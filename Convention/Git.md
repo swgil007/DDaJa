@@ -92,23 +92,48 @@ BUG, DEVELOPE, IDEA, HELP, FIX 등 대 분류 Labels 생성 후
 5가지 종류의 Branch를 사용.
 
 1. Master
-    - 운영, 배포될 가장 최상위 Branch
-
+    - 운영, 배포되는 최종 소스가 관리되는 가장 최상위 Branch
 
 2. Develope
-    - Master Branch에서 파생되어, 기능 개발 Branch(Feature)가 통합 될 Branch
+    - 기능 개발 Branch(Feature)가 통합 될 메인 개발 Branch
 
 3. Feature
-    - Develope Branch에서 파생되어, Issues 관련으로 
+    - Develope Branch에서 파생되어, Issues 관련되어 개발 되는 기능 단위로 Local Area에서만 생성, 병합 될 개발 Branch
+
 4. Release
+    - 배포 되기전 최종 테스트를 거치는 단계의 Branch
 
 5. Hotfix
+    - 운영중인 Master Branch에서 파생되며, Bug나 Error 발생 시 긴급히 Master Branch에서 파생 후, 에러 처리 후 Develope Branch와 Master Branch에 병합되고 삭제되는 Branch
 
+<br>
 
 ## Commit Message
 
 작업 중인 Branch 유형에 따라 커밋 메시지 작성
 
-### Develope
+### Feature Branch
 
-"[#6]메인화면구성중컴포넌트새로생성함"
+Issues 생성 후 Issues 번호와 개발 과정에서 한눈에 커밋을 알아볼 수 있는 메시지를 아래와 같이 작성
+
+- [Issues번호]커밋 메시지
+
+> [EX][#6]메인화면구성중컴포넌트새로생성함
+
+
+### Develope Branch
+
+Feature Branch의 커밋들이 모여 merge된 Devel Branch는, 아래와 같이 해당 커밋들을 대표 할 수 있는 대분류 커밋 메시지를 작성한다.
+
+- [Devel]커밋 메시지
+
+> [EX][Devel]공지사항 기능 개발 완료
+
+
+### Release Branch
+
+미정
+
+### Hotfix Branch
+
+미정
