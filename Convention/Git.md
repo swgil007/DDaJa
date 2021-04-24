@@ -1,6 +1,9 @@
 # Git Convention
 
 
+
+# 일정, 운영
+
 <br>
 
 ## Milestones
@@ -76,3 +79,36 @@ Issues 생성 후 Milestones, Lable, Projects 설정하여 프로젝트 구현�
 BUG, DEVELOPE, IDEA, HELP, FIX 등 대 분류 Labels 생성 후
 
 기능 개발을 넘어 자유롭게 모든 이슈 사항을 Labels 태그를 붙여 Issues 생성
+
+---
+
+
+<br>
+
+# 개발
+
+## Branch
+
+5가지 종류의 Branch를 사용.
+
+1. Master
+    - 운영, 배포될 가장 최상위 Branch
+
+
+2. Develope
+    - Master Branch에서 파생되어, 기능 개발 Branch(Feature)가 통합 될 Branch
+
+3. Feature
+    - Develope Branch에서 파생되어, Issues 관련으로 
+4. Release
+
+5. Hotfix
+
+
+## Commit Message
+
+작업 중인 Branch 유형에 따라 커밋 메시지 작성
+
+### Develope
+
+"[#6]메인화면구성중컴포넌트새로생성함"
