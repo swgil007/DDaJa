@@ -46,8 +46,12 @@ Column 목록은 아래 단계들 순차적 단계로 사용
 - Bug
     - Test 단계나, 최종 완료 단계에서 버그 발견시 버그 해결 단계
     - Test, Done 단계에서 Bug로 이동 
-    - Bug 작업 완료 후에는 Test 단계로 이동 후 Test 검증
+    - Bug 해결 작업 시에는 Test 단계로 이동 후 Test 검증
+    - 이를 통해 해결되지 않은 Bug 관리 용도
 
+- Done
+    - Test 단계 완료 후 개발 완료 단계
+    - 추후 버그 발생 시 Bug 단계로 이동 가능
 <br>
 
 ## Issues
