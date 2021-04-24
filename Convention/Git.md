@@ -110,30 +110,29 @@ BUG, DEVELOPE, IDEA, HELP, FIX 등 대 분류 Labels 생성 후
 
 ## Commit Message
 
-작업 중인 Branch 유형에 따라 커밋 메시지 작성
-
-### Feature Branch
-
 Issues 생성 후 Issues 번호와 개발 과정에서 한눈에 커밋을 알아볼 수 있는 메시지를 아래와 같이 작성
 
 - [Issues번호]커밋 메시지
 
 > [EX][#6]메인화면구성중컴포넌트새로생성함
 
-
-### Develope Branch
-
-Feature Branch의 커밋들이 모여 merge된 Devel Branch는, 아래와 같이 해당 커밋들을 대표 할 수 있는 대분류 커밋 메시지를 작성한다.
-
-- [Devel]커밋 메시지
-
-> [EX][Devel]공지사항 기능 개발 완료
+~~작업 중인 Branch 유형에 따라 커밋 메시지 작성~~
 
 
-### Release Branch
+~~### Feature Branch~~
 
-미정
+~~Issues 생성 후 Issues 번호와 개발 과정에서 한눈에 커밋을 알아볼 수 있는 메시지를 아래와 같이 작성~~
 
-### Hotfix Branch
+~~- [Issues번호]커밋 메시지~~
 
-미정
+~~> [EX][#6]메인화면구성중컴포넌트새로생성함~~
+
+
+~~### Develope Branch~~
+
+~~Feature Branch의 커밋들이 모여 merge된 Devel Branch는, 아래와 같이 해당 커밋들을 대표 할 수 있는 대분류 커밋 메시지를 작성한다.~~
+
+~~- [Devel]커밋 메시지~~
+
+~~> [EX][Devel]공지사항 기능 개발 완료~~
+
