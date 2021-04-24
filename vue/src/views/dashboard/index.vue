@@ -1,10 +1,31 @@
 <template>
-  <div>
-    <H1>빅데이터 자격증</H1>
-    <ul>
-        <li>빅데이터 자격증 이란 ?</li>
-        <li>데이터 자격증 접수방법</li>
-        <li>XXX 사이트로 공부 하는 법</li>
-    </ul>
+  <div class="dashboard-container">
+    <component :is="currentRole" />
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+import adminDashboard from './admin'
+import editorDashboard from './editor'
+
+export default {
+  name: 'Dashboard',
+  components: { adminDashboard, editorDashboard },
+  data() {
+    return {
+      currentRole: 'adminDashboard'
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'roles'
+    ])
+  },
+  created() {
+    if (!this.roles.includes('admin')) {
+      this.currentRole = 'editorDashboard'
+    }
+  }
+}
+</script>

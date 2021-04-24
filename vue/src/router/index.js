@@ -6,15 +6,42 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
-/* CHAPTER */
-import bigdataRouter from './modules/big-data/index.js' 
-import computerUtilization1Router from './modules/computer-utilization1/index.js'
-import computerUtilization2Router from './modules/computer-utilization2/index.js'
-import InformationProcessing1Router from './modules/Information-processing1/index.js'
-import InformationProcessing2Router from './modules/Information-processing2/index.js'
-import network1Router from './modules/network1/index.js'
-import network2Router from './modules/network2/index.js'
+/* Router Modules */
+// import componentsRouter from './modules/components'
+import jeongboCheoliGisaRouter from './license/jeongbo-cheoli-gisa';
+import jeongboCheoliSanupGisaRouter from './license/jeongbo-cheoli-sanup-gisa';
+import bigDataGisaRouter from './license/big-data-gisa';
+import computerUtilizeOneRouter from './license/computer-utilize-one';
+import computerUtilizeTwoRouter from './license/computer-utilize-two';
+import networkAdminOneRouter from './license/network-admin-one';
+import networkAdminTwoRouter from './license/network-admin-two';
 
+/**
+ * Note: sub-menu only appear when route children.length >= 1
+ * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
+ *
+ * hidden: true                   if set true, item will not show in the sidebar(default is false)
+ * alwaysShow: true               if set true, will always show the root menu
+ *                                if not set alwaysShow, when item has more than one children route,
+ *                                it will becomes nested mode, otherwise not show the root menu
+ * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
+    roles: ['admin','editor']    control the page roles (you can set multiple roles)
+    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
+    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
+    noCache: true                if set true, the page will no be cached(default is false)
+    affix: true                  if set true, the tag will affix in the tags-view
+    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
+    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+  }
+ */
+
+/**
+ * constantRoutes
+ * a base page that does not have permission requirements
+ * all roles can be accessed
+ */
 export const constantRoutes = [
   {
     path: '/redirect',
@@ -54,19 +81,12 @@ export const constantRoutes = [
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/views-copy/dashboard'),
+        component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'M A I N', icon: 'dashboard', affix: true }
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
       }
     ]
-  }, 
-  bigdataRouter,
-  computerUtilization1Router,
-  computerUtilization2Router,
-  InformationProcessing1Router,
-  InformationProcessing2Router,
-  network1Router,
-  network2Router,
+  }  ,
   {
     path: '/profile',
     component: Layout,
@@ -88,6 +108,115 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+
+   /** when your routing map is too long, you can split it into small modules **/
+   // 라우터 여기 넣어주세요   
+
+  jeongboCheoliGisaRouter,
+  jeongboCheoliSanupGisaRouter,
+  bigDataGisaRouter,
+  computerUtilizeOneRouter, 
+  computerUtilizeTwoRouter,
+  networkAdminOneRouter,
+  networkAdminTwoRouter,
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: 'Permission',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'page',
+        component: () => import('@/views-copy/permission/page'),
+        name: 'PagePermission',
+        meta: {
+          title: 'Page Permission',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'directive',
+        component: () => import('@/views-copy/permission/directive'),
+        name: 'DirectivePermission',
+        meta: {
+          title: 'Directive Permission'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'role',
+        component: () => import('@/views-copy/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: 'Role Permission',
+          roles: ['admin']
+        }
+      }
+    ]
+  } ,
+ 
+  {
+    path: '/tab',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views-copy/tab/index'),
+        name: 'Tab',
+        meta: { title: 'Tab', icon: 'tab' }
+      }
+    ]
+  },
+
+  {
+    path: '/error',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'ErrorPages',
+    meta: {
+      title: 'Error Pages',
+      icon: '404'
+    },
+    children: [
+      {
+        path: '401',
+        component: () => import('@/views-copy/error-page/401'),
+        name: 'Page401',
+        meta: { title: '401', noCache: true }
+      },
+      {
+        path: '404',
+        component: () => import('@/views-copy/error-page/404'),
+        name: 'Page404',
+        meta: { title: '404', noCache: true }
+      }
+    ]
+  },
+
+  {
+    path: '/error-log',
+    component: Layout,
+    children: [
+      {
+        path: 'log',
+        component: () => import('@/views-copy/error-log/index'),
+        name: 'ErrorLog',
+        meta: { title: 'Error Log', icon: 'bug' }
+      }
+    ]
+  } ,
+  {
+    path: '/pdf/download',
+    component: () => import('@/views-copy/pdf/download'),
+    hidden: true
+  }  ,
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
