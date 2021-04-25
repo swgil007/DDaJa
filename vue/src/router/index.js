@@ -48,7 +48,9 @@ export const constantRoutes = [
   {
     path: '/admin',
     component: () => import('@/views/admin'),
-    name: 'admin'
+    name: 'admin',
+    roles: ['admin'],
+    test: ['test']
   },
   {
     path: '/redirect',
@@ -230,7 +232,7 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
