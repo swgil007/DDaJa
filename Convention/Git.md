@@ -108,7 +108,23 @@ BUG, DEVELOPE, IDEA, HELP, FIX 등 대 분류 Labels 생성 후
 
 <br>
 
-## Commit Message
+## Commit
+
+Develope Branch에서 개발 진행 중인 Commit을 추가 하며, Develope Branch에서 Commit을 누적하다가,
+
+기능 개발을 테스트 단계로 옮겨도 된다는 판단이 드는 시점에, Release Branch로 merge와 Commit 내역들을 적용 시키고
+
+배포전 테스트 과정을 수행한다.
+
+Release Branch에서 테스트가 종료된 후에 테스트를 통과한 결점 없는 상태의 Commit을 Master Branch에 merge와 push를 적용 시킨다.
+
+
+<br>
+
+### Commit Message
+
+
+#### Issues 존재
 
 Issues 생성 후 Issues 번호와 개발 과정에서 한눈에 커밋을 알아볼 수 있는 메시지를 아래와 같이 작성
 
@@ -116,23 +132,11 @@ Issues 생성 후 Issues 번호와 개발 과정에서 한눈에 커밋을 알�
 
 > [EX][#6]메인화면구성중컴포넌트새로생성함
 
-~~작업 중인 Branch 유형에 따라 커밋 메시지 작성~~
+<br>
 
+#### Issues 미존재
 
-~~### Feature Branch~~
+Issues 생성 없이 급하게 수정된 기능이나, 자잘한 단순 Commit의 경우 메시지를 아래와 같이 작성 한다.
 
-~~Issues 생성 후 Issues 번호와 개발 과정에서 한눈에 커밋을 알아볼 수 있는 메시지를 아래와 같이 작성~~
-
-~~- [Issues번호]커밋 메시지~~
-
-~~> [EX][#6]메인화면구성중컴포넌트새로생성함~~
-
-
-~~### Develope Branch~~
-
-~~Feature Branch의 커밋들이 모여 merge된 Devel Branch는, 아래와 같이 해당 커밋들을 대표 할 수 있는 대분류 커밋 메시지를 작성한다.~~
-
-~~- [Devel]커밋 메시지~~
-
-~~> [EX][Devel]공지사항 기능 개발 완료~~
-
+- [~]커밋 메시지
+> [EX][~] url # 제거 완료

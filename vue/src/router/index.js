@@ -8,13 +8,14 @@ import Layout from '@/layout'
 
 /* Router Modules */
 // import componentsRouter from './modules/components'
-import jeongboCheoliGisaRouter from './license/jeongbo-cheoli-gisa';
-import jeongboCheoliSanupGisaRouter from './license/jeongbo-cheoli-sanup-gisa';
-import bigDataGisaRouter from './license/big-data-gisa';
-import computerUtilizeOneRouter from './license/computer-utilize-one';
-import computerUtilizeTwoRouter from './license/computer-utilize-two';
-import networkAdminOneRouter from './license/network-admin-one';
-import networkAdminTwoRouter from './license/network-admin-two';
+import jeongboCheoliGisaRouter from './license/jeongbo-cheoli-gisa'
+import jeongboCheoliSanupGisaRouter from './license/jeongbo-cheoli-sanup-gisa'
+import bigDataGisaRouter from './license/big-data-gisa'
+import computerUtilizeOneRouter from './license/computer-utilize-one'
+import computerUtilizeTwoRouter from './license/computer-utilize-two'
+import networkAdminOneRouter from './license/network-admin-one'
+import networkAdminTwoRouter from './license/network-admin-two'
+import adminRouter from './admin'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -86,7 +87,7 @@ export const constantRoutes = [
         meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
       }
     ]
-  }  ,
+  },
   {
     path: '/profile',
     component: Layout,
@@ -109,16 +110,21 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
 
-   /** when your routing map is too long, you can split it into small modules **/
-   // 라우터 여기 넣어주세요   
+  /** when your routing map is too long, you can split it into small modules **/
+  // 라우터 여기 넣어주세요
 
   jeongboCheoliGisaRouter,
   jeongboCheoliSanupGisaRouter,
   bigDataGisaRouter,
-  computerUtilizeOneRouter, 
+  computerUtilizeOneRouter,
   computerUtilizeTwoRouter,
   networkAdminOneRouter,
   networkAdminTwoRouter,
+  adminRouter,
+  {
+    path: '/admin',
+    component: () => import('@/views/admin')
+  },
   {
     path: '/permission',
     component: Layout,
@@ -159,8 +165,8 @@ export const asyncRoutes = [
         }
       }
     ]
-  } ,
- 
+  },
+
   {
     path: '/tab',
     component: Layout,
@@ -210,12 +216,12 @@ export const asyncRoutes = [
         meta: { title: 'Error Log', icon: 'bug' }
       }
     ]
-  } ,
+  },
   {
     path: '/pdf/download',
     component: () => import('@/views-copy/pdf/download'),
     hidden: true
-  }  ,
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
