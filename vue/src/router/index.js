@@ -44,6 +44,12 @@ import adminRouter from './admin'
  * all roles can be accessed
  */
 export const constantRoutes = [
+
+  {
+    path: '/admin',
+    component: () => import('@/views/admin'),
+    name: 'admin'
+  },
   {
     path: '/redirect',
     component: Layout,
@@ -121,10 +127,6 @@ export const asyncRoutes = [
   networkAdminOneRouter,
   networkAdminTwoRouter,
   adminRouter,
-  {
-    path: '/adminmain',
-    component: () => import('@/views/admin')
-  },
   {
     path: '/permission',
     component: Layout,

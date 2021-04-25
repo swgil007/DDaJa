@@ -1,16 +1,3 @@
 <template>
-  <div>
-    <Login />
-
-  </div>
+  <h1>GilLog</h1>
 </template>
-
-<script>
-import Login from './component/login'
-
-export default {
-  name: 'Admin',
-  components: { Login }
-}
-</script>
-
