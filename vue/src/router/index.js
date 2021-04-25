@@ -122,7 +122,7 @@ export const asyncRoutes = [
   networkAdminTwoRouter,
   adminRouter,
   {
-    path: '/admin',
+    path: '/adminmain',
     component: () => import('@/views/admin')
   },
   {
