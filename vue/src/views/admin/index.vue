@@ -1,16 +1,29 @@
 <template>
   <div>
-    <Login />
-
+    <h1>roles test {{ current }} </h1>
   </div>
 </template>
 
 <script>
-import Login from './component/login'
+import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Admin',
-  components: { Login }
+  data() {
+    return {
+      current: 'ready'
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'roles'
+    ])
+  },
+  created() {
+    if (!this.roles.includes('admin')) {
+      this.current = 'admin'
+    } else {
+      this.current = 'editor'
+    }
+  }
 }
 </script>
-

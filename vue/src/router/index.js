@@ -6,8 +6,6 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
-/* Router Modules */
-// import componentsRouter from './modules/components'
 import jeongboCheoliGisaRouter from './license/jeongbo-cheoli-gisa'
 import jeongboCheoliSanupGisaRouter from './license/jeongbo-cheoli-sanup-gisa'
 import bigDataGisaRouter from './license/big-data-gisa'
@@ -17,32 +15,6 @@ import networkAdminOneRouter from './license/network-admin-one'
 import networkAdminTwoRouter from './license/network-admin-two'
 import adminRouter from './admin'
 
-/**
- * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
-    noCache: true                if set true, the page will no be cached(default is false)
-    affix: true                  if set true, the tag will affix in the tags-view
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
-  }
- */
-
-/**
- * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
- */
 export const constantRoutes = [
   {
     path: '/redirect',
@@ -89,6 +61,12 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/admin',
+    component: () => import('@/views/admin'),
+    name: 'admin',
+    roles: ['admin']
+  },
+  {
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
@@ -110,9 +88,6 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
 
-  /** when your routing map is too long, you can split it into small modules **/
-  // 라우터 여기 넣어주세요
-
   jeongboCheoliGisaRouter,
   jeongboCheoliSanupGisaRouter,
   bigDataGisaRouter,
@@ -121,10 +96,7 @@ export const asyncRoutes = [
   networkAdminOneRouter,
   networkAdminTwoRouter,
   adminRouter,
-  {
-    path: '/adminmain',
-    component: () => import('@/views/admin')
-  },
+
   {
     path: '/permission',
     component: Layout,
@@ -143,7 +115,7 @@ export const asyncRoutes = [
         name: 'PagePermission',
         meta: {
           title: 'Page Permission',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: ['admin']
         }
       },
       {
@@ -154,28 +126,6 @@ export const asyncRoutes = [
           title: 'Directive Permission'
           // if do not set roles, means: this page does not require permission
         }
-      },
-      {
-        path: 'role',
-        component: () => import('@/views-copy/permission/role'),
-        name: 'RolePermission',
-        meta: {
-          title: 'Role Permission',
-          roles: ['admin']
-        }
-      }
-    ]
-  },
-
-  {
-    path: '/tab',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views-copy/tab/index'),
-        name: 'Tab',
-        meta: { title: 'Tab', icon: 'tab' }
       }
     ]
   },
@@ -228,7 +178,7 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
