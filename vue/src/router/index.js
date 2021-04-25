@@ -16,6 +16,12 @@ import networkAdminTwoRouter from './license/network-admin-two'
 import adminRouter from './admin'
 
 export const constantRoutes = [
+
+  {
+    path: '/admin',
+    component: () => import('@/views/admin'),
+    name: 'admin'
+  },
   {
     path: '/redirect',
     component: Layout,
@@ -96,7 +102,6 @@ export const asyncRoutes = [
   networkAdminOneRouter,
   networkAdminTwoRouter,
   adminRouter,
-
   {
     path: '/permission',
     component: Layout,
