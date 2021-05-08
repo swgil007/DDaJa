@@ -3,10 +3,18 @@
     <div class="main-logo-div">
       <img :src="Logo" class="logo" style="">
     </div>
-    <user />
-    <license />
-    <notice />
-    <exam />
+    <router-link to="/admin/user">
+      <user />
+    </router-link>
+    <router-link to="/admin/license">
+      <license />
+    </router-link>
+    <router-link to="/admin/notice">
+      <notice />
+    </router-link>
+    <router-link to="/admin/exam">
+      <exam />
+    </router-link>
     <div class="main-bottom" />
   </div>
 </template>
