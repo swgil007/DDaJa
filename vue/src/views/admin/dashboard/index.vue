@@ -13,7 +13,7 @@
 
 <script>
 import mainLogo from '@/assets/DDaJa-Logo/logo.png'
-import exam from '../exam'
+import exam from '../examination'
 import notice from '../notice'
 import license from '../license'
 import user from '../user'

@@ -14,7 +14,8 @@ const adminRouter = {
     },
     {
       path: 'exam',
-      component: () => import('@/views/admin/exam'),
+      component: () => import('@/views/admin/examination'),
+      props: (route) => ({ query: route.query.test }),
       name: '시험 관리',
       roles: ['admin']
     },
