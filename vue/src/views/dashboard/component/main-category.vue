@@ -13,7 +13,7 @@
         </router-link>
       </div>
       <div>
-        <router-link to="/explore/AA">
+        <router-link to="/explore">
           <img
             :src="LOGO_JCG"
             class="mans-img"
