@@ -2,7 +2,7 @@
   <div class="cotegory-container">
     <div class="title-style"><font class="title-font">{{ licenseInfo.licenseName }}</font></div>
     <div>
-      <router-link to="/explore/examination-one"><div class="box-style-1" @click="sessionSave(licenseInfo.id == 1)"> <font class="box-font">한 문 제 씩 탐 험 해 보 기</font> </div> </router-link>
+      <router-link to="/explore/examination-one"><div class="box-style-1"> <font class="box-font">한 문 제 씩 탐 험 해 보 기</font> </div> </router-link>
       <router-link to="/explore/examination-word"><div class="box-style-2"> <font class="box-font">단 어 암 기</font> </div></router-link>
       <router-link to="/explore/examination"><div class="box-style-3"> <font class="box-font">모 의 고 사</font> </div></router-link>
     </div>
@@ -12,7 +12,7 @@
       <router-link to="/explore/examination-again"><div class="box-style-6"> <font class="box-font">틀 린 문 제 재 탐 험</font> </div></router-link>
     </div>
     <div>
-      <router-link to="/explore/score-status"><div class="box-style-7"> <font class="box-font">{{ licenseName }} 점 수</font> </div></router-link>
+      <router-link to="/explore/score-status"><div class="box-style-7"> <font class="box-font">'{{ licenseInfo.licenseName }}' 점 수</font> </div></router-link>
       <router-link to="/explore/communication"><div class="box-style-8"> <font class="box-font">ㅡ</font> </div></router-link>
       <router-link to="/explore/communication"><div class="box-style-9"> <font class="box-font">ㅡ</font> </div></router-link>
     </div>

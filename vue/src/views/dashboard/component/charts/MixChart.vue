@@ -203,7 +203,6 @@ export default {
                 show: true,
                 position: 'top',
                 formatter(p) {
-                  console.log(p)
                   return p.value > 0 ? p.value : ''
                 }
               }

@@ -30,10 +30,22 @@ export default {
   components: { chart },
   data() {
     return {
-      categoryTitle: [{ id: 1, title: '정보 처리 산업기사' },
-        { id: 1, title: '정보처리 기사' },
-        { id: 1, title: '컴퓨터 활용 자격증 1급' },
-        { id: 1, title: '컴퓨터 활용 자격증 2급' }]
+      categoryTitle: [
+        { id: 4,
+          title: '정보 처리 산업기사'
+        },
+        { id: 1,
+          title: '정보처리 기사'
+        },
+        {
+          id: 2,
+          title: '컴퓨터 활용 자격증 1급'
+        },
+        {
+          id: 3,
+          title: '컴퓨터 활용 자격증 2급'
+        }
+      ]
     }
   },
   methods: {
