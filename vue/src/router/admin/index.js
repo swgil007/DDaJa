@@ -1,24 +1,24 @@
 import Layout from '@/layout'
-
+import examinationRouter from './examination'
 const adminRouter = {
   path: '/admin',
   component: Layout,
-  redirect: '/',
+  redirect: '/admin/dashboard',
   name: 'admin',
+  meta: {
+    title: '관리자'
+  },
   children: [
     {
       path: 'dashboard',
       component: () => import('@/views/admin/dashboard'),
-      name: '관리자 메인화면',
+      name: '관리자 메인',
+      meta: {
+        title: '관리자 메인'
+      },
       roles: ['admin']
     },
-    {
-      path: 'exam',
-      component: () => import('@/views/admin/examination'),
-      props: (route) => ({ query: route.query.test }),
-      name: '시험 관리',
-      roles: ['admin']
-    },
+    examinationRouter,
     {
       path: 'notice',
       component: () => import('@/views/admin/notice'),
