@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import Chart from './Charts/MixChart'
+import chart from './charts/MixChart'
 
 export default {
   name: 'MixChart',
-  components: { Chart },
+  components: { chart },
   data() {
     return {
       categoryTitle: [{ id: 1, title: '정보 처리 산업기사' },
@@ -114,3 +114,5 @@ export default {
   }
 }
 </style>
+
+successful-status.vue
