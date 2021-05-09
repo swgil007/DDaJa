@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <div class="main-logo-div">
       <img :src="Logo" class="logo" style="">
     </div>
@@ -42,6 +42,9 @@ data() {
 </script>
 
 <style lang="scss" scoped>
+.main{
+  background-color: rgb(11, 8, 49);
+}
 .main-logo-div{
   padding-left: 44%;
   width: 100%;
