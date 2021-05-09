@@ -82,8 +82,6 @@ export default {
 </script>
 
 <style scoped>
-
-/* dialog 헤더 */
 ::v-deep .el-dialog__header {
   position: relative;
   height: 45px;

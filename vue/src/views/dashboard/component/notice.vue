@@ -41,35 +41,33 @@ data() {
   return {
     voData: undefined,
     popupVal: false,
-    tableData: [{
-      date: '2016-05-03',
-      name: 'Tom',
-      title: '공지사항 알립니다 더미'
-    }, {
-      date: '2016-05-02',
-      name: 'Tom',
-      title: '공지사항 알립니다 더미'
-    }, {
-      date: '2016-05-04',
-      name: 'Tom',
-      title: '공지사항 알립니다 더미'
-    }, {
-      date: '2016-05-01',
-      name: 'Tom',
-      title: '공지사항 알립니다 더미'
-    }, {
-      date: '2016-05-08',
-      name: 'Tom',
-      title: '공지사항 알립니다 더미'
-    }, {
-      date: '2016-05-06',
-      name: 'Tom',
-      title: '공지사항 알립니다 더미'
-    }, {
-      date: '2016-05-07',
-      name: 'Tom',
-      title: '공지사항 알립니다 더미'
-    }]
+    tableData: [
+      {
+        date: '2016-05-03',
+        name: 'Tom',
+        title: '공지사항 알립니다 더미'
+      },
+      {
+        date: '2016-05-03',
+        name: 'Tom',
+        title: '공지사항 알립니다 더미'
+      },
+      {
+        date: '2016-05-03',
+        name: 'Tom',
+        title: '공지사항 알립니다 더미'
+      },
+      {
+        date: '2016-05-03',
+        name: 'Tom',
+        title: '공지사항 알립니다 더미'
+      },
+      {
+        date: '2016-05-03',
+        name: 'Tom',
+        title: '공지사항 알립니다 더미'
+      }
+    ]
   }
 },
 methods: {
