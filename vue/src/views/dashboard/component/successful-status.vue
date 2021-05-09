@@ -59,7 +59,6 @@ export default {
   height: 100%;
   background-color:rgb(11, 8, 49);
   width: 100%;
-
   .chart-container{
     position: relative;
     height: calc(100vh - 84px);
