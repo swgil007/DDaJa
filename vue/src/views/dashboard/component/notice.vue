@@ -1,71 +1,90 @@
 <template>
-<div class="notice-container">
-  <div class="title"> <i class="el-icon-check" />  공지사항  </div>
-  <div class="notice-div">
-    <el-table
-      :data="tableData"
-      height="250"
-      style="width: 100%">
-      <el-table-column
-        prop="title"
-        label="Title">
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="Name"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="date"
-        label="Date"
-        width="180">
-      </el-table-column>
-      
-    </el-table>    
+  <div class="notice-container">
+    <div class="title"> <i class="el-icon-check" />  공 지 사 항  </div>
+    <div class="notice-div">
+      <el-table
+        :data="tableData"
+        height="250"
+        style="width: 100%"
+        @cell-click="noticeSelect()"
+      >
+        <el-table-column
+          prop="title"
+          label="Title"
+        />
+        <el-table-column
+          prop="name"
+          label="Name"
+          width="180"
+        />
+        <el-table-column
+          prop="date"
+          label="Date"
+          width="180"
+        />
+      </el-table>
+      <selectPopup
+        :popup-val="popupVal"
+        :vo-data="voData"
+        @close:selectPopup="popupClose"
+      />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-
-          date: '2016-05-03',
-          name: 'Tom',
-          title: '공지사항 알립니다 더미'
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          title: '공지사항 알립니다 더미'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          title: '공지사항 알립니다 더미'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          title: '공지사항 알립니다 더미'
-        }, {
-          date: '2016-05-08',
-          name: 'Tom',
-          title: '공지사항 알립니다 더미'
-        }, {
-          date: '2016-05-06',
-          name: 'Tom',
-          title: '공지사항 알립니다 더미'
-        }, {
-          date: '2016-05-07',
-          name: 'Tom',
-          title: '공지사항 알립니다 더미'
-        }],
-      }
-    }
+import selectPopup from './notice/noticeSelect'
+export default { components: {
+  selectPopup
+},
+data() {
+  return {
+    voData: undefined,
+    popupVal: false,
+    tableData: [{
+      date: '2016-05-03',
+      name: 'Tom',
+      title: '공지사항 알립니다 더미'
+    }, {
+      date: '2016-05-02',
+      name: 'Tom',
+      title: '공지사항 알립니다 더미'
+    }, {
+      date: '2016-05-04',
+      name: 'Tom',
+      title: '공지사항 알립니다 더미'
+    }, {
+      date: '2016-05-01',
+      name: 'Tom',
+      title: '공지사항 알립니다 더미'
+    }, {
+      date: '2016-05-08',
+      name: 'Tom',
+      title: '공지사항 알립니다 더미'
+    }, {
+      date: '2016-05-06',
+      name: 'Tom',
+      title: '공지사항 알립니다 더미'
+    }, {
+      date: '2016-05-07',
+      name: 'Tom',
+      title: '공지사항 알립니다 더미'
+    }]
   }
+},
+methods: {
+  noticeSelect() {
+    this.popupVal = true
+  },
+  popupClose(value) {
+    this.popupVal = value
+  }
+}
+
+}
 </script>
 
-<style lang="scss" scoped>  
+<style lang="scss" scoped>
 .notice-container{
   padding-left: 7%;
   padding-right: 7%;
@@ -77,10 +96,10 @@
     background-color: white;
   }
 }
-
-.title{ 
+.title{
   color: beige;
-  font-size: 35px;
+  font-size: 40px;
+  font-family: 'Kirang Haerang', cursive;
   padding-top: 10px;
   padding-bottom: 20px;
 }
