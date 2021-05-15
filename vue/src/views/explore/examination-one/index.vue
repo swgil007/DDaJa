@@ -35,12 +35,12 @@ export default {
   methods: {
     colorSelect: function(colorKey) {
     	return colorKey % 7 === 1 ? 'bgc1'
-            : colorKey % 7 === 2 ? 'bgc2'
-            : colorKey % 7 === 3 ? 'bgc3'
+        : colorKey % 7 === 2 ? 'bgc2'
+          : colorKey % 7 === 3 ? 'bgc3'
             : colorKey % 7 === 4 ? 'bgc4'
-            : colorKey % 7 === 5 ? 'bgc5'
-            : colorKey % 7 === 6 ? 'bgc6'
-            : colorKey % 7 === 7 ? 'bgc7' : 'bgc1'
+              : colorKey % 7 === 5 ? 'bgc5'
+                : colorKey % 7 === 6 ? 'bgc6'
+                  : colorKey % 7 === 7 ? 'bgc7' : 'bgc1'
     }
   }
 }
