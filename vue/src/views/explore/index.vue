@@ -51,18 +51,18 @@ export default {
   background-color: black;
   color: whitesmoke;
   margin-left: 1%;
-  margin-right: 5%;
+  margin-right: 2%;
   padding: 1.5% 2% 1.5% 2%;
 }
 .title-font{font-size: 50px;  font-family: 'Kirang Haerang', cursive;}
-.box-style-1{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#f14668; margin: 1%; text-align: center; padding-top:60px }
-.box-style-2{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#f0a500; margin: 1%; text-align: center; padding-top:60px }
-.box-style-3{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#e45826; margin: 1%; text-align: center; padding-top:60px }
-.box-style-4{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#edffa9; margin: 1%; text-align: center; padding-top:60px }
-.box-style-5{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#e40017; margin: 1%; text-align: center; padding-top:60px }
-.box-style-6{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#81b214; margin: 1%; text-align: center; padding-top:60px }
-.box-style-7{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#77acf1; margin: 1%; text-align: center; padding-top:60px }
-.box-style-8{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#c67ace; margin: 1%; text-align: center; padding-top:60px }
-.box-style-9{ border: 10px solid rgb(255, 255, 255); float: left; width: 30%; height: 173px; background-color:#ffaaa7; margin: 1%; text-align: center; padding-top:60px }
+.box-style-1{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#f14668; margin: 1%; text-align: center; padding-top:60px }
+.box-style-2{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#f0a500; margin: 1%; text-align: center; padding-top:60px }
+.box-style-3{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#e45826; margin: 1%; text-align: center; padding-top:60px }
+.box-style-4{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#edffa9; margin: 1%; text-align: center; padding-top:60px }
+.box-style-5{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#e40017; margin: 1%; text-align: center; padding-top:60px }
+.box-style-6{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#81b214; margin: 1%; text-align: center; padding-top:60px }
+.box-style-7{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#77acf1; margin: 1%; text-align: center; padding-top:60px }
+.box-style-8{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#c67ace; margin: 1%; text-align: center; padding-top:60px }
+.box-style-9{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#ffaaa7; margin: 1%; text-align: center; padding-top:60px }
 .box-font{ font-size: 40px; font-family: 'Kirang Haerang', cursive; }
 </style>
