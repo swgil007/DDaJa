@@ -26,7 +26,7 @@
       <selectPopup
         :popup-val="popupVal"
         :vo-data="voData"
-        @close:selectPopup="popupClose"
+        @close:notice="popupClose"
       />
     </div>
   </div>
@@ -34,41 +34,42 @@
 
 <script>
 import selectPopup from './notice/noticeSelect'
-export default { components: {
+export default { 
+  components: {
   selectPopup
-},
-data() {
-  return {
-    voData: undefined,
-    popupVal: false,
-    tableData: [
-      {
-        date: '2016-05-03',
-        name: 'Tom',
-        title: '공지사항 알립니다 더미'
-      },
-      {
-        date: '2016-05-03',
-        name: 'Tom',
-        title: '공지사항 알립니다 더미'
-      },
-      {
-        date: '2016-05-03',
-        name: 'Tom',
-        title: '공지사항 알립니다 더미'
-      },
-      {
-        date: '2016-05-03',
-        name: 'Tom',
-        title: '공지사항 알립니다 더미'
-      },
-      {
-        date: '2016-05-03',
-        name: 'Tom',
-        title: '공지사항 알립니다 더미'
-      }
-    ]
   }
+  , data() {
+    return {
+      voData: undefined,
+      popupVal: false,
+      tableData: [
+        {
+          date: '2016-05-03',
+          name: 'Tom',
+          title: '공지사항 알립니다 더미'
+        },
+        {
+          date: '2016-05-03',
+          name: 'Tom',
+          title: '공지사항 알립니다 더미'
+        },
+        {
+          date: '2016-05-03',
+          name: 'Tom',
+          title: '공지사항 알립니다 더미'
+        },
+        {
+          date: '2016-05-03',
+          name: 'Tom',
+          title: '공지사항 알립니다 더미'
+        },
+        {
+          date: '2016-05-03',
+          name: 'Tom',
+          title: '공지사항 알립니다 더미'
+        }
+      ]
+    }
 },
 methods: {
   noticeSelect() {

@@ -30,7 +30,7 @@ export default {
     }
   },
   created() {
-    this.licenseInfo = this.$session.get('licenseInfo')
+    this.licenseInfo = this.$session.get('licenseInfo') 
   },
   methods: { }
 }

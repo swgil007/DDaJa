@@ -1,13 +1,13 @@
 <template>
     <div>
         <el-dialog
-        title="공지 사항"
+        title="한문제씩 풀기"
         :visible.sync="popupVal"
         width="30%"
         :before-close="handleClose">
-        <span>This is a message</span>
+        <span>{{subjectExamination}}</span>
         <span slot="footer" class="dialog-footer">
-            <el-button @click="popupClose()">Cancel</el-button>
+            <el-button @click="popupClose()">닫 기</el-button>
             <el-button type="primary" @click="popupClose()">Confirm</el-button>
         </span>
         </el-dialog>
@@ -16,19 +16,21 @@
 </template>
 
 <script>
+// Object.keys(subjectExamination).length
 export default {
-    name: 'noticePopup',
+    name: 'examinationPopup',
     data() {
-        return {
-        
+        return { 
         };
     },
     props: {
-        popupVal: false
+        popupVal: {}
+        , subjectExamination : {}
     }
     , methods: {
         popupClose() { 
-            this.$emit('close:notice', false) 
+
+            this.$emit('close:examination', false) 
         }
         , handleClose(done) {
         this.$confirm('정말 끝내시겠습니까 ?')
@@ -36,7 +38,7 @@ export default {
                 this.popupClose();
             })
             .catch(_ => {});
-        }
+        } 
     }
     };
 </script>

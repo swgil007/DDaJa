@@ -76,73 +76,73 @@ export default {
       JCG: JCG,
       JCSG: JCSG,
       jeongboCheoliGisa: {
-        licenseName: '정보처리 기사',
-        licenseSeq: '1',
-        subject: [
-          { 'subjectid': 1,
-            'subjectName': '소프트웨어 설계'
-          },
-          { 'subjectid': 2,
-            'subjectName': ' 소프트웨어 개발'
-          },
-          { 'subjectid': 3,
-            'subjectName': '데이터베이스 구축'
-          },
-          { 'subjectid': 4,
-            'subjectName': '프로그래밍 언어 활용'
-          },
-          { 'subjectid': 5,
-            'subjectName': '정보시스템 구축 관리'
-          }
-        ]
-      },
-      jeongboCheoliSanupGisa: {
-        licenseName: '정보처리 산업기사',
-        licenseSeq: '2',
-        subject: [
-          { 'subjectid': 1,
-            'subjectName': '데이터베이스'
-          },
-          { 'subjectid': 2,
-            'subjectName': '전자계산기구조'
-          },
-          { 'subjectid': 3,
-            'subjectName': '시스템분석 설계'
-          },
-          { 'subjectid': 4,
-            'subjectName': '운영체제'
-          },
-          { 'subjectid': 5,
-            'subjectName': '정보통신개론'
-          }
-        ]
-      },
-      computerUtilizeOne: {
-        licenseName: '컴퓨터 활용 1급',
-        licenseSeq: '3',
-        subject: [
-          { 'subjectid': 1,
-            'subjectName': '컴퓨터 일반'
-          },
-          { 'subjectid': 2,
-            'subjectName': '스프레드 시트'
-          },
-          { 'subjectid': 3,
-            'subjectName': '데이터 베이스 일반'
-          }
-        ]
-      },
-      computerUtilizeTwo: {
-        licenseName: '컴퓨터 활용 2급',
-        licenseSeq: '4',
-        subject: [
-          { 'subjectid': 1,
-            'subjectName': '컴퓨터 일반'
-          },
-          { 'subjectid': 2,
-            'subjectName': '스프레드 시트'
-          }
-        ]
+        licenseName: '정보처리 기사'
+        , licenseSeq: '1'  
+        , subject : [
+            { "subjectid"    : 1
+              , "subjectName"  : "소프트웨어 설계"
+            }
+            , { "subjectid"   : 2
+                , "subjectName" : " 소프트웨어 개발"
+              }
+            , { "subjectid"   : 3
+                , "subjectName" : "데이터베이스 구축"
+              }
+            ,{ "subjectid"    : 4
+                , "subjectName" : "프로그래밍 언어 활용"
+              }
+            , { "subjectid"   : 5
+                , "subjectName" : "정보시스템 구축 관리"
+              }
+          ]
+      }
+      , jeongboCheoliSanupGisa: {
+        licenseName: '정보처리 산업기사'
+        , licenseSeq: '2'
+        , subject : [
+            { "subjectid"   : 1
+              , "subjectName" : "데이터베이스"
+            }
+            , { "subjectid"   : 2
+                , "subjectName" : "전자계산기구조"
+              }
+            , { "subjectid"   : 3
+                , "subjectName" : "시스템분석 설계"
+              }
+            , { "subjectid"   : 4
+                , "subjectName" : "운영체제"
+              }
+            , { "subjectid"   : 5
+                , "subjectName" : "정보통신개론"
+              }
+          ]
+      }
+    , computerUtilizeOne: {
+        licenseName: '컴퓨터 활용 1급'
+        , licenseSeq: '3'
+        , subject : [
+            { "subjectid"   : 1
+              , "subjectName" : "컴퓨터 일반"
+            }
+            , { "subjectid"   : 2 
+                , "subjectName" : "스프레드 시트"
+              }
+            , { "subjectid"   : 3
+                , "subjectName" : "데이터 베이스 일반"
+              }
+          ]        
+      }
+      , computerUtilizeTwo: {
+        licenseName: '컴퓨터 활용 2급'
+        , licenseSeq: '4'
+        , subject : [
+            { "subjectid"   : 1 
+              , "subjectName" : "컴퓨터 일반"
+            }
+            , { "subjectid"   : 2
+                , "subjectName" : "스프레드 시트"
+              }
+          ]        
       }
     }
   },
