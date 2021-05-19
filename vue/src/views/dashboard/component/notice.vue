@@ -34,11 +34,11 @@
 
 <script>
 import selectPopup from './notice/noticeSelect'
-export default { 
+export default {
   components: {
-  selectPopup
-  }
-  , data() {
+    selectPopup
+  },
+  data() {
     return {
       voData: undefined,
       popupVal: false,
@@ -70,15 +70,15 @@ export default {
         }
       ]
     }
-},
-methods: {
-  noticeSelect() {
-    this.popupVal = true
   },
-  popupClose(value) {
-    this.popupVal = value
+  methods: {
+    noticeSelect() {
+      this.popupVal = true
+    },
+    popupClose(value) {
+      this.popupVal = value
+    }
   }
-}
 
 }
 </script>
