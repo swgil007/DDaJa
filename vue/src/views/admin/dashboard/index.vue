@@ -3,17 +3,18 @@
     <div class="main-logo-div">
       <img :src="Logo" class="logo" style="">
     </div>
+    <el-calendar v-model="CalendarDate" />
     <router-link to="/admin/user">
-      <user />
+      <el-button type="primary" icon="el-icon-user-solid">회원 관리</el-button>
     </router-link>
     <router-link to="/admin/license">
-      <license />
+      <el-button type="primary" icon="el-icon-star-on">자격증 관리</el-button>
     </router-link>
     <router-link to="/admin/notice">
-      <notice />
+      <el-button type="primary" icon="el-icon-tickets">공지사항 관리</el-button>
     </router-link>
-    <router-link to="/admin/exam">
-      <exam />
+    <router-link to="/admin/question">
+      <el-button type="primary" icon="el-icon-star-on">문제 관리</el-button>
     </router-link>
     <div class="main-bottom" />
   </div>
@@ -21,22 +22,24 @@
 
 <script>
 import mainLogo from '@/assets/DDaJa-Logo/logo.png'
-import exam from '../examination'
-import notice from '../notice'
-import license from '../license'
-import user from '../user'
+// import question from '../question'
+// import notice from '../notice'
+// import license from '../license'
+// import user from '../user'
 
-export default { components: {
-  exam,
-  notice,
-  license,
-  user
-},
-data() {
-  return {
-    Logo: mainLogo
+export default {
+//    components: {
+//   question,
+//   notice,
+//   license,
+//   user
+// },
+  data() {
+    return {
+      Logo: mainLogo,
+      CalendarDate: new Date()
+    }
   }
-}
 
 }
 </script>
