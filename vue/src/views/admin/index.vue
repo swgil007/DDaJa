@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>roles test {{ current }} </h1>
+    <h1> {{ current }} </h1>
   </div>
 </template>
 
