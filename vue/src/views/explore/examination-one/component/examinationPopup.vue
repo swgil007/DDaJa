@@ -19,10 +19,7 @@
                 </el-card>
         
         <span slot="footer" class="dialog-footer"> 
-            <el-tooltip placement="top">
-                <div slot="content">다른 수험자들의<br/>의견 보러가기</div>
-                <el-button type="primary" @click="communityOpen()">토 론</el-button>
-            </el-tooltip>
+            <el-button type="primary" @click="communityOpen()">토 론</el-button>
             <el-tooltip placement="top">
                 <div slot="content">채점 하러 갈래요 ?</div>
             <el-button type="primary" @click="grading()">채 점</el-button>

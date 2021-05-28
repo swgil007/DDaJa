@@ -1,17 +1,29 @@
 <template>
 <div class="main-container">
 <div class="main-title"><font class="title-font">{{ licenseInfo.licenseName }} - 한문제씩 풀기 🌠</font></div>
-<div class="selectbox-box"> 
-<el-select v-model="examYearCountTitle" placeholder="Select" class="exam-select-box" size="lazy">
-    <el-option
-        v-for="item in examYearCount"
-        :key="item.examKey"
-        :count="item.count"
-        :value="item.year">
-        <span style="float: left; font-size: 15px; padding:5px">{{ item.year }}</span>
-        <span style="float: right; color: #8492a6; font-size: 15px; padding:5px">{{ item.count }}</span>
-    </el-option>
-</el-select>    
+<div class="search-box"> 
+    <div class="choice-box">
+        <el-switch
+        class="switch" 
+        v-model="choiceValue"
+        active-color="#13ce66"
+        inactive-color="#ff4949" 
+        active-text="필기"
+        inactive-text="실기">
+        </el-switch>
+    </div> 
+    <div class="select-box">
+        <el-select v-model="examYearCountTitle" placeholder="Select" class="exam-select-box" size="lazy">
+            <el-option
+            v-for="item in examYearCount"
+            :key="item.examKey"
+            :count="item.count"
+            :value="item.year">
+            <span style="float: left; font-size: 15px; padding:5px">{{ item.year }}</span>
+            <span style="float: right; color: #8492a6; font-size: 15px; padding:5px">{{ item.count }}</span>
+            </el-option>
+        </el-select>
+    </div>
 </div>
 <div  class="subject-content-box"> 
     <div v-for="vo in subject" :key="vo.subjectid" class="subject-content">
@@ -62,6 +74,7 @@ name: ''
 return {
     attachRed: false
     , popupVal : false
+    , choiceValue: false
     , licenseInfo: []
     , subject:[]
     , subjectExamination: testJson
@@ -129,7 +142,6 @@ return {
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
-
 .main-container{
     width: 100%;
     text-align: center; 
@@ -150,15 +162,27 @@ return {
             font-family: 'Kirang Haerang', cursive;
         }
     }
-    .selectbox-box{ 
-        margin-top: 5px;
-        margin-bottom: 5px; 
-        color: rgb(0, 0, 0);
-        margin-left: 1%;
-        margin-right: 1%;
-        padding: 1% 1% 1% 1%;
-        .exam-select-box{
-            width: 1000px;
+    .search-box{ 
+        margin: 2% 7% 2% 5%;
+        padding: 6px 0 6px 0;
+        background-color: #ffffff;
+        border: 1px solid rgb(198, 216, 133);
+        height: auto;
+        overflow: auto;
+        
+        .select-box{
+            float: left;
+            padding: 0 0 0 3%; 
+                .exam-select-box{
+                    width: 1000px;
+                }
+        }
+        .choice-box{ 
+            float: left;
+            padding: 10px 0 0 27%; 
+            .switch{
+                display: block; 
+            }
         }
     }
 }
@@ -224,17 +248,10 @@ return {
         }
     }
 }
-
-
-
 .bgc1 { background-color: #23049d;}
 .bgc2 { background-color: #aa2ee6;}
 .bgc3 { background-color: #ff79cd;}
 .bgc4 { background-color: #ffdf6b;}
 .bgc5 { background-color: #96bb7c;}
-.bgc6 { background-color: #ff5200; 
-
-}
-
-
+.bgc6 { background-color: #ff5200; }
 </style>
