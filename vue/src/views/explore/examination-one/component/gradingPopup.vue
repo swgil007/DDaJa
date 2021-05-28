@@ -1,3 +1,3 @@
 <template>
-  <h1>grading</h1>
+    <h1>채점</h1>
 </template>
