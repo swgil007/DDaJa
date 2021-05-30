@@ -19,7 +19,7 @@
                 </el-card>
         
         <span slot="footer" class="dialog-footer"> 
-            <el-button type="primary" @click="communityOpen()">토 론</el-button>
+            <el-button type="primary" @click="communityPopupStatus(true)">토 론</el-button>
             <el-tooltip placement="top">
                 <div slot="content">채점 하러 갈래요 ?</div>
             <el-button type="primary" @click="grading()">채 점</el-button>
@@ -28,7 +28,7 @@
         </el-dialog>
         <community
         :popup-val="communityPopupVal"
-        @close:community="communityClose"
+        @close:community="communityPopupStatus"
         />
     </div>
 </template>
@@ -88,19 +88,21 @@ export default {
             }); 
         }
         , grading(){
-            // 채점 결과
-            alert("채점 UI 개발 중입니다. 🤭🤪😵");
+            // 채점 결과 POPUP
+            this.$emit('open:grading', true)
+            
         }
-        , communityOpen(){
-            // 토론창 열기 
-            this.communityPopupVal = true
-        }
-        , communityClose(value){
-            // 토론창 열기 
-            this.communityPopupVal = value
-        }
+        , communityPopupStatus(val){
+            if(val){
+                // 토론창 열기 
+                this.communityPopupVal = val
+            }else{
+                // 토론창 닫기
+                this.communityPopupVal = val
+            }
+        } 
     }
-    };
+};
 </script>
 
 <style lang="scss" scoped>

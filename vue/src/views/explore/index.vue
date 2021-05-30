@@ -37,32 +37,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap'); 
 .cotegory-container {
-  text-align: center;
+  text-align: left;
   padding: 30px;
   overflow:auto;
-  background-color: rgb(11, 8, 49);
+  // background-color: rgb(255, 255, 255);
 }
 .title-style{
-  border: 20px solid whitesmoke;
+  // border: 20px solid whitesmoke;
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: black;
-  color: whitesmoke;
+  // background-color: rgb(226, 226, 226);
+  color: rgb(0, 0, 0);
   margin-left: 1%;
   margin-right: 2%;
   padding: 1.5% 2% 1.5% 2%;
 }
-.title-font{font-size: 50px;  font-family: 'Kirang Haerang', cursive;}
-.box-style-1{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#f14668; margin: 1%; text-align: center; padding-top:60px }
-.box-style-2{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#f0a500; margin: 1%; text-align: center; padding-top:60px }
-.box-style-3{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#e45826; margin: 1%; text-align: center; padding-top:60px }
-.box-style-4{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#edffa9; margin: 1%; text-align: center; padding-top:60px }
-.box-style-5{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#e40017; margin: 1%; text-align: center; padding-top:60px }
-.box-style-6{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#81b214; margin: 1%; text-align: center; padding-top:60px }
-.box-style-7{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#77acf1; margin: 1%; text-align: center; padding-top:60px }
-.box-style-8{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#c67ace; margin: 1%; text-align: center; padding-top:60px }
-.box-style-9{ border: 10px solid rgb(255, 255, 255); float: left; width: 31%; height: 173px; background-color:#ffaaa7; margin: 1%; text-align: center; padding-top:60px }
-.box-font{ font-size: 40px; font-family: 'Kirang Haerang', cursive; }
+.title-font{ font-size: 50px;   font-family: 'Do Hyeon', sans-serif;}
+.box-style-1{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px; float: left; width: 31%; height: 173px; background-color:#e9bcc5; margin: 1%; text-align: center; padding-top:60px }
+.box-style-2{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px; float: left; width: 31%; height: 173px; background-color:#f5da9f; margin: 1%; text-align: center; padding-top:60px }
+.box-style-3{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#ecf7b3; margin: 1%; text-align: center; padding-top:60px }
+.box-style-4{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#b7ffa9; margin: 1%; text-align: center; padding-top:60px }
+.box-style-5{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#a1cff5; margin: 1%; text-align: center; padding-top:60px }
+.box-style-6{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#5a70ee; margin: 1%; text-align: center; padding-top:60px }
+.box-style-7{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#ce77f1; margin: 1%; text-align: center; padding-top:60px }
+.box-style-8{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#a2e6da; margin: 1%; text-align: center; padding-top:60px }
+.box-style-9{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#ffced2; margin: 1%; text-align: center; padding-top:60px }
+.box-font{ font-size: 40px;  font-family: 'Do Hyeon', sans-serif; }
 </style>
