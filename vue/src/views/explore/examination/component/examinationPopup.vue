@@ -6,38 +6,21 @@
         :before-close="handleClose"> 
         <div class="score-div">
             <div class="score-div1">
-                <span class="span1">2020년 10월 11일 3회차 모의고사</span>
-                <span class="span2">데이터 베이스</span>
-                <span class="span2"> SCORE : 90 점</span>
-            </div>
-            <div class="score-div2">
-                <el-progress :text-inside="true" :stroke-width="20" :percentage="90" status="exception" class="progress"></el-progress>
-            </div>
-        </div>
-        <div>
-            <el-radio-group v-model="quizType" class="quiz-type-div">
-                <el-radio :label="3">전체문제 확인</el-radio>
-                <el-radio :label="6">틀린문제만 확인</el-radio>
-                <el-radio :label="9">맞은 문제만 확인</el-radio>
-            </el-radio-group>
-        </div>
+                <span>2020년 10월 11일 3회차 모의고사</span>
+            </div> 
+        </div> 
         <div v-for="(quiz) in testJson" :key="quiz.examinationNo" >
-            <div class="graging-quiz">
+            <div class="quiz-box">
                 <div class="quiz">
-                    <span> {{quiz.examinationNo}}. {{quiz.examinationQuestion}}  </span> 
-                    <span class="user-answer">3</span> 
-                </div>
-                <div class="quiz-communication" >
-                    <el-button class="quiz-communication-button" @click="communityPopupStatus(true)">토 론</el-button>
-                </div>
+                    <span> {{quiz.examinationNo}}. {{quiz.examinationQuestion}}  </span>  
+                </div> 
                 <div class="answer" v-for="(answer, index) in quiz.example" :key="answer">
-                    <span v-if="answer != quiz.examinationAnswer"> {{index+1}} . {{answer}}</span>
-                    <span class="answer-font" v-else> {{index+1}} . {{answer}}</span>
+                    <span> <el-checkbox v-model="answerTest" >{{index+1}} . {{answer}}</el-checkbox> </span> 
                 </div>  
             </div>
         </div>
         <span slot="footer" class="dialog-footer"> 
-            <el-button type="primary" @click="popupClose(false)">닫 기</el-button> 
+            <el-button type="primary" @click="popupClose(false)">채 점</el-button> 
         </span>
         </el-dialog>
         <community
@@ -50,13 +33,15 @@
 <script>
 import testJson from '@/assets/jsonFile/subjectExaminationTestJson1'
 import community from '@/views/explore/communication'
+
 export default {
-    name: 'gradingPopup'
+    name: 'examinationPopup'
     , data() {
         return { 
             testJson : testJson
             , communityPopupVal : false
             , quizType : 1
+            , answerTest: false
         }
     }
     , components : {
@@ -69,8 +54,8 @@ export default {
     , watch: { }
     ,methods: { 
         popupClose(val) { 
-            // 채점 popup 닫는다.
-            this.$emit('close:grading', val) 
+            // 시험 popup 닫는다.
+            this.$emit('close:examination', val) 
         }
         , handleClose(done) {
             // 클릭 이벤트가 popup 벗어나면 확인창.
@@ -99,17 +84,14 @@ export default {
     height: 30px; 
     .score-div1{ 
         width: 100%;
-        float: left; 
+        float: left;
         span{
             float: left;
-            text-align: left; 
+            font-size: 40px;
             font-family: 'Do Hyeon', sans-serif;
             color: black;
-            padding: 0 0 1% 2%;
-            width: 100%; 
+            padding: 0 0 0 5%;
         }
-        .span1{font-size: 40px;}
-        .span2{font-size: 32px;} 
     }
     .score-div2{ 
         width: 100%;
@@ -127,7 +109,7 @@ export default {
         }
     }
 }
-.graging-quiz{  
+.quiz-box{  
     width: 93%;
     padding: 2%;
     height: inherit; 

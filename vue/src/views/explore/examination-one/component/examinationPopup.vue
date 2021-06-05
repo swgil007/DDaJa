@@ -1,11 +1,15 @@
 <template>
     <div>
         <el-dialog
-        title="2021년 5회차 모의고사"
+        title=""
         :visible.sync="popupVal"
         width="60%"
         :before-close="handleClose">
-            <el-card class="box-card" >
+            <el-card class="box-card" 
+            title=""
+            :visible.sync="popupVal"
+            width="60%"
+            :before-close="handleClose">
                 <div slot="header" class="clearfix">
                     <el-button style="float: left; padding: 3px 0" type="text" @click="examinationNumber = examinationNumber-1"> ← Ago </el-button>
                     <span>{{examinationQuestion}}</span>
@@ -16,15 +20,11 @@
                     <span> {{index+1}} .</span>
                     <span> {{exam}}</span>
                 </div>
-                </el-card>
-        
-        <span slot="footer" class="dialog-footer"> 
-            <el-button type="primary" @click="communityPopupStatus(true)">토 론</el-button>
-            <el-tooltip placement="top">
-                <div slot="content">채점 하러 갈래요 ?</div>
-            <el-button type="primary" @click="grading()">채 점</el-button>
-            </el-tooltip>
-        </span>
+                <div  class="dialog-footer">
+                    <div class="btn1"><el-button type="primary" @click="grading()">채 점</el-button></div>
+                    <div><el-button type="primary" @click="communityPopupStatus(true)">토 론</el-button></div>
+                </div> 
+            </el-card> 
         </el-dialog>
         <community
         :popup-val="communityPopupVal"
@@ -132,5 +132,15 @@ export default {
 }
 .box-card{
     padding-bottom: 20px;
+    .dialog-footer{
+        float: left;
+        width: 100%;
+        div{ 
+            float: right; 
+        }
+        .btn1{
+            padding-left: 2%; 
+        }
+    }
 }
 </style>

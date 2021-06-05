@@ -6,8 +6,7 @@
         :before-close="handleClose"> 
         <div class="score-div">
             <div class="score-div1">
-                <span class="span1">2020년 10월 11일 3회차 모의고사</span>
-                <span class="span2">데이터 베이스</span>
+                <span class="span1">2020년 10월 11일 3회차 모의고사</span> 
                 <span class="span2"> SCORE : 90 점</span>
             </div>
             <div class="score-div2">
@@ -70,7 +69,7 @@ export default {
     ,methods: { 
         popupClose(val) { 
             // 채점 popup 닫는다.
-            this.$emit('close:grading', val) 
+            this.$emit('close:examination', val) 
         }
         , handleClose(done) {
             // 클릭 이벤트가 popup 벗어나면 확인창.

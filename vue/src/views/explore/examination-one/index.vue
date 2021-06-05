@@ -14,16 +14,10 @@
                 </el-option>
             </el-select>
         </div>
-        <div class="choice-box">
-            <el-switch
-            class="switch" 
-            v-model="choiceValue"
-            active-color="#13ce66"
-            inactive-color="#ff4949" 
-            active-text="필기"
-            inactive-text="실기">
-            </el-switch>
-        </div>
+    <div class="choice-box">
+        <el-radio v-model="radio1" label="1" border>필 기</el-radio>
+        <el-radio v-model="radio1" label="2" border>실 기</el-radio>
+    </div>
     </div>
     <div  class="subject-content-box"> 
         <div v-for="vo in subject" :key="vo.subjectid" class="subject-content">
@@ -82,8 +76,7 @@ export default {
         return {
             attachRed: false
             , examinationPopupVal : false
-            , gradingPopupVal : false
-            , choiceValue: false
+            , gradingPopupVal : false 
             , licenseInfo: []
             , subject:[]
             , subjectExamination: testJson
@@ -120,6 +113,7 @@ export default {
                 }
             ] 
             , examYearCountTitle: '응시 회차수를 선택해주세요.' 
+            , radio1: '1'
         }
     }
     , created() {
@@ -193,7 +187,7 @@ export default {
     .select-box{  
         float: left;
         padding: 0 0 0 0; 
-        width: 75%;
+        width: 73%;
             .exam-select-box{
                 float: left;
                 width: 1000px;
@@ -201,11 +195,8 @@ export default {
     }
     .choice-box{  
         float: right;
-        padding: 1% 0 0 10%; 
-        width: 25%;
-        .switch{
-            display: block; 
-        }
+        padding: 1% 1% 0 10%; 
+        width: 27%; 
     }
 }       
 
