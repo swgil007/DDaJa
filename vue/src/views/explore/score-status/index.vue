@@ -17,7 +17,7 @@ export default {
     width: 100%;
 }
 .main-title{
-    border: 1px solid red;
+    border: 1px solid rgb(74, 90, 230);
 }
 .main-board{
     border: 1px solid brown;
