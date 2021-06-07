@@ -6,7 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "user")
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
+@EqualsAndHashCode
+@Table(name = "USER")
 @Entity
 public class User {
 
@@ -20,6 +27,21 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name="TOKEN_JWT")
     private String tokenJWT;
+
+    @Column(name="TOKEN_SOCIAL")
+    private String tokenSocial;
+
+    @Column(name="TOKEN_REFRESH")
+    private String tokenRefresh;
+
+    @Column(name="SESSION_ID")
+    private String sessionId;
+
+    @Column(name="C_TYPE")
+    private String cType;
+
+    @Column(name="SOCIAL_TYPE")
+    private String socialType;
 }
