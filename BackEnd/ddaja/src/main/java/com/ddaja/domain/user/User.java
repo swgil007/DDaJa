@@ -6,14 +6,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
 @EqualsAndHashCode
 @Table(name = "USER")
+@NoArgsConstructor
 @Entity
 public class User {
 
@@ -44,4 +47,10 @@ public class User {
 
     @Column(name="SOCIAL_TYPE")
     private String socialType;
+
+    @Builder
+    public User(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
