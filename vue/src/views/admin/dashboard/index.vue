@@ -3,7 +3,6 @@
     <div class="main-logo-div">
       <img :src="Logo" class="logo" style="">
     </div>
-    <el-calendar v-model="CalendarDate" />
     <router-link to="/admin/user">
       <el-button type="primary" icon="el-icon-user-solid">회원 관리</el-button>
     </router-link>
@@ -17,6 +16,8 @@
       <el-button type="primary" icon="el-icon-star-on">문제 관리</el-button>
     </router-link>
     <div class="main-bottom" />
+
+    <el-calendar v-model="CalendarDate" />
   </div>
 </template>
 
