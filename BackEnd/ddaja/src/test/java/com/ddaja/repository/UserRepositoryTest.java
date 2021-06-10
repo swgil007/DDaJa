@@ -41,10 +41,11 @@ public class UserRepositoryTest {
         //userRepository.save(User.builder().id(id).name(name).build());
         
         // when
-        List<User> userList = userRepository.findAll();
+        //List<User> userList = userRepository.findAll();
+        User user = userRepository.findById(id);
 
         // then
-        User user = userList.get(0);
+        //User user = userList.get(0);
         assertThat(user.getId()).isEqualTo(id);
         assertThat(user.getName()).isEqualTo(name);
     }
