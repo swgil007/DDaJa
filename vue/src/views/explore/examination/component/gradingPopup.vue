@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div class="test">
         <el-dialog 
         :visible.sync="popupVal" 
         title=""
+        class="dialog-box"
         :before-close="handleClose"> 
         <div class="score-div">
             <div class="score-div1">
@@ -172,5 +173,6 @@ export default {
     margin: 10px 0 0 0;
     padding: 1% 0 0 5%;
     float: left;
-}
+} 
+
 </style>

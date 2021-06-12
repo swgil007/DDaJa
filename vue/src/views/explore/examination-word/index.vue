@@ -13,8 +13,19 @@
             </el-table-column>
             <el-table-column
             label="Date"
+            width="400"
             prop="date">
-            </el-table-column>            
+            </el-table-column> 
+            <el-table-column
+            label="단어 수"
+            width="100"
+            prop="wordNum">
+            </el-table-column>
+            <el-table-column
+            label="정답 수"
+            width="100"
+            prop="answer">
+            </el-table-column>        
             <el-table-column
             align="right">
             <template slot="header" slot-scope="{}">
@@ -50,14 +61,14 @@ export default {
     , data() {
         return {
             tableData: [ 
-                { date: '2011-05-03', name: '데이터 베이스 요약 정리 암기 하기'}
-                , { date: '2012-05-03', name: 'java 요약 정리 암기 하기' }
-                , { date: '2013-05-03', name: '운영체제 요약 정리 암기 하기' }
-                , { date: '2014-05-03', name: '전자계산기 요약 정리 암기 하기' }
-                , { date: '2015-05-03', name: '알고리즘  요약 정리 암기 하기' }
-                , { date: '2016-05-03', name: 'OSI 7계층  요약 정리 암기 하기' }
-                , { date: '2017-05-03', name: 'C 언어 함수  요약 정리 암기 하기' }
-                , { date: '2018-05-03', name: '리눅스 용어  요약 정리 암기 하기' } 
+                { date: '2011-05-03',  wordNum:'23', answer: '12', name: '데이터 베이스 요약 정리 암기 하기'}
+                , { date: '2012-05-03', wordNum:'30', answer: '8', name: 'java 요약 정리 암기 하기' }
+                , { date: '2013-05-03', wordNum:'40', answer: '7', name: '운영체제 요약 정리 암기 하기' }
+                , { date: '2014-05-03', wordNum:'20', answer: '0', name: '전자계산기 요약 정리 암기 하기' }
+                , { date: '2015-05-03', wordNum:'23', answer: '0', name: '알고리즘  요약 정리 암기 하기' }
+                , { date: '2016-05-03', wordNum:'36', answer: '0', name: 'OSI 7계층  요약 정리 암기 하기' }
+                , { date: '2017-05-03', wordNum:'90', answer: '0', name: 'C 언어 함수  요약 정리 암기 하기' }
+                , { date: '2018-05-03', wordNum:'96', answer: '0', name: '리눅스 용어  요약 정리 암기 하기' } 
             ]
             , search: ''
             , radio1: '1'
