@@ -5,8 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.ddaja.ddaja.DdajaApplication;
-import com.ddaja.domain.user.User;
-import com.ddaja.repository.user.UserRepository;
+import com.ddaja.ddaja.domain.user.User;
+import com.ddaja.ddaja.repository.user.UserRepository;
 
 import org.junit.After;
 import org.junit.Test;
