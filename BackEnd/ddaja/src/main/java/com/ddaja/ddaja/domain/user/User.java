@@ -1,4 +1,4 @@
-package com.ddaja.domain.user;
+package com.ddaja.ddaja.domain.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +37,7 @@ public class User {
     @Column(name="TOKEN_SOCIAL")
     private String tokenSocial;
 
-    @Column(name="TOKEN_REFRESH")
+    @Column(name="TOKEN_REFERSH")
     private String tokenRefresh;
 
     @Column(name="SESSION_ID")
