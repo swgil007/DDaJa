@@ -3,6 +3,7 @@ package com.ddaja.ddaja.service;
 import java.util.Optional;
 
 import com.ddaja.ddaja.domain.user.User;
+import com.ddaja.ddaja.dto.UserDTO;
 import com.ddaja.ddaja.repository.user.UserRepository;
 
 import org.slf4j.Logger;
@@ -19,7 +20,11 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    public User findUserInfoById(String id) {
-        return userRepository.findById(id);
+    public UserDTO findUserInfoById(String id) {
+        User user = userRepository.findById(id);
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setName(user.getName());
+        return userDTO;
     }
 }
