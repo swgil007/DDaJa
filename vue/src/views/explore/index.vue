@@ -9,13 +9,8 @@
     <div>
       <router-link to="/explore/acceptance-review"><div class="box-style-4"> <font class="box-font">합 격 후 기</font> </div></router-link>
       <router-link to="/explore/license-information"><div class="box-style-5"> <font class="box-font">자 격 증 정 보</font> </div></router-link>
-      <router-link to="/explore/examination-again"><div class="box-style-6"> <font class="box-font">틀 린 문 제 재 탐 험</font> </div></router-link>
-    </div>
-    <div>
-      <router-link to="/explore/score-status"><div class="box-style-7"> <font class="box-font">'{{ licenseInfo.licenseName }}' 점 수</font> </div></router-link>
-      <router-link to="/explore/communication"><div class="box-style-8"> <font class="box-font">ㅡ</font> </div></router-link>
-      <router-link to="/explore/communication"><div class="box-style-9"> <font class="box-font">ㅡ</font> </div></router-link>
-    </div>
+      <router-link to=""><div class="box-style-6"> <font class="box-font">-</font> </div></router-link>
+    </div> 
   </div>
 </template>
 
@@ -41,28 +36,29 @@ export default {
 .cotegory-container {
   text-align: left;
   padding: 30px;
-  overflow:auto;
-  // background-color: rgb(255, 255, 255);
+  overflow:auto; 
 }
-.title-style{
-  // border: 20px solid whitesmoke;
+.title-style{ 
   margin-top: 5px;
-  margin-bottom: 5px;
-  // background-color: rgb(226, 226, 226);
+  margin-bottom: 5px; 
   color: rgb(0, 0, 0);
   margin-left: 1%;
   margin-right: 2%;
   padding: 1.5% 2% 1.5% 2%;
 }
 .title-font{ font-size: 50px;   font-family: 'Do Hyeon', sans-serif;}
-.box-style-1{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px; float: left; width: 31%; height: 173px; background-color:#e9bcc5; margin: 1%; text-align: center; padding-top:60px }
-.box-style-2{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px; float: left; width: 31%; height: 173px; background-color:#f5da9f; margin: 1%; text-align: center; padding-top:60px }
-.box-style-3{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#ecf7b3; margin: 1%; text-align: center; padding-top:60px }
-.box-style-4{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#b7ffa9; margin: 1%; text-align: center; padding-top:60px }
-.box-style-5{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#a1cff5; margin: 1%; text-align: center; padding-top:60px }
-.box-style-6{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#5a70ee; margin: 1%; text-align: center; padding-top:60px }
-.box-style-7{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#ce77f1; margin: 1%; text-align: center; padding-top:60px }
-.box-style-8{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#a2e6da; margin: 1%; text-align: center; padding-top:60px }
-.box-style-9{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 173px; background-color:#ffced2; margin: 1%; text-align: center; padding-top:60px }
+.box-style-1{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px; float: left; width: 31%; height: 230px; background-color:#e9bcc5; margin: 1%; text-align: center; padding-top:85px }
+.box-style-1:hover { background-color: #f75273; }
+.box-style-2{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px; float: left; width: 31%; height: 230px; background-color:#f5da9f; margin: 1%; text-align: center; padding-top:85px }
+.box-style-2:hover { background-color:#fcc141; }
+.box-style-3{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 230px; background-color:#ecf7b3; margin: 1%; text-align: center; padding-top:85px }
+.box-style-3:hover { background-color:#daf74b; }
+.box-style-4{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 230px; background-color:#b7ffa9; margin: 1%; text-align: center; padding-top:85px }
+.box-style-4:hover { background-color:#6af34e; }
+.box-style-5{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 230px; background-color:#a1cff5; margin: 1%; text-align: center; padding-top:85px }
+.box-style-5:hover { background-color:#4caaf7; }
+.box-style-6{ border: 10px solid rgb(255, 255, 255); border-radius: 40px 80px / 80px 40px;  float: left; width: 31%; height: 230px; background-color:#5a70ee; margin: 1%; text-align: center; padding-top:85px }
+.box-style-6:hover { background-color:#2645f7; }
 .box-font{ font-size: 40px;  font-family: 'Do Hyeon', sans-serif; }
+
 </style>
