@@ -37,6 +37,9 @@ public class User {
     @Column(name="TOKEN_SOCIAL")
     private String tokenSocial;
 
+    @Column(name="TOKEN_REFRESH")
+    private String tokenREFRESH;
+
     @Column(name="SESSION_ID")
     private String sessionId;
 
