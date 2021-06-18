@@ -92,7 +92,7 @@ export default {
   background-color:rgb(11, 8, 49);
   .notice-div{
     padding: 30px;
-    background-color: white;
+    background-color: black;
   }
 }
 .title{
