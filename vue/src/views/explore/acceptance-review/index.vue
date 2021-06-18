@@ -1,43 +1,57 @@
 <template>
 <div class="main-container">
-    <div class="main-title">
-        <div class="div-1">
-            <font class="title-font1">합격 리뷰</font><font font class="title-font2"> - {{ licenseInfo.licenseName }}</font>
+    <div class="div1 main-title">
+        <div class="div1-1">
+            <font class="title-font1">
+                합격 리뷰
+            </font>
+            <font font class="title-font2"> 
+                - {{ licenseInfo.licenseName }}
+            </font>
         </div>
-        <div class="div-2">
-            <el-button type="success" class="btn1" @click="popupState(true)">합격 후기 쓰러 가기</el-button>  
+        <div class="div1-2">
+            <el-button type="success" class="btn1" @click="popupState(true)">
+                합격 후기 쓰러 가기
+            </el-button>  
         </div>
     </div>
-    <div class="table-box">
+    <div class="div2">
         <el-table
         :data="tableData"
-        style="width: 100%">
+        style="width: 100%"
+        >
             <el-table-column type="expand">
-            <template slot-scope="props">
-            <p class="title">{{ props.row.title }}</p>
-            <p class="scrore"><i class="el-icon-caret-right"></i> 합격 점수: {{ props.row.scrore }}</p>
-            <p class="content">{{ props.row.content }}</p> 
-            </template>
+                <template slot-scope="props">
+                    <p class="p1">
+                        {{ props.row.title }}
+                    </p>
+                    <p class="p2">
+                        <i class="el-icon-caret-right"></i> 합격 점수: {{ props.row.scrore }}
+                    </p>
+                    <p class="p3">
+                        {{ props.row.content }}
+                </p> 
+                </template>
             </el-table-column>
             <el-table-column
-            label="REVIEW TITLE"
-            prop="title">
+                label="REVIEW TITLE"
+                prop="title">
             </el-table-column>
             <el-table-column
-            label="시험명"
-            prop="name">
+                label="시험명"
+                prop="name">
             </el-table-column>
             <el-table-column
-            label="후기 작성일"
-            prop="date">
+                label="후기 작성일"
+                prop="date">
             </el-table-column>
         </el-table>
     </div>
-    <div class="paging-box">
+    <div class="div3">
         <el-pagination
-        class="paging"
-        layout="prev, pager, next"
-        :total="50">
+            class="paging"
+            layout="prev, pager, next"
+            :total="50">
         </el-pagination>
     </div>
     <popup 
@@ -81,8 +95,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
+
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap'); 
+
 .main-container{
     width: 100%;
     text-align: center; 
@@ -97,7 +113,7 @@ export default {
         margin-left: 1%;
         margin-right: 1%;
         padding: 1.5% 2% 0% 4%;
-        .div-1{
+        .div1-1{
             width: 80%;
             float: left; 
             .title-font1{
@@ -110,7 +126,7 @@ export default {
                 font-family: 'Do Hyeon', sans-serif;
             }
         }
-        .div-2{
+        .div1-2{
             width: 20%;
             float: left; 
             .btn1{
@@ -120,26 +136,24 @@ export default {
             }
         } 
     }
-    .table-box{
+    .div2{
         padding: 1.5% 2% 0% 4%;
         margin: 0 0 30px 0 ;  
         float:left;
         width: 100%;
         max-height:550px;
-        .title{ font-size: 20px; font-weight: bold; }
-        .scrore{ font-size: 14px; font-weight: bold; }
-        .content{ padding: 1.5%; font-size: 14px; }
+        .p1{ font-size: 20px; font-weight: bold; }
+        .p2{ font-size: 14px; font-weight: bold; }
+        .p3{ padding: 1.5%; font-size: 14px; }
     }
-    .paging-box{
+    .div3{
         float:left;
         padding: 2% 11% 2% 0;
         text-align: center;
         position: fixed; 
         bottom: 0; 
         width: 100%; 
-        .paging{ 
-            display: inline-block;
-        }
+        .paging{ display: inline-block;}
     }
 } 
 </style>

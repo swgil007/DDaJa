@@ -1,52 +1,52 @@
 <template>
-<div class="main-container">
-    <div class="main-title">
-        <font class="title-font1">단어 암기</font><font font class="title-font2"> - {{ licenseInfo.licenseName }}</font>
+    <div class="main-container">
+        <div class="main-title">
+            <font class="font1">단어 암기</font><font font class="font2"> - {{ licenseInfo.licenseName }}</font>
+        </div>
+        <div class="div1">  
+            <el-table
+                :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                style="width: 100%; height: 100%;">
+                <el-table-column
+                    label="Name"
+                    prop="name">
+                </el-table-column>
+                <el-table-column
+                    label="Date"
+                    width="400"
+                    prop="date">
+                </el-table-column> 
+                <el-table-column
+                    label="단어 수"
+                    width="100"
+                    prop="wordNum">
+                </el-table-column>
+                <el-table-column
+                    label="정답 수"
+                    width="100"
+                    prop="answer">
+                </el-table-column>        
+                <el-table-column
+                    align="right">
+                    <template slot="header" slot-scope="{}">
+                        <el-input
+                            v-model="search"
+                            size="mini"
+                            placeholder="Type to search"/>
+                    </template>
+                    <template slot-scope="scope">
+                        <el-button
+                            size="mini"
+                            @click="examPopupStatus(scope.$index, scope.row, true)">암기 하기</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <examinationPopup
+        :popup-val="examPopupStatusVal"
+        @close:examination="examPopupStatus"
+        /> 
     </div>
-    <div class="search-box">  
-        <el-table
-            :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-            style="width: 100%; height: 100%;">
-            <el-table-column
-            label="Name"
-            prop="name">
-            </el-table-column>
-            <el-table-column
-            label="Date"
-            width="400"
-            prop="date">
-            </el-table-column> 
-            <el-table-column
-            label="단어 수"
-            width="100"
-            prop="wordNum">
-            </el-table-column>
-            <el-table-column
-            label="정답 수"
-            width="100"
-            prop="answer">
-            </el-table-column>        
-            <el-table-column
-            align="right">
-            <template slot="header" slot-scope="{}">
-                <el-input
-                v-model="search"
-                size="mini"
-                placeholder="Type to search"/>
-            </template>
-            <template slot-scope="scope">
-                <el-button
-                size="mini"
-                @click="examPopupStatus(scope.$index, scope.row, true)">암기 하기</el-button>
-            </template>
-            </el-table-column>
-        </el-table>
-    </div>
-    <examinationPopup
-    :popup-val="examPopupStatusVal"
-    @close:examination="examPopupStatus"
-    /> 
-</div>
 </template>
 
 <script>
@@ -93,7 +93,9 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
+
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap'); 
+
 .main-container{
     width: 100%;
     text-align: center; 
@@ -108,40 +110,19 @@ export default {
         margin-left: 1%;
         margin-right: 1%;
         padding: 1.5% 2% 0% 4%;
-        .title-font1{
+        .font1{
             font-size: 50px;   
             font-family: 'Do Hyeon', sans-serif;
         }
-        .title-font2{
+        .font2{
             font-size: 40px;
             padding: 0 0 0 30px; 
             font-family: 'Do Hyeon', sans-serif;
         }
-    }
-    .choice-box{ 
-        padding: 0 5.5% 1.5% 0;
-        float: right;
-    }
-    .search-box{
+    } 
+    .div1{
         width: 90%;  
-        margin: 0 5% 0 5%;
-        .select-box{  
-            float: left;
-            padding: 0 0 0 0; 
-            width: 75%;
-                .exam-select-box{
-                    float: left;
-                    width: 1000px;
-                }
-        }
-        .choice-box{  
-            float: right;
-            padding: 1% 0 0 10%; 
-            width: 25%;
-            .switch{
-                display: block; 
-            }
-        }
+        margin: 0 5% 0 5%; 
     }
 } 
 </style>

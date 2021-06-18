@@ -5,24 +5,24 @@
         :visible.sync="popupVal"
         width="60%"
         :before-close="handleClose">
-            <el-card class="box-card" 
-            title=""
+            <el-card class = "examination-card" 
+            title = ""
+            width = "60%"
             :visible.sync="popupVal"
-            width="60%"
             :before-close="handleClose">
-                <div slot="header" class="clearfix">
+                <div class="div1-1" slot="header">
                     <el-button style="float: left; padding: 3px 0" type="text" @click="examinationNumber = examinationNumber-1"> ← Ago </el-button>
-                    <span>{{examinationQuestion}}</span>
+                    <span class="span1">{{examinationQuestion}}</span>
                     <el-button style="float: right; padding: 3px 0" type="text" @click="examinationNumber = examinationNumber+1"> Next → </el-button>
                 </div>
-                <div v-for="( exam, index ) in example" :key="exam.examinationNo" class="text item">
+                <div class="div1-2" v-for="( exam, index ) in example" :key="exam.examinationNo">
                     <el-checkbox v-model="checkedTest" class="check-box" size="medium"></el-checkbox>
-                    <span> {{index+1}} .</span>
-                    <span> {{exam}}</span>
+                    <span class="span1"> {{index+1}} .</span>
+                    <span class="span2"> {{exam}}</span>
                 </div>
-                <div  class="dialog-footer">
-                    <div class="btn1"><el-button type="primary" @click="grading()">채 점</el-button></div>
-                    <div><el-button type="primary" @click="communityPopupStatus(true)">토 론</el-button></div>
+                <div class="div1-3">
+                    <div class="div1-3-1"><el-button type="primary" @click="grading()">채 점</el-button></div>
+                    <div class="div1-3-2"><el-button type="primary" @click="communityPopupStatus(true)">토 론</el-button></div>
                 </div> 
             </el-card> 
         </el-dialog>
@@ -36,6 +36,7 @@
 <script> 
 
 import community from '@/views/explore/communication'
+
 export default {
     name: 'examinationPopup'
     , data() {
@@ -106,41 +107,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.item{
-    float: left;
-    width: 100%;
-    padding-left: 5%; 
-    span {
-        font-size: 18px;
-        padding-top: 12px;
-        font-weight: bold;
-        float: left;
-        padding: 15px; 
-    }
-    .check-box{
-        size: 10px; 
-        padding-top: 15px;
-        padding-bottom: 10px;
-        float: left;
-    }
-}
-.clearfix{
-    span {
-        font-size: 22px;
-        font-weight: bold;
-    }
-}
-.box-card{
+.examination-card{
     padding-bottom: 20px;
-    .dialog-footer{
+    .div1-3{
         float: left;
         width: 100%;
-        div{ 
+        .div1-3-1{
+            float: right; 
+            padding-left: 2%; 
+        }        
+        .div1-3-2{ 
             float: right; 
         }
-        .btn1{
-            padding-left: 2%; 
+    }
+    .div1-1{
+        .span1 {
+            font-size: 22px;
+            font-weight: bold;
         }
     }
+    .div1-2{
+        float: left;
+        width: 100%;
+        padding-left: 5%; 
+        .span1, .span2 {
+            font-size: 18px;
+            padding-top: 12px;
+            font-weight: bold;
+            float: left;
+            padding: 15px; 
+        }
+        .check-box{
+            size: 10px; 
+            padding-top: 15px;
+            padding-bottom: 10px;
+            float: left;
+        }
+    }    
 }
 </style>

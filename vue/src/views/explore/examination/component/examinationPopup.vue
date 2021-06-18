@@ -4,18 +4,18 @@
         :visible.sync="popupVal" 
         title=""
         :before-close="handleClose"> 
-        <div class="score-div">
-            <div class="score-div1">
-                <span>2020년 10월 11일 3회차 모의고사</span>
+        <div class="div1">
+            <div class="div1-1">
+                <span class="span1">2020년 10월 11일 3회차 모의고사</span>
             </div> 
         </div> 
-        <div v-for="(quiz) in testJson" :key="quiz.examinationNo" >
-            <div class="quiz-box">
-                <div class="quiz">
-                    <span> {{quiz.examinationNo}}. {{quiz.examinationQuestion}}  </span>  
+        <div class="div2" v-for="(quiz) in testJson" :key="quiz.examinationNo" >
+            <div class="div2-1">
+                <div class="div2-1-1">
+                    <span class="span1"> {{quiz.examinationNo}}. {{quiz.examinationQuestion}}  </span>  
                 </div> 
-                <div class="answer" v-for="(answer, index) in quiz.example" :key="answer">
-                    <span> <el-checkbox v-model="answerTest" >{{index+1}} . {{answer}}</el-checkbox> </span> 
+                <div class="div2-1-2" v-for="(answer, index) in quiz.example" :key="answer">
+                    <span class="span1"> <el-checkbox v-model="answerTest" >{{index+1}} . {{answer}}</el-checkbox> </span> 
                 </div>  
             </div>
         </div>
@@ -24,8 +24,8 @@
         </span>
         </el-dialog>
         <community
-        :popup-val="communityPopupVal"
-        @close:community="communityPopupStatus"
+            :popup-val="communityPopupVal"
+            @close:community="communityPopupStatus"
         />
     </div> 
 </template>
@@ -78,14 +78,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap'); 
-.score-div{
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap');
+.div1{
     width: 100%;
     height: 30px; 
-    .score-div1{ 
+    .div1-1{ 
         width: 100%;
         float: left;
-        span{
+        .span1{
             float: left;
             font-size: 40px;
             font-family: 'Do Hyeon', sans-serif;
@@ -93,67 +93,35 @@ export default {
             padding: 0 0 0 5%;
         }
     }
-    .score-div2{ 
-        width: 100%;
-        float: left;
-        padding: 3% 0 0 5%;
-        span{
-            float: left;
-            font-size: 30px;
-            font-family: 'Do Hyeon', sans-serif;
-            color: black;
-            
-        }
-        .progress{
-            width: 90%;
-        }
-    }
 }
-.quiz-box{  
-    width: 93%;
-    padding: 2%;
-    height: inherit; 
-    float: left;
-    margin: 3% 3% 3% 3%;
-    .quiz{ 
-        float: left;
-        width: inherit;
+.div2{
+    .div2-1{
+        width: 93%;
         padding: 2%;
-        font-size: 15px;
-        font-weight: bold;
-        span{
-            float: left;
-        }
-        .user-answer{
-            color: blue;
-            padding: 0 0 0 2%;
-        }
-    }
-    .answer{ 
+        height: inherit; 
         float: left;
-        width: inherit;
-        padding: 2%;
-        font-size: 13px;
-        font-weight: bold;
-        span{
-            padding-left: 5%;
+        margin: 3% 3% 3% 3%;
+        .div2-1-1{ 
             float: left;
+            width: inherit;
+            padding: 2%;
+            font-size: 15px;
+            font-weight: bold;
+            .span1{
+                float: left;
+            } 
         }
-        .answer-font{
-            color: red;
+        .div2-1-2{ 
+            float: left;
+            width: inherit;
+            padding: 2%;
+            font-size: 13px;
+            font-weight: bold;
+            .span1{
+                padding-left: 5%;
+                float: left;
+            }
         }
     }
-    .quiz-communication{
-        float: left;
-        width: 100%; 
-        .quiz-communication-button{
-            float: right;
-        }
-    }
-}
-.quiz-type-div{
-    margin: 10px 0 0 0;
-    padding: 1% 0 0 5%;
-    float: left;
 }
 </style>

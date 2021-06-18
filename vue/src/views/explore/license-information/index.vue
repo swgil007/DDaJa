@@ -3,23 +3,25 @@
     <div class="main-title">
         <font class="title-font1">{{ licenseInfo.licenseName }} 자격증 정보</font>
     </div>
-    <div class="license-info-subject">
-        <div class="div1">
+
+    <div class="div1">
+        <div class="div1-1">
             <span class="font1">✅ 자격증 과목</span>
         </div>
-        <div class="div2">
-            <div class="div2-1"><span class="font1"><i class="el-icon-caret-right"></i>전자 계산기</span></div>
-            <div class="div2-1"><span class="font1"><i class="el-icon-caret-right"></i>데이터 베이스</span></div>
-            <div class="div2-1"><span class="font1"><i class="el-icon-caret-right"></i>운영 체제</span></div>
-            <div class="div2-1"><span class="font1"><i class="el-icon-caret-right"></i>시스템분석 설계</span></div>
-            <div class="div2-1"><span class="font1"><i class="el-icon-caret-right"></i>정보통신 개론</span></div> 
+        <div class="div1-2">
+            <div class="div1-2-1"><span class="font1"><i class="el-icon-caret-right"></i>전자 계산기</span></div>
+            <div class="div1-2-1"><span class="font1"><i class="el-icon-caret-right"></i>데이터 베이스</span></div>
+            <div class="div1-2-1"><span class="font1"><i class="el-icon-caret-right"></i>운영 체제</span></div>
+            <div class="div1-2-1"><span class="font1"><i class="el-icon-caret-right"></i>시스템분석 설계</span></div>
+            <div class="div1-2-1"><span class="font1"><i class="el-icon-caret-right"></i>정보통신 개론</span></div> 
         </div>
     </div>
-    <div class="license-info-date">
-        <div class="div1">
+
+    <div class="div2">
+        <div class="div2-1">
             <span class="font1">✅ 자격증 일정</span>
         </div>
-        <div class="div2">
+        <div class="div2-2">
             <el-table
             :data="tableData"
             border
@@ -48,75 +50,76 @@
         </div>
     </div>
     
-    <div class="license-info-pass-chart"> 
-        <div class="div1">
+    <div class="div3"> 
+        <div class="div3-1">
             <span class="font1">✅ 자격증 합격 현황 : ) </span>
         </div>
-        <div class="div2"> 
+        <div class="div3-2"> 
             <line-chart :chart-data="datacollection" ></line-chart>
         </div>
     </div>
 
-    <div class="license-info-fail-chart"> 
-        <div class="div1">
+    <div class="div4"> 
+        <div class="div4-1">
             <span class="font1">✅ 자격증 과락 현황 : (</span>
         </div>
-        <div class="div2"> 
+        <div class="div4-2"> 
             <line-chart :chart-data="datacollection" ></line-chart>
         </div>
     </div>
 
-    <div class="license-info-pass"> 
-        <div class="div1">
+    <div class="div5"> 
+        <div class="div5-1">
             <span class="font1">✅ 자격증 합격 기준 </span>
         </div>
-        <div class="div2">
-            <div class="div2-1">
+        <div class="div5-2">
+            <div class="div5-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>평균</span><br/>
                 <span class="span2">60점 이상</span> 
             </div>
-            <div class="div2-1">
+            <div class="div5-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>전자 계산기</span><br/>
                 <span class="span2">40점 이상</span> 
             </div>
-            <div class="div2-1">
+            <div class="div5-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>데이터 베이스</span><br/>
                 <span class="span2">40점 이상</span>  
             </div>
-            <div class="div2-1">
+            <div class="ddiv5-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>운영 체제</span><br/>
                 <span class="span2">40점 이상</span> 
             </div>
-            <div class="div2-1">
+            <div class="div5-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>시스템분석 설계</span><br/>
                 <span class="span2">40점 이상</span>  
             </div>
-            <div class="div2-1">
+            <div class="div5-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>정보통신 개론</span><br/>
                 <span class="span2">40점 이상</span> 
             </div> 
         </div>
     </div>
 
-    <div class="license-info-qualification"> 
-        <div class="div1">
+    <div class="div6"> 
+        <div class="div6-1">
             <span class="font1">✅ 자격증 응시 자격</span>
         </div>
-        <div class="div2">
-            <div class="div2-1">
+        <div class="div6-2">
+            <div class="div6-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>학력 응시</span><br/>
                 <span class="span2">2년제 OR 3년제 관련학과 졸업</span> 
             </div>
-            <div class="div2-1">
+            <div class="div6-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>경력 응시</span><br/>
                 <span class="span2">3년 이상</span> 
             </div>
-            <div class="div2-1">
+            <div class="div6-2-1">
                 <span class="span1"><i class="el-icon-caret-right"></i>학점 응시</span><br/>
                 <span class="span2">41 학점 보유자</span> 
             </div> 
         </div>
     </div>
+
 </div>
 </template>
 
@@ -190,11 +193,11 @@ export default {
             font-size: 50px;   
             font-family: 'Do Hyeon', sans-serif;
         } 
-    }
-    .license-info-date{
+    } 
+    .div1{
         width: 100%; 
         float: left;
-        .div1{
+        .div1-1{
             padding: 4% 10% 4% 10% ; 
             .font1{
                 font-size: 35px;   
@@ -203,28 +206,11 @@ export default {
                 text-align: left;
             }  
         }
-        .div2{
-            padding: 0 10% 0 10% ;
-            width: 100%; 
-        }
-    }
-    .license-info-subject{
-        width: 100%; 
-        float: left;
-        .div1{
-            padding: 4% 10% 4% 10% ; 
-            .font1{
-                font-size: 35px;   
-                font-family: 'Do Hyeon', sans-serif;
-                float: left;
-                text-align: left;
-            }  
-        }
-        .div2{
+        .div1-2{
             padding: 0 10% 0 10% ;
             width: 100%;
             float: left;
-            .div2-1{
+            .div1-2-1{
                 text-align: left;
                 .font1{
                     font-size: 27px; 
@@ -235,10 +221,27 @@ export default {
             }
         }
     }
-    .license-info-pass-chart{
+    .div2{
+        width: 100%; 
+        float: left;
+        .div2-1{
+            padding: 4% 10% 4% 10% ; 
+            .font1{
+                font-size: 35px;   
+                font-family: 'Do Hyeon', sans-serif;
+                float: left;
+                text-align: left;
+            }  
+        }
+        .div2-2{
+            padding: 0 10% 0 10% ;
+            width: 100%; 
+        }
+    }    
+    .div3{
         width: 50%; 
         float: left; 
-        .div1{
+        .div3-1{
             padding: 10% 10% 10% 20% ; 
             .font1{
                 font-size: 35px;   
@@ -247,15 +250,15 @@ export default {
                 text-align: left;
             }  
         }
-        .div2{
+        .div3-2{
             padding: 0 0 0 20% ;
             width: 910px; 
         }
     }
-    .license-info-fail-chart{
+    .div4{
         width: 50%; 
         float: left; 
-        .div1{
+        .div4-1{
             padding: 10% 10% 10% 0% ; 
             .font1{
                 font-size: 35px;   
@@ -264,15 +267,15 @@ export default {
                 text-align: left;
             }  
         }
-        .div2{
+        .div4-2{
             padding: 0 20% 0 0 ;
             width: 910px; 
         }
     }
-    .license-info-pass{
+    .div5{
         width: 50%; 
         float: left; 
-        .div1{
+        .div5-1{
             padding: 10% 10% 10% 20% ; 
             .font1{
                 font-size: 35px;   
@@ -281,10 +284,10 @@ export default {
                 text-align: left;
             }  
         }
-        .div2{
+        .div5-2{
             padding: 0 10% 0 20% ;
             width: 1000px;
-            .div2-1{
+            .div5-2-1{
                 float: left;
                 width: 100%; 
                 text-align: left;
@@ -304,10 +307,10 @@ export default {
             } 
         }
     }
-    .license-info-qualification{
+    .div6{
         width: 50%; 
         float: left; 
-        .div1{
+        .div6-1{
             padding: 10% 10% 10% 10% ; 
             .font1{
                 font-size: 35px;   
@@ -317,10 +320,10 @@ export default {
             }
             
         }
-        .div2{
+        .div6-2{
             padding: 0 29% 0 10% ;
             width: 1000px;
-            .div2-1{
+            .div6-2-1{
                 float: left;
                 width: 100%; 
                 text-align: left;

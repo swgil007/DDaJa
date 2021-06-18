@@ -84,10 +84,10 @@ export default {
           callback()
         } else {
           this.$message({
-            message: '外链url填写不正确',
+            message: 'URL 이 잘못 되었습니다',
             type: 'error'
           })
-          callback(new Error('外链url填写不正确'))
+          callback(new Error('URL 이 잘못 되었습니다'))
         }
       } else {
         callback()

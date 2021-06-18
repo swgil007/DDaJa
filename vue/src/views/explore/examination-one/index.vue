@@ -1,9 +1,9 @@
 <template>
 <div class="main-container">
-    <div class="main-title"><font class="title-font1">한문제씩 풀기</font><font font class="title-font2"> - {{ licenseInfo.licenseName }}</font></div>
-    <div class="search-box">  
-        <div class="select-box">
-            <el-select v-model="examYearCountTitle" placeholder="Select" class="exam-select-box" size="lazy">
+    <div class="main-title"><font class="font1">한문제씩 풀기</font><font font class="font2"> - {{ licenseInfo.licenseName }}</font></div>
+    <div class="examination-one-div1">  
+        <div class="div1-1">
+            <el-select v-model="examYearCountTitle" placeholder="Select" class="div1-1-1" size="lazy">
                 <el-option
                 v-for="item in examYearCount"
                 :key="item.examKey"
@@ -14,34 +14,34 @@
                 </el-option>
             </el-select>
         </div>
-    <div class="choice-box">
-        <el-radio v-model="radio1" label="1" border>필 기</el-radio>
-        <el-radio v-model="radio1" label="2" border>실 기</el-radio>
+        <div class="div1-2">
+            <el-radio v-model="radio1" label="1" border>필 기</el-radio>
+            <el-radio v-model="radio1" label="2" border>실 기</el-radio>
+        </div>
     </div>
-    </div>
-    <div  class="subject-content-box"> 
-        <div v-for="vo in subject" :key="vo.subjectid" class="subject-content">
-            <div class="subject-box"
+    <div  class="examination-one-div2"> 
+        <div v-for="vo in subject" :key="vo.subjectid" class="div2-1">
+            <div class="div2-1-1"
                 :class="colorSelect(vo.subjectid)" 
                 @click="examinationPopupStatus(true)"
             >
-                <span class="subject-name-style">
-                    <div class="name-div">{{vo.subjectName}} </div> 
+                <span class="span1">
+                    <div class="div2-1-1-1">{{vo.subjectName}} </div> 
                 </span>
             </div>
-            <div class="chart-box1">
-                <div class="chart-box2"> 
-                    <div class="chart-row-box">
-                        <div class="chart-font-div"><span>전체 진도율 </span></div>
-                        <div class="chart-bar-div"><el-progress :text-inside="true" :stroke-width="26" :percentage="80"  class="chart"></el-progress></div>
+            <div class="div2-1-2">
+                <div class="div2-1-2-1"> 
+                    <div class="div2-1-2-1-1">
+                        <div class="div2-1-2-1-1-1"><span class="span1">전체 진도율 </span></div>
+                        <div class="div2-1-2-1-1-2"><el-progress :text-inside="true" :stroke-width="26" :percentage="80"  class="chart"></el-progress></div>
                     </div>
-                    <div class="chart-row-box"> 
-                        <div class="chart-font-div"><span>정답 문제 현황 </span></div>
-                        <div class="chart-bar-div"><el-progress :text-inside="true" :stroke-width="26" :percentage="30"  class="chart" status="success"></el-progress></div>
+                    <div class="div2-1-2-1-1"> 
+                        <div class="div2-1-2-1-1-1"><span class="span1">정답 문제 현황 </span></div>
+                        <div class="div2-1-2-1-1-2"><el-progress :text-inside="true" :stroke-width="26" :percentage="30"  class="chart" status="success"></el-progress></div>
                     </div> 
-                    <div class="chart-row-box"> 
-                        <div class="chart-font-div"><span>틀린 문제 현황</span></div>
-                        <div class="chart-bar-div"><el-progress :text-inside="true" :stroke-width="26" :percentage="40"  class="chart" status="exception"></el-progress></div>
+                    <div class="div2-1-2-1-1"> 
+                        <div class="div2-1-2-1-1-1"><span class="span1">틀린 문제 현황</span></div>
+                        <div class="div2-1-2-1-1-2"><el-progress :text-inside="true" :stroke-width="26" :percentage="40"  class="chart" status="exception"></el-progress></div>
                     </div> 
                 </div>
             </div>
@@ -66,7 +66,7 @@ import gradingPopup from './component/gradingPopup'
 import testJson from '../../../assets/jsonFile/subjectExaminationTestJson1'
 
 export default {
-    name: ''
+    name: 'examination-one'
     , components: {
         testJson
         , examinationPopup
@@ -169,43 +169,41 @@ export default {
         margin-left: 1%;
         margin-right: 1%;
         padding: 1.5% 2% 1.5% 4%;
-        .title-font1{
+        .font1{
             font-size: 50px;   
             font-family: 'Do Hyeon', sans-serif;
         }
-        .title-font2{
+        .font2{
             font-size: 40px;
             padding: 0 0 0 30px; 
             font-family: 'Do Hyeon', sans-serif;
         }
     }
-    
-.search-box{
+}
+.examination-one-div1{
     width: 90%; 
     height: 80px;
     margin: 0 5% 0 5%;
-    .select-box{  
+    .div1-1{  
         float: left;
         padding: 0 0 0 0; 
         width: 73%;
-            .exam-select-box{
-                float: left;
-                width: 1000px;
-            }
+        .div1-1-1{
+            float: left;
+            width: 1000px;
+        }
     }
-    .choice-box{  
+    .div1-2{  
         float: right;
         padding: 1% 1% 0 10%; 
         width: 27%; 
     }
-}       
-
 }
-.subject-content-box{ 
+.examination-one-div2{ 
     height: 400px;
-    .subject-content{  
+    .div2-1{  
         height: 400px;
-        .subject-box{
+        .div2-1-1{
             width: 38%;
             height: 350px;
             margin-top: 20px;
@@ -213,11 +211,11 @@ export default {
             margin-right: 10%; 
             float: left;
             cursor: pointer; 
-            .subject-name-style{ 
+            .span1{ 
                 color: aliceblue;
                 font-size: 50px;   
                 font-family: 'Do Hyeon', sans-serif;
-                .name-div{
+                .div2-1-1-1{
                     padding-top: 20%; 
                     float: left;
                     width: 100%;
@@ -225,34 +223,34 @@ export default {
                 }
             }
         }
-        .chart-box1{
+        .div2-1-2{
             width: 38%;
             height: 350px; 
             margin-top: 20px;
             margin-left: 2%; 
             float: left;
             border: 20px solid rgb(255, 255, 170);
-            .chart-box2 {
+            .div2-1-2-1 {
                 padding-top: 1%;
                 border: 2px solid rgb(255, 255, 44);
                 width: 100%;
                 height: 100%;
-                .chart-row-box{
+                .div2-1-2-1-1{
                     height: 100px; 
                     width: 100%;
                     float: left; 
-                    .chart-font-div{ 
+                    .div2-1-2-1-1-1{ 
                         float: left;
                         width: 100%;  
                         height: 30px;
-                        span {
+                        .span1 {
                             font-weight: bold;
                             padding-left: 3%;
                             float:left;
                             color: rgb(0, 0, 0); 
                         }
                     } 
-                    .chart-bar-div{ 
+                    .div2-1-2-1-1-2{ 
                         float: left;
                         width: 100%;  
                         height: 30px;
