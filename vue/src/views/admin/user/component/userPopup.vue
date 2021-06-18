@@ -8,7 +8,7 @@
         <template>
           <article-detail
             :is-edit="false"
-            :data="popupData"
+            :user-id="userId"
             @close:popup="popupClose"
           />
         </template>
@@ -23,12 +23,17 @@ export default {
   name: '',
   components: {
     ArticleDetail
-  }, props: {
-    popupVal: {}
+  },
+  props: {
+    popupVal: {},
+    userId: {}
   },
   data() {
     return {
-      popupData: { id: this.userId, name: this.userName }
+      popupData: {
+        userId: this.props.userId,
+        popupVal: this.props.popupVal
+      }
     }
   },
   created() { },

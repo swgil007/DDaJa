@@ -28,6 +28,16 @@
 </template>
 
 <script>
+export default {
+  name: '',
+  props: {
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    userId: {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>
