@@ -29,6 +29,9 @@ public class UserRepositoryTest {
     @MockBean
     private UserRepository userRepository;
 
+    @Autowired
+    private UserRepositroy userRepositroyAuto;
+    
     //@After
     public void clean() {
         userRepository.deleteAll();
@@ -41,9 +44,11 @@ public class UserRepositoryTest {
         String name = "김로그";
 
         //userRepository.save(User.builder().id(id).name(name).build());
+        //userRepositoryAuto.save(User.builder().id(id).name(name).build());
         
         // when
         //List<User> userList = userRepository.findAll();
+        //List<User> userList = userRepositoryAuto.findAll();
         User user = userRepository.findById(id);
 
         // then
@@ -58,6 +63,7 @@ public class UserRepositoryTest {
         // when
         int userCount = 1;
         List<User> userList = userRepository.findAll();
+        //List<User> userList = userRepositoryAuto.findAll();
 
         // console
         userList.stream().forEach(user -> System.out.println(user));
