@@ -7,9 +7,10 @@
       <div>
         <template>
           <article-detail
-            :is-edit="false"
+            :is-edit="isEdit"
             :user-id="userId"
             @close:popup="popupClose"
+            @test="test"
           />
         </template>
       </div>
@@ -30,10 +31,7 @@ export default {
   },
   data() {
     return {
-      popupData: {
-        userId: this.props.userId,
-        popupVal: this.props.popupVal
-      }
+      isEdit: false
     }
   },
   created() { },
@@ -45,8 +43,15 @@ export default {
         })
         .catch(_ => {})
     },
-    popupClose() {
-      this.$emit('close:popup', false)
+    popupClose(popupVal) {
+      alert(`aaaa`)
+      this.popupVal = popupVal
+      this.$emit('close:popup', popupVal)
+      alert(`asfs`)
+    },
+    test(test) {
+      alert('bb' + test)
+      this.$emit('test', test)
     }
   }
 }

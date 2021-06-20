@@ -6,20 +6,22 @@
         <el-row>
           <el-col
             :span="24"
-            prop="userId"
-          />
+          >
+            {{ userId }}
+          </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
             <div class="choice-box">
-              <el-radio v-model="radio1" label="1" border>노출</el-radio>
+              <el-radio v-model="radio1" label="1" border>노출 {{ test }}</el-radio>
               <el-radio v-model="radio1" label="2" border>비 노출</el-radio>
+              <el-input v-model="test" />
             </div>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24" align="right">
-            <el-button @click="popupClose(false)">저장 하기</el-button>
+            <el-button @click="popupClose()">저장 하기</el-button>
           </el-col>
         </el-row>
       </div>
@@ -31,11 +33,19 @@
 export default {
   name: '',
   props: {
-    isEdit: {
-      type: Boolean,
-      default: false
-    },
+    isEdit: {},
     userId: {}
+  },
+  data() {
+    return {
+      test: ''
+    }
+  },
+  methods: {
+    popupClose() {
+      this.$emit('close:popup', false)
+      this.$emit('test', this.test)
+    }
   }
 }
 </script>
