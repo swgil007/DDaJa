@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.ddaja.ddaja.DdajaApplication;
-import com.ddaja.ddaja.domain.user.User;
-import com.ddaja.ddaja.repository.user.UserRepository;
+import com.bng.ddaja.DdajaApplication;
+import com.bng.ddaja.common.domain.user.User;
+import com.bng.ddaja.test.repository.user.UserRepository;
 
 import org.junit.After;
 import org.junit.Test;
@@ -28,9 +28,6 @@ public class UserRepositoryTest {
     
     @MockBean
     private UserRepository userRepository;
-
-    @Autowired
-    private UserRepositroy userRepositroyAuto;
     
     //@After
     public void clean() {

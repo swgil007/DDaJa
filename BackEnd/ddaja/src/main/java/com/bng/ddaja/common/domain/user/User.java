@@ -1,4 +1,4 @@
-package com.ddaja.ddaja.domain.user;
+package com.bng.ddaja.common.domain.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.ddaja.config;
+package com.bng.config;
 
 import java.util.HashSet;
 import java.util.Set;

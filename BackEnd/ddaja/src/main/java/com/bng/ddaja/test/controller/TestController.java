@@ -1,8 +1,8 @@
-package com.ddaja.ddaja.controller;
+package com.bng.ddaja.test.controller;
 
-import com.ddaja.ddaja.domain.user.User;
-import com.ddaja.ddaja.dto.UserDTO;
-import com.ddaja.ddaja.service.UserService;
+import com.bng.ddaja.common.domain.user.User;
+import com.bng.ddaja.test.dto.UserDTO;
+import com.bng.ddaja.test.service.UserService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +26,7 @@ public class TestController {
     public String test() {
         return "This Is Just Test";
     }
+    
     @RequestMapping("/user/{id}")
     @ApiOperation(
         value = "사용자 정보 조회"

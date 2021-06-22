@@ -1,4 +1,4 @@
-package com.ddaja.ddaja;
+package com.bng.ddaja;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

@@ -1,4 +1,4 @@
-package com.ddaja.ddaja.dto;
+package com.bng.ddaja.test.dto;
 
 import io.swagger.annotations.ApiParam;
 import lombok.Getter;
