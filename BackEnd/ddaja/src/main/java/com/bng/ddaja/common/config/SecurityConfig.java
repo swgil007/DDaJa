@@ -1,4 +1,4 @@
-package com.bng.config;
+package com.bng.ddaja.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
