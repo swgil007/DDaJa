@@ -10,3 +10,4 @@ get https://www.googleapis.com/books/v1/volumes?q=isbn=9791155811566
 
 ####
 
+get https://www.googleapis.com/books/v1/volumes/zt7ouQEACAAJ/industryIdentifiers
