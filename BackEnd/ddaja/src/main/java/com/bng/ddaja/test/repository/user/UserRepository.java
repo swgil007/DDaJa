@@ -1,7 +1,5 @@
 package com.bng.ddaja.test.repository.user;
 
-import java.util.Optional;
-
 import com.bng.ddaja.common.domain.user.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
