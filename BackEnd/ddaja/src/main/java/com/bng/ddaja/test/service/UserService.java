@@ -8,13 +8,16 @@ import com.bng.ddaja.test.repository.user.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService{
     
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
@@ -26,5 +29,10 @@ public class UserService {
         userDTO.setId(user.getId());
         userDTO.setName(user.getName());
         return userDTO;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        return userRepository.findByName(userName);
     }
 }

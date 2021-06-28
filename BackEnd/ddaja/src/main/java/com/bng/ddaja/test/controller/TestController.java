@@ -1,6 +1,5 @@
 package com.bng.ddaja.test.controller;
 
-import com.bng.ddaja.common.domain.user.User;
 import com.bng.ddaja.test.dto.UserDTO;
 import com.bng.ddaja.test.service.UserService;
 
