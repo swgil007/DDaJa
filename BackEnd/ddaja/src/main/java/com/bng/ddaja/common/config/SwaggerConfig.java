@@ -22,6 +22,7 @@ public class SwaggerConfig{
         return new Docket(DocumentationType.OAS_30)
                 .consumes(getConsumeContentTypes())
                 .produces(getProduceContentTypes())
+                .useDefaultResponseMessages(false)
                 .apiInfo(getApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.bng.ddaja"))
@@ -44,8 +45,8 @@ public class SwaggerConfig{
 
     private ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
-                .title("API")
-                .description("[DDaJa] REST API")
+                .title("[DDaJa] REST API")
+                .description("[DDaJa] BackEnd REST API Details")
                 .contact(new Contact("[DDaja Swagger]", "https://github.com/swgil007/DDaJa", "BNG"))
                 .version("1.0")
                 .build();
