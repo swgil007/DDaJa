@@ -1,10 +1,10 @@
-package com.bng.ddaja.test.service;
+package com.bng.ddaja.example.service;
 
 import java.util.Optional;
 
 import com.bng.ddaja.common.domain.user.User;
-import com.bng.ddaja.test.dto.UserDTO;
-import com.bng.ddaja.test.repository.user.UserRepository;
+import com.bng.ddaja.example.dto.UserDTO;
+import com.bng.ddaja.example.repository.user.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

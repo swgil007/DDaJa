@@ -1,7 +1,7 @@
-package com.bng.ddaja.test.controller;
+package com.bng.ddaja.example.controller;
 
-import com.bng.ddaja.test.dto.UserDTO;
-import com.bng.ddaja.test.service.UserService;
+import com.bng.ddaja.example.dto.UserDTO;
+import com.bng.ddaja.example.service.UserService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +20,9 @@ import lombok.AllArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/example")
 @AllArgsConstructor
-public class TestController {
+public class ExampleController {
 
     private UserService userService;
 

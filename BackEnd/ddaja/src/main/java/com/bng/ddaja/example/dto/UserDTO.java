@@ -1,4 +1,4 @@
-package com.bng.ddaja.test.dto;
+package com.bng.ddaja.example.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;

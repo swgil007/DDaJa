@@ -1,4 +1,4 @@
-package com.bng.ddaja.test.repository.user;
+package com.bng.ddaja.example.repository.user;
 
 import com.bng.ddaja.common.domain.user.User;
 
