@@ -1,6 +1,6 @@
 package com.bng.ddaja.common.config;
 
-import com.bng.ddaja.test.service.UserService;
+import com.bng.ddaja.example.service.UserService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

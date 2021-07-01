@@ -22,6 +22,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @Controller
 @RequestMapping("/example")
 @AllArgsConstructor
+@ApiIgnore
 public class ExampleController {
 
     private UserService userService;
