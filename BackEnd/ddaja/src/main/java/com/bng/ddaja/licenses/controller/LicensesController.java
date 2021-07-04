@@ -49,10 +49,6 @@ public class LicensesController {
     })
     @ApiResponses({
         @ApiResponse(
-            code = 200
-            , message = "생성 성공"
-        )
-        , @ApiResponse(
             code = 201
             , message = "생성된 자원 정보"
             , response = ResponseDTO.class
