@@ -24,4 +24,5 @@ public class RequestDTO {
     
     @ApiModelProperty(example = "[{'field1' : value, 'field2' : value}]")
     private List<String> fields;
+    
 }

@@ -1,5 +1,6 @@
 package com.bng.ddaja.licenses.controller;
 
+import com.bng.ddaja.licenses.dto.ErrorDTO;
 import com.bng.ddaja.licenses.dto.RequestDTO;
 import com.bng.ddaja.licenses.dto.ResponseDTO;
 
@@ -47,11 +48,26 @@ public class LicensesController {
         )
     })
     @ApiResponses({
-        @ApiResponse(code = 201, message = "생성된 자원 정보", response = ResponseDTO.class)
+        @ApiResponse(
+            code = 200
+            , message = "생성 성공"
+        )
+        , @ApiResponse(
+            code = 201
+            , message = "생성된 자원 정보"
+            , response = ResponseDTO.class
+            , responseContainer = "List"
+        )
+        , @ApiResponse(
+            code = 409
+            , message = "로직 수행 불가 모순 발생"
+            , response = ErrorDTO.class
+            , responseContainer = "List"
+        )
     })
     @ResponseBody
-    public String postLicenses(@RequestBody RequestDTO requestDTO) {
-        return "postLicenses";
+    public ResponseDTO postLicenses(@RequestBody RequestDTO requestDTO) {
+        return new ResponseDTO();
     }
     
     @ApiOperation(
