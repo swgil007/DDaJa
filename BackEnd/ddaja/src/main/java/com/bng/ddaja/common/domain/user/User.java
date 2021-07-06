@@ -23,32 +23,17 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long uSeq;
+    @Column(name="U_ID")
+    private long uId;
     
-    @Column(nullable = false)
     private String id;
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(name="TOKEN_JWT")
-    private String tokenJWT;
-
-    @Column(name="TOKEN_SOCIAL")
-    private String tokenSocial;
-
-    @Column(name="SESSION_ID")
-    private String sessionId;
-
-    @Column(name="C_TYPE")
-    private String cType;
-
-    @Column(name="SOCIAL_TYPE")
-    private String socialType;
+    @Column(name="NICK_NAME")
+    private String nickName;
 
     @Builder
-    public User(String id, String name) {
+    public User(String id, String nickName) {
         this.id = id;
-        this.name = name;
+        this.nickName = nickName;
     }
 }

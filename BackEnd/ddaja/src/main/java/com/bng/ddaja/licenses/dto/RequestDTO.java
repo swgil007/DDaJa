@@ -19,10 +19,10 @@ public class RequestDTO {
     @ApiModelProperty(example = "gillog")
     private String id;
 
-    @ApiModelProperty(example = "길로그")
+    @ApiModelProperty(example = "길록")
     private String name;
     
     @ApiModelProperty(example = "[{'field1' : value, 'field2' : value}]")
     private List<String> fields;
-    
+
 }

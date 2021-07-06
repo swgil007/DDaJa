@@ -20,10 +20,6 @@ public class UserDTO {
 
     @ApiModelProperty(example = "길로그")
     @ApiParam(value = "사용자 이름")
-    private String name;
+    private String nickName;
 
-    
-    @ApiModelProperty(example = "15gilglogg1412")
-    @ApiParam(value = "token 갱신 값")
-    private String tokenRefresh;
 }

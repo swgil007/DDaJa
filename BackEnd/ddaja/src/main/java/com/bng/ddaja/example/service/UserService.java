@@ -27,12 +27,12 @@ public class UserService implements UserDetailsService{
         User user = userRepository.findById(id);
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
-        userDTO.setName(user.getName());
+        userDTO.setNickName(user.getNickName());
         return userDTO;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        return userRepository.findByName(userName);
+    public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException {
+        return userRepository.findByNickName(nickName);
     }
 }
