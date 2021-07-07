@@ -43,6 +43,12 @@ public class ExampleController {
         return userService.findUserInfoById(id);
     }
 
+    // @GetMapping("/users/{uId}")
+    // @ResponseBody
+    // public UserDTO getUser(@PathVariable(name = "uId") long uId) {
+    //     return userService.findUser(uId);
+
+    // }
 
     @ApiOperation(
         value = "자격증 정보 조회"

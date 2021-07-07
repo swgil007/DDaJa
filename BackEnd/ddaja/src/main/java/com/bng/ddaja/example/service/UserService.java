@@ -31,6 +31,15 @@ public class UserService implements UserDetailsService{
         return userDTO;
     }
 
+    // public UserDTO findUser(long uId) {
+    //     User userInfo = new User();
+    //     userInfo.setUId(uId);
+    //     User user = userRepository.findByUid(uId);
+    //     UserDTO userDTO = new UserDTO();
+    //     userDTO.setId(user.getId());
+    //     userDTO.setNickName(user.getNickName());
+    //     return userDTO;
+    // }
     @Override
     public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException {
         return userRepository.findByNickName(nickName);

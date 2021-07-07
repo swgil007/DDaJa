@@ -11,12 +11,14 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
-@Table(name = "USER")
+@Table(name = "TB_USER")
 @NoArgsConstructor
 @Entity
 public class User {
