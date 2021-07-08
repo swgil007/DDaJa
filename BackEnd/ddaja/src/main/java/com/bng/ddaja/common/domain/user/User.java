@@ -28,6 +28,7 @@ public class User {
     @Column(name="U_ID")
     private long uId;
     
+    @Column(name="ID")
     private String id;
 
     @Column(name="NICK_NAME")

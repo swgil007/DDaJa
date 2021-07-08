@@ -1,5 +1,6 @@
 package com.bng.ddaja.example.controller;
 
+import com.bng.ddaja.common.domain.user.User;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 
@@ -39,7 +40,7 @@ public class ExampleController {
         , defaultValue = "None")
     @GetMapping("/user/{id}")
     @ResponseBody
-    public UserDTO getUser(@PathVariable(name = "id") String id) {
+    public User getUser(@PathVariable(name = "id") String id) {
         return userService.findUserInfoById(id);
     }
 

@@ -23,12 +23,12 @@ public class UserService implements UserDetailsService{
 
     private UserRepository userRepository;
 
-    public UserDTO findUserInfoById(String id) {
+    public User findUserInfoById(String id) {
         User user = userRepository.findById(id);
         UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setNickName(user.getNickName());
-        return userDTO;
+        //userDTO.setId(user.getId());
+        //userDTO.setNickName(user.getNickName());
+        return user;
     }
 
     // public UserDTO findUser(long uId) {
