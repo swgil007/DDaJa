@@ -1,8 +1,13 @@
 package com.bng.ddaja.example.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.domain.user.User;
+import com.bng.ddaja.common.dto.CommonParameter;
+import com.bng.ddaja.common.dto.CommonResource;
+import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.repository.user.UserRepository;
 
@@ -40,6 +45,12 @@ public class UserService implements UserDetailsService{
     //     userDTO.setNickName(user.getNickName());
     //     return userDTO;
     // }
+
+    public CommonResponse<UserDTO> findUserListByParameter(CommonParameter parameter) {
+        List<User> userList = userRepository.findAll();
+        List<CommonResource<UserDTO>> resourceList = userList.stream().map(user -> new UserDTO(user)).map(dto -> new CommonResource<UserDTO>(dto, null)).collect(Collectors.toList());
+        return new CommonResponse<UserDTO>(resourceList.size(), resourceList);
+    }
     @Override
     public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException {
         return userRepository.findByNickName(nickName);

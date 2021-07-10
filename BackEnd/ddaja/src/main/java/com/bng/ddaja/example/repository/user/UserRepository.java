@@ -1,5 +1,7 @@
 package com.bng.ddaja.example.repository.user;
 
+import java.util.List;
+
 import com.bng.ddaja.common.domain.user.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //public User findByEmail(String email);
 
     public UserDetails findByNickName(String nickName);
+
+    public List<User> findAll();
 }

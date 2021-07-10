@@ -1,7 +1,10 @@
 package com.bng.ddaja.example.dto;
 
+import com.bng.ddaja.common.domain.user.User;
+
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     
     @ApiModelProperty(
@@ -22,4 +26,8 @@ public class UserDTO {
     @ApiParam(value = "사용자 이름")
     private String nickName;
 
+    public UserDTO(User user) {
+        this.id = user.getId();
+        this.nickName = user.getNickName();
+    }
 }
