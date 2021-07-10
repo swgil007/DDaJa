@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService{
 
     public CommonResponse<UserDTO> findUserListByParameter(CommonParameter parameter) {
         List<User> userList = userRepository.findAll();
-        List<CommonResource<UserDTO>> resourceList = userList.stream()
+        List<CommonResource<UserDTO>> resourceList = userList.parallelStream()
         .map(user -> new UserDTO(user))
         .map(dto -> new CommonResource<UserDTO>(
             dto
@@ -63,6 +63,7 @@ public class UserService implements UserDetailsService{
         ).collect(Collectors.toList());
         return new CommonResponse<UserDTO>(resourceList.size(), resourceList);
     }
+    
     @Override
     public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException {
         return userRepository.findByNickName(nickName);
