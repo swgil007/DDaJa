@@ -1,9 +1,12 @@
 package com.bng.ddaja.test.controller;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.bng.ddaja.common.dto.CommonError;
+import com.bng.ddaja.common.dto.CommonErrorDetail;
 import com.bng.ddaja.common.dto.CommonParameter;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
@@ -65,5 +68,14 @@ public class TestController {
         UserDTO userDTO = new UserDTO(Integer.toUnsignedLong(11), "test", "김텟트");
         CommonResponse<UserDTO> response = new CommonResponse<UserDTO>(1, new CommonResource<UserDTO>(userDTO, null));
         return new ResponseEntity<>(response, null, HttpStatus.OK);
+    }
+
+    @GetMapping("/six")
+    @ResponseBody
+    public ResponseEntity<CommonError> six() {
+        List<CommonErrorDetail> errorDetailList = new LinkedList<>();
+        errorDetailList.add(new CommonErrorDetail("parameter", "pqge=1", "notCorrectParam"));
+        CommonError error = new CommonError(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), errorDetailList);
+        return new ResponseEntity<>(error, null, HttpStatus.BAD_REQUEST);
     }
 }
