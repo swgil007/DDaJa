@@ -20,6 +20,10 @@ public enum Licenses {
         this.url = url;
     }
 
+    public Link initLink(Long id) {
+        return new Link(name(), url+id.toString(), method);
+    }
+
     public List<Link> makeLinkList(Long id) {
         return Arrays.stream(values()).map(e -> new Link(name(), url+id.toString(), method)).collect(Collectors.toList());
     }

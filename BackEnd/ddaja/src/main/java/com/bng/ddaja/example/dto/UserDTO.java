@@ -14,7 +14,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-    
+    @ApiModelProperty(
+        name = "u_id"
+        , example = "11"
+    )
+    @ApiParam(value = "사용자 SEQ ID")
+    private Long uId;
+
     @ApiModelProperty(
         name = "id"
         , example = "gillog"
@@ -27,6 +33,7 @@ public class UserDTO {
     private String nickName;
 
     public UserDTO(User user) {
+        this.uId = user.getUId();
         this.id = user.getId();
         this.nickName = user.getNickName();
     }
