@@ -11,6 +11,7 @@ import com.bng.ddaja.common.dto.CommonParameter;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.Link;
+import com.bng.ddaja.common.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.hateos.licenses.Licenses;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
@@ -18,6 +19,7 @@ import com.bng.ddaja.example.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,5 +79,11 @@ public class TestController {
         errorDetailList.add(new CommonErrorDetail("parameter", "pqge=1", "notCorrectParam"));
         CommonError error = new CommonError(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), errorDetailList);
         return new ResponseEntity<>(error, null, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/seven")
+    @ResponseBody
+    public String seven() throws MemberNotFoundException {
+        throw new MemberNotFoundException();
     }
 }

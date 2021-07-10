@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommonErrorDetail {
-    private String location;
+    private String field;
     private String value;
     private String reason;
 }
