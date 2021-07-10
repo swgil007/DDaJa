@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class CommonParameter {
     @ApiModelProperty(example = "q=inuse=true,name=정처기")
-    private String q;
+    private String[] q;
     @ApiModelProperty(example = "fields=inuse,name,time")
     private String[] fields;
     @ApiModelProperty(example = "page=1")
