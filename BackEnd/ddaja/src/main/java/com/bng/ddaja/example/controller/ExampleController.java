@@ -77,7 +77,7 @@ public class ExampleController {
     @GetMapping("/licenses/{id}")
     @ResponseBody
     public UserDTO getLicense(@PathVariable(name = "id") String id, @RequestParam(name = "fields", required = false) String fields) {
-        return userService.findUserInfoById(id);
+        return null;
     }
 
     @ApiResponses({
