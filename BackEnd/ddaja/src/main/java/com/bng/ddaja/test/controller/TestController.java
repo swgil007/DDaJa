@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.dto.CommonParameter;
+import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.Link;
 import com.bng.ddaja.common.hateos.licenses.Licenses;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,5 +57,13 @@ public class TestController {
     @ResponseBody
     public CommonParameter four(CommonParameter parameter) {
         return parameter;
+    }
+
+    @GetMapping("/five")
+    @ResponseBody
+    public ResponseEntity<CommonResponse<UserDTO>> five() {
+        UserDTO userDTO = new UserDTO(Integer.toUnsignedLong(11), "test", "김텟트");
+        CommonResponse<UserDTO> response = new CommonResponse<UserDTO>(1, new CommonResource<UserDTO>(userDTO, null));
+        return new ResponseEntity<>(response, null, HttpStatus.OK);
     }
 }
