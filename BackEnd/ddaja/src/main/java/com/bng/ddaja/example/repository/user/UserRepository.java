@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     public UserDetails findByNickName(String nickName);
 
     public List<User> findAll();
+
+    
 }
