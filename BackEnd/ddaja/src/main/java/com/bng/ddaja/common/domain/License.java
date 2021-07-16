@@ -26,9 +26,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Table(name = "TB_LICENSE")
 @NoArgsConstructor
-
 @Entity
-public class License {
+public class License extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +55,7 @@ public class License {
     @OneToMany(mappedBy = "license")
     private List<Word> words = new ArrayList<Word>();
 
+    // 연관관계 편의 메소드
     public void addWord(Word word) {
         this.words.add(word);
         if (word.getLicense() != this) {

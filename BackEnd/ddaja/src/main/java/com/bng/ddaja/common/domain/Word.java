@@ -37,7 +37,11 @@ public class Word {
     @JoinColumn(name="L_ID")
     private License license;
 
+    // 연관관계 편의 메소드
     public void setLicense(License license) {
+        if(this.license != null) {
+            this.license.getWords().remove(this);
+        }
         this.license = license;
         if(!license.getWords().contains(this)) {
             license.getWords().add(this);
