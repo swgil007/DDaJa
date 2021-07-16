@@ -1,6 +1,6 @@
 package com.bng.ddaja.example.controller;
 
-import com.bng.ddaja.common.domain.user.User;
+import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 

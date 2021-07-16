@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.bng.ddaja.DdajaApplication;
-import com.bng.ddaja.common.domain.user.User;
+import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.example.repository.user.UserRepository;
 
 import org.junit.After;

@@ -1,6 +1,6 @@
 package com.bng.ddaja.example.dto;
 
-import com.bng.ddaja.common.domain.user.User;
+import com.bng.ddaja.common.domain.User;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
