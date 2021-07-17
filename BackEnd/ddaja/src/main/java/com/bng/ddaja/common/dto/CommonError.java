@@ -21,8 +21,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommonError {
+
     private int code;
     private String message;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CommonErrorDetail> errors;
 
@@ -31,6 +33,7 @@ public class CommonError {
         this.message = errorCode.getMessage();
         errors = null;
     }
+    
     public void setErrors(List<FieldError> fieldErrors) {
         errors = fieldErrors.stream().map(
             error -> new CommonErrorDetail

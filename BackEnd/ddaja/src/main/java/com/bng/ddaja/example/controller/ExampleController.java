@@ -57,20 +57,20 @@ public class ExampleController {
     @ApiImplicitParams(
         {
             @ApiImplicitParam(
-                name = "id"
-                , value = "자격증 아이디"
-                , required = true
-                , dataType = "string"
-                , paramType = "path"
+                name           = "id"
+                , value        = "자격증 아이디"
+                , required     = true
+                , dataType     = "string"
+                , paramType    = "path"
                 , defaultValue = "None"
             )
         ,
             @ApiImplicitParam(
-                name = "fields"
-                , value = "응답 필드 종류"
-                , required = false
-                , dataType = "string"
-                , paramType = "query"
+                name           = "fields"
+                , value        = "응답 필드 종류"
+                , required     = false
+                , dataType     = "string"
+                , paramType    = "query"
                 , defaultValue = ""
             )
         })

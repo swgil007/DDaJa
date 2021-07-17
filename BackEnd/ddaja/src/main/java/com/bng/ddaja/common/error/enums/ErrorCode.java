@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum ErrorCode {
+    
     INVALID_PARAMETER(400, "Invalid Request Parameter")
     , NOT_FOUND(404, "Not Founded Resource")
     , NOT_ALLOWED_METHOD(405, "Not Allowed Method")

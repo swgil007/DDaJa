@@ -67,5 +67,5 @@ public class UserRepositoryTest {
         
         // then
         assertThat(userList.size()).isEqualTo(userCount);
-    }
+    } 
 }
