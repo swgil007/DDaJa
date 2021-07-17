@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.bng.ddaja.DdajaApplication;
-import com.bng.ddaja.common.domain.user.User;
+import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.example.repository.user.UserRepository;
 
 import org.junit.After;
@@ -58,7 +58,7 @@ public class UserRepositoryTest {
     public void findAllUsers() {
         
         // when
-        int userCount = 1;
+        int userCount = 2;
         List<User> userList = userRepository.findAll();
         //List<User> userList = userRepositoryAuto.findAll();
 

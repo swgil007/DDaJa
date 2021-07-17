@@ -1,4 +1,4 @@
-package com.bng.ddaja.common.domain.user;
+package com.bng.ddaja.common.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,15 +21,15 @@ import lombok.ToString;
 @Table(name = "TB_USER")
 @NoArgsConstructor
 @Entity
-public class User {
+public class User extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="U_ID")
-    private long uId;
+    private long id;
     
     @Column(name="ID")
-    private String id;
+    private String userId;
 
     @Column(name="NICK_NAME")
     private String nickName;

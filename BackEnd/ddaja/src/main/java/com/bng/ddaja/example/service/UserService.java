@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.domain.user.User;
+import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonParameter;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
+import com.bng.ddaja.common.dto.CommonUserDetails;
 import com.bng.ddaja.common.hateos.licenses.Licenses;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.repository.user.UserRepository;
@@ -38,6 +39,9 @@ public class UserService implements UserDetailsService{
         return user;
     }
 
+    public User findUserInfoByUId(long uId) {
+        return userRepository.findByuId(uId);
+    }
     // public UserDTO findUser(long uId) {
     //     User userInfo = new User();
     //     userInfo.setUId(uId);
@@ -65,7 +69,7 @@ public class UserService implements UserDetailsService{
     }
     
     @Override
-    public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException {
-        return userRepository.findByNickName(nickName);
+    public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException { 
+        return new CommonUserDetails();
     }
 }
