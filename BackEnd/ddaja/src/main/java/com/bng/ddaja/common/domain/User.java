@@ -26,10 +26,10 @@ public class User extends CommonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="U_ID")
-    private long uId;
+    private long id;
     
     @Column(name="ID")
-    private String id;
+    private String userId;
 
     @Column(name="NICK_NAME")
     private String nickName;

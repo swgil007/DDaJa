@@ -32,7 +32,7 @@ public class License extends CommonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "L_ID")
-    private long lId;
+    private long id;
 
     @Column(name = "L_CODE")
     private LicenseCode lCode;

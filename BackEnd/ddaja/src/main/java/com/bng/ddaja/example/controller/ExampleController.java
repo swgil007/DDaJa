@@ -4,12 +4,12 @@ import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -20,10 +20,10 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
-@Controller
 @RequestMapping("/example")
 @AllArgsConstructor
 @ApiIgnore
+@RestController
 public class ExampleController {
 
     private UserService userService;
@@ -38,10 +38,14 @@ public class ExampleController {
         , dataType = "string"
         , paramType = "path"
         , defaultValue = "None")
-    @GetMapping("/user/{id}")
-    @ResponseBody
-    public User getUser(@PathVariable(name = "id") String id) {
-        return userService.findUserInfoById(id);
+    @GetMapping("/user/{userId}")
+    public User getUser(@PathVariable(name = "userId") String userId) {
+        return userService.findUserInfoById(userId);
+    }
+
+    @GetMapping("/users/{id}")
+    public User getUserByUId(@PathVariable(name = "id") long uId) {
+        return userService.findUserInfoByUId(uId);
     }
 
     // @GetMapping("/users/{uId}")
@@ -75,7 +79,6 @@ public class ExampleController {
             )
         })
     @GetMapping("/licenses/{id}")
-    @ResponseBody
     public UserDTO getLicense(@PathVariable(name = "id") String id, @RequestParam(name = "fields", required = false) String fields) {
         return null;
     }

@@ -58,7 +58,7 @@ public class UserRepositoryTest {
     public void findAllUsers() {
         
         // when
-        int userCount = 1;
+        int userCount = 2;
         List<User> userList = userRepository.findAll();
         //List<User> userList = userRepositoryAuto.findAll();
 

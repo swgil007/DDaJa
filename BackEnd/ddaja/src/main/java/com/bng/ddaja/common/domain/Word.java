@@ -27,7 +27,7 @@ public class Word extends CommonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="W_ID")
-    private long wId;
+    private long id;
 
     @Column(name="TITLE")
     private String title;
