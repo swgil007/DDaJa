@@ -21,7 +21,7 @@ import lombok.ToString;
 @Table(name = "TB_USER")
 @NoArgsConstructor
 @Entity
-public class User {
+public class User extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

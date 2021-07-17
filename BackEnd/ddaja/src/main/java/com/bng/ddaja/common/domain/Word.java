@@ -22,13 +22,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name="TB_WORD")
 @Entity
-public class Word {
+public class Word extends CommonEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="W_ID")
     private long wId;
-
 
     @Column(name="TITLE")
     private String title;
