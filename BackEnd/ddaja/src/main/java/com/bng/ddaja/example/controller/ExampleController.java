@@ -39,8 +39,8 @@ public class ExampleController {
         , paramType = "path"
         , defaultValue = "None")
     @GetMapping("/user/{userId}")
-    public User getUser(@PathVariable(name = "userId") String userId) {
-        return userService.findUserInfoById(userId);
+    public UserDTO getUser(@PathVariable(name = "userId") String userId) {
+        return userService.findUserInfoByUserId(userId);
     }
 
     @GetMapping("/users/{id}")
