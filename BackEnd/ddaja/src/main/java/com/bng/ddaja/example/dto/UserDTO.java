@@ -33,6 +33,7 @@ public class UserDTO {
     private String nickName;
 
     public UserDTO(User user) {
+
         this.id = user.getId();
         this.userId = user.getUserId();
         this.nickName = user.getNickName();

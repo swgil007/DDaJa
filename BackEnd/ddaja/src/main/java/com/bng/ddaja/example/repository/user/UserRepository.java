@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     //public User findByUId(long uId);
 
-    public User findByuId(long uId);
+    public User findById(long Id);
     
 }

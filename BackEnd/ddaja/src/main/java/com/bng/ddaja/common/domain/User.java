@@ -36,7 +36,7 @@ public class User extends CommonEntity {
 
     @Builder
     public User(String id, String nickName) {
-        this.id = id;
+        this.id =  Long.parseLong(id);
         this.nickName = nickName;
     }
 }

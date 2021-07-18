@@ -98,5 +98,4 @@ public class LicensesController {
         , @RequestParam(name = "per-page", required = false) int perPage) {
         return "getLicenses";
     }
-
 }

@@ -33,14 +33,14 @@ public class UserService implements UserDetailsService{
 
     public User findUserInfoById(String id) {
         User user = userRepository.findById(id);
-        UserDTO userDTO = new UserDTO();
-        //userDTO.setId(user.getId());
-        //userDTO.setNickName(user.getNickName());
+        // UserDTO userDTO = new UserDTO();
+        // userDTO.setId(user.getId());
+        // userDTO.setNickName(user.getNickName());
         return user;
     }
 
-    public User findUserInfoByUId(long uId) {
-        return userRepository.findByuId(uId);
+    public User findUserInfoById(long id) {
+        return userRepository.findById(id);
     }
     // public UserDTO findUser(long uId) {
     //     User userInfo = new User();
@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService{
             dto
             , Arrays.stream(Licenses.values())
                 .map(
-                    hateos -> hateos.initLink(dto.getUId())
+                    hateos -> hateos.initLink(dto.getId())
                 )
                 .collect(Collectors.toList())
             )
