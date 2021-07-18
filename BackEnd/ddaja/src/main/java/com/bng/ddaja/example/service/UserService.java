@@ -31,35 +31,13 @@ public class UserService implements UserDetailsService{
 
     private UserRepository userRepository;
 
-<<<<<<< HEAD
-    public User findUserInfoById(String id) {
-        User user = userRepository.findById(id);
-        // UserDTO userDTO = new UserDTO();
-        // userDTO.setId(user.getId());
-        // userDTO.setNickName(user.getNickName());
-        return user;
-    }
-
-    public User findUserInfoById(long id) {
-        return userRepository.findById(id);
-=======
     public UserDTO findUserInfoByUserId(String userId) {
         return new UserDTO(userRepository.findByUserId(userId));
     }
 
     public User findUserInfoByUId(long uId) {
         return userRepository.findById(uId);
->>>>>>> b77ed0812197573b7b26b4dbe759f1ccbd13111e
     }
-    // public UserDTO findUser(long uId) {
-    //     User userInfo = new User();
-    //     userInfo.setUId(uId);
-    //     User user = userRepository.findByUid(uId);
-    //     UserDTO userDTO = new UserDTO();
-    //     userDTO.setId(user.getId());
-    //     userDTO.setNickName(user.getNickName());
-    //     return userDTO;
-    // }
 
     public CommonResponse<UserDTO> findUserListByParameter(CommonParameter parameter) {
         List<User> userList = userRepository.findAll();
