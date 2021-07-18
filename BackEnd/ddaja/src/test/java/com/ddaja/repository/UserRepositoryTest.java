@@ -37,7 +37,7 @@ public class UserRepositoryTest {
     @Test
     public void saveAndGetUser() {
         // given
-        String id = "ddajauser";
+        String userId = "ddajauser";
         String name = "김로그";
 
         //userRepository.save(User.builder().id(id).name(name).build());
@@ -46,11 +46,11 @@ public class UserRepositoryTest {
         // when
         //List<User> userList = userRepository.findAll();
         //List<User> userList = userRepositoryAuto.findAll();
-        User user = userRepository.findById(id);
+        User user = userRepository.findByUserId(userId);
 
         // then
         //User user = userList.get(0);
-        assertThat(user.getId()).isEqualTo(id);
+        assertThat(user.getId()).isEqualTo(userId);
         //assertThat(user.getName()).isEqualTo(name);
     }
 

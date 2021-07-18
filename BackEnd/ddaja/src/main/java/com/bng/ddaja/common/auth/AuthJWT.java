@@ -13,15 +13,15 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class AuthJWT {
     private final String secretKey = "Gil11ogG2200";
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        AuthJWT authJWT = new AuthJWT();
+    // public static void main(String[] args) throws UnsupportedEncodingException {
+    //     AuthJWT authJWT = new AuthJWT();
 
-        String jwt = authJWT.createToken();
+    //     String jwt = authJWT.createToken();
 
-        Map<String, Object> claimMap = authJWT.verifyJWT(jwt);
-        // 토큰 만료 or 검증 실패 시 null
-        System.out.println(claimMap);
-    }
+    //     Map<String, Object> claimMap = authJWT.verifyJWT(jwt);
+    //     // 토큰 만료 or 검증 실패 시 null
+    //     System.out.println(claimMap);
+    // }
 
     public String createToken() {
 

@@ -35,8 +35,13 @@ public class User extends CommonEntity {
     private String nickName;
 
     @Builder
+<<<<<<< HEAD
     public User(String id, String nickName) {
         this.id =  Long.parseLong(id);
+=======
+    public User(long id, String nickName) {
+        this.id = id;
+>>>>>>> b77ed0812197573b7b26b4dbe759f1ccbd13111e
         this.nickName = nickName;
     }
 }
