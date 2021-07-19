@@ -93,8 +93,8 @@ public class TestController {
 
 
     @PostMapping("/ten")
-    public String ten(@Valid @RequestBody TestParameter parameter ) {
-        return "ResponseEntity.ok().body(body success);";
+    public ResponseEntity<String> ten(@Valid @RequestBody TestParameter parameter ) {
+        return ResponseEntity.ok().body("body success");
     }
 
 
