@@ -8,6 +8,7 @@ import com.bng.ddaja.common.error.enums.ErrorCode;
 import com.bng.ddaja.common.error.exception.MemberNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,10 +31,10 @@ public class CommonExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex){
-        // Map<String, String> errors = new HashMap<>();
-        // ex.getBindingResult().getAllErrors()
-        //         .forEach(c -> errors.put(c.getObjectName(), c.getDefaultMessage()));
-        return ResponseEntity.badRequest().body("Valid Error");
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex){
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors()
+                .forEach(c -> errors.put(((FieldError) c).getField(), c.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(errors);
     }
 }
