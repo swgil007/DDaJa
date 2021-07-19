@@ -42,15 +42,18 @@
       @close:popup="popupClose"
       @childData="childPopup"
     />
+    <back-end-axios />
   </div>
 </template>
 
 <script>
 import popup from './component/licensePopup.vue'
+import backEndAxios from './component/backEndAxios.vue'
 export default {
   name: '',
   components: {
-    popup
+    popup,
+    backEndAxios
   },
   data() {
     return {

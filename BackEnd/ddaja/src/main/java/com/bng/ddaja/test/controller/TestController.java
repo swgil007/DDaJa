@@ -1,8 +1,10 @@
 package com.bng.ddaja.test.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -21,6 +23,7 @@ import com.bng.ddaja.test.dto.TestParameter;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,9 +33,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 
-@RestController
-@RequestMapping("test")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @AllArgsConstructor
+@RequestMapping("test")
+@RestController
 public class TestController {
     
     private UserService userService;
@@ -98,5 +102,15 @@ public class TestController {
     @GetMapping("/nine")
     public String nine() {
         return "dfdfsdsssdf";
+    }
+
+    @GetMapping("/vue")
+    public ResponseEntity<CommonResource<Map<String,String>>> vue() {
+        Map<String, String> testData = new HashMap<>();
+        testData.put("1", "정보처리기사");
+        testData.put("2", "정보처리산업기사");
+        testData.put("3", "컴퓨터 활용능력 1급");
+        testData.put("4", "컴퓨터 활용능력 2급");
+        return ResponseEntity.ok().body(new CommonResource<>(testData, null));
     }
 }
