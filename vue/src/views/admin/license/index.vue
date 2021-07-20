@@ -42,7 +42,9 @@
       @close:popup="popupClose"
       @childData="childPopup"
     />
-    <back-end-axios />
+    <back-end-axios
+      @licenseInfo="getLicenseInfo"
+    />
   </div>
 </template>
 
@@ -55,6 +57,9 @@ export default {
     popup,
     backEndAxios
   },
+  props: {
+    licenseInfo: {}
+  },
   data() {
     return {
       tableData: [
@@ -64,7 +69,8 @@ export default {
         { licenseName: '컴퓨터활용능력 2급', licenseId: 4 }
       ],
       popupVal: false,
-      childData: ''
+      childData: '',
+      licenseData: {}
     }
   },
   methods: {
@@ -78,6 +84,12 @@ export default {
     childPopup(childData) {
       alert('[indexVue] child to : ' + childData)
       this.childData = childData
+    },
+    getLicenseInfo(data) {
+      alert('[parent] getLicenseInfo')
+      this.licenseData = data
+      console.log('getLicenseInfo===')
+      console.log(data.item)
     }
   }
 }

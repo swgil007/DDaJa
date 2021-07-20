@@ -11,7 +11,8 @@ export default {
   data() {
     return {
       licenseId: null,
-      licenseName: null
+      licenseName: null,
+      licenseInfo: {}
     }
   },
   created() {
@@ -25,6 +26,7 @@ export default {
         .then(res => {
           alert('success')
           console.log(res)
+          this.$emit('licenseInfo', res.data)
         })
         .catch(err => {
           alert('fail')
