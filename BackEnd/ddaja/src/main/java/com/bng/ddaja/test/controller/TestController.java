@@ -111,6 +111,7 @@ public class TestController {
         testData.put("2", "정보처리산업기사");
         testData.put("3", "컴퓨터 활용능력 1급");
         testData.put("4", "컴퓨터 활용능력 2급");
+        testData.put("5", "빅데이터 기사");
         return ResponseEntity.ok().body(new CommonResource<>(testData, null));
     }
 }
