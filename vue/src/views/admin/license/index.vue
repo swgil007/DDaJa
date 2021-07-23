@@ -13,11 +13,11 @@
       >
         <el-table-column
           label="자격증 ID"
-          prop="licenseId"
+          prop="item.id"
         />
         <el-table-column
           label="자격증 명"
-          prop="licenseName"
+          prop="item.licenseName"
         />
         <el-table-column>
           <template slot-scope="props">
@@ -57,20 +57,12 @@ export default {
     popup,
     backEndAxios
   },
-  props: {
-    licenseInfo: {}
-  },
   data() {
     return {
-      tableData: [
-        { licenseName: '정보처리기사', licenseId: 1 },
-        { licenseName: '정보처리산업기사', licenseId: 2 },
-        { licenseName: '컴퓨터활용능력 1급', licenseId: 3 },
-        { licenseName: '컴퓨터활용능력 2급', licenseId: 4 }
-      ],
+      tableData: [],
+      totalCount: 0,
       popupVal: false,
-      childData: '',
-      licenseData: {}
+      childData: ''
     }
   },
   methods: {
@@ -79,17 +71,13 @@ export default {
       this.popupVal = popupVal
     },
     popupClose(popupVal) {
-      alert('[indexVue] popupClose')
     },
     childPopup(childData) {
-      alert('[indexVue] child to : ' + childData)
       this.childData = childData
     },
     getLicenseInfo(data) {
-      alert('[parent] getLicenseInfo')
-      this.licenseData = data
-      console.log('getLicenseInfo===')
-      console.log(data.item)
+      this.tableData = data.items
+      this.totalCount = data.totalCount
     }
   }
 }

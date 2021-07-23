@@ -44,13 +44,10 @@ export default {
         .catch(_ => {})
     },
     popupClose(popupVal) {
-      alert(`[depth] popup close!`)
       this.popupVal = popupVal
       this.$emit('close:popup', popupVal)
-      alert(`[depth] after emit close popup`)
     },
     depthChildPopup(childData) {
-      alert('[depthChildPopup]' + childData)
       this.$emit('childData', childData)
     }
   }

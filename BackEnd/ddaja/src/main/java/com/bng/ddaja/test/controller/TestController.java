@@ -19,6 +19,7 @@ import com.bng.ddaja.common.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.hateos.licenses.Licenses;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
+import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.test.dto.TestParameter;
 
 import org.springframework.http.HttpStatus;
@@ -98,20 +99,20 @@ public class TestController {
         return ResponseEntity.ok().body("body success");
     }
 
-
-    @GetMapping("/nine")
-    public String nine() {
-        return "dfdfsdsssdf";
-    }
-
     @GetMapping("/vue")
-    public ResponseEntity<CommonResource<Map<String,String>>> vue() {
-        Map<String, String> testData = new HashMap<>();
-        testData.put("1", "정보처리기사");
-        testData.put("2", "정보처리산업기사");
-        testData.put("3", "컴퓨터 활용능력 1급");
-        testData.put("4", "컴퓨터 활용능력 2급");
-        testData.put("5", "빅데이터 기사");
-        return ResponseEntity.ok().body(new CommonResource<>(testData, null));
+    public ResponseEntity<CommonResponse<LicenseDTO>> vue() {
+        LicenseDTO dtoOne = new LicenseDTO(11, "정보처리기사");
+        LicenseDTO dtoTwo = new LicenseDTO(21, "정보처리산업기사");
+        LicenseDTO dtoThr = new LicenseDTO(31, "컴퓨터활용능력 1급");
+        LicenseDTO dtoFour = new LicenseDTO(41, "컴퓨터활용능력 2급");
+        LicenseDTO dtoFive = new LicenseDTO(51, "빅데이터 기사");
+        List<CommonResource<LicenseDTO>> dtoList = new LinkedList<>();
+        dtoList.add(new CommonResource<LicenseDTO>(dtoOne, null));
+        dtoList.add(new CommonResource<LicenseDTO>(dtoTwo, null));
+        dtoList.add(new CommonResource<LicenseDTO>(dtoThr, null));
+        dtoList.add(new CommonResource<LicenseDTO>(dtoFour, null));
+        dtoList.add(new CommonResource<LicenseDTO>(dtoFive, null));
+        
+        return ResponseEntity.ok().body(new CommonResponse<>(dtoList.size(), dtoList));
     }
 }

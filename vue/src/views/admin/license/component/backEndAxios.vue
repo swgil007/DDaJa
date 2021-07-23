@@ -1,22 +1,12 @@
-<template>
-  <div>
-    <h1>License Data</h1>
-  </div>
-</template>
-
 <script>
 import axios from 'axios'
 
 export default {
   data() {
     return {
-      licenseId: null,
-      licenseName: null,
-      licenseInfo: {}
     }
   },
   created() {
-    alert('api')
     this.fetchData(this.pageNum)
   },
   methods: {
@@ -24,8 +14,7 @@ export default {
       axios
         .get('http://localhost/test/vue')
         .then(res => {
-          alert('success')
-          console.log(res)
+          console.log(res.data)
           this.$emit('licenseInfo', res.data)
         })
         .catch(err => {
