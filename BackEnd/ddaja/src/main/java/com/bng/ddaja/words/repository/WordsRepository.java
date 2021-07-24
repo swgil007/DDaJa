@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WordsRepository extends JpaRepository< Word, Long >{
     
-    public Word findById(long id);
+    public Word findById( long wid );
 
-    public Word findByTitle(String title);
+    public Word findByTitle( String title );
 
     public List<Word> findAll();
 }

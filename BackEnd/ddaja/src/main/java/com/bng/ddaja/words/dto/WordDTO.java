@@ -1,6 +1,7 @@
 package com.bng.ddaja.words.dto;
 
 import com.bng.ddaja.common.domain.License;
+import com.bng.ddaja.common.domain.Word;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -36,4 +37,13 @@ public class WordDTO {
         name = "License Entity"
     )
     private License license;
+
+
+    public WordDTO( Word word ){
+        this.wId = word.getId();
+        this.lId = word.getLid();
+        this.title =  word.getTitle();
+        
+        // this.license = word.getLicense();
+    }
 }

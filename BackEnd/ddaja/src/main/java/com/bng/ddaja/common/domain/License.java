@@ -52,14 +52,14 @@ public class License extends CommonEntity {
     @Column(name = "PASS_SCORE")
     private int passScore;
 
-    @OneToMany(mappedBy = "license")
-    private List<Word> words = new ArrayList<Word>();
+    // @OneToMany(mappedBy = "license")
+    // private List<Word> words = new ArrayList<Word>();
 
     // 연관관계 편의 메소드
-    public void addWord(Word word) {
-        this.words.add(word);
-        if (word.getLicense() != this) {
-            word.setLicense(this);
-        }
-    }
+    // public void addWord(Word word) {
+    //     this.words.add(word);
+    //     if (word.getLicense() != this) {
+    //         word.setLicense(this);
+    //     }
+    // }
 }

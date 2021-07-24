@@ -1,14 +1,12 @@
 package com.bng.ddaja.common.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -18,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+ 
 
 @Getter
 @Setter
@@ -25,23 +24,29 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="TB_WORD")
+@Table(name = "TB_WORD_QUESTION")
 @Entity
-public class Word extends CommonEntity {
+public class WordQuestion extends CommonEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="W_ID")
+    @Column(name="WQ_ID")
     private long Id;
 
-    @Column(name="TITLE")
-    private String title;
+    @Column(name = "CONTENT")
+    private String content;
 
-    @Column(name="L_ID")
-    private long lid;
+    @Column(name = "ANSWER")
+    private String answer;
 
+    @Column(name = "L_ID")
+    private long LId;
 
-    // @OneToMany(mappedBy = "word")
-    // private List<WordQuestion> wordQuestions = new ArrayList<WordQuestion>();
+    @Column(name = "W_ID")
+    private long WId;
 
-}
+    // @ManyToOne
+    // @JoinColumn //(name = "W_ID")
+    // private Word word;
+
+} 
