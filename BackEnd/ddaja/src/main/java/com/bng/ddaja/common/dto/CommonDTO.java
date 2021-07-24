@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class CommonDTO {
     
-    private Date createdDate;
-    private Date modifiedDate;
+    public Date createdDate;
+    public Date modifiedDate;
 }

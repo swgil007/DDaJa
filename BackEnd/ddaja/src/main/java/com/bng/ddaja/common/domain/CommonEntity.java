@@ -18,9 +18,9 @@ public class CommonEntity {
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_DATE")
-    private Date createdDate;
+    public Date createdDate;
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "MODIFIED_DATE")
-    private Date modifiedDate;
+    public Date modifiedDate;
 }

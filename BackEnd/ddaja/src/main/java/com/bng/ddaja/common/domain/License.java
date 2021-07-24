@@ -23,7 +23,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "TB_LICENSE")
 @NoArgsConstructor
 @Entity

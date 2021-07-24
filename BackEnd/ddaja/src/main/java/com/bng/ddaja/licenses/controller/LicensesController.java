@@ -2,6 +2,7 @@ package com.bng.ddaja.licenses.controller;
 
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonResponse;
+import com.bng.ddaja.licenses.dto.LicenseDTO;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -19,9 +19,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 
-@RestController
-@RequestMapping("licenses")
 @AllArgsConstructor
+@RequestMapping("licenses")
+@RestController
 public class LicensesController {
     
     @ApiOperation(
@@ -59,7 +59,7 @@ public class LicensesController {
         )
     })
     @PostMapping("")
-    public String postLicenses(@RequestBody RequestDTO requestDTO) {
+    public String postLicenses(@RequestBody LicenseDTO licenseDTO) {
         return "string";
     }
     

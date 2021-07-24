@@ -1,5 +1,6 @@
 package com.bng.ddaja.licenses.dto;
 
+import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.enums.LicenseCode;
 import com.bng.ddaja.common.enums.LicenseType;
@@ -25,4 +26,15 @@ public class LicenseDTO extends CommonDTO {
     private LicenseType type;
     private int passScore;
     
+    public LicenseDTO(License vo) {
+        this.id = vo.getId();
+        this.lCode = vo.getLCode();
+        this.name = vo.getName();
+        this.inUse = vo.isInUse();
+        this.agency = vo.getAgency();
+        this.type = vo.getType();
+        this.passScore = vo.getPassScore();
+        super.createdDate = vo.getCreatedDate();
+        super.modifiedDate = vo.getModifiedDate();
+    }
 }
