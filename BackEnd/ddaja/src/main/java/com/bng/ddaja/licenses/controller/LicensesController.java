@@ -1,10 +1,8 @@
 package com.bng.ddaja.licenses.controller;
 
-import com.bng.ddaja.licenses.dto.ErrorDTO;
-import com.bng.ddaja.licenses.dto.RequestDTO;
-import com.bng.ddaja.licenses.dto.ResponseDTO;
+import com.bng.ddaja.common.dto.CommonError;
+import com.bng.ddaja.common.dto.CommonResponse;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -20,7 +19,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 
-@Controller
+@RestController
 @RequestMapping("licenses")
 @AllArgsConstructor
 public class LicensesController {
@@ -29,17 +28,15 @@ public class LicensesController {
         value = "자격증 전체 조회"
         , notes = "전체 자격증 목록을 조회한다")
     @GetMapping("")
-    @ResponseBody
     public String getLicenses() {
         return "getLicenses";
     }
 
-    @PostMapping("")
     @ApiOperation(
         value = "신규 자격증 생성"
         , notes = "신규 자격증을 생성한다."
         , produces = "application/json"
-        , response = ResponseDTO.class
+        , response = CommonResponse.class
     )
     @ApiImplicitParams({
         @ApiImplicitParam(
@@ -51,19 +48,19 @@ public class LicensesController {
         @ApiResponse(
             code = 201
             , message = "생성된 자원 정보"
-            , response = ResponseDTO.class
+            , response = CommonResponse.class
             , responseContainer = "List"
         )
         , @ApiResponse(
             code = 409
             , message = "로직 수행 불가 모순 발생"
-            , response = ErrorDTO.class
+            , response = CommonError.class
             , responseContainer = "List"
         )
     })
-    @ResponseBody
-    public ResponseDTO postLicenses(@RequestBody RequestDTO requestDTO) {
-        return new ResponseDTO();
+    @PostMapping("")
+    public String postLicenses(@RequestBody RequestDTO requestDTO) {
+        return "string";
     }
     
     @ApiOperation(
@@ -90,7 +87,6 @@ public class LicensesController {
         )
     })
     @GetMapping("/{seq}")
-    @ResponseBody
     public String getLicenses(
         @PathVariable(name = "seq", required = true) long seq
         , @RequestParam(name = "fields", required = false) String fields

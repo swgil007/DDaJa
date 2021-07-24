@@ -34,6 +34,7 @@ public class License extends CommonEntity {
     @Column(name = "L_ID")
     private long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "L_CODE")
     private LicenseCode lCode;
     
