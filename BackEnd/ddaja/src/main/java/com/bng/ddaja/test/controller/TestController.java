@@ -87,13 +87,6 @@ public class TestController {
         throw new MemberNotFoundException();
     }
 
-
-    @PostMapping("/eight")
-    public String eight() {
-        return "tsdggsgs";
-    }
-
-
     @PostMapping("/ten")
     public ResponseEntity<String> ten(@Valid @RequestBody TestParameter parameter ) {
         return ResponseEntity.ok().body("body success");
