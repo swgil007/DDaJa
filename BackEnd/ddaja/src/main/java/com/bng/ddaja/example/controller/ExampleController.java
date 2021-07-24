@@ -1,11 +1,16 @@
 package com.bng.ddaja.example.controller;
 
+import javax.validation.Valid;
+
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
+import com.bng.ddaja.test.dto.TestParameter;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -95,5 +100,10 @@ public class ExampleController {
     @GetMapping("/debates/{id}")
     public String getDebate(@ApiParam(value = "토론 ID") @PathVariable(name = "id") String id) {
         return "debate";
+    }
+
+    @PostMapping("/valid")
+    public String valid(@Valid @RequestBody TestParameter parameter ) {
+        return "ResponseEntity.ok().body(body success);";
     }
 }
