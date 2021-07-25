@@ -1,5 +1,6 @@
 package com.bng.ddaja.words.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bng.ddaja.common.domain.Word;
@@ -9,6 +10,7 @@ import com.bng.ddaja.words.repository.WordsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -20,14 +22,20 @@ public class WordsService {
 
     private WordsRepository repository;
 
-    /**
-     * - 단어 외우기
-     * @param L_ID
-     * @return List<WordDTO>
-     * 
-     **/
-    public List<Word> findAll( ) { 
+    /** WORD LIST ALL **/
+    public List<WordDTO> findAll( ) { 
 
-        return repository.findAll();
+        List<WordDTO> list = new ArrayList<>();
+
+        repository.findAll().forEach(x -> { 
+            list.add( new WordDTO(x) );
+        }); 
+        return list;
     } 
+
+    /** WORD INSERT **/
+    @Transactional
+    public void wordInsert ( Word vo ){ 
+        repository.save(vo);
+    }
 }

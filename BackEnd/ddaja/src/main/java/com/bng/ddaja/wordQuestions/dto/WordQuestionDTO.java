@@ -38,10 +38,17 @@ public class WordQuestionDTO {
     )
     private long lId;
 
+    @ApiModelProperty(
+        name = "wId"
+        , example = "11"
+    )
+    private long wId;
+
     public WordQuestionDTO( WordQuestion wordQuestion ){
         this.wqId    = wordQuestion.getId();
+        this.wId     = wordQuestion.getWId();
+        this.lId     = wordQuestion.getLId();
         this.content = wordQuestion.getContent();
         this.answer  = wordQuestion.getAnswer();
-        this.lId     = wordQuestion.getLId();
     }
 }

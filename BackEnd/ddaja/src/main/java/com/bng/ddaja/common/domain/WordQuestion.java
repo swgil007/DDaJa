@@ -2,6 +2,7 @@ package com.bng.ddaja.common.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,14 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
- 
 
 @Getter
 @Setter
@@ -45,8 +45,7 @@ public class WordQuestion extends CommonEntity {
     @Column(name = "W_ID")
     private long WId;
 
-    // @ManyToOne
-    // @JoinColumn //(name = "W_ID")
-    // private Word word;
-
-} 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "W_ID", insertable=false, updatable=false )
+    private Word word;
+}

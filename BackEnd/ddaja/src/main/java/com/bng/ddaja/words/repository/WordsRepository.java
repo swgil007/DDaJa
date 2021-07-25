@@ -11,4 +11,5 @@ public interface WordsRepository extends JpaRepository< Word, Long >{
     public Word findByTitle( String title );
 
     public List<Word> findAll();
+
 }

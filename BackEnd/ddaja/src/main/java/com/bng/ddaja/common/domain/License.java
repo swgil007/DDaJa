@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,6 +52,9 @@ public class License extends CommonEntity {
 
     @Column(name = "PASS_SCORE")
     private int passScore;
+
+    @OneToMany(mappedBy = "license", fetch = FetchType.LAZY)
+    private List<Word> wordQuestions = new ArrayList<Word>();
 
     // @OneToMany(mappedBy = "license")
     // private List<Word> words = new ArrayList<Word>();

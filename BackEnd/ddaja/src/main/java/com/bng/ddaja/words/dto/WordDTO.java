@@ -1,7 +1,11 @@
 package com.bng.ddaja.words.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.domain.Word;
+import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -22,12 +26,6 @@ public class WordDTO {
     private long wId;
 
     @ApiModelProperty(
-        name = "l_id"
-        , example = "11"
-    )
-    private long lId;
-
-    @ApiModelProperty(
         name = "title"
         , example = "리눅스 용어 외우기"
     )
@@ -38,12 +36,18 @@ public class WordDTO {
     )
     private License license;
 
+    @ApiModelProperty(
+        name = "WordQuestion Entity"
+    ) 
+    private List<WordQuestionDTO> wordQuestions = new ArrayList<WordQuestionDTO>();
 
     public WordDTO( Word word ){
         this.wId = word.getId();
-        this.lId = word.getLid();
-        this.title =  word.getTitle();
-        
         // this.license = word.getLicense();
+        this.title =  word.getTitle(); 
+
+        word.getWordQuestions().forEach(x-> {
+            this.wordQuestions.add( new WordQuestionDTO(x) );
+        });
     }
 }

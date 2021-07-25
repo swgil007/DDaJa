@@ -5,14 +5,18 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +25,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@Builder
+@EqualsAndHashCode(callSuper = false)
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,11 +42,11 @@ public class Word extends CommonEntity {
     @Column(name="TITLE")
     private String title;
 
-    @Column(name="L_ID")
-    private long lid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "L_ID", insertable=false, updatable=false )
+    private License license;
 
-
-    // @OneToMany(mappedBy = "word")
-    // private List<WordQuestion> wordQuestions = new ArrayList<WordQuestion>();
+    @OneToMany(mappedBy = "word", fetch = FetchType.LAZY)
+    private List<WordQuestion> wordQuestions = new ArrayList<WordQuestion>();
 
 }
