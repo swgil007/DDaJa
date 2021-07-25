@@ -2,7 +2,6 @@ package com.bng.ddaja.words.controller;
 
 import java.util.List;
 
-import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.words.dto.WordDTO;
