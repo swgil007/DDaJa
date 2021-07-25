@@ -47,7 +47,4 @@ public class WordsController {
 
         return ResponseEntity.ok().body("INSERT SECCESS : )");
     }
-
-
-
 }
