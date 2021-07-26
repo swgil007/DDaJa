@@ -53,8 +53,8 @@ public class License extends CommonEntity {
     @Column(name = "PASS_SCORE")
     private int passScore;
 
-    @OneToMany(mappedBy = "license", fetch = FetchType.LAZY)
-    private List<Word> wordQuestions = new ArrayList<Word>();
+    // @OneToMany(mappedBy = "license", fetch = FetchType.LAZY)
+    // private List<Word> wordQuestions = new ArrayList<Word>();
 
     // @OneToMany(mappedBy = "license")
     // private List<Word> words = new ArrayList<Word>();

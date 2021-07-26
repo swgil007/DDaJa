@@ -23,13 +23,14 @@ import lombok.AllArgsConstructor;
 public class WordsController {
 
     private WordsService service;
-    private LicensesService lService;
+    private LicensesService license;
 
     @GetMapping("/words")
     @ResponseBody
-    public List<WordDTO> wordAllList ( ){
-    
-        return service.findAll();
+    public ResponseEntity<List<WordDTO>> wordAllList ( ){
+
+        return ResponseEntity.ok() 
+                            .body(service.findAll());
     }
 
     @PostMapping("/words")
@@ -38,7 +39,7 @@ public class WordsController {
                                                 
         
         Word vo = Word.builder()
-                        .license( lService.findById(lid) )
+                        .license( license.findById(lid) )
                         .title(title)
                         .build();
 

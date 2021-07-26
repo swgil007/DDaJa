@@ -1,17 +1,19 @@
 package com.bng.ddaja.licenses.controller;
 
+import java.util.List;
+
 import com.bng.ddaja.licenses.dto.ErrorDTO;
 import com.bng.ddaja.licenses.dto.RequestDTO;
 import com.bng.ddaja.licenses.dto.ResponseDTO;
+import com.bng.ddaja.licenses.service.LicensesService;
+import com.bng.ddaja.test.dto.LicenseDTO;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -20,20 +22,27 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 
-@Controller
-@RequestMapping("licenses")
 @AllArgsConstructor
+@RequestMapping("/licenses")
+@RestController
 public class LicensesController {
     
+    private LicensesService service;
+
+    /*
+    * TEST 중 입니다.
+    * - 실행 실패.
+    */
     @ApiOperation(
         value = "자격증 전체 조회"
         , notes = "전체 자격증 목록을 조회한다")
     @GetMapping("")
     @ResponseBody
-    public String getLicenses() {
-        return "getLicenses";
+    public List<LicenseDTO> getLicenses() {
+        return service.findAll();
     }
 
+    /*
     @PostMapping("")
     @ApiOperation(
         value = "신규 자격증 생성"
@@ -98,4 +107,5 @@ public class LicensesController {
         , @RequestParam(name = "per-page", required = false) int perPage) {
         return "getLicenses";
     }
+    */
 }
