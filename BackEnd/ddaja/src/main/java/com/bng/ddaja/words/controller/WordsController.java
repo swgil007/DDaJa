@@ -35,11 +35,11 @@ public class WordsController {
 
     @PostMapping("/words")
     public ResponseEntity<String> wordInsert (  @RequestParam( name = "title", required = false ) String title,
-                                                @RequestParam( name = "lid", required = false )   long lid ){
+                                                @RequestParam( name = "lid"  , required = false )   long lid ){
                                                 
         
         Word vo = Word.builder()
-                        .license( license.findById(lid) )
+                        // .license( license.findById(lid) )
                         .title(title)
                         .build();
 

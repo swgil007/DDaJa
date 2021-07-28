@@ -33,19 +33,19 @@ public class WordQuestionController {
                             .body(service.findAll());
     }
 
-    @GetMapping("/wId/{wId}")
+    @GetMapping("/wId/{wid}")
     @ResponseBody
-    public ResponseEntity<List<WordQuestionDTO>> wordQuestionAllList2( @PathVariable(name = "wId", required = true) long wId ){
+    public ResponseEntity<List<WordQuestionDTO>> wordQuestionAllList2( @PathVariable(name = "wid", required = true) long wid ){
 
         return ResponseEntity.ok() 
-                            .body(service.findByWId(wId));
+                            .body(service.findByWId(wid));
     }
 
-    @GetMapping("/{wqId}")
+    @GetMapping("/{wqid}")
     @ResponseBody
-    public ResponseEntity<WordQuestionDTO> wordQuestionAllList1( @PathVariable(name = "wqId", required = true) long wqId ){
+    public ResponseEntity<WordQuestionDTO> wordQuestionAllList1( @PathVariable(name = "wqid", required = true) long wqid ){
 
         return ResponseEntity.ok() 
-                            .body(service.findById(wqId)); 
+                            .body(service.findById(wqid)); 
     }
 }

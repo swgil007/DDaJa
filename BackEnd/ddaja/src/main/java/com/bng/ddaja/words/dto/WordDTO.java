@@ -5,7 +5,11 @@ import java.util.List;
 
 import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.domain.Word;
+import com.bng.ddaja.licenses.service.LicensesService;
+import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -17,13 +21,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WordDTO {
+public class WordDTO { 
 
     @ApiModelProperty(
         name = "w_id"
         , example = "11"
     )
     private long wId;
+    
+    @ApiModelProperty(
+        name = "l_id"
+        , example = "11"
+    )
+    private long lId;
 
     @ApiModelProperty(
         name = "title"
@@ -34,7 +44,7 @@ public class WordDTO {
     @ApiModelProperty(
         name = "License Entity"
     )
-    private License license;
+    private LicenseDTO license;
 
     @ApiModelProperty(
         name = "WordQuestion Entity"
@@ -42,12 +52,22 @@ public class WordDTO {
     private List<WordQuestionDTO> wordQuestions = new ArrayList<WordQuestionDTO>();
 
     public WordDTO( Word word ){
-        this.wId = word.getId();
-        // this.license = word.getLicense();
-        this.title =  word.getTitle(); 
 
+        this.wId = word.getId();
+        this.title =  word.getTitle();
         word.getWordQuestions().forEach(x-> {
             this.wordQuestions.add( new WordQuestionDTO(x) );
-        });
+        }); 
+    }
+
+    public WordDTO( Word word , LicenseDTO license ){
+
+        this.wId     = word.getId();
+        this.title   = word.getTitle();
+        this.license = license;
+        
+        word.getWordQuestions().forEach(x-> {
+            this.wordQuestions.add( new WordQuestionDTO(x) );
+        }); 
     }
 }

@@ -17,8 +17,8 @@ public class LicensesService {
     
     private LicensesRepository repository;
 
-    public License findById( long lid ){
-        return  repository.findById(lid);
+    public LicenseDTO findById( long lid ){
+        return new LicenseDTO( repository.findById( lid ));
     }
 
     /** LICENSES LIST ALL **/
@@ -27,7 +27,7 @@ public class LicensesService {
         List<LicenseDTO> list = new ArrayList<>();
 
         repository.findAll().forEach( x ->{ 
-            list.add (new LicenseDTO(x));
+            list.add (new LicenseDTO( x ));
         });
 
         return list;

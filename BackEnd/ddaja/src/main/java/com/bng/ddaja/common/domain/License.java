@@ -1,32 +1,36 @@
-package com.bng.ddaja.common.domain;
+package com.bng.ddaja.common.domain; 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.bng.ddaja.common.enums.LicenseCode;
-import com.bng.ddaja.common.enums.LicenseType;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
+@Builder
+@EqualsAndHashCode(callSuper = false)
 @ToString
-@EqualsAndHashCode
-@Table(name = "TB_LICENSE")
+@AllArgsConstructor
 @NoArgsConstructor
+@Table(name="TB_LICENSE")
 @Entity
 public class License extends CommonEntity {
 
@@ -34,9 +38,6 @@ public class License extends CommonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "L_ID")
     private long id;
-
-    @Column(name = "L_CODE")
-    private LicenseCode lCode;
     
     @Column(name = "NAME")
     private String name;
@@ -47,20 +48,21 @@ public class License extends CommonEntity {
     @Column(name = "AGENCY")
     private String agency;
 
-    @Enumerated(EnumType.STRING)
-    private LicenseType type;
-
     @Column(name = "PASS_SCORE")
     private int passScore;
 
-    // @OneToMany(mappedBy = "license", fetch = FetchType.LAZY)
-    // private List<Word> wordQuestions = new ArrayList<Word>();
+    /** 잠시 주석 처리 해놓겠습니다 ! **/
+    // @Column(name = "L_CODE")
+    // private LicenseCode lCode;
+    // @Enumerated(EnumType.STRING)
+    // private LicenseType type;
 
-    // @OneToMany(mappedBy = "license")
-    // private List<Word> words = new ArrayList<Word>();
+
+    @OneToMany(mappedBy = "license")
+    private List<Word> words; 
 
     // 연관관계 편의 메소드
-    // public void addWord(Word word) {
+    // public void setWord(Word word) {
     //     this.words.add(word);
     //     if (word.getLicense() != this) {
     //         word.setLicense(this);
