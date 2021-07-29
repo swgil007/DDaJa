@@ -28,7 +28,7 @@ public class WordsService {
     @Autowired
     private LicensesService licenses;
 
-    /** WORD LIST ALL **/
+    /** WORD LIST - ALL **/
     public List<WordDTO> findAll( ) { 
 
         List<WordDTO> list = new ArrayList<>();
@@ -39,6 +39,19 @@ public class WordsService {
         return list;
     } 
 
+    /** WORD LIST - LICENSES **/
+    public List<WordDTO> wordLicenseList( long lid ) { 
+
+        List<WordDTO> list = new ArrayList<>();
+
+        License vo = License.builder().id(lid).build(); 
+
+        repository.findByLicense( vo ).forEach( x -> { 
+            list.add( new WordDTO(x, licenses.findById(3)));
+        }); 
+        return list;
+    } 
+    
     /** WORD INSERT **/
     @Transactional
     public void wordInsert ( Word vo ){ 

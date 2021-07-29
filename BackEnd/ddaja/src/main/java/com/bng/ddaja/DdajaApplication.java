@@ -7,5 +7,4 @@ public class DdajaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DdajaApplication.class, args);
 	}
-
 }

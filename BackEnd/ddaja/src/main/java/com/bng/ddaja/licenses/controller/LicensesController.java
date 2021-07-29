@@ -36,7 +36,7 @@ public class LicensesController {
 
     @GetMapping("/licenses/{lid}")
     @ResponseBody
-    public ResponseEntity<LicenseDTO> getLicensess( @PathVariable(name = "lid", required = true) long lid) { 
+    public ResponseEntity<LicenseDTO> getLicensess( @PathVariable(name = "lid", required = true) long lid ) { 
         return ResponseEntity.ok() 
                             .body(service.findById(lid));
     }
