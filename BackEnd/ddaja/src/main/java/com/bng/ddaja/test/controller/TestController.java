@@ -44,7 +44,7 @@ public class TestController {
     
     @GetMapping("")
     public String test() {
-        return "test";
+        return "testeeee";
     }
 
     @GetMapping("/one/{id}")

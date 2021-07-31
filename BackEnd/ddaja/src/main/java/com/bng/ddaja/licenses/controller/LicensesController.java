@@ -6,12 +6,15 @@ import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.test.dto.LicenseDTO;
 
 import org.springframework.http.ResponseEntity;
+import com.bng.ddaja.common.dto.CommonError;
+import com.bng.ddaja.common.dto.CommonResponse;
+//import com.bng.ddaja.licenses.dto.LicenseDTO;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -28,14 +31,12 @@ public class LicensesController {
     * - 실행 실패.
     */
     @GetMapping("/licenses")
-    @ResponseBody
     public ResponseEntity<List<LicenseDTO>> getLicenses() { 
         return ResponseEntity.ok() 
                             .body(service.findAll());
     }
 
     @GetMapping("/licenses/{lid}")
-    @ResponseBody
     public ResponseEntity<LicenseDTO> getLicensess( @PathVariable(name = "lid", required = true) long lid ) { 
         return ResponseEntity.ok() 
                             .body(service.findById(lid));
@@ -43,11 +44,25 @@ public class LicensesController {
 
     /*
     @PostMapping("")
+
+@AllArgsConstructor
+@RequestMapping("licenses")
+@RestController
+public class LicensesController {
+    
+    @ApiOperation(
+        value = "자격증 전체 조회"
+        , notes = "전체 자격증 목록을 조회한다")
+    @GetMapping("")
+    public String getLicenses() {
+        return "getLicenses";
+    }
+
     @ApiOperation(
         value = "신규 자격증 생성"
         , notes = "신규 자격증을 생성한다."
         , produces = "application/json"
-        , response = ResponseDTO.class
+        , response = CommonResponse.class
     )
     @ApiImplicitParams({
         @ApiImplicitParam(
@@ -59,19 +74,19 @@ public class LicensesController {
         @ApiResponse(
             code = 201
             , message = "생성된 자원 정보"
-            , response = ResponseDTO.class
+            , response = CommonResponse.class
             , responseContainer = "List"
         )
         , @ApiResponse(
             code = 409
             , message = "로직 수행 불가 모순 발생"
-            , response = ErrorDTO.class
+            , response = CommonError.class
             , responseContainer = "List"
         )
     })
-    @ResponseBody
-    public ResponseDTO postLicenses(@RequestBody RequestDTO requestDTO) {
-        return new ResponseDTO();
+    @PostMapping("")
+    public String postLicenses(@RequestBody LicenseDTO licenseDTO) {
+        return "string";
     }
     
     @ApiOperation(
@@ -98,7 +113,6 @@ public class LicensesController {
         )
     })
     @GetMapping("/{seq}")
-    @ResponseBody
     public String getLicenses(
         @PathVariable(name = "seq", required = true) long seq
         , @RequestParam(name = "fields", required = false) String fields

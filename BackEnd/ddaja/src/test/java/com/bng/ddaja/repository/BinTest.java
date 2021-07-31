@@ -1,4 +1,4 @@
-package com.ddaja.repository;
+package com.bng.ddaja.repository;
 
 import java.util.List;
 

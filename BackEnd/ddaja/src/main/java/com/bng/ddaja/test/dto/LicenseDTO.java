@@ -44,6 +44,10 @@ public class LicenseDTO {
     )
     private int passScore; 
     
+    public LicenseDTO ( long id, String licenseName ) {
+        this.id          = id;
+        this.licenseName = licenseName;
+    }
     
     public LicenseDTO ( License license ){
         this.id          = license.getId(); 

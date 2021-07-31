@@ -15,10 +15,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class LicensesService {
     
-    private LicensesRepository repository;
+    private LicensesRepository licensesRepository;
 
     public LicenseDTO findById( long lid ){
-        return new LicenseDTO( repository.findById( lid ));
+        return new LicenseDTO( licensesRepository.findById( lid ));
     }
 
     /** LICENSES LIST ALL **/
@@ -26,10 +26,16 @@ public class LicensesService {
 
         List<LicenseDTO> list = new ArrayList<>();
 
-        repository.findAll().forEach( x ->{ 
+        licensesRepository.findAll().forEach( x ->{ 
             list.add (new LicenseDTO( x ));
         });
 
         return list;
+    }
+
+     
+    public List<LicenseDTO> getAllLicenses() {
+        List<License> voList = licensesRepository.findAll();
+        return voList.stream().map(vo -> new LicenseDTO(vo)).collect(Collectors.toList());
     }
 }

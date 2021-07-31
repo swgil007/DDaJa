@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.bng.ddaja.common.enums.LicenseCode;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +41,10 @@ public class License extends CommonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "L_ID")
     private long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "L_CODE")
+    private LicenseCode lCode;
     
     @Column(name = "NAME")
     private String name;
