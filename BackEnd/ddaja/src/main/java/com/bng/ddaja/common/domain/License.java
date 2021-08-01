@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.bng.ddaja.common.enums.LicenseCode;
+import com.bng.ddaja.common.enums.LicenseType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -58,12 +59,9 @@ public class License extends CommonEntity {
     @Column(name = "PASS_SCORE")
     private int passScore;
 
-    /** 잠시 주석 처리 해놓겠습니다 ! **/
-    // @Column(name = "L_CODE")
-    // private LicenseCode lCode;
-    // @Enumerated(EnumType.STRING)
-    // private LicenseType type;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TYPE")
+    private LicenseType type;
 
     @OneToMany(mappedBy = "license")
     private List<Word> words; 

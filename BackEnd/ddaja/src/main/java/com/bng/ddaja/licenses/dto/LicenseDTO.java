@@ -32,9 +32,21 @@ public class LicenseDTO extends CommonDTO {
         this.name = vo.getName();
         this.inUse = vo.isInUse();
         this.agency = vo.getAgency();
-        //this.type = vo.getType();
+        this.type = vo.getType();
         this.passScore = vo.getPassScore();
         super.createdDate = vo.getCreatedDate();
         super.modifiedDate = vo.getModifiedDate();
+    }
+
+    public License toEntity() {
+        return License.builder()
+        .id(this.id)
+        .lCode(this.lCode)
+        .name(this.name)
+        .inUse(this.inUse)
+        .agency(this.agency)
+        .type(this.type)
+        .passScore(this.passScore)
+        .build();
     }
 }
