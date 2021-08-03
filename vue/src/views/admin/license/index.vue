@@ -17,7 +17,7 @@
         />
         <el-table-column
           label="자격증 명"
-          prop="item.licenseName"
+          prop="item.name"
         />
         <el-table-column>
           <template slot-scope="props">
@@ -42,7 +42,7 @@
       @close:popup="popupClose"
       @childData="childPopup"
     />
-    <back-end-axios
+    <api-request
       @licenseInfo="getLicenseInfo"
     />
   </div>
@@ -50,12 +50,12 @@
 
 <script>
 import popup from './component/licensePopup.vue'
-import backEndAxios from './component/backEndAxios.vue'
+import apiRequest from './component/licenseApiRequest.vue'
 export default {
   name: '',
   components: {
     popup,
-    backEndAxios
+    apiRequest
   },
   data() {
     return {
