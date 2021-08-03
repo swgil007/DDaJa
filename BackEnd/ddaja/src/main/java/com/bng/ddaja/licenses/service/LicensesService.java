@@ -18,6 +18,17 @@ public class LicensesService {
     
     private LicensesRepository licensesRepository;
 
+    public List<LicenseDTO> getAllLicenses() {
+        return licensesRepository.findAll()
+                                .stream()
+                                .map(vo -> new LicenseDTO(vo))
+                                .collect(Collectors.toList());
+    }
+
+    public LicenseDTO getLicenseById(long id) {
+        return new LicenseDTO(licensesRepository.findById(id));
+    }
+
     public LicenseDTO findById( long lid ){
         return new LicenseDTO( licensesRepository.findById( lid ));
     }
@@ -34,9 +45,4 @@ public class LicensesService {
         return list;
     }
 
-     
-    public List<LicenseDTO> getAllLicenses() {
-        List<License> voList = licensesRepository.findAll();
-        return voList.stream().map(vo -> new LicenseDTO(vo)).collect(Collectors.toList());
-    }
 }
