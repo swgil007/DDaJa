@@ -66,11 +66,11 @@ public class License extends CommonEntity {
     @OneToMany(mappedBy = "license")
     private List<Word> words; 
 
-    // 연관관계 편의 메소드
-    // public void setWord(Word word) {
-    //     this.words.add(word);
-    //     if (word.getLicense() != this) {
-    //         word.setLicense(this);
-    //     }
-    // }
+    //연관관계 편의 메소드
+    public void setWord(Word word) {
+        this.words.add(word);
+        if (word.getLicense() != this) {
+            word.setLicense(this);
+        }
+    }
 }
