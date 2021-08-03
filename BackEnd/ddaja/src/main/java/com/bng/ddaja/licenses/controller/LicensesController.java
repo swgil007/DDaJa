@@ -28,10 +28,12 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
 @RequestMapping("licenses")
 @RestController
+@Slf4j
 public class LicensesController {
     
     private LicensesService licenseService;
@@ -108,8 +110,11 @@ public class LicensesController {
         )
     })
     @PostMapping("")
-    public String postLicenses(@RequestBody LicenseDTO licenseDTO) {
-        return "string";
+    public LicenseDTO createLicenses(@RequestBody LicenseDTO licenseDTO, String lCode) {
+        log.info("postLicense");
+        log.info(lCode);
+        log.info(licenseDTO.toString());
+        return licenseDTO;
     }
     
 }
