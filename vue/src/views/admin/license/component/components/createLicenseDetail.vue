@@ -37,17 +37,12 @@
                 size="medium"
                 placeholder="합격 점수"
               />
-              <el-input
-                v-model="type"
-                size="medium"
-                placeholder="시험 종류(필기/실기)"
-              />
-              <el-select v-model="value" placeholder="Select">
+              <el-select v-model="type" placeholder="시험 종류(필기/실기)">
                 <el-option
                   v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  :key="item.item"
+                  :label="item.item"
+                  :value="item.item"
                 />
               </el-select>
             </div>

@@ -52,8 +52,9 @@ export default {
     requestTypeList() {
       axios.get('http://localhost/licenses/type')
         .then(res => {
+          console.log('optionsss')
           console.log(res.data)
-          this.options = res.data
+          this.options = res.data.items
         })
         .catch(err => {
           alert('fail')
