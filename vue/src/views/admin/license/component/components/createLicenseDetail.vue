@@ -43,12 +43,12 @@
                 placeholder="시험 종류(필기/실기)"
               />
               <el-select v-model="value" placeholder="Select">
-                <!-- <el-option
+                <el-option
                   v-for="item in options"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
-                /> -->
+                />
               </el-select>
             </div>
           </el-col>
