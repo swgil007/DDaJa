@@ -42,6 +42,14 @@
                 size="medium"
                 placeholder="시험 종류(필기/실기)"
               />
+              <el-select v-model="value" placeholder="Select">
+                <!-- <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                /> -->
+              </el-select>
             </div>
           </el-col>
         </el-row>
@@ -62,7 +70,8 @@ import axios from 'axios'
 export default {
   name: '',
   props: {
-    isEdit: {}
+    isEdit: {},
+    options: {}
   },
   data() {
     return {

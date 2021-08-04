@@ -8,6 +8,7 @@
         <template>
           <create-license-detail
             :is-edit="isEdit"
+            :options="options"
             @close:popup="popupClose"
           />
         </template>
@@ -18,6 +19,7 @@
 
 <script>
 import CreateLicenseDetail from './components/createLicenseDetail.vue'
+import axios from 'axios'
 export default {
   name: '',
   components: {
@@ -28,10 +30,13 @@ export default {
   },
   data() {
     return {
-      isEdit: false
+      isEdit: false,
+      options: []
     }
   },
-  created() { },
+  created() {
+    this.requestTypeList()
+  },
   methods: {
     handleClose(done) {
       this.$confirm('자격증 생성을 취소 하시겠습니까 ?')
@@ -43,6 +48,17 @@ export default {
     popupClose(createPopupVal) {
       this.createPopupVal = createPopupVal
       this.$emit('close:popup', createPopupVal)
+    },
+    requestTypeList() {
+      axios.get('http://localhost/licenses/type')
+        .then(res => {
+          console.log(res.data)
+          this.options = res.data
+        })
+        .catch(err => {
+          alert('fail')
+          console.log(err)
+        })
     }
   }
 }

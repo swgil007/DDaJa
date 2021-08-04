@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
+import com.bng.ddaja.common.enums.LicenseType;
 import com.bng.ddaja.licenses.dto.LicenseDTO;
 import com.bng.ddaja.common.hateos.licenses.Licenses;
 
@@ -116,4 +117,9 @@ public class LicensesController {
         return licenseDTO;
     }
     
+    @GetMapping("type")
+    public ResponseEntity<CommonResponse<LicenseType>> getLicensesType() {
+        List<CommonResource<LicenseType>> resourceList = Arrays.stream(LicenseType.values()).map(e -> new CommonResource<>(e, null)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(new CommonResponse<>(resourceList.size(), resourceList));
+    }
 }
