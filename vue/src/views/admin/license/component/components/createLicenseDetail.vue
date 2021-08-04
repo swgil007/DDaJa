@@ -11,8 +11,7 @@
         <el-row>
           <el-col :span="24">
             <div class="choice-box">
-              <el-radio v-model="inUse" value="1" label="1" border>사용</el-radio>
-              <el-radio v-model="inUse" value="0" label="2" border>미사용</el-radio>
+              <el-checkbox v-model="inUse" label="1" border>사용</el-checkbox>
             </div>
           </el-col>
         </el-row>
