@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.licenses.service.LicensesService;
-import com.bng.ddaja.test.dto.LicenseDTO;
+//import com.bng.ddaja.test.dto.LicenseDTO;
 
 import org.springframework.http.ResponseEntity;
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
-//import com.bng.ddaja.licenses.dto.LicenseDTO;
+import com.bng.ddaja.licenses.dto.LicenseDTO;
 import com.bng.ddaja.common.hateos.licenses.Licenses;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -110,9 +110,8 @@ public class LicensesController {
         )
     })
     @PostMapping("")
-    public LicenseDTO createLicenses(@RequestBody LicenseDTO licenseDTO, String lCode) {
+    public LicenseDTO createLicenses(@RequestBody LicenseDTO licenseDTO) {
         log.info("postLicense");
-        log.info(lCode);
         log.info(licenseDTO.toString());
         return licenseDTO;
     }

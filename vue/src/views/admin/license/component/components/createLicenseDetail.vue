@@ -82,18 +82,27 @@ export default {
     },
     createLicense() {
       alert(this.name)
-      axios.post('http://localhost/licenses', {
-        name: this.name,
-        inUse: this.inUse,
-        agency: this.agency,
-        type: this.type,
-        lCode: this.lCode,
-        passScore: this.passScore
-      })
-        .then(function(res) {
+      const licenseInfo = {
+        'name': this.name,
+        'inUse': this.inUse,
+        'agency': this.agency,
+        'type': this.type,
+        'lCode': this.lCode,
+        'passScore': this.passScore
+      }
+      const teest = {
+        'test': 'tssss',
+        'testInt': 110
+      }
+      console.log(teest)
+      console.log(licenseInfo)
+      console.log('and send!')
+      axios.post('http://localhost/licenses', licenseInfo)
+        .then(res => {
           console.log(res.data)
-        }, function() {
-          console.log('failed')
+        })
+        .catch(error => {
+          console.log(error)
         })
     }
   }

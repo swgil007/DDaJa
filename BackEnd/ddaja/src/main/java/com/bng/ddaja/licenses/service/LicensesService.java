@@ -6,8 +6,7 @@ import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.licenses.repository.LicensesRepository;
-import com.bng.ddaja.test.dto.LicenseDTO;
-
+import com.bng.ddaja.licenses.dto.LicenseDTO;
 import org.springframework.stereotype.Service; 
 
 import lombok.AllArgsConstructor;

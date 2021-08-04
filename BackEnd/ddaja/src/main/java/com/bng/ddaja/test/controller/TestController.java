@@ -20,6 +20,7 @@ import com.bng.ddaja.common.hateos.licenses.Licenses;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
+import com.bng.ddaja.test.dto.TestDTO;
 import com.bng.ddaja.test.dto.TestParameter;
 
 import org.springframework.http.HttpStatus;
@@ -33,11 +34,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @AllArgsConstructor
 @RequestMapping("test")
 @RestController
+@Slf4j
 public class TestController {
     
     private UserService userService;
@@ -107,5 +110,11 @@ public class TestController {
         dtoList.add(new CommonResource<LicenseDTO>(dtoFive, null));
         
         return ResponseEntity.ok().body(new CommonResponse<>(dtoList.size(), dtoList));
+    }
+
+    @PostMapping("/post")
+    public TestDTO testPost(@RequestBody TestDTO testDTO) {
+        log.info("testPOst");
+        return testDTO;
     }
 }
