@@ -22,7 +22,7 @@
                 v-model="name"
                 placeholder="자격증 이름"
               />
-              <el-select v-model="lCode" placeholder="자격증 코드">
+              <el-select v-model="code" placeholder="자격증 코드">
                 <el-option
                   v-for="item in codeOptions"
                   :key="item.item"
@@ -79,7 +79,7 @@ export default {
       agency: '',
       type: '',
       passScore: '',
-      lCode: ''
+      code: ''
     }
   },
   methods: {
@@ -93,7 +93,7 @@ export default {
         'inUse': this.inUse,
         'agency': this.agency,
         'type': this.type,
-        'lCode': this.lCode,
+        'code': this.code,
         'passScore': this.passScore
       }
       console.log(licenseInfo)

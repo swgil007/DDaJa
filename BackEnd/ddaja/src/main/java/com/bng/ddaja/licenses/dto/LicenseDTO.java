@@ -19,7 +19,7 @@ import lombok.ToString;
 public class LicenseDTO extends CommonDTO {
     
     private long id;
-    private LicenseCode lCode;
+    private LicenseCode code;
     private String name;
     private boolean inUse;
     private String agency;
@@ -28,7 +28,7 @@ public class LicenseDTO extends CommonDTO {
     
     public LicenseDTO(License vo) {
         this.id = vo.getId();
-        this.lCode = vo.getLCode();
+        this.code = vo.getLCode();
         this.name = vo.getName();
         this.inUse = vo.isInUse();
         this.agency = vo.getAgency();
@@ -41,7 +41,7 @@ public class LicenseDTO extends CommonDTO {
     public License toEntity() {
         return License.builder()
         .id(this.id)
-        .lCode(this.lCode)
+        .lCode(this.code)
         .name(this.name)
         .inUse(this.inUse)
         .agency(this.agency)
