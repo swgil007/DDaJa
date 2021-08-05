@@ -8,7 +8,8 @@
         <template>
           <create-license-detail
             :is-edit="isEdit"
-            :options="options"
+            :type-options="typeOptions"
+            :code-options="codeOptions"
             @close:popup="popupClose"
           />
         </template>
@@ -31,11 +32,13 @@ export default {
   data() {
     return {
       isEdit: false,
-      options: []
+      typeOptions: [],
+      codeOptions: []
     }
   },
   created() {
     this.requestTypeList()
+    this.requestCodeList()
   },
   methods: {
     handleClose(done) {
@@ -52,12 +55,18 @@ export default {
     requestTypeList() {
       axios.get('http://localhost/licenses/type')
         .then(res => {
-          console.log('optionsss')
-          console.log(res.data)
-          this.options = res.data.items
+          this.typeOptions = res.data.items
         })
         .catch(err => {
-          alert('fail')
+          console.log(err)
+        })
+    },
+    requestCodeList() {
+      axios.get('http://localhost/licenses/code')
+        .then(res => {
+          this.codeOptions = res.data.items
+        })
+        .catch(err => {
           console.log(err)
         })
     }

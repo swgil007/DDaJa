@@ -22,11 +22,14 @@
                 v-model="name"
                 placeholder="자격증 이름"
               />
-              <el-input
-                v-model="lCode"
-                size="medium"
-                placeholder="자격증 코드"
-              />
+              <el-select v-model="lCode" placeholder="자격증 코드">
+                <el-option
+                  v-for="item in codeOptions"
+                  :key="item.item"
+                  :label="item.item"
+                  :value="item.item"
+                />
+              </el-select>
               <el-input
                 v-model="agency"
                 size="medium"
@@ -39,7 +42,7 @@
               />
               <el-select v-model="type" placeholder="시험 종류(필기/실기)">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in typeOptions"
                   :key="item.item"
                   :label="item.item"
                   :value="item.item"
@@ -66,7 +69,8 @@ export default {
   name: '',
   props: {
     isEdit: {},
-    options: {}
+    typeOptions: {},
+    codeOptions: {}
   },
   data() {
     return {
@@ -84,7 +88,6 @@ export default {
       this.$emit('depthChildData', this.childData)
     },
     createLicense() {
-      alert(this.name)
       const licenseInfo = {
         'name': this.name,
         'inUse': this.inUse,
@@ -93,13 +96,7 @@ export default {
         'lCode': this.lCode,
         'passScore': this.passScore
       }
-      const teest = {
-        'test': 'tssss',
-        'testInt': 110
-      }
-      console.log(teest)
       console.log(licenseInfo)
-      console.log('and send!')
       axios.post('http://localhost/licenses', licenseInfo)
         .then(res => {
           console.log(res.data)
