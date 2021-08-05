@@ -1,5 +1,6 @@
 package com.bng.ddaja.licenses.controller;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -112,10 +113,9 @@ public class LicensesController {
         )
     })
     @PostMapping("")
-    public LicenseDTO createLicenses(@RequestBody LicenseDTO licenseDTO) {
-        log.info("postLicense");
-        log.info(licenseDTO.toString());
-        return licenseDTO;
+    public ResponseEntity<LicenseDTO> createLicenses(@RequestBody LicenseDTO licenseDTO) {
+        LicenseDTO savedLicense = licenseService.saveLicense(licenseDTO);
+        return ResponseEntity.created(Licenses.SELF.makeURI(savedLicense.getId())).body(savedLicense);
     }
     
     @GetMapping("type")

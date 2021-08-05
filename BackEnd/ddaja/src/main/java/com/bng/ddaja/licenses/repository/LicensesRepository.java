@@ -10,5 +10,4 @@ public interface LicensesRepository  extends JpaRepository< License, Long >{
     
     public License findById( long id );
     public List<License> findAll();
-
 }

@@ -1,5 +1,7 @@
 package com.bng.ddaja.common.hateos.licenses;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +24,15 @@ public enum Licenses {
 
     public Link initLink(Long id) {
         return new Link(name(), url+id.toString(), method);
+    }
+
+    public URI makeURI(Long id) {
+        try {
+            return new URI(initLink(id).getUrl());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public List<Link> makeLinkList(Long id) {

@@ -1,6 +1,6 @@
 <template>
   <div class="createPost-container">
-    <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
+    <el-form ref="postForm" :model="postForm" class="form-container">
       <div class="createPost-main-container">
         <h1>자격증 생성</h1>
         <el-row>
@@ -85,7 +85,6 @@ export default {
   methods: {
     popupClose() {
       this.$emit('close:popup', false)
-      this.$emit('depthChildData', this.childData)
     },
     createLicense() {
       const licenseInfo = {

@@ -28,6 +28,12 @@ public class LicensesService {
         return new LicenseDTO(licensesRepository.findById(id));
     }
 
+    public LicenseDTO saveLicense(LicenseDTO licenseDTO) {
+        License licenseVO = licenseDTO.toEntity();
+        licensesRepository.save(licenseVO);
+        return new LicenseDTO(licenseVO);
+    }
+
     public LicenseDTO findById( long lid ){
         return new LicenseDTO( licensesRepository.findById( lid ));
     }
