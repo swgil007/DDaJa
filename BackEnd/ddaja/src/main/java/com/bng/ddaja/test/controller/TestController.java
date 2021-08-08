@@ -74,7 +74,7 @@ public class TestController {
 
     @GetMapping("/five")
     public ResponseEntity<CommonResponse<UserDTO>> five() {
-        UserDTO userDTO = new UserDTO(Integer.toUnsignedLong(11), "test", "김텟트");
+        UserDTO userDTO = new UserDTO(Integer.toUnsignedLong(11), "test", "tesssttt");
         CommonResponse<UserDTO> response = new CommonResponse<UserDTO>(1, new CommonResource<UserDTO>(userDTO, null));
         return new ResponseEntity<>(response, null, HttpStatus.OK);
     }
