@@ -44,7 +44,7 @@ public class WordsService {
 
         List<WordDTO> list = new ArrayList<>();
 
-        License vo = License.builder().id(lid).build(); 
+        License vo = License.builder().id( lid ).build(); 
 
         repository.findByLicense( vo ).forEach( x -> { 
             list.add( new WordDTO(x, licenses.findById(3)));

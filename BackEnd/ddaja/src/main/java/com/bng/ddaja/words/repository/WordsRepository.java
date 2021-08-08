@@ -14,5 +14,4 @@ public interface WordsRepository extends JpaRepository< Word, Long >{
     public List<Word> findAll();
 
     public List<Word> findByLicense( License license );
-
 }

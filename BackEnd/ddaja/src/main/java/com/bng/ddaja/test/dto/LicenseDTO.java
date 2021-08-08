@@ -44,13 +44,25 @@ public class LicenseDTO {
     )
     private int passScore; 
     
+    public LicenseDTO ( int id, String name ){
+        this.id          = id;
+        this.licenseName = name;
+    }
     
     public LicenseDTO ( License license ){
         this.id          = license.getId(); 
-        this.passScore   = license.getPassScore();
         this.licenseName = license.getName();
         this.passScore   = license.getPassScore();
         this.agency      = license.getAgency();
     }
 
+    public License licenseToDto ( LicenseDTO dto ){
+
+        return License.builder()
+                        .id(dto.getId())
+                        .name(dto.licenseName)
+                        .passScore(dto.passScore)
+                        .agency(dto.agency)
+                        .build();
+    }
 }

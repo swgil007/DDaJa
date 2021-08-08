@@ -2,7 +2,6 @@ package com.ddaja.repository;
 
 import java.util.List;
 
-
 import com.bng.ddaja.DdajaApplication;
 import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.words.repository.WordsRepository;

@@ -2,16 +2,12 @@ package com.ddaja.repository;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import com.bng.ddaja.DdajaApplication;
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.example.repository.user.UserRepository;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;

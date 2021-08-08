@@ -1,10 +1,8 @@
 package com.bng.ddaja.test.controller;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -20,7 +18,7 @@ import com.bng.ddaja.common.hateos.licenses.Licenses;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
-import com.bng.ddaja.test.dto.TestParameter;
+import com.bng.ddaja.test.dto.TestParameter; 
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -43,7 +42,7 @@ public class Word extends CommonEntity {
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "L_ID", insertable=false, updatable=false )
+    @JoinColumn(name = "L_ID", insertable=true, updatable=false)
     private License license;
 
     @OneToMany(mappedBy = "word", fetch = FetchType.LAZY)

@@ -1,16 +1,12 @@
 package com.bng.ddaja.common.domain; 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -57,15 +53,6 @@ public class License extends CommonEntity {
     // @Enumerated(EnumType.STRING)
     // private LicenseType type;
 
-
     @OneToMany(mappedBy = "license")
     private List<Word> words; 
-
-    // 연관관계 편의 메소드
-    // public void setWord(Word word) {
-    //     this.words.add(word);
-    //     if (word.getLicense() != this) {
-    //         word.setLicense(this);
-    //     }
-    // }
 }
