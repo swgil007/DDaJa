@@ -18,7 +18,12 @@ import com.bng.ddaja.common.hateos.licenses.Licenses;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
+<<<<<<< HEAD
 import com.bng.ddaja.test.dto.TestParameter; 
+=======
+import com.bng.ddaja.test.dto.TestDTO;
+import com.bng.ddaja.test.dto.TestParameter;
+>>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,18 +36,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @AllArgsConstructor
 @RequestMapping("test")
 @RestController
+@Slf4j
 public class TestController {
     
     private UserService userService;
     
     @GetMapping("")
     public String test() {
-        return "test";
+        return "testeeee";
     }
 
     @GetMapping("/one/{id}")
@@ -105,5 +112,11 @@ public class TestController {
         dtoList.add(new CommonResource<LicenseDTO>(dtoFive, null));
         
         return ResponseEntity.ok().body(new CommonResponse<>(dtoList.size(), dtoList));
+    }
+
+    @PostMapping("/post")
+    public TestDTO testPost(@RequestBody TestDTO testDTO) {
+        log.info("testPOst");
+        return testDTO;
     }
 }

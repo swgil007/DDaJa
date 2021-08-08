@@ -4,12 +4,20 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+<<<<<<< HEAD
+=======
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+>>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.bng.ddaja.common.enums.LicenseCode;
+import com.bng.ddaja.common.enums.LicenseType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +42,10 @@ public class License extends CommonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "L_ID")
     private long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "L_CODE")
+    private LicenseCode lCode;
     
     @Column(name = "NAME")
     private String name;
@@ -47,6 +59,7 @@ public class License extends CommonEntity {
     @Column(name = "PASS_SCORE")
     private int passScore;
 
+<<<<<<< HEAD
     /** 잠시 주석 처리 해놓겠습니다 ! **/
     // @Column(name = "L_CODE")
     // private LicenseCode lCode;
@@ -55,4 +68,20 @@ public class License extends CommonEntity {
 
     @OneToMany(mappedBy = "license")
     private List<Word> words; 
+=======
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TYPE")
+    private LicenseType type;
+
+    @OneToMany(mappedBy = "license")
+    private List<Word> words; 
+
+    //연관관계 편의 메소드
+    public void setWord(Word word) {
+        this.words.add(word);
+        if (word.getLicense() != this) {
+            word.setLicense(this);
+        }
+    }
+>>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
 }

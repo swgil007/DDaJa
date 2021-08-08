@@ -1,6 +1,8 @@
 package com.bng.ddaja.test.dto;
 
 import com.bng.ddaja.common.domain.License;
+import com.bng.ddaja.common.enums.LicenseCode;
+import com.bng.ddaja.common.enums.LicenseType;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,16 +17,22 @@ import lombok.Setter;
 public class LicenseDTO {
 
     @ApiModelProperty(
-        name = "l_id"
-        , example = "11"
+        name = "id"
+        , example = "1"
     )
     private long id;
 
     @ApiModelProperty(
-        name = "licenseName"
+        name = "lCode"
+        , example = "NONE"
+    )
+    private LicenseCode lCode;
+
+    @ApiModelProperty(
+        name = "name"
         , example = "정보처리기사"
     )
-    private String licenseName;
+    private String name;
 
     @ApiModelProperty(
         name = "inUse"
@@ -34,16 +42,17 @@ public class LicenseDTO {
 
     @ApiModelProperty(
         name = "agency"
-        , example = "-"
+        , example = "Q-net"
     )
     private String agency;
 
     @ApiModelProperty(
         name = "passScore"
-        , example = "50"
+        , example = "60"
     )
     private int passScore; 
     
+<<<<<<< HEAD
     public LicenseDTO ( int id, String name ){
         this.id          = id;
         this.licenseName = name;
@@ -54,6 +63,26 @@ public class LicenseDTO {
         this.licenseName = license.getName();
         this.passScore   = license.getPassScore();
         this.agency      = license.getAgency();
+=======
+    @ApiModelProperty(
+        name = "type"
+        , example = "WRITING"
+    )
+    private LicenseType type;
+
+    public LicenseDTO ( long id, String name ) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    public LicenseDTO ( License license ){
+        this.id = license.getId();
+        this.lCode = license.getLCode();
+        this.passScore = license.getPassScore();
+        this.name = license.getName();
+        this.passScore = license.getPassScore();
+        this.agency = license.getAgency();
+>>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
     }
 
     public License licenseToDto ( LicenseDTO dto ){

@@ -12,7 +12,7 @@ export default {
   methods: {
     fetchData(pageNum) {
       axios
-        .get('http://localhost/test/vue')
+        .get('http://localhost/licenses')
         .then(res => {
           console.log(res.data)
           this.$emit('licenseInfo', res.data)

@@ -5,6 +5,10 @@
         <font class="title-font1">자격증 관리</font>
         {{ childData }}
       </div>
+      <el-button
+        size="mini"
+        @click="createPopupState(true)"
+      >자격증 생성</el-button>
     </div>
     <div class="table-box">
       <el-table
@@ -17,7 +21,7 @@
         />
         <el-table-column
           label="자격증 명"
-          prop="item.licenseName"
+          prop="item.name"
         />
         <el-table-column>
           <template slot-scope="props">
@@ -42,26 +46,33 @@
       @close:popup="popupClose"
       @childData="childPopup"
     />
-    <back-end-axios
+    <api-request
       @licenseInfo="getLicenseInfo"
+    />
+    <license-create-popup
+      :create-popup-val="createPopupVal"
+      @close:popup="createPopupClose"
     />
   </div>
 </template>
 
 <script>
 import popup from './component/licensePopup.vue'
-import backEndAxios from './component/backEndAxios.vue'
+import apiRequest from './component/licenseApiRequest.vue'
+import licenseCreatePopup from './component/licenseCreatePopup.vue'
 export default {
   name: '',
   components: {
     popup,
-    backEndAxios
+    apiRequest,
+    licenseCreatePopup
   },
   data() {
     return {
       tableData: [],
       totalCount: 0,
       popupVal: false,
+      createPopupVal: false,
       childData: ''
     }
   },
@@ -70,7 +81,14 @@ export default {
       this.licenseName = licenseName
       this.popupVal = popupVal
     },
+    createPopupState(createPopupVal) {
+      this.createPopupVal = createPopupVal
+    },
     popupClose(popupVal) {
+      this.popupVal = popupVal
+    },
+    createPopupClose(createPopupVal) {
+      this.createPopupVal = createPopupVal
     },
     childPopup(childData) {
       this.childData = childData

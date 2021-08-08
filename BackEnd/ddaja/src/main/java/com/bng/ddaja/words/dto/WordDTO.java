@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bng.ddaja.common.domain.Word;
+<<<<<<< HEAD
 import com.bng.ddaja.test.dto.LicenseDTO;
+=======
+import com.bng.ddaja.licenses.service.LicensesService;
+import com.bng.ddaja.licenses.dto.LicenseDTO;
+>>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
 
 import io.swagger.annotations.ApiModelProperty;
