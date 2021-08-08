@@ -18,7 +18,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false, of = "id")
 @Table(name = "TB_ADMIN")
 @NoArgsConstructor
 @Entity
@@ -27,11 +27,10 @@ public class Admin extends CommonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="A_ID")
-    private long Id;
-
-    /** USER ID & ADMIN ID ??? **/
+    private long id;
+    
     @Column(name="ID")
-    private String userId;
+    private String adminId;
 
     @Column(name="PASSWORD")
     private String password;

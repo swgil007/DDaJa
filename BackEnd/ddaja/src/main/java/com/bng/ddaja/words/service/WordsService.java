@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -31,13 +32,7 @@ public class WordsService {
 
     /** WORD LIST - ALL **/
     public List<WordDTO> findAll( ) { 
-
-        List<WordDTO> list = new ArrayList<>();
-
-        repository.findAll().forEach( x -> { 
-            list.add( new WordDTO(x, licenses.findById(3)));
-        }); 
-        return list;
+        return repository.findAll().stream().map(vo -> new WordDTO(vo)).collect(Collectors.toList());
     } 
 
     /** WORD LIST - LICENSES **/

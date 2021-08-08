@@ -1,5 +1,8 @@
 package com.bng.ddaja.common.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum LicenseType {
     NONE("")
     , WRITING("필기")
@@ -9,9 +12,5 @@ public enum LicenseType {
 
     LicenseType(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 }

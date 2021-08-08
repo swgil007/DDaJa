@@ -38,9 +38,9 @@ public class WordDTO {
     private String title;
 
     @ApiModelProperty(
-        name = "License Entity"
+        name = "LicenseDTO"
     )
-    private LicenseDTO license;
+    private LicenseDTO licenseDTO;
 
     @ApiModelProperty(
         name = "WordQuestion Entity"
@@ -51,19 +51,20 @@ public class WordDTO {
 
         this.wId = word.getId();
         this.title =  word.getTitle();
-        word.getWordQuestions().forEach(x-> {
-            this.wordQuestions.add( new WordQuestionDTO(x) );
-        }); 
+        this.licenseDTO = new LicenseDTO(word.getLicense());
+        // word.getWordQuestions().forEach(x-> {
+        //     this.wordQuestions.add( new WordQuestionDTO(x) );
+        // }); 
     }
 
-    public WordDTO( Word word , LicenseDTO license ){
+    public WordDTO( Word word , LicenseDTO licenseDTO ) {
 
         this.wId     = word.getId();
         this.title   = word.getTitle();
-        this.license = license;
+        this.licenseDTO = licenseDTO;
         
-        word.getWordQuestions().forEach(x-> {
-            this.wordQuestions.add( new WordQuestionDTO(x) );
-        }); 
+        // word.getWordQuestions().forEach(x-> {
+        //     this.wordQuestions.add( new WordQuestionDTO(x) );
+        // }); 
     }
 }

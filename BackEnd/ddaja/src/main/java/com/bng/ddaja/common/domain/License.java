@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import com.bng.ddaja.common.enums.LicenseCode;
 import com.bng.ddaja.common.enums.LicenseType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,10 +29,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @Builder
 @EqualsAndHashCode(callSuper = false, of = "id")
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="TB_LICENSE")
@@ -62,14 +62,23 @@ public class License extends CommonEntity {
     @Column(name = "TYPE")
     private LicenseType type;
 
-    @OneToMany(mappedBy = "license")
+    @OneToMany(mappedBy = "license", fetch = FetchType.LAZY)
     private List<Word> words; 
 
-    //연관관계 편의 메소드
+    @OneToMany(mappedBy = "license")
+    private List<Round> rounds;
+    
     public void setWord(Word word) {
         this.words.add(word);
         if (word.getLicense() != this) {
             word.setLicense(this);
+        }
+    }
+
+    public void setRound(Round round) {
+        this.rounds.add(round);
+        if (round.getLicense() != this) {
+            round.setLicense(this);
         }
     }
 }

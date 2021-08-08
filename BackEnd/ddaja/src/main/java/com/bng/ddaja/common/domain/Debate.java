@@ -14,7 +14,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false, of = "id")
 @Table(name = "TB_DEBATE")
 @NoArgsConstructor
 @Entity

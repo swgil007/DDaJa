@@ -1,5 +1,8 @@
 package com.bng.ddaja.common.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum LicenseCode {
 
     NONE("")
@@ -13,9 +16,5 @@ public enum LicenseCode {
 
     LicenseCode(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 }

@@ -1,6 +1,7 @@
 package com.bng.ddaja.wordQuestions.dto;
 
 import com.bng.ddaja.common.domain.WordQuestion;
+import com.bng.ddaja.words.dto.WordDTO;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -15,10 +16,10 @@ import lombok.Setter;
 public class WordQuestionDTO {
 
     @ApiModelProperty(
-        name = "wq_id"
+        name = "id"
         , example = "11"
     )
-    private long wqId;
+    private long id;
 
     @ApiModelProperty(
         name = "content"
@@ -33,20 +34,20 @@ public class WordQuestionDTO {
     private String answer;
 
     @ApiModelProperty(
-        name = "l_id"
+        name = "lId"
         , example = "11"
     )
     private long lId;
 
     @ApiModelProperty(
-        name = "wId"
+        name = "WordDTO"
         , example = "11"
     )
-    private long wId;
+    private WordDTO wordDTO;
 
     public WordQuestionDTO( WordQuestion wordQuestion ){
-        this.wqId    = wordQuestion.getId();
-        this.wId     = wordQuestion.getWId();
+        this.id      = wordQuestion.getId();
+        this.wordDTO = new WordDTO(wordQuestion.getWord());
         this.lId     = wordQuestion.getLId();
         this.content = wordQuestion.getContent();
         this.answer  = wordQuestion.getAnswer();
