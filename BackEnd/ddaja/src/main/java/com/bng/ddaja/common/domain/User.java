@@ -1,5 +1,7 @@
 package com.bng.ddaja.common.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.bng.ddaja.common.enums.TokenType;
@@ -49,9 +52,19 @@ public class User extends CommonEntity {
     @Column(name = "PROFILE_IMG")
     private String profileImg;
 
+    @OneToMany(mappedBy = "user")
+    private List<UserQuestion> userQuestions;
+
     @Builder
     public User(long id, String nickName) {
         this.id = id;
         this.nickName = nickName;
+    }
+
+    public void setUserQuestion(UserQuestion userQuestion) {
+        this.userQuestions.add(userQuestion);
+        if(userQuestion.getUser() != this) {
+            userQuestion.setUser(this);
+        }
     }
 }

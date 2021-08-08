@@ -1,6 +1,7 @@
 package com.bng.ddaja.common.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table; 
 
 import lombok.EqualsAndHashCode;
@@ -43,6 +45,9 @@ public class Round {
     @JoinColumn(name = "L_ID")
     private License license;
 
+    @OneToMany(mappedBy = "round", fetch = FetchType.LAZY)
+    private List<UserQuestion> userQuestions;
+
     public void setLicense(License license) {
         if(this.license != null) {
             this.license.getRounds().remove(this);
@@ -50,6 +55,13 @@ public class Round {
         this.license = license;
         if(!license.getRounds().contains(this)) {
             license.setRound(this);
+        }
+    }
+
+    public void setUserQuestion(UserQuestion userQuestion) {
+        this.userQuestions.add(userQuestion);
+        if(userQuestion.getRound() != this){
+            userQuestion.setRound(this);
         }
     }
 }

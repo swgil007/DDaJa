@@ -67,7 +67,13 @@ public class License extends CommonEntity {
 
     @OneToMany(mappedBy = "license")
     private List<Round> rounds;
-    
+
+    @OneToMany(mappedBy = "license")
+    private List<UserQuestion> userQuestions;
+
+    @OneToMany(mappedBy = "license")
+    private List<Subject> subjects;
+
     public void setWord(Word word) {
         this.words.add(word);
         if (word.getLicense() != this) {
@@ -79,6 +85,20 @@ public class License extends CommonEntity {
         this.rounds.add(round);
         if (round.getLicense() != this) {
             round.setLicense(this);
+        }
+    }
+
+    public void setUserQuestion(UserQuestion userQuestion) {
+        this.userQuestions.add(userQuestion);
+        if (userQuestion.getLicense() != this) {
+            userQuestion.setLicense(this);
+        }
+    }
+
+    public void setSubject(Subject subject) {
+        this.subjects.add(subject);
+        if (subject.getLicense() != this) {
+            subject.setLicense(this);
         }
     }
 }

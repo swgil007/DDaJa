@@ -7,9 +7,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.FetchType;
 
-import com.bng.ddaja.common.enums.UserQuestionResultType;
+import com.bng.ddaja.common.enums.ResultType;
 import com.bng.ddaja.common.enums.UserQuestionType;
 
 import lombok.EqualsAndHashCode;
@@ -19,7 +22,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false, of = "id")
 @Table(name = "TB_USER_QUESTION")
 @NoArgsConstructor
 @Entity
@@ -34,13 +37,13 @@ public class UserQuestion extends CommonEntity {
     @Column(name="TYPE")
     private UserQuestionType type;
 
-    /** 이거 공통적으로 많이 쓰여서 이름통일 시키고 돌려 쓰자 ! **/
+    @Enumerated(EnumType.STRING)
     @Column(name="RESULT")
-    private UserQuestionResultType result;
+    private ResultType result;
 
-    /** 일단 ENUM 같이 사용 하지만 변경 꼭 **/
+    @Enumerated(EnumType.STRING)
     @Column(name="RESULT_FINAL")
-    private UserQuestionResultType resultFinal;
+    private ResultType resultFinal;
 
     @Column(name="RESULT_SCORE")
     private int resultScore;
@@ -48,18 +51,59 @@ public class UserQuestion extends CommonEntity {
     @Column(name="SOLVED_DATE")
     private String solvedDate;
 
-    @Column(name="L_ID")
-    private long lId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "U_ID")
+    private User user;
 
-    @Column(name="S_ID")
-    private long sId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "L_ID")
+    private License license;
 
-    @Column(name="R_ID")
-    private long rId;
-
-    @Column(name="U_ID")
-    private long uId;
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "S_ID")
+    private Subject subject;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "R_ID")
+    private Round round;
+
+    public void setLicense(License license) {
+        if(this.license != null) {
+            license.getUserQuestions().remove(this);
+        }
+        this.license = license;
+        if(!license.getUserQuestions().contains(this)) {
+            license.setUserQuestion(this);
+        }
+    }
+
+    public void setUser(User user) {
+        if(this.user != null) {
+            user.getUserQuestions().remove(this);
+        }
+        this.user = user;
+        if(!user.getUserQuestions().contains(this)) {
+            user.setUserQuestion(this);
+        }
+    }
+
+    public void setSubject(Subject subject) {
+        if(this.subject != null) {
+            this.subject.getUserQuestions().remove(this);
+        }
+        this.subject = subject;
+        if(subject.getUserQuestions().contains(this)) {
+            subject.setUserQuestion(this);
+        }
+    }
+
+    public void setRound(Round round) {
+        if(this.round != null) {
+            this.round.getUserQuestions().remove(this);
+        }
+        this.round = round;
+        if(!round.getUserQuestions().contains(this)) {
+            round.setUserQuestion(this);
+        }
+    }
 }
