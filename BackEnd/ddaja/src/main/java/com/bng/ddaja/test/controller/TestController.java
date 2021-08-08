@@ -18,12 +18,8 @@ import com.bng.ddaja.common.hateos.licenses.Licenses;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
-<<<<<<< HEAD
 import com.bng.ddaja.test.dto.TestParameter; 
-=======
 import com.bng.ddaja.test.dto.TestDTO;
-import com.bng.ddaja.test.dto.TestParameter;
->>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

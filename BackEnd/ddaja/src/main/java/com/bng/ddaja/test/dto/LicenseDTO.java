@@ -52,18 +52,6 @@ public class LicenseDTO {
     )
     private int passScore; 
     
-<<<<<<< HEAD
-    public LicenseDTO ( int id, String name ){
-        this.id          = id;
-        this.licenseName = name;
-    }
-    
-    public LicenseDTO ( License license ){
-        this.id          = license.getId(); 
-        this.licenseName = license.getName();
-        this.passScore   = license.getPassScore();
-        this.agency      = license.getAgency();
-=======
     @ApiModelProperty(
         name = "type"
         , example = "WRITING"
@@ -82,14 +70,13 @@ public class LicenseDTO {
         this.name = license.getName();
         this.passScore = license.getPassScore();
         this.agency = license.getAgency();
->>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
     }
 
     public License licenseToDto ( LicenseDTO dto ){
 
         return License.builder()
                         .id(dto.getId())
-                        .name(dto.licenseName)
+                        .name(dto.name)
                         .passScore(dto.passScore)
                         .agency(dto.agency)
                         .build();

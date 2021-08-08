@@ -16,12 +16,10 @@ import com.bng.ddaja.common.hateos.licenses.Licenses;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ResponseBody;
-=======
 import org.springframework.web.bind.annotation.RequestParam;
->>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiImplicitParam;

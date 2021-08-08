@@ -4,12 +4,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-=======
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
->>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +27,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Builder
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false, of = "id")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,16 +56,6 @@ public class License extends CommonEntity {
     @Column(name = "PASS_SCORE")
     private int passScore;
 
-<<<<<<< HEAD
-    /** 잠시 주석 처리 해놓겠습니다 ! **/
-    // @Column(name = "L_CODE")
-    // private LicenseCode lCode;
-    // @Enumerated(EnumType.STRING)
-    // private LicenseType type;
-
-    @OneToMany(mappedBy = "license")
-    private List<Word> words; 
-=======
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")
     private LicenseType type;
@@ -83,5 +70,4 @@ public class License extends CommonEntity {
             word.setLicense(this);
         }
     }
->>>>>>> fac7febbfbb1029efe9738dc0f7a338b55a85a40
 }
