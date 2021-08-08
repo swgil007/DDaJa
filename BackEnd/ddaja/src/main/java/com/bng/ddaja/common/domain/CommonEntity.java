@@ -22,10 +22,10 @@ public class CommonEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(name = "CREATED_DATE")
-    public Date createdDate = new Date();
+    public Date createdDate;
     
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     @Column(name = "MODIFIED_DATE")
-    public Date modifiedDate = new Date();
+    public Date modifiedDate;
 }
