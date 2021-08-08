@@ -1,12 +1,10 @@
 package com.bng.ddaja.licenses.controller;
 
-import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.licenses.service.LicensesService;
-//import com.bng.ddaja.test.dto.LicenseDTO;
 
 import org.springframework.http.ResponseEntity;
 import com.bng.ddaja.common.dto.CommonError;
@@ -21,8 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -34,10 +30,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 @RequestMapping("licenses")
 @RestController
-@Slf4j
 public class LicensesController {
     
     private LicensesService licenseService;
@@ -59,26 +55,6 @@ public class LicensesController {
     @ApiOperation(
         value = "특정 자격증 조회"
         , notes = "자격증 ID를 통해 특정 자격증의 정보를 조회한다.")
-    // @ApiImplicitParams({
-    //     @ApiImplicitParam(
-    //         name = "seq"
-    //         , value = "자격증 시퀀스"
-    //         , defaultValue = ""
-    //     )
-    //     , @ApiImplicitParam(
-    //         name = "fields"
-    //         , value = "요청 데이터 필드 값"
-    //         , defaultValue = ""
-    //     )
-    //     , @ApiImplicitParam(
-    //         name = "page"
-    //         , value = "요청 데이터 페이지"
-    //     )
-    //     , @ApiImplicitParam(
-    //         name = "perPage"
-    //         , value = "요청 데이터 페이지 당 데이터 수"
-    //     )
-    // })
     @GetMapping("/{id}")
     public ResponseEntity<CommonResource<LicenseDTO>> getLicenses(@PathVariable(name = "id", required = true) long id) {
         LicenseDTO license = licenseService.getLicenseById(id);
