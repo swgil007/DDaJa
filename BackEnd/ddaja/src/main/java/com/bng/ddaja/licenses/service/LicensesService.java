@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.licenses.repository.LicensesRepository;
+import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.licenses.dto.LicenseDTO;
 import org.springframework.stereotype.Service; 
 

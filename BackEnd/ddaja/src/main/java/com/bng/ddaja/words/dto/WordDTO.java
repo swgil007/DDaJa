@@ -3,13 +3,9 @@ package com.bng.ddaja.words.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.domain.Word;
-import com.bng.ddaja.licenses.service.LicensesService;
-import com.bng.ddaja.licenses.dto.LicenseDTO;
+import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

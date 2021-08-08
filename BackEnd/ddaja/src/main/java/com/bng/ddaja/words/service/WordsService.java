@@ -6,6 +6,7 @@ import java.util.List;
 import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.licenses.service.LicensesService;
+import com.bng.ddaja.temp.license.TempLicensesService;
 import com.bng.ddaja.words.dto.WordDTO;
 import com.bng.ddaja.words.repository.WordsRepository;
 
@@ -16,17 +17,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class WordsService {
 
-    private static final Logger log = LoggerFactory.getLogger(WordsService.class);
-
     private WordsRepository repository;
 
     @Autowired
-    private LicensesService licenses;
+    private TempLicensesService licenses;
 
     /** WORD LIST - ALL **/
     public List<WordDTO> findAll( ) { 
@@ -44,7 +45,7 @@ public class WordsService {
 
         List<WordDTO> list = new ArrayList<>();
 
-        License vo = License.builder().id(lid).build(); 
+        License vo = License.builder().id( lid ).build(); 
 
         repository.findByLicense( vo ).forEach( x -> { 
             list.add( new WordDTO(x, licenses.findById(3)));
