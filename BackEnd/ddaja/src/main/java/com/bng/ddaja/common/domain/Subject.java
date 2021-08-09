@@ -37,9 +37,9 @@ public class Subject extends CommonEntity {
     private int minScore;
 
     @Column(name="IN_USE")
-    private int inUse;
+    private boolean inUse;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "L_ID")
     private License license;
 
