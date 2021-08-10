@@ -13,6 +13,7 @@ import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.enums.LicenseCode;
 import com.bng.ddaja.common.enums.LicenseType;
 import com.bng.ddaja.licenses.dto.LicenseDTO;
+import com.bng.ddaja.licenses.dto.LicenseSearch;
 import com.bng.ddaja.common.hateos.licenses.Licenses;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,5 +106,10 @@ public class LicensesController {
     public ResponseEntity<CommonResponse<LicenseCode>> getLicensesCode() {
         List<CommonResource<LicenseCode>> resourceList = Arrays.stream(LicenseCode.values()).map(e -> new CommonResource<>(e, null)).collect(Collectors.toList());
         return ResponseEntity.ok().body(new CommonResponse<>(resourceList.size(), resourceList)); 
+    }
+
+    @GetMapping("subjects")
+    public ResponseEntity<List<LicenseDTO>> getSubjectCollections(LicenseSearch licenseSearch) {
+        return ResponseEntity.ok().body(licenseService.getAllLicenseLikeSubjectName(licenseSearch));   
     }
 }

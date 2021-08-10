@@ -39,7 +39,7 @@ public class Subject extends CommonEntity {
     @Column(name="IN_USE")
     private boolean inUse;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "L_ID")
     private License license;
 

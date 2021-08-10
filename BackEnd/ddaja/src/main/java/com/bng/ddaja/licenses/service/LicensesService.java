@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import com.bng.ddaja.licenses.repository.LicensesRepository;
 import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.licenses.dto.LicenseDTO;
+import com.bng.ddaja.licenses.dto.LicenseSearch;
+
 import org.springframework.stereotype.Service; 
 
 import lombok.AllArgsConstructor;
@@ -32,6 +34,10 @@ public class LicensesService {
         License licenseVO = licenseDTO.toEntity();
         licensesRepository.save(licenseVO);
         return new LicenseDTO(licenseVO);
+    }
+
+    public List<LicenseDTO> getAllLicenseLikeSubjectName(LicenseSearch licenseSearch) {
+        return licensesRepository.findAll(licenseSearch.toSpecification()).stream().map(v -> new LicenseDTO(v)).collect(Collectors.toList());
     }
 
     public LicenseDTO findById( long lid ){

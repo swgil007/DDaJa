@@ -10,5 +10,4 @@ import com.bng.ddaja.common.domain.License;
 public interface LicensesRepository  extends JpaRepository< License, Long >, JpaSpecificationExecutor< License >{  
     public License findById( long id );
     public List<License> findAll();
-    
 }
