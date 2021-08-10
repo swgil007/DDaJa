@@ -9,6 +9,8 @@ import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.licenses.dto.LicenseDTO;
 import com.bng.ddaja.licenses.dto.LicenseSearch;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service; 
 
 import lombok.AllArgsConstructor;
@@ -26,6 +28,12 @@ public class LicensesService {
                                 .collect(Collectors.toList());
     }
 
+    public Page<LicenseDTO> getAllLicensesByPage(Pageable pageable) {
+        // Page<License> voPage = licensesRepository.findAll(pageable);
+        // List<LicenseDTO> licenseDTOList = voPage.getContent().stream().map(v -> new LicenseDTO(v)).collect(Collectors.toList());
+        // Page<LicenseDTO> dtoPage = new PageRequest<LicenseDTO>();
+        return licensesRepository.findAll(pageable).map(vo -> new LicenseDTO(vo));
+    }
     public LicenseDTO getLicenseById(long id) {
         return new LicenseDTO(licensesRepository.findById(id));
     }

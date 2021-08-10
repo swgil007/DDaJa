@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import com.bng.ddaja.licenses.service.LicensesService;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonResource;
@@ -43,14 +45,21 @@ public class LicensesController {
         value = "자격증 전체 조회"
         , notes = "전체 자격증 목록을 조회한다")
     @GetMapping("")
-    public ResponseEntity<CommonResponse<LicenseDTO>> getLicenses() {
+    public ResponseEntity<Page<LicenseDTO>> getLicenses(Pageable pageable) {
         List<LicenseDTO> licenseList = licenseService.getAllLicenses();
         List<CommonResource<LicenseDTO>> resourceList = licenseList.stream()
                                                                     .map(dto -> new CommonResource<>(dto, 
                                                                     Arrays.stream(Licenses.values()).map(e -> e.initLink(dto.getId())).collect(Collectors.toList())
                                                                         ))
                                                                     .collect(Collectors.toList());
-        return ResponseEntity.ok().body(new CommonResponse<>(resourceList.size(), resourceList));
+
+        Page<LicenseDTO> licensePage = licenseService.getAllLicensesByPage(pageable);
+        List<CommonResource<LicenseDTO>> resourcePageList = licensePage.stream()
+                                                                    .map(dto -> new CommonResource<>(dto, 
+                                                                    Arrays.stream(Licenses.values()).map(e -> e.initLink(dto.getId())).collect(Collectors.toList())
+                                                                    ))
+                                                                    .collect(Collectors.toList());
+        return ResponseEntity.ok().body(licensePage);
     }
 
     @ApiOperation(
