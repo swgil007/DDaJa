@@ -11,6 +11,7 @@ import com.bng.ddaja.licenses.dto.LicenseSearch;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service; 
 
 import lombok.AllArgsConstructor;
@@ -38,6 +39,9 @@ public class LicensesService {
         return new LicenseDTO(licensesRepository.findById(id));
     }
 
+    public Page<LicenseDTO> getAllLicensesBySearchAndPage(LicenseSearch licenseSearch, Pageable pageable) {
+        return licensesRepository.findAll(licenseSearch.toSpecification(), pageable).map(vo -> new LicenseDTO(vo));
+    }
     public LicenseDTO saveLicense(LicenseDTO licenseDTO) {
         License licenseVO = licenseDTO.toEntity();
         licensesRepository.save(licenseVO);
