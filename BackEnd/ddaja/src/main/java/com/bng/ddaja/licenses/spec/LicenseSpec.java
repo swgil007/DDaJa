@@ -13,13 +13,23 @@ import com.bng.ddaja.common.domain.Subject;
 import org.springframework.data.jpa.domain.Specification;
 
 public class LicenseSpec {
+
     public static Specification<License> subjectNameLike(final String subjectName) {
         return new Specification<License>() {
             public Predicate toPredicate(Root<License> root, CriteriaQuery<?> query,
             CriteriaBuilder builder) {
-                if ("".equals(subjectName) || subjectName == null) return builder.conjunction();
+                if (subjectName == null || "".equals(subjectName)) return builder.conjunction();
                 Join<License, Subject> j = root.join("subjects", JoinType.INNER);
                 return builder.like(j.<String>get("name"), new StringBuilder().append("%").append(subjectName).append("%").toString());
+            }
+        };
+    }
+
+    public static Specification<License> nameLike(final String name) {
+        return new Specification<License>() {
+            public Predicate toPredicate(Root<License> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+                if (name == null || "".equals(name)) return builder.conjunction();
+                return builder.like(root.get("name"), new StringBuilder().append("%").append(name).append("%").toString());
             }
         };
     }

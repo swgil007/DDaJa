@@ -25,7 +25,8 @@ public class SpecBuilder {
                 Specification<T> spec = specList.get(0);
                 specList.remove(0);
                 return specList.stream()
-                                .reduce(spec, (specOne, specTwo) -> specOne.and(specTwo)
+                                .reduce(
+                                    spec, (specOne, specTwo) -> specOne.and(specTwo)
                                 );
             }
         }
