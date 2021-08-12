@@ -5,5 +5,5 @@ import java.util.List;
 import com.bng.ddaja.common.dto.Link;
 
 public interface CommonHateos {
-    public List<Link> initLink(long id);
+    public Link initLink(long id);
 }

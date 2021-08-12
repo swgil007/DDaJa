@@ -48,12 +48,12 @@ public class LicensesController {
     public ResponseEntity<CommonResponse> getLicenses(LicenseSearch licenseSearch, Pageable pageable) {
         List<LicenseDTO> licenseList = licenseService.getAllLicenses();
         List<CommonResource> resourceList = licenseList.stream()
-                                                                    .map(dto -> new CommonResource(dto, LicenseHateos.SELF))
+                                                                    .map(dto -> new CommonResource(dto, LicenseHateos.values()))
                                                                     .collect(Collectors.toList());
 
         Page<LicenseDTO> licensePage = licenseService.getAllLicensesBySearchAndPage(licenseSearch, pageable);
         List<CommonResource> resourcePageList = licensePage.stream()
-                                                                    .map(dto -> new CommonResource(dto, LicenseHateos.SELF))
+                                                                    .map(dto -> new CommonResource(dto, LicenseHateos.values()))
                                                                     .collect(Collectors.toList());
         return ResponseEntity.ok().body(new CommonResponse(resourcePageList));
     }
@@ -64,7 +64,7 @@ public class LicensesController {
     @GetMapping("/{id}")
     public ResponseEntity<CommonResource> getLicenses(@PathVariable(name = "id", required = true) long id) {
         LicenseDTO license = licenseService.getLicenseById(id);
-        CommonResource resource = new CommonResource(license, LicenseHateos.SELF);
+        CommonResource resource = new CommonResource(license, LicenseHateos.values());
         return ResponseEntity.ok().body(resource);
     }
 

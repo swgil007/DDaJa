@@ -24,8 +24,8 @@ public enum LicenseHateos implements CommonHateos {
     }
 
     @Override
-    public List<Link> initLink(long id) {
-        return Arrays.stream(LicenseHateos.values()).map(e -> new Link(name(), new StringBuilder().append(url).append(Long.toString(id)).toString(), method)).collect(Collectors.toList());
+    public Link initLink(long id) {
+        return new Link(name(), new StringBuilder().append(url).append(Long.toString(id)).toString(), method);
     }
 
     public List<Link> makeLinkList(Long id) {

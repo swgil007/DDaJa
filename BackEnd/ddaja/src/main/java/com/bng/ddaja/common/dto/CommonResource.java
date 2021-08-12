@@ -1,6 +1,8 @@
 package com.bng.ddaja.common.dto;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +27,8 @@ public class CommonResource {
     public CommonResource(CommonDTO item) {
         this.item = item;
     }
-    public CommonResource(CommonDTO item, CommonHateos hateos) {
+    public CommonResource(CommonDTO item, CommonHateos[] hateos) {
         this.item = item;
-        this.hateos = hateos.initLink(item.getId());
+        this.hateos = Arrays.stream(hateos).map(h -> h.initLink(item.getId())).collect(Collectors.toList());
     }
 }
