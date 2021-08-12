@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import com.bng.ddaja.common.hateos.CommonHateos;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -17,7 +18,15 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonResource<T> {
-    private T item;
+public class CommonResource {
+    private CommonDTO item;
     private List<Link> hateos;
+
+    public CommonResource(CommonDTO item) {
+        this.item = item;
+    }
+    public CommonResource(CommonDTO item, CommonHateos hateos) {
+        this.item = item;
+        this.hateos = hateos.initLink(item.getId());
+    }
 }

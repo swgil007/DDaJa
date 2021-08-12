@@ -10,6 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CommonDTO {
+    private long id;
     public Date createdDate;
     public Date modifiedDate;
 }

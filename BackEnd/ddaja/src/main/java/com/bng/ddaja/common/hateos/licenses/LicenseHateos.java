@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.dto.Link;
+import com.bng.ddaja.common.hateos.CommonHateos;
 
-public enum Licenses {
+public enum LicenseHateos implements CommonHateos {
     SELF("GET", "https://api.ddaja.com/licenses/")
     , UPDATE("PATCH", "https://api.ddaja.com/licenses/")
     , REPLACE("PUT", "https://api.ddaja.com/licenses/")
@@ -16,23 +17,15 @@ public enum Licenses {
 
     public String method;
     public String url;
-
-    Licenses(String method, String url) {
+    //private static final List<LicenseHateos> = Arrays.stream(super.values()).collect(Collectors.toList());
+    LicenseHateos(String method, String url) {
         this.method = method;
         this.url = url;
     }
 
-    public Link initLink(Long id) {
-        return new Link(name(), url+id.toString(), method);
-    }
-
-    public URI makeURI(Long id) {
-        try {
-            return new URI(initLink(id).getUrl());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
+    @Override
+    public List<Link> initLink(long id) {
+        return Arrays.stream(LicenseHateos.values()).map(e -> new Link(name(), new StringBuilder().append(url).append(Long.toString(id)).toString(), method)).collect(Collectors.toList());
     }
 
     public List<Link> makeLinkList(Long id) {

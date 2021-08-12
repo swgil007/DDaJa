@@ -20,13 +20,17 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonResponse<T> {
+public class CommonResponse {
     private int totalCount;
-    private List<CommonResource<T>> items;
+    private List<CommonResource> items;
 
-    public CommonResponse(int totalCount, CommonResource<T> item) {
+    public CommonResponse (List<CommonResource> items) {
+        this.totalCount = items.size();
+        this.items = items;
+    }
+    public CommonResponse(int totalCount, CommonResource item) {
         this.totalCount = totalCount;
-        List<CommonResource<T>> resourceList = new LinkedList<>();
+        List<CommonResource> resourceList = new LinkedList<>();
         resourceList.add(item);
         this.items = resourceList;
     }
