@@ -35,13 +35,13 @@ public class WordsController {
     private WordsService service;
     private TempLicensesService license;
 
-    // @GetMapping("/words")
-    // @ResponseBody
-    // public ResponseEntity<CommonResponse<WordDTO>> wordAllList( ){
-    //     List<CommonResource<WordDTO>> resourceList = service.findAll().stream().map(dto -> new CommonResource<>(dto, null)).collect(Collectors.toList());
-    //     return ResponseEntity.ok() 
-    //                         .body( new CommonResponse<>(resourceList.size(), resourceList) );
-    // }
+    @GetMapping("/words")
+    @ResponseBody
+    public ResponseEntity<CommonResponse> wordAllList( ){
+        List<CommonResource> resourceList = service.findAll().stream().map(dto -> new CommonResource(dto)).collect(Collectors.toList());
+        return ResponseEntity.ok() 
+                            .body( new CommonResponse(resourceList.size(), resourceList) );
+    }
 
     @GetMapping("/words/{wid}")
     @ResponseBody
