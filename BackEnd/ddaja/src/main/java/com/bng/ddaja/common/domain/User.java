@@ -67,6 +67,9 @@ public class User extends CommonEntity {
     @OneToMany(mappedBy = "user")
     private List<DebateComment> debateComments;
 
+    @OneToMany(mappedBy = "user")
+    private List<DebateState> debateStates;
+
     @Builder
     public User(long id, String nickName) {
         this.id = id;
@@ -105,6 +108,13 @@ public class User extends CommonEntity {
         this.debateComments.add(debateComment);
         if(debateComment.getUser() != this) {
             debateComment.setUser(this);
+        }
+    }
+
+    public void setDebateState(DebateState debateState) {
+        this.debateStates.add(debateState);
+        if(debateState.getUser() != this) {
+            debateState.setUser(this);
         }
     }
 }
