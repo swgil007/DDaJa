@@ -1,5 +1,7 @@
 package com.bng.ddaja.common.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
  
 import lombok.EqualsAndHashCode;
@@ -35,6 +38,9 @@ public class Debate extends CommonEntity {
     @JoinColumn(name = "U_ID")
     private User user;
 
+    @OneToMany(mappedBy = "debate")
+    private List<DebateComment> debateComments;
+
     public void setQuestion(Question question) {
         if(this.question != null) {
             question.getDebates().remove(this);
@@ -52,6 +58,13 @@ public class Debate extends CommonEntity {
         this.user = user;
         if(!user.getDebates().contains(this)) {
             user.setDebate(this);
+        }
+    }
+
+    public void setDebateComment(DebateComment debateComment) {
+        this.debateComments.add(debateComment);
+        if(debateComment.getDebate() != this) {
+            debateComment.setDebate(this);
         }
     }
 }
