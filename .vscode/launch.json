@@ -4,6 +4,12 @@
             "type": "java",
             "name": "Launch DdajaApplication",
             "request": "launch",
+            "mainClass": "com.bng.ddaja.DdajaApplication"
+        },
+        {
+            "type": "java",
+            "name": "Launch DdajaApplication",
+            "request": "launch",
             "mainClass": "com.bng.ddaja.DdajaApplication",
             "projectName": "ddaja"
         },
