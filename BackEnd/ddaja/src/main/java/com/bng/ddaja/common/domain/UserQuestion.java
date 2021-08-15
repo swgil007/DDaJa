@@ -30,26 +30,29 @@ public class UserQuestion extends CommonEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="UQ_ID")
+    @Column(name = "UQ_ID")
     private long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="TYPE")
+    @Column(name = "TYPE")
     private UserQuestionType type;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="RESULT")
+    @Column(name = "RESULT")
     private ResultType result;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="RESULT_FINAL")
+    @Column(name = "RESULT_FINAL")
     private ResultType resultFinal;
 
-    @Column(name="RESULT_SCORE")
+    @Column(name = "RESULT_SCORE")
     private int resultScore;
 
-    @Column(name="SOLVED_DATE")
+    @Column(name = "SOLVED_DATE")
     private String solvedDate;
+
+    @Column(name = "ANSWER")
+    private String answer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "U_ID")

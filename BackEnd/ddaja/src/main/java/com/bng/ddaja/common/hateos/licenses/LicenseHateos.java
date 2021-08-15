@@ -27,8 +27,4 @@ public enum LicenseHateos implements CommonHateos {
     public Link initLink(long id) {
         return new Link(name(), new StringBuilder().append(url).append(Long.toString(id)).toString(), method);
     }
-
-    public List<Link> makeLinkList(Long id) {
-        return Arrays.stream(values()).map(e -> new Link(name(), url+id.toString(), method)).collect(Collectors.toList());
-    }
 }
