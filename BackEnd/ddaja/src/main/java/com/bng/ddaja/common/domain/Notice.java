@@ -14,8 +14,8 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode
-@Table(name = "TB_LOTICE")
+@EqualsAndHashCode(callSuper = false, of = "id")
+@Table(name = "TB_NOTICE")
 @NoArgsConstructor
 @Entity
 public class Notice extends CommonEntity {

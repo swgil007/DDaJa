@@ -15,18 +15,12 @@ import javax.persistence.Table;
 
 import com.bng.ddaja.common.enums.LicenseCode;
 import com.bng.ddaja.common.enums.LicenseType;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Builder
