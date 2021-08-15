@@ -8,7 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table; 
+import java.util.List;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -67,6 +69,9 @@ public class Question {
     @JoinColumn(name = "R_ID")
     private Round round;
 
+    @OneToMany(mappedBy = "question")
+    private List<StateQuestion> stateQuestions;
+
     public void setSubject(Subject subject) {
         if(this.subject != null) {
             this.subject.getQuestions().remove(this);
@@ -94,6 +99,13 @@ public class Question {
         this.license = license;
         if(!license.getQuestions().contains(this)) {
             license.setQuestion(this);
+        }
+    }
+
+    public void setStateQuestion(StateQuestion stateQuestion){
+        this.stateQuestions.add(stateQuestion);
+        if(stateQuestion.getQuestion() != this) {
+            stateQuestion.setQuestion(this);
         }
     }
 }

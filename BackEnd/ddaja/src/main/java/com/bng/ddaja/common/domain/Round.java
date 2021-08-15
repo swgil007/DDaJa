@@ -54,6 +54,9 @@ public class Round {
     @OneToMany(mappedBy = "round", fetch = FetchType.LAZY)
     private List<OpenAPI> openAPIs;
 
+    @OneToMany(mappedBy = "round", fetch = FetchType.LAZY)
+    private List<StateQuestion> stateQuestions;
+
     public void setLicense(License license) {
         if(this.license != null) {
             this.license.getRounds().remove(this);
@@ -66,7 +69,7 @@ public class Round {
 
     public void setUserQuestion(UserQuestion userQuestion) {
         this.userQuestions.add(userQuestion);
-        if(userQuestion.getRound() != this){
+        if(userQuestion.getRound() != this) {
             userQuestion.setRound(this);
         }
     }
@@ -79,9 +82,16 @@ public class Round {
     }
 
     public void setOpenAPI(OpenAPI openAPI) {
-        this.getOpenAPIs().add(openAPI);
+        this.openAPIs.add(openAPI);
         if(openAPI.getRound() != this) {
             openAPI.setRound(this);
+        }
+    }
+
+    public void setStateQuestion(StateQuestion stateQuestion){
+        this.stateQuestions.add(stateQuestion);
+        if(stateQuestion.getRound() != this) {
+            stateQuestion.setRound(this);
         }
     }
 }
