@@ -1,12 +1,16 @@
 package com.bng.ddaja.common.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
-import javax.persistence.Enumerated; 
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;  
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.bng.ddaja.common.enums.AdminRule; 
@@ -40,4 +44,14 @@ public class Admin extends CommonEntity {
 
     @Enumerated(EnumType.STRING)
     private AdminRule role;
+
+    @OneToMany(mappedBy = "admin", fetch = FetchType.LAZY)
+    private List<Notice> notices;
+
+    public void setNotice(Notice notice) {
+        this.getNotices().add(notice);
+        if(notice.getAdmin() != this) {
+            notice.setAdmin(this);
+        }
+    }
 }

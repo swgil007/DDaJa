@@ -46,6 +46,9 @@ public class Subject extends CommonEntity {
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
     private List<UserQuestion> userQuestions;
 
+    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY)
+    private List<Question> questions;
+
     public void setLicense(License license) {
         if(this.license != null) {
             this.license.getSubjects().remove(this);
@@ -60,6 +63,13 @@ public class Subject extends CommonEntity {
         this.userQuestions.add(userQuestion);
         if(userQuestion.getSubject() != this) {
             userQuestion.setSubject(this);
+        }
+    }
+
+    public void setQuestion(Question question) {
+        this.questions.add(question);
+        if(question.getSubject() != this) {
+            question.setSubject(this);
         }
     }
 }

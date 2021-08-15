@@ -2,9 +2,12 @@ package com.bng.ddaja.common.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table; 
 
 import lombok.EqualsAndHashCode;
@@ -52,12 +55,45 @@ public class Question {
     @Column(name="ANSWER_FIVE")
     private String ANSWER_FIVE;
 
-    @Column(name="L_ID")
-    private long lId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "L_ID")
+    private License license;
 
-    @Column(name="S_ID")
-    private long sId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "S_ID")
+    private Subject subject;
 
-    @Column(name="R_ID")
-    private long rId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "R_ID")
+    private Round round;
+
+    public void setSubject(Subject subject) {
+        if(this.subject != null) {
+            this.subject.getQuestions().remove(this);
+        }
+        this.subject = subject;
+        if(!subject.getQuestions().contains(this)) {
+            subject.setQuestion(this);
+        }
+    }
+
+    public void setRound(Round round) {
+        if(this.round != null) {
+            this.round.getQuestions().remove(this);
+        }
+        this.round = round;
+        if(!round.getQuestions().contains(this)) {
+            round.setQuestion(this);
+        }
+    }
+
+    public void setLicense(License license) {
+        if(this.license != null) {
+            this.license.getQuestions().remove(this);
+        }
+        this.license = license;
+        if(!license.getQuestions().contains(this)) {
+            license.setQuestion(this);
+        }
+    }
 }
