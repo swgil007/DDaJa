@@ -72,6 +72,9 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private List<StateQuestion> stateQuestions;
 
+    @OneToMany(mappedBy = "question")
+    private List<Debate> debates;
+
     public void setSubject(Subject subject) {
         if(this.subject != null) {
             this.subject.getQuestions().remove(this);
@@ -106,6 +109,13 @@ public class Question {
         this.stateQuestions.add(stateQuestion);
         if(stateQuestion.getQuestion() != this) {
             stateQuestion.setQuestion(this);
+        }
+    }
+
+    public void setDebate(Debate debate) {
+        this.debates.add(debate);
+        if(debate.getQuestion() != this) {
+            debate.setQuestion(this);
         }
     }
 }

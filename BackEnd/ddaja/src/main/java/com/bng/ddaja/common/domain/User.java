@@ -59,7 +59,10 @@ public class User extends CommonEntity {
     private List<Token> tokens;
 
     @OneToMany(mappedBy = "user")
-    private List<StateQuestion> stateQuestion;
+    private List<StateQuestion> stateQuestions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Debate> debates; 
 
     @Builder
     public User(long id, String nickName) {
@@ -82,10 +85,16 @@ public class User extends CommonEntity {
     }
 
     public void setStateQuestion(StateQuestion stateQuestion){
-        this.stateQuestion.add(stateQuestion);
-
+        this.stateQuestions.add(stateQuestion);
         if(stateQuestion.getUser() != this) {
             stateQuestion.setUser(this);
+        }
+    }
+
+    public void setDebate(Debate debate) {
+        this.debates.add(debate);
+        if(debate.getUser() != this) {
+            debate.setUser(this);
         }
     }
 }

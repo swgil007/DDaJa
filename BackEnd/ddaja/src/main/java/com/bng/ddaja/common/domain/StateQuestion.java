@@ -98,10 +98,10 @@ public class StateQuestion extends CommonEntity {
 
     public void setUser(User user){
         if(this.user != null){
-            this.user.getStateQuestion().remove(this);
+            this.user.getStateQuestions().remove(this);
         }
         this.user = user;
-        if(!user.getStateQuestion().contains(this)) {
+        if(!user.getStateQuestions().contains(this)) {
             user.setStateQuestion(this);
         }
     }

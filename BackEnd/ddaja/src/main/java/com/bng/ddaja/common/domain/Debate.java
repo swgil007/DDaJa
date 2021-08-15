@@ -2,9 +2,12 @@ package com.bng.ddaja.common.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
  
 import lombok.EqualsAndHashCode;
@@ -24,9 +27,31 @@ public class Debate extends CommonEntity {
     @Column(name="D_ID")
     private long id;
 
-    @Column(name="Q_ID")
-    private long qId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Q_ID")
+    private Question question;
 
-    @Column(name="U_ID")
-    private long uId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "U_ID")
+    private User user;
+
+    public void setQuestion(Question question) {
+        if(this.question != null) {
+            question.getDebates().remove(this);
+        }
+        this.question = question;
+        if(!question.getDebates().contains(this)) {
+            question.setDebate(this);
+        }
+    }
+
+    public void setUser(User user) {
+        if(this.user != null) {
+            user.getDebates().remove(this);
+        }
+        this.user = user;
+        if(!user.getDebates().contains(this)) {
+            user.setDebate(this);
+        }
+    }
 }

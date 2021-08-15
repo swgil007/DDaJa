@@ -77,6 +77,9 @@ public class License extends CommonEntity {
     @OneToMany(mappedBy = "license")
     private List<LicenseInfo> licenseInfos;
 
+    @OneToMany(mappedBy = "license")
+    private List<StateQuestion> stateQuestions;
+
     public void setWord(Word word) {
         this.words.add(word);
         if (word.getLicense() != this) {
@@ -123,6 +126,13 @@ public class License extends CommonEntity {
         this.licenseInfos.add(licenseInfo);
         if(licenseInfo.getLicense() != this) {
             licenseInfo.setLicense(this);
+        }
+    }
+
+    public void setStateQuestion(StateQuestion stateQuestion) {
+        this.stateQuestions.add(stateQuestion);
+        if(stateQuestion.getLicense() != null){
+            stateQuestion.setLicense(this);
         }
     }
 }
