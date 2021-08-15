@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bng.ddaja.common.domain.Word;
+import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
 
@@ -17,14 +18,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WordDTO { 
+public class WordDTO extends CommonDTO { 
 
-    @ApiModelProperty(
-        name = "w_id"
-        , example = "11"
-    )
-    private long wId;
-    
     @ApiModelProperty(
         name = "l_id"
         , example = "11"
@@ -38,9 +33,9 @@ public class WordDTO {
     private String title;
 
     @ApiModelProperty(
-        name = "LicenseDTO"
+        name = "License"
     )
-    private LicenseDTO licenseDTO;
+    private LicenseDTO license;
 
     @ApiModelProperty(
         name = "WordQuestion Entity"
@@ -49,9 +44,9 @@ public class WordDTO {
 
     public WordDTO( Word word ){
 
-        this.wId = word.getId();
-        this.title =  word.getTitle();
-        this.licenseDTO = new LicenseDTO(word.getLicense());
+        id = word.getId();
+        title =  word.getTitle();
+        license = new LicenseDTO(word.getLicense());
         // word.getWordQuestions().forEach(x-> {
         //     this.wordQuestions.add( new WordQuestionDTO(x) );
         // }); 
@@ -59,9 +54,9 @@ public class WordDTO {
 
     public WordDTO( Word word , LicenseDTO licenseDTO ) {
 
-        this.wId     = word.getId();
-        this.title   = word.getTitle();
-        this.licenseDTO = licenseDTO;
+        id     = word.getId();
+        title   = word.getTitle();
+        license = licenseDTO;
         
         // word.getWordQuestions().forEach(x-> {
         //     this.wordQuestions.add( new WordQuestionDTO(x) );

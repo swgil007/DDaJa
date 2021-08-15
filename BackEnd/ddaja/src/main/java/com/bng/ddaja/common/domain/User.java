@@ -58,6 +58,18 @@ public class User extends CommonEntity {
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
+    @OneToMany(mappedBy = "user")
+    private List<StateQuestion> stateQuestions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Debate> debates;
+    
+    @OneToMany(mappedBy = "user")
+    private List<DebateComment> debateComments;
+
+    @OneToMany(mappedBy = "user")
+    private List<DebateState> debateStates;
+
     @Builder
     public User(long id, String nickName) {
         this.id = id;
@@ -75,6 +87,34 @@ public class User extends CommonEntity {
         this.tokens.add(token);
         if(token.getUser() != this) {
             token.setUser(this);
+        }
+    }
+
+    public void setStateQuestion(StateQuestion stateQuestion){
+        this.stateQuestions.add(stateQuestion);
+        if(stateQuestion.getUser() != this) {
+            stateQuestion.setUser(this);
+        }
+    }
+
+    public void setDebate(Debate debate) {
+        this.debates.add(debate);
+        if(debate.getUser() != this) {
+            debate.setUser(this);
+        }
+    }
+
+    public void setDebateComment(DebateComment debateComment) {
+        this.debateComments.add(debateComment);
+        if(debateComment.getUser() != this) {
+            debateComment.setUser(this);
+        }
+    }
+
+    public void setDebateState(DebateState debateState) {
+        this.debateStates.add(debateState);
+        if(debateState.getUser() != this) {
+            debateState.setUser(this);
         }
     }
 }
