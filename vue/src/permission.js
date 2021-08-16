@@ -7,45 +7,66 @@ import { getToken } from '@/utils/auth'
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false })
-const whiteList = ['/', '/auth-redirect']
+const whiteList = [ '/login','/', '/auth-redirect']
 
+/**
+* Page 이동시 매번 호출
+* - 권한 확인
+**/
 router.beforeEach(async(to, from, next) => {
-  
+
   NProgress.start()
   document.title = getPageTitle(to.meta.title)
-
-  /** 임시로 Token 하드 코딩. Token 개발시 로직 수정 **/
-  // const hasToken = getToken()
-  const hasToken = 'admin-token';
-
+  
+  const hasToken = getToken()
+  
+  /** **/
+  /** Token == Y **/
   if (hasToken) {
+
+    /** Token 이 존재하는데 Login Page 접근 시도시 **/
     if (to.path === '/login') {
       next({ path: '/' })
       NProgress.done()
-    } else {
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
-      if (hasRoles) {
+
+    /** Token 이 존재하는데 Login Page 외에 모든 Page 접근 시도시 Router 생성 **/
+    }else{
+      /** (permission_route == X, store == 초기화 ) -> 사용자 새로고침 **/
+      if(store.getters.permission_routes.length === 0){ 
+
+        const role = ['admin']
+        const accessRoutes = await store.dispatch('permission/generateRoutes', role).catch((error) => {
+          console.log(error)
+        })
+
+        router.addRoutes(accessRoutes)
+        next({path : to.path})
+        NProgress.done()
+
+      /** router.afterEach() 호출 **/
+      }else{
         next()
-      } else {
-        try {
-          const { roles } = await store.dispatch('user/getInfo')
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-          router.addRoutes(accessRoutes)
-          next({ ...to, replace: true })
-
-        } catch (error) {
-          await store.dispatch('user/resetToken')
-          Message.error(error || 'Has Error')
-          next(`/login?redirect=${to.path}`)
-          NProgress.done()
-
-        }
       }
+    }
+    
+  /** 토큰이 없고 다른 페이지로 이동하려는 경우 **/
+  }else{
+    /** store에서도 token을 리셋 **/
+    store.dispatch('user/resetToken')
+
+    /** whiteList에 해당하는 페이지 일 때 **/
+    if(whiteList.indexOf(to.path) !== -1) {
+      next()
+    
+    /** whiteList에 해당하는 페이지가 아닌 경우 **/
+    }else{
+      alert('Login 후에 이용할 수 있습니다.')
+      next(`/login?redirect=${to.path}`)
+      NProgress.done()
     }
   }
 })
 
 router.afterEach(() => {
-  // finish progress bar
   NProgress.done()
 })

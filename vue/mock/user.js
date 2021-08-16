@@ -28,7 +28,7 @@ module.exports = [
   {
     url: '/vue-element-admin/user/login',
     type: 'post',
-    response: config => {
+    response: config => { 
       const { username } = config.body
       const token = tokens[username]
 
