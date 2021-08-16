@@ -21,7 +21,7 @@ public class LicenseInfo extends CommonEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "L_ID")
+    @Column(name = "LI_ID")
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
