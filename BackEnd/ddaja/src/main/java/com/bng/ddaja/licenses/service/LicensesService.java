@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.bng.ddaja.licenses.repository.LicensesRepository;
 import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.dto.CommonPage;
+import com.bng.ddaja.common.dto.CommonSearch;
 import com.bng.ddaja.licenses.dto.LicenseDTO;
 import com.bng.ddaja.licenses.dto.LicenseSearch;
 
@@ -43,6 +44,11 @@ public class LicensesService {
     public Page<LicenseDTO> getAllLicensesBySearchAndPage(LicenseSearch licenseSearch, CommonPage page) {
         return licensesRepository.findAll(licenseSearch.toSpecification(), page.toPageable()).map(vo -> new LicenseDTO(vo));
     }
+
+    public Page<LicenseDTO> getAllLicenseByLicenseSearch(LicenseSearch search) {
+        return licensesRepository.findAll(search.toSpecification(), search.toPageable()).map(vo -> new LicenseDTO(vo));
+    }
+
     public LicenseDTO saveLicense(LicenseDTO licenseDTO) {
         License licenseVO = licenseDTO.toEntity();
         licensesRepository.save(licenseVO);
