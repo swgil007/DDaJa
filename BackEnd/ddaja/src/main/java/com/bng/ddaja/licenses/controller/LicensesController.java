@@ -46,10 +46,12 @@ public class LicensesController {
         , notes = "전체 자격증 목록을 조회한다")
     @GetMapping("")
     public ResponseEntity<CommonResponse> getLicenses(LicenseSearch licenseSearch, Pageable pageable) {
-        List<CommonResource> resourcePageList = licenseService.getAllLicensesBySearchAndPage(licenseSearch, pageable).stream()
-                                                                    .map(dto -> new CommonResource(dto, LicenseHateos.values()))
-                                                                    .collect(Collectors.toList());
-        return ResponseEntity.ok().body(new CommonResponse(resourcePageList));
+        return ResponseEntity.ok().body(
+                new CommonResponse(
+                    licenseService.getAllLicensesBySearchAndPage(licenseSearch, pageable)
+                    , LicenseHateos.values()
+                )
+            );
     }
 
     @ApiOperation(

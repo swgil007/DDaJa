@@ -24,6 +24,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class CommonResponse {
     private int totalCount;
+    public CommonPage page;
     private List<CommonResource> items;
 
     public CommonResponse (List<CommonResource> items) {
@@ -37,8 +38,9 @@ public class CommonResponse {
         this.items = resourceList;
     }
 
-    public CommonResponse(Page<CommonDTO> pageDTO, CommonHateos[] hateos) {
+    public CommonResponse(Page<? extends CommonDTO> pageDTO, CommonHateos[] hateos) {
         items = pageDTO.stream().map(dto -> new CommonResource(dto, hateos)).collect(Collectors.toList());
         totalCount = pageDTO.getSize();
+        page = new CommonPage(pageDTO);
     }
 }
