@@ -39,9 +39,4 @@ public class CommonPage {
         totalPage = pageEntity.getTotalPages();
         totalItems = Long.valueOf(pageEntity.getTotalElements()).intValue();
     }
-
-    public Pageable toPageable() {
-        return PageRequest.of(page == 0 ? page : page - 1, size);
-    }
- 
 }
