@@ -38,6 +38,11 @@ public class CommonResponse {
         this.items = resourceList;
     }
 
+    public CommonResponse(int totalCount, List<CommonResource> items) {
+        this.totalCount = totalCount;
+        this.items = items;
+    }
+
     public CommonResponse(Page<? extends CommonDTO> pageDTO, CommonHateos[] hateos) {
         items = pageDTO.stream().map(dto -> new CommonResource(dto, hateos)).collect(Collectors.toList());
         totalCount = pageDTO.getSize();

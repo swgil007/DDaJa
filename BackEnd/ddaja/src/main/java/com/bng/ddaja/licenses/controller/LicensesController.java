@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import com.bng.ddaja.common.dto.CommonError;
+import com.bng.ddaja.common.dto.CommonPage;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.enums.LicenseCode;
@@ -45,10 +46,10 @@ public class LicensesController {
         value = "자격증 전체 조회"
         , notes = "전체 자격증 목록을 조회한다")
     @GetMapping("")
-    public ResponseEntity<CommonResponse> getLicenses(LicenseSearch licenseSearch, Pageable pageable) {
+    public ResponseEntity<CommonResponse> getLicenses(LicenseSearch licenseSearch, CommonPage page) {
         return ResponseEntity.ok().body(
                 new CommonResponse(
-                    licenseService.getAllLicensesBySearchAndPage(licenseSearch, pageable)
+                    licenseService.getAllLicensesBySearchAndPage(licenseSearch, page)
                     , LicenseHateos.values()
                 )
             );

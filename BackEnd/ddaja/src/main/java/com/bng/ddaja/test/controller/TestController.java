@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonErrorDetail;
-import com.bng.ddaja.common.dto.CommonParameter;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.Link;
