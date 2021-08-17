@@ -1,5 +1,6 @@
 <template>
   <div class="main-container">
+
     <div class="main-title">
       <div class="div-1">
         <font class="title-font1">자격증 관리</font>
@@ -10,6 +11,23 @@
         @click="createPopupState(true)"
       >자격증 생성</el-button>
     </div>
+
+    <div class="searchArea">
+      <el-input v-model="searchValue" placeholder="검색 내용" class="input-with-select">
+        <el-select slot="prepend" v-model="searchType" placeholder="검색 조건">
+          <el-option label="자격증 이름" value="name" />
+          <el-option label="과목 이름" value="subjectName" />
+          <el-option label="사용 여부" value="inUse" />
+        </el-select>
+        <el-button
+          slot="append"
+          icon="el-icon-search"
+          plain
+          @click="searchBtnClick"
+        >검색</el-button>
+      </el-input>
+    </div>
+
     <div class="table-box">
       <el-table
         :data="tableData"
@@ -42,6 +60,7 @@
           prop="item.passScore"
         />
         <el-table-column
+          :formatter="cellValueBooleanFormatter"
           label="사용 여부"
           prop="item.inUse"
         />
@@ -105,7 +124,18 @@ export default {
       popupVal: false,
       createPopupVal: false,
       childData: '',
-      name: ''
+      name: '',
+      cellValueBooleanFormatter: function(row, column, cellValue, index) {
+        var value = String(cellValue)
+        if (value === 'true') {
+          value = '사용'
+        } else if (value === 'false') {
+          value = '미사용'
+        }
+        return value
+      },
+      searchValue: '',
+      searchType: ''
     }
   },
   methods: {
@@ -143,6 +173,14 @@ export default {
           alert('fail')
           console.log(err)
         })
+    },
+    searchBtnClick() {
+      const h = this.$createElement
+
+      this.$notify({
+        title: '검색결과',
+        message: h('i', { style: 'color: teal' }, '검색 결과 입니다.')
+      })
     }
   }
 }
@@ -208,5 +246,20 @@ export default {
             display: inline-block;
         }
     }
+}
+.el-select .el-input {
+  width: 110px;
+}
+.input-with-select .el-input-group__prepend {
+  background-color: #fff;
+}
+.searchArea {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.input-with-select {
+  width:80%;
 }
 </style>
