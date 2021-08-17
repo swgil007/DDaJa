@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.licenses.service.LicensesService;
+import com.bng.ddaja.licenses.spec.LicenseSearchOptions;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+
+import com.bng.ddaja.common.dto.CommonEnumResource;
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonPage;
 import com.bng.ddaja.common.dto.CommonResource;
@@ -116,5 +119,20 @@ public class LicensesController {
     @GetMapping("subjects")
     public ResponseEntity<List<LicenseDTO>> getSubjectCollections(LicenseSearch licenseSearch) {
         return ResponseEntity.ok().body(licenseService.getAllLicenseLikeSubjectName(licenseSearch));   
+    }
+
+    @ApiOperation(
+        value = "자격증 검색조건 조회"
+        , notes = "자격증 검색 조건 목록을 조회한다"
+        , produces = "application/json"
+        , response = CommonResponse.class
+    )
+    @GetMapping("search")
+    public ResponseEntity<CommonResponse> getLicenseSearchOptions() {
+        List<CommonEnumResource> resourceList = 
+                Arrays.stream(LicenseSearchOptions.values())
+                        .map(e -> new CommonEnumResource(e.name(), e.getName()))
+                        .collect(Collectors.toList());
+        return ResponseEntity.ok().body(new CommonResponse(resourceList));
     }
 }

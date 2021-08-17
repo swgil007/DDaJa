@@ -15,9 +15,12 @@
     <div class="searchArea">
       <el-input v-model="searchValue" placeholder="검색 내용" class="input-with-select">
         <el-select slot="prepend" v-model="searchType" placeholder="검색 조건">
-          <el-option label="자격증 이름" value="name" />
-          <el-option label="과목 이름" value="subjectName" />
-          <el-option label="사용 여부" value="inUse" />
+          <el-option
+            v-for="item in searchOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
         </el-select>
         <el-button
           slot="append"
@@ -83,6 +86,9 @@
     <api-request
       @licenseInfo="getLicenseInfo"
     />
+    <search-options-request
+      @searchOptions="getSerachOptions"
+    />
     <license-create-popup
       :create-popup-val="createPopupVal"
       @close:popup="createPopupClose"
@@ -108,6 +114,7 @@ import apiRequest from './component/licenseApiRequest.vue'
 import licenseCreatePopup from './component/licenseCreatePopup.vue'
 import Pagination from '@/components/Pagination'
 import axios from 'axios'
+import searchOptionsRequest from './component/licenseApiRequest.vue'
 
 export default {
   name: '',
@@ -115,7 +122,8 @@ export default {
     popup,
     apiRequest,
     licenseCreatePopup,
-    Pagination
+    Pagination,
+    searchOptionsRequest
   },
   data() {
     return {
@@ -135,7 +143,8 @@ export default {
         return value
       },
       searchValue: '',
-      searchType: ''
+      searchType: '',
+      searchOptions: []
     }
   },
   methods: {
@@ -158,6 +167,9 @@ export default {
     getLicenseInfo(data) {
       this.tableData = data.items
       this.page = data.page
+    },
+    getSerachOptions(data) {
+      this.searchOptions = data
     },
     getList(data) {
       const page = data.page

@@ -25,12 +25,13 @@ import lombok.ToString;
 public class CommonResponse {
     private int totalCount;
     public CommonPage page;
-    private List<CommonResource> items;
+    private List<? extends CommonResource> items;
 
-    public CommonResponse (List<CommonResource> items) {
+    public CommonResponse (List<? extends CommonResource> items) {
         this.totalCount = items.size();
         this.items = items;
     }
+
     public CommonResponse(int totalCount, CommonResource item) {
         this.totalCount = totalCount;
         List<CommonResource> resourceList = new LinkedList<>();
