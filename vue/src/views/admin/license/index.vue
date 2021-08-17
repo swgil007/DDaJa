@@ -20,32 +20,44 @@
           prop="item.id"
         />
         <el-table-column
+          :min-width="200"
           label="자격증 명"
           prop="item.name"
+        />
+        <el-table-column
+          label="관리 코드"
+          prop="item.code"
+        />
+        <el-table-column
+          :min-width="100"
+          label="주최 기관"
+          prop="item.agency"
+        />
+        <el-table-column
+          label="시험 구분"
+          prop="item.type"
+        />
+        <el-table-column
+          label="합격 점수"
+          prop="item.passScore"
+        />
+        <el-table-column
+          label="사용 여부"
+          prop="item.inUse"
         />
         <el-table-column>
           <template slot-scope="props">
             <el-button
               size="mini"
-              @click="popupState(props.row.licenseName, true)"
+              @click="popupState(props.row.name, true)"
             >상세 보기</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <div class="paging-box">
-      <pagination
-        class="paging"
-        layout="prev, pager, next"
-        :total="page.totalItems"
-        :page.sync="page.page"
-        :limit.sync="page.size"
-        @pagination="getList"
-      />
-    </div>
     <popup
       :popup-val="popupVal"
-      :license-name="licenseName"
+      :license-name="name"
       @close:popup="popupClose"
       @childData="childPopup"
     />
@@ -56,7 +68,19 @@
       :create-popup-val="createPopupVal"
       @close:popup="createPopupClose"
     />
+
+    <div class="paging-box">
+      <pagination
+        class="paging"
+        layout="prev, pager, next"
+        :total="page.totalItems"
+        :page.sync="page.page"
+        :limit.sync="page.size"
+        @pagination="getList"
+      />
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -80,12 +104,13 @@ export default {
       page: [],
       popupVal: false,
       createPopupVal: false,
-      childData: ''
+      childData: '',
+      name: ''
     }
   },
   methods: {
-    popupState(licenseName, popupVal) {
-      this.licenseName = licenseName
+    popupState(name, popupVal) {
+      this.name = name
       this.popupVal = popupVal
     },
     createPopupState(createPopupVal) {
@@ -174,14 +199,13 @@ export default {
     }
     .paging-box{
         float:left;
-        padding: 2% 11% 2% 0;
         text-align: center;
         position: fixed;
         bottom: 0;
         width: 100%;
+        margin-top: 100px;
         .paging{
             display: inline-block;
-            margin-top: 20px;
         }
     }
 }
