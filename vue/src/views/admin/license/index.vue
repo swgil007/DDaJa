@@ -34,10 +34,13 @@
       </el-table>
     </div>
     <div class="paging-box">
-      <el-pagination
+      <pagination
         class="paging"
         layout="prev, pager, next"
-        :total="50"
+        :total="page.totalItems"
+        :page.sync="page.page"
+        :limit.sync="page.size"
+        @pagination="getList"
       />
     </div>
     <popup
@@ -60,17 +63,21 @@
 import popup from './component/licensePopup.vue'
 import apiRequest from './component/licenseApiRequest.vue'
 import licenseCreatePopup from './component/licenseCreatePopup.vue'
+import Pagination from '@/components/Pagination'
+import axios from 'axios'
+
 export default {
   name: '',
   components: {
     popup,
     apiRequest,
-    licenseCreatePopup
+    licenseCreatePopup,
+    Pagination
   },
   data() {
     return {
       tableData: [],
-      totalCount: 0,
+      page: [],
       popupVal: false,
       createPopupVal: false,
       childData: ''
@@ -95,7 +102,22 @@ export default {
     },
     getLicenseInfo(data) {
       this.tableData = data.items
-      this.totalCount = data.totalCount
+      this.page = data.page
+    },
+    getList(data) {
+      const page = data.page
+      const size = data.limit
+      axios
+        .get('http://localhost/licenses?page=' + page + '&size=' + size)
+        .then(res => {
+          console.log(res.data)
+          this.tableData = res.data.items
+          this.page = res.data.page
+        })
+        .catch(err => {
+          alert('fail')
+          console.log(err)
+        })
     }
   }
 }
@@ -159,6 +181,7 @@ export default {
         width: 100%;
         .paging{
             display: inline-block;
+            margin-top: 20px;
         }
     }
 }

@@ -44,7 +44,10 @@ public class LicensesController {
 
     @ApiOperation(
         value = "자격증 전체 조회"
-        , notes = "전체 자격증 목록을 조회한다")
+        , notes = "전체 자격증 목록을 조회한다"
+        , produces = "application/json"
+        , response = CommonResponse.class
+    )
     @GetMapping("")
     public ResponseEntity<CommonResponse> getLicenses(LicenseSearch licenseSearch) {
         return ResponseEntity.ok().body(
