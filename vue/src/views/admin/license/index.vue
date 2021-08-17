@@ -18,7 +18,7 @@
           <el-option
             v-for="item in searchOptions"
             :key="item.value"
-            :label="item.label"
+            :label="item.name"
             :value="item.value"
           />
         </el-select>
@@ -114,7 +114,7 @@ import apiRequest from './component/licenseApiRequest.vue'
 import licenseCreatePopup from './component/licenseCreatePopup.vue'
 import Pagination from '@/components/Pagination'
 import axios from 'axios'
-import searchOptionsRequest from './component/licenseApiRequest.vue'
+import searchOptionsRequest from './component/licenseSearchOptionsRequest.vue'
 
 export default {
   name: '',
@@ -169,7 +169,7 @@ export default {
       this.page = data.page
     },
     getSerachOptions(data) {
-      this.searchOptions = data
+      this.searchOptions = data.items
     },
     getList(data) {
       const page = data.page
