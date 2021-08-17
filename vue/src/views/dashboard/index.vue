@@ -21,18 +21,39 @@ import successfulStatus from './component/successful-status'
 import examinationDay from './component/examination-day'
 import realTimeStatus from './component/real-time-status'
 import notice from './component/notice'
+import { getToken } from '@/utils/auth'
 
 export default {
   components: {
-    mainCategory,
-    successfulStatus,
-    examinationDay,
-    realTimeStatus,
-    notice
-  },
-  data() {
+    mainCategory
+    , successfulStatus
+    , examinationDay
+    , realTimeStatus
+    , notice
+    , getToken
+  }
+
+  , data () {
     return {
       Logo: mainLogo
+    }
+  }
+
+  /** Token 이 없다면 visitor 부여 **/
+  , beforeCreate: function () {
+    var token = getToken();
+  
+    if( token != 'admin-token' &&  token != 'editor-token'  ){
+
+      var visitorInfo = {
+        username: 'visitor',
+        password: '111111'
+      }
+
+      this.$store.dispatch('user/login', visitorInfo )
+        .then(() => {
+          this.$router.push({ path: this.redirect || '/', query: '' })
+        })
     }
   }
 }

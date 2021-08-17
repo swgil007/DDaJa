@@ -76,11 +76,15 @@
 <script>
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
+import { removeToken } from '@/utils/auth'
 
 export default {
   name: 'Login',
-  components: { SocialSign },
-  data() {
+  components: { 
+    SocialSign
+    , removeToken
+  }
+  , data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
@@ -97,22 +101,22 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
-      },
-      loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
-      },
-      passwordType: 'password',
-      capsTooltip: false,
-      loading: false,
-      showDialog: false,
-      redirect: undefined,
-      otherQuery: {}
+        username: 'admin'
+        , password: '111111'
+      }
+      , loginRules: {
+        username: [{ required: true, trigger: 'blur', validator: validateUsername }]
+        , password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+      }
+      , passwordType: 'password'
+      , capsTooltip: false
+      , loading: false
+      , showDialog: false
+      , redirect: undefined
+      , otherQuery: {}
     }
-  },
-  watch: {
+  }
+  , watch: {
     $route: {
       handler: function(route) {
         const query = route.query
@@ -120,29 +124,30 @@ export default {
           this.redirect = query.redirect
           this.otherQuery = this.getOtherQuery(query)
         }
-      },
-      immediate: true
+      }
+      , immediate: true
     }
-  },
-  created() {
-    // window.addEventListener('storage', this.afterQRScan)
+  }
+  , created() {
+    
   },
   mounted() {
+
     if (this.loginForm.username === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
-  },
-  destroyed() {
-    // window.removeEventListener('storage', this.afterQRScan)
-  },
-  methods: {
+  }
+  , beforeCreate: function () {
+    this.$store.dispatch('user/logout')
+  }
+  , methods: {
     checkCapslock(e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
-    },
-    showPwd() {
+    }
+    , showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
       } else {
@@ -151,26 +156,30 @@ export default {
       this.$nextTick(() => {
         this.$refs.password.focus()
       })
-    },
-    handleLogin() {
+    }
+    , handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-              this.loading = false
-            })
-            .catch(() => {
-              this.loading = false
-            })
+          this.login()
+          
         } else {
           console.log('error submit!!')
           return false
         }
       })
-    },
-    getOtherQuery(query) {
+    }
+    , async login(){
+      await this.$store.dispatch('user/login', this.loginForm)
+        .then(() => {
+          this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+          this.loading = false
+        })
+        .catch(() => {
+          this.loading = false
+      })
+    }
+    , getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
         if (cur !== 'redirect') {
           acc[cur] = query[cur]
@@ -178,24 +187,6 @@ export default {
         return acc
       }, {})
     }
-    // afterQRScan() {
-    //   if (e.key === 'x-admin-oauth-code') {
-    //     const code = getQueryObject(e.newValue)
-    //     const codeMap = {
-    //       wechat: 'code',
-    //       tencent: 'code'
-    //     }
-    //     const type = codeMap[this.auth_type]
-    //     const codeName = code[type]
-    //     if (codeName) {
-    //       this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
-    //         this.$router.push({ path: this.redirect || '/' })
-    //       })
-    //     } else {
-    //       alert('第三方登录失败')
-    //     }
-    //   }
-    // }
   }
 }
 </script>

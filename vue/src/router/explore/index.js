@@ -13,7 +13,6 @@ const exploreRouter = {
       component: {
         render(c) { return c('router-view') }
       },
-      name: 'explore',
       meta: {
         title: '자격증',
         noCache: true
