@@ -18,12 +18,14 @@ public class LicenseSearch extends CommonSearch {
     
     private String subjectName;
     private String name;
+    private Boolean inUse;
 
     @Override
     public Specification<License> toSpecification() {
         return SpecBuilder.builder(License.class)
                             .addSpec(where(subjectNameLike(subjectName)))
                             .addSpec(where(nameLike(name)))
+                            .addSpec(where(inUseEqual(inUse)))
                 .toSpecification();
     }
 }

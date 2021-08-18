@@ -188,6 +188,7 @@ export default {
     },
     searchBtnClick() {
       const h = this.$createElement
+      let searchValue = this.searchValue
       if (!this.searchType.value) {
         this.$refs.apiRequest.fetchData('')
         this.$notify({
@@ -196,14 +197,24 @@ export default {
         })
         return
       }
-      if (this.searchValue === '') {
+      if (searchValue === '') {
         this.$notify({
           title: '검색내용 미입력',
           message: h('i', { style: 'color: teal' }, '검색 내용을 입력해주세요.')
         })
         return
       }
-      const query = '?' + this.searchType.query + '=' + this.searchValue
+      if (this.searchType.value === 'INUSE') {
+        if (searchValue !== '사용' && searchValue !== '미사용') {
+          this.$notify({
+            title: '검색내용 오류',
+            message: h('i', { style: 'color: teal' }, '사용, 미사용을 입력해주세요.')
+          })
+          return
+        }
+        searchValue = searchValue === '사용'
+      }
+      const query = '?' + this.searchType.query + '=' + searchValue
       this.$refs.apiRequest.fetchData(query)
       this.$notify({
         title: '검색결과',

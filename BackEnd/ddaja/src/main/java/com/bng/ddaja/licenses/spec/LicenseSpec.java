@@ -33,4 +33,13 @@ public class LicenseSpec {
             }
         };
     }
+
+    public static Specification<License> inUseEqual(final Boolean inUse) {
+        return new Specification<License>() {
+            public  Predicate toPredicate(Root<License> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+                if (inUse == null) return builder.conjunction();
+                return builder.equal(root.get("inUse"), inUse);
+            }
+        };
+    }
 }
