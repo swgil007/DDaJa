@@ -4,8 +4,6 @@
     <div class="main-title">
       <div class="div-1">
         <font class="title-font1">자격증 관리</font>
-        {{ searchType }}
-        {{ searchType.value }}
       </div>
       <el-button
         size="mini"
@@ -14,7 +12,7 @@
     </div>
 
     <div class="searchArea">
-      <el-input v-model="searchValue" placeholder="검색 내용" class="input-with-select">
+      <el-input v-model="searchValue" placeholder="검색 내용" class="input-with-select" @keyup.enter.native="searchBtnClick">
         <el-select slot="prepend" v-model="searchType" placeholder="검색 조건">
           <el-option
             v-for="item in searchOptions"
@@ -205,9 +203,8 @@ export default {
         })
         return
       }
-      const query = '?' + 'name' + '=' + this.searchValue
+      const query = '?' + this.searchType.query + '=' + this.searchValue
       this.$refs.apiRequest.fetchData(query)
-      alert(query)
       this.$notify({
         title: '검색결과',
         message: h('i', { style: 'color: teal' }, this.searchType.name + ' 검색 결과 입니다.')
