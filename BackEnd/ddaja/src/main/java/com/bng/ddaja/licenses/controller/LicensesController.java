@@ -131,7 +131,7 @@ public class LicensesController {
     public ResponseEntity<CommonResponse> getLicenseSearchOptions() {
         List<CommonEnumResource> resourceList = 
                 Arrays.stream(LicenseSearchOptions.values())
-                        .map(e -> new CommonEnumResource(e.name(), e.getName()))
+                        .map(e -> new CommonEnumResource(e.name(), e.getName(), e.getQuery()))
                         .collect(Collectors.toList());
         return ResponseEntity.ok().body(new CommonResponse(resourceList));
     }

@@ -4,7 +4,8 @@
     <div class="main-title">
       <div class="div-1">
         <font class="title-font1">자격증 관리</font>
-        {{ childData }}
+        {{ searchType }}
+        {{ searchType.value }}
       </div>
       <el-button
         size="mini"
@@ -19,7 +20,7 @@
             v-for="item in searchOptions"
             :key="item.value"
             :label="item.name"
-            :value="item.value"
+            :value="item"
           />
         </el-select>
         <el-button
@@ -84,6 +85,7 @@
       @childData="childPopup"
     />
     <api-request
+      ref="apiRequest"
       @licenseInfo="getLicenseInfo"
     />
     <search-options-request
@@ -143,7 +145,7 @@ export default {
         return value
       },
       searchValue: '',
-      searchType: '',
+      searchType: {},
       searchOptions: []
     }
   },
@@ -188,10 +190,27 @@ export default {
     },
     searchBtnClick() {
       const h = this.$createElement
-
+      if (!this.searchType.value) {
+        this.$refs.apiRequest.fetchData('')
+        this.$notify({
+          title: '검색결과',
+          message: h('i', { style: 'color: teal' }, '전체 검색 결과 입니다.')
+        })
+        return
+      }
+      if (this.searchValue === '') {
+        this.$notify({
+          title: '검색내용 미입력',
+          message: h('i', { style: 'color: teal' }, '검색 내용을 입력해주세요.')
+        })
+        return
+      }
+      const query = '?' + 'name' + '=' + this.searchValue
+      this.$refs.apiRequest.fetchData(query)
+      alert(query)
       this.$notify({
         title: '검색결과',
-        message: h('i', { style: 'color: teal' }, '검색 결과 입니다.')
+        message: h('i', { style: 'color: teal' }, this.searchType.name + ' 검색 결과 입니다.')
       })
     }
   }

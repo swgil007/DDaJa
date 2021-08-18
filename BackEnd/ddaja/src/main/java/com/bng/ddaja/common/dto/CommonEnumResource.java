@@ -10,16 +10,16 @@ import lombok.Setter;
 public class CommonEnumResource extends CommonResource {
     private String value;
     private String name;
-    private String option;
+    private String query;
 
     public CommonEnumResource(String value, String name) {
         this.value = value;
         this.name = name;
     }
 
-    public CommonEnumResource(String value, String name, String option) {
+    public CommonEnumResource(String value, String name, String query) {
         this.value = value;
         this.name = name;
-        this.option = option;
+        this.query = query;
     }
 }
