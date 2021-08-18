@@ -1,6 +1,6 @@
 <template>
   <div class="createPost-container">
-    <el-form ref="postForm" :model="postForm" class="form-container">
+    <el-form class="form-container">
       <div class="createPost-main-container">
         <h1>자격증 생성</h1>
         <el-row>
@@ -25,9 +25,9 @@
               <el-select v-model="code" placeholder="자격증 코드">
                 <el-option
                   v-for="item in codeOptions"
-                  :key="item.item"
-                  :label="item.item"
-                  :value="item.item"
+                  :key="item"
+                  :label="item"
+                  :value="item"
                 />
               </el-select>
               <el-input
@@ -43,9 +43,9 @@
               <el-select v-model="type" placeholder="시험 종류(필기/실기)">
                 <el-option
                   v-for="item in typeOptions"
-                  :key="item.item"
-                  :label="item.item"
-                  :value="item.item"
+                  :key="item"
+                  :label="item"
+                  :value="item"
                 />
               </el-select>
             </div>

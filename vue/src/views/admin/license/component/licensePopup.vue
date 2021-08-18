@@ -8,7 +8,7 @@
         <template>
           <article-detail
             :is-edit="isEdit"
-            :license-name="licenseName"
+            :license-info="licenseInfo"
             @close:popup="popupClose"
             @depthChildData="depthChildPopup"
           />
@@ -27,7 +27,7 @@ export default {
   },
   props: {
     popupVal: {},
-    licenseName: {}
+    licenseInfo: {}
   },
   data() {
     return {

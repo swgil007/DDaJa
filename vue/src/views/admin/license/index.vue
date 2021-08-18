@@ -70,7 +70,7 @@
           <template slot-scope="props">
             <el-button
               size="mini"
-              @click="popupState(props.row.name, true)"
+              @click="popupState(props.row.item, true)"
             >상세 보기</el-button>
           </template>
         </el-table-column>
@@ -78,7 +78,7 @@
     </div>
     <popup
       :popup-val="popupVal"
-      :license-name="name"
+      :license-info="licenseInfo"
       @close:popup="popupClose"
       @childData="childPopup"
     />
@@ -148,8 +148,8 @@ export default {
     }
   },
   methods: {
-    popupState(name, popupVal) {
-      this.name = name
+    popupState(licenseInfo, popupVal) {
+      this.licenseInfo = licenseInfo
       this.popupVal = popupVal
     },
     createPopupState(createPopupVal) {

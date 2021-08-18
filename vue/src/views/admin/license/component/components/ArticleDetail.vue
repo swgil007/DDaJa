@@ -1,20 +1,19 @@
 <template>
   <div class="createPost-container">
-    <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
+    <el-form ref="licenseForm" :model="license" class="form-container">
       <div class="createPost-main-container">
         <h1>자격증 정보 수정</h1>
+
         <el-row>
           <el-col
             :span="24"
           >
-            {{ licenseName }}
+            {{ licenseInfo }}
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
             <div class="choice-box">
-              <el-radio v-model="radio1" label="1" border>노출</el-radio>
-              <el-radio v-model="radio1" label="2" border>비 노출</el-radio>
               <el-input v-model="childData" />
             </div>
             {{ childData }}
@@ -25,8 +24,36 @@
             <el-button @click="popupClose()">저장</el-button>
           </el-col>
         </el-row>
+
+        <el-form-item label="자격증 이름">
+          <el-input v-model="license.name" :value="licenseInfo.name" />
+        </el-form-item>
+        <el-form-item label="Activity zone">
+          <el-select v-model="license.lCode" placeholder="please select your zone">
+            <el-option value="licenseInfo.name">{{ licenseInfo.name }}</el-option>
+            <el-option value="beijing" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Resources">
+          <el-radio-group v-model="license.type">
+            <el-radio label="Sponsor" />
+            <el-radio label="Venue" />
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="Resources">
+          <el-radio-group v-model="license.inUse">
+            <el-radio label="Sponsor" />
+            <el-radio label="Venue" />
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary">Create</el-button>
+          <el-button>Cancel</el-button>
+        </el-form-item>
+
       </div>
     </el-form>
+
   </div>
 </template>
 
@@ -35,11 +62,17 @@ export default {
   name: '',
   props: {
     isEdit: {},
-    licenseName: {}
+    licenseInfo: {}
   },
   data() {
     return {
-      childData: ''
+      childData: '',
+      license: {
+        name: '',
+        inUse: '',
+        type: '',
+        lCode: ''
+      }
     }
   },
   methods: {
