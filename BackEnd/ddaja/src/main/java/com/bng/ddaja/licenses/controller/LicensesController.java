@@ -77,9 +77,7 @@ public class LicensesController {
         , notes = "자격증 ID를 통해 특정 자격증의 정보를 수정한다.")
     @PutMapping("/{id}")
     public ResponseEntity<CommonResource> putLicenses(@PathVariable(name = "id", required = true) long id, @RequestBody LicenseDTO licenseDTO) {
-        log.info("put mapping!!");
-        log.info(licenseDTO.toString());
-        return null;
+        return ResponseEntity.ok().body(new CommonResource(licenseService.saveLicense(licenseDTO), LicenseHateos.values()));
     }
 
     @ApiOperation(
