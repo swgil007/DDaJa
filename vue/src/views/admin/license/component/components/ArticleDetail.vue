@@ -51,7 +51,6 @@
             inactive-color="#ff4949"
             active-value="true"
             inactive-value="false"
-            :value="license.inUse"
           />
         </el-form-item>
 
@@ -95,8 +94,7 @@ export default {
     licenseInfo: {},
     typeOptions: {},
     codeOptions: {}
-  },
-  data() {
+  }, data() {
     return {
       childData: '',
       license: {
@@ -111,9 +109,14 @@ export default {
   },
   watch: {
     'licenseInfo': function() {
-      alert('t')
-      this.license = this.licenseInfo
-      this.license.lCode = this.licenseInfo.code
+      this.license = {
+        name: this.licenseInfo.name,
+        agency: this.licenseInfo.agency,
+        inUse: this.licenseInfo.inUse,
+        type: this.licenseInfo.type,
+        lCode: this.licenseInfo.code,
+        passScore: this.licenseInfo.passScore
+      }
     }
   },
   methods: {
