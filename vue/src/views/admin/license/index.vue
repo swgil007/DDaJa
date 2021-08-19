@@ -158,6 +158,7 @@ export default {
     },
     popupClose(popupVal) {
       this.popupVal = popupVal
+      this.$refs.apiRequest.fetchData('')
     },
     createPopupClose(createPopupVal) {
       this.createPopupVal = createPopupVal

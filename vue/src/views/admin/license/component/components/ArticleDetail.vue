@@ -104,6 +104,12 @@ export default {
       axios.put('http://localhost/licenses/' + this.license.id, this.license)
         .then(res => {
           console.log(res.data)
+          const h = this.$createElement
+          this.$notify({
+            title: '완료',
+            message: h('i', { style: 'color: teal' }, '수정이 완료되었습니다.')
+          })
+          this.popupClose()
         })
         .catch(error => {
           console.log(error)
