@@ -130,6 +130,7 @@ export default {
       tableData: [],
       page: [],
       popupVal: false,
+      licenseInfo: {},
       createPopupVal: false,
       childData: '',
       name: '',

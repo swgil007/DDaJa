@@ -51,6 +51,7 @@
             inactive-color="#ff4949"
             active-value="true"
             inactive-value="false"
+            :value="license.inUse"
           />
         </el-form-item>
 
@@ -106,6 +107,13 @@ export default {
         lCode: this.licenseInfo.code,
         passScore: this.licenseInfo.passScore
       }
+    }
+  },
+  watch: {
+    'licenseInfo': function() {
+      alert('t')
+      this.license = this.licenseInfo
+      this.license.lCode = this.licenseInfo.code
     }
   },
   methods: {
