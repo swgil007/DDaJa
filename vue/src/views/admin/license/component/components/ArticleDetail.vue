@@ -20,7 +20,9 @@
         </el-form-item>
 
         <el-form-item label="주최 기관">
-          <el-input v-model="license.agency" />
+          <el-input
+            v-model="license.agency"
+          />
         </el-form-item>
 
         <el-form-item label="시험 구분">
@@ -32,6 +34,13 @@
               :value="item"
             />
           </el-radio-group>
+        </el-form-item>
+        <el-form-item label="합격 점수">
+          <el-input-number
+            v-model="license.passScore"
+            :min="0"
+            :max="100"
+          />
         </el-form-item>
 
         <el-row>
