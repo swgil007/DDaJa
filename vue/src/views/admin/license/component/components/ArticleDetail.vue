@@ -3,6 +3,7 @@
     <el-form ref="licenseForm" :model="license" class="form-container">
       <div class="createPost-main-container">
         <h1>자격증 정보 수정</h1>
+        {{ license.inUse }}
 
         <el-form-item label="자격증 이름">
           <el-input v-model="license.name" />
@@ -43,6 +44,16 @@
           />
         </el-form-item>
 
+        <el-form-item label="사용 여부">
+          <el-switch
+            v-model="license.inUse"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            active-value="true"
+            inactive-value="false"
+          />
+        </el-form-item>
+
         <el-row>
           <el-col
             :span="24"
@@ -64,12 +75,6 @@
           </el-col>
         </el-row>
 
-        <el-form-item label="Resources">
-          <el-radio-group v-model="license.inUse">
-            <el-radio label="Sponsor" />
-            <el-radio label="Venue" />
-          </el-radio-group>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary">Create</el-button>
           <el-button>Cancel</el-button>
