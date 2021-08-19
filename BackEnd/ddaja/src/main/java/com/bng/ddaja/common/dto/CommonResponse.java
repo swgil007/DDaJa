@@ -1,10 +1,12 @@
 package com.bng.ddaja.common.dto;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.hateos.CommonHateos;
+import com.bng.ddaja.common.spec.CommonSearchOption;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -48,5 +50,10 @@ public class CommonResponse {
         items = pageDTO.stream().map(dto -> new CommonResource(dto, hateos)).collect(Collectors.toList());
         totalCount = pageDTO.getSize();
         page = new CommonPage(pageDTO);
+    }
+
+    public CommonResponse(CommonSearchOption[] searchOptions) {
+        items = Arrays.stream(searchOptions).map(e -> e.toCommonEnumResource()).collect(Collectors.toList());
+        totalCount = searchOptions.length;
     }
 }

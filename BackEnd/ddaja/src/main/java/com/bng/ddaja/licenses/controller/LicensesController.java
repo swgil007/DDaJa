@@ -137,10 +137,10 @@ public class LicensesController {
     )
     @GetMapping("search")
     public ResponseEntity<CommonResponse> getLicenseSearchOptions() {
-        List<CommonEnumResource> resourceList = 
-                Arrays.stream(LicenseSearchOptions.values())
-                        .map(e -> new CommonEnumResource(e.name(), e.getName(), e.getQuery()))
-                        .collect(Collectors.toList());
-        return ResponseEntity.ok().body(new CommonResponse(resourceList));
+        // List<CommonEnumResource> resourceList = 
+        //         Arrays.stream(LicenseSearchOptions.values())
+        //                 .map(e -> new CommonEnumResource(e.name(), e.getName(), e.getQuery()))
+        //                 .collect(Collectors.toList());
+        return ResponseEntity.ok().body(new CommonResponse(LicenseSearchOptions.values()));
     }
 }
