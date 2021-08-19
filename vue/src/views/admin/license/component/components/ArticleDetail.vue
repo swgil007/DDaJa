@@ -10,7 +10,7 @@
         </el-form-item>
 
         <el-form-item label="관리코드">
-          <el-select v-model="license.lCode">
+          <el-select v-model="license.code">
             <el-option
               v-for="item in codeOptions"
               :key="item"
@@ -45,39 +45,11 @@
         </el-form-item>
 
         <el-form-item label="사용 여부">
-          <el-switch
-            v-model="license.inUse"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-            active-value="true"
-            inactive-value="false"
-          />
+          <el-checkbox v-model="license.inUse">사용</el-checkbox>
         </el-form-item>
 
-        <el-row>
-          <el-col
-            :span="24"
-          >
-            {{ licenseInfo }}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
-            <div class="choice-box">
-              <el-input v-model="childData" />
-            </div>
-            {{ childData }}
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24" align="right">
-            <el-button @click="popupClose()">저장</el-button>
-          </el-col>
-        </el-row>
-
         <el-form-item>
-          <el-button type="primary">Create</el-button>
-          <el-button>Cancel</el-button>
+          <el-button @click="saveLicense()">저장</el-button>
         </el-form-item>
 
       </div>
@@ -87,6 +59,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: '',
   props: {
@@ -98,11 +71,12 @@ export default {
     return {
       childData: '',
       license: {
+        id: this.licenseInfo.id,
         name: this.licenseInfo.name,
         agency: this.licenseInfo.agency,
         inUse: this.licenseInfo.inUse,
         type: this.licenseInfo.type,
-        lCode: this.licenseInfo.code,
+        code: this.licenseInfo.code,
         passScore: this.licenseInfo.passScore
       }
     }
@@ -110,11 +84,12 @@ export default {
   watch: {
     'licenseInfo': function() {
       this.license = {
+        id: this.licenseInfo.id,
         name: this.licenseInfo.name,
         agency: this.licenseInfo.agency,
         inUse: this.licenseInfo.inUse,
         type: this.licenseInfo.type,
-        lCode: this.licenseInfo.code,
+        code: this.licenseInfo.code,
         passScore: this.licenseInfo.passScore
       }
     }
@@ -123,6 +98,16 @@ export default {
     popupClose() {
       this.$emit('close:popup', false)
       this.$emit('depthChildData', this.childData)
+    },
+    saveLicense() {
+      console.log(this.license)
+      axios.put('http://localhost/licenses/' + this.license.id, this.license)
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

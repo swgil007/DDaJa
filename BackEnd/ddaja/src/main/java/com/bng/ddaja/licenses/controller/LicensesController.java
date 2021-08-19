@@ -25,6 +25,7 @@ import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,6 +72,15 @@ public class LicensesController {
         return ResponseEntity.ok().body(resource);
     }
 
+    @ApiOperation(
+        value = "특정 자격증 수정"
+        , notes = "자격증 ID를 통해 특정 자격증의 정보를 수정한다.")
+    @PutMapping("/{id}")
+    public ResponseEntity<CommonResource> putLicenses(@PathVariable(name = "id", required = true) long id, @RequestBody LicenseDTO licenseDTO) {
+        log.info("put mapping!!");
+        log.info(licenseDTO.toString());
+        return null;
+    }
 
     @ApiOperation(
         value = "신규 자격증 생성"
