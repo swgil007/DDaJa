@@ -4,6 +4,36 @@
       <div class="createPost-main-container">
         <h1>자격증 정보 수정</h1>
 
+        <el-form-item label="자격증 이름">
+          <el-input v-model="license.name" />
+        </el-form-item>
+
+        <el-form-item label="관리코드">
+          <el-select v-model="license.lCode">
+            <el-option
+              v-for="item in codeOptions"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="주최 기관">
+          <el-input v-model="license.agency" />
+        </el-form-item>
+
+        <el-form-item label="시험 구분">
+          <el-radio-group v-model="license.type">
+            <el-radio
+              v-for="item in typeOptions"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-radio-group>
+        </el-form-item>
+
         <el-row>
           <el-col
             :span="24"
@@ -25,21 +55,6 @@
           </el-col>
         </el-row>
 
-        <el-form-item label="자격증 이름">
-          <el-input v-model="license.name" :value="licenseInfo.name" />
-        </el-form-item>
-        <el-form-item label="Activity zone">
-          <el-select v-model="license.lCode" placeholder="please select your zone">
-            <el-option value="licenseInfo.name">{{ licenseInfo.name }}</el-option>
-            <el-option value="beijing" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Resources">
-          <el-radio-group v-model="license.type">
-            <el-radio label="Sponsor" />
-            <el-radio label="Venue" />
-          </el-radio-group>
-        </el-form-item>
         <el-form-item label="Resources">
           <el-radio-group v-model="license.inUse">
             <el-radio label="Sponsor" />
@@ -62,16 +77,20 @@ export default {
   name: '',
   props: {
     isEdit: {},
-    licenseInfo: {}
+    licenseInfo: {},
+    typeOptions: {},
+    codeOptions: {}
   },
   data() {
     return {
       childData: '',
       license: {
-        name: '',
-        inUse: '',
-        type: '',
-        lCode: ''
+        name: this.licenseInfo.name,
+        agency: this.licenseInfo.agency,
+        inUse: this.licenseInfo.inUse,
+        type: this.licenseInfo.type,
+        lCode: this.licenseInfo.code,
+        passScore: this.licenseInfo.passScore
       }
     }
   },

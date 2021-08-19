@@ -9,6 +9,8 @@
           <article-detail
             :is-edit="isEdit"
             :license-info="licenseInfo"
+            :type-options="typeOptions"
+            :code-options="codeOptions"
             @close:popup="popupClose"
             @depthChildData="depthChildPopup"
           />
@@ -20,6 +22,7 @@
 
 <script>
 import ArticleDetail from './components/ArticleDetail'
+import axios from 'axios'
 export default {
   name: '',
   components: {
@@ -31,10 +34,15 @@ export default {
   },
   data() {
     return {
-      isEdit: false
+      isEdit: false,
+      typeOptions: [],
+      codeOptions: []
     }
   },
-  created() { },
+  created() {
+    this.requestTypeList()
+    this.requestCodeList()
+  },
   methods: {
     handleClose(done) {
       this.$confirm('작성을 취소 하시겠습니까 ?')
@@ -49,6 +57,24 @@ export default {
     },
     depthChildPopup(childData) {
       this.$emit('childData', childData)
+    },
+    requestTypeList() {
+      axios.get('http://localhost/licenses/type')
+        .then(res => {
+          this.typeOptions = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    requestCodeList() {
+      axios.get('http://localhost/licenses/code')
+        .then(res => {
+          this.codeOptions = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
