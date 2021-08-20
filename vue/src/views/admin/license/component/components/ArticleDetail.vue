@@ -3,8 +3,6 @@
     <el-form ref="licenseForm" :model="license" class="form-container">
       <div class="createPost-main-container">
         <h1>자격증 정보 수정</h1>
-        {{ license.inUse }}
-
         <el-form-item label="자격증 이름">
           <el-input v-model="license.name" />
         </el-form-item>
