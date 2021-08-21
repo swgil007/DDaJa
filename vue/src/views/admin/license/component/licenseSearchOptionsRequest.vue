@@ -7,15 +7,15 @@ export default {
     }
   },
   created() {
-    this.fetchData('')
+    this.fetchData()
   },
   methods: {
-    fetchData(query) {
+    fetchData() {
       axios
-        .get('http://localhost/licenses' + query)
+        .get('http://localhost/licenses/search')
         .then(res => {
           console.log(res.data)
-          this.$emit('licenseInfo', res.data)
+          this.$emit('searchOptions', res.data)
         })
         .catch(err => {
           alert('fail')

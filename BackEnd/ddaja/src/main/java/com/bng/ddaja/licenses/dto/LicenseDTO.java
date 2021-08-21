@@ -40,9 +40,9 @@ public class LicenseDTO extends CommonDTO {
         this.passScore = vo.getPassScore();
         super.createdDate = vo.getCreatedDate();
         super.modifiedDate = vo.getModifiedDate();
-        this.subjects = vo.getSubjects().stream().map(v -> new SubjectDTO(v)).collect(Collectors.toList());
+        this.subjects = vo.getSubjects() == null ? null : vo.getSubjects().stream().map(v -> new SubjectDTO(v)).collect(Collectors.toList());
     }
-
+    
     public License toEntity() {
         return License.builder()
         .id(this.id)

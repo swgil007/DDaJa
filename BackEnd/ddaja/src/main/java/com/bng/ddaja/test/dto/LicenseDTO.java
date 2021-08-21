@@ -73,7 +73,6 @@ public class LicenseDTO {
     }
 
     public License toEntity (){
-
         return License.builder()
                         .id(id)
                         .name(name)

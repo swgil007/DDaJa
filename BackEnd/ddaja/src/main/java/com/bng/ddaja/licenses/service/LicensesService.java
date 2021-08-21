@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import com.bng.ddaja.licenses.repository.LicensesRepository;
 import com.bng.ddaja.common.domain.License;
+import com.bng.ddaja.common.dto.CommonPage;
+import com.bng.ddaja.common.dto.CommonSearch;
 import com.bng.ddaja.licenses.dto.LicenseDTO;
 import com.bng.ddaja.licenses.dto.LicenseSearch;
 
@@ -22,26 +24,14 @@ public class LicensesService {
     
     private LicensesRepository licensesRepository;
 
-    public List<LicenseDTO> getAllLicenses() {
-        return licensesRepository.findAll()
-                                .stream()
-                                .map(vo -> new LicenseDTO(vo))
-                                .collect(Collectors.toList());
-    }
-
-    public Page<LicenseDTO> getAllLicensesByPage(Pageable pageable) {
-        // Page<License> voPage = licensesRepository.findAll(pageable);
-        // List<LicenseDTO> licenseDTOList = voPage.getContent().stream().map(v -> new LicenseDTO(v)).collect(Collectors.toList());
-        // Page<LicenseDTO> dtoPage = new PageRequest<LicenseDTO>();
-        return licensesRepository.findAll(pageable).map(vo -> new LicenseDTO(vo));
-    }
     public LicenseDTO getLicenseById(long id) {
         return new LicenseDTO(licensesRepository.findById(id));
     }
 
-    public Page<LicenseDTO> getAllLicensesBySearchAndPage(LicenseSearch licenseSearch, Pageable pageable) {
-        return licensesRepository.findAll(licenseSearch.toSpecification(), pageable).map(vo -> new LicenseDTO(vo));
+    public Page<LicenseDTO> getAllLicenseByLicenseSearch(LicenseSearch search) {
+        return licensesRepository.findAll(search.toSpecification(), search.toPageable()).map(vo -> new LicenseDTO(vo));
     }
+
     public LicenseDTO saveLicense(LicenseDTO licenseDTO) {
         License licenseVO = licenseDTO.toEntity();
         licensesRepository.save(licenseVO);

@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.licenses.service.LicensesService;
+import com.bng.ddaja.licenses.spec.LicenseSearchOptions;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+
+import com.bng.ddaja.common.dto.CommonEnumResource;
 import com.bng.ddaja.common.dto.CommonError;
+import com.bng.ddaja.common.dto.CommonPage;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.enums.LicenseCode;
@@ -21,6 +25,7 @@ import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,13 +48,18 @@ public class LicensesController {
 
     @ApiOperation(
         value = "자격증 전체 조회"
-        , notes = "전체 자격증 목록을 조회한다")
+        , notes = "전체 자격증 목록을 조회한다"
+        , produces = "application/json"
+        , response = CommonResponse.class
+    )
     @GetMapping("")
-    public ResponseEntity<CommonResponse> getLicenses(LicenseSearch licenseSearch, Pageable pageable) {
-        List<CommonResource> resourcePageList = licenseService.getAllLicensesBySearchAndPage(licenseSearch, pageable).stream()
-                                                                    .map(dto -> new CommonResource(dto, LicenseHateos.values()))
-                                                                    .collect(Collectors.toList());
-        return ResponseEntity.ok().body(new CommonResponse(resourcePageList));
+    public ResponseEntity<CommonResponse> getLicenses(LicenseSearch licenseSearch) {
+        return ResponseEntity.ok().body(
+                new CommonResponse(
+                    licenseService.getAllLicenseByLicenseSearch(licenseSearch)
+                    , LicenseHateos.values()
+                )
+            );
     }
 
     @ApiOperation(
@@ -62,6 +72,13 @@ public class LicensesController {
         return ResponseEntity.ok().body(resource);
     }
 
+    @ApiOperation(
+        value = "특정 자격증 수정"
+        , notes = "자격증 ID를 통해 특정 자격증의 정보를 수정한다.")
+    @PutMapping("/{id}")
+    public ResponseEntity<CommonResource> putLicenses(@PathVariable(name = "id", required = true) long id, @RequestBody LicenseDTO licenseDTO) {
+        return ResponseEntity.ok().body(new CommonResource(licenseService.saveLicense(licenseDTO), LicenseHateos.values()));
+    }
 
     @ApiOperation(
         value = "신규 자격증 생성"
@@ -110,5 +127,20 @@ public class LicensesController {
     @GetMapping("subjects")
     public ResponseEntity<List<LicenseDTO>> getSubjectCollections(LicenseSearch licenseSearch) {
         return ResponseEntity.ok().body(licenseService.getAllLicenseLikeSubjectName(licenseSearch));   
+    }
+
+    @ApiOperation(
+        value = "자격증 검색조건 조회"
+        , notes = "자격증 검색 조건 목록을 조회한다"
+        , produces = "application/json"
+        , response = CommonResponse.class
+    )
+    @GetMapping("search")
+    public ResponseEntity<CommonResponse> getLicenseSearchOptions() {
+        // List<CommonEnumResource> resourceList = 
+        //         Arrays.stream(LicenseSearchOptions.values())
+        //                 .map(e -> new CommonEnumResource(e.name(), e.getName(), e.getQuery()))
+        //                 .collect(Collectors.toList());
+        return ResponseEntity.ok().body(new CommonResponse(LicenseSearchOptions.values()));
     }
 }

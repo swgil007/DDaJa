@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
+@Builder
 @ToString
 @EqualsAndHashCode(callSuper = false, of = "id")
 @Table(name = "TB_USER")
@@ -71,9 +72,9 @@ public class User extends CommonEntity {
     private List<DebateState> debateStates;
 
     @Builder
-    public User(long id, String nickName) {
+    public User(long id, String userId) {
         this.id = id;
-        this.nickName = nickName;
+        this.userId = userId;
     }
 
     public void setUserQuestion(UserQuestion userQuestion) {
