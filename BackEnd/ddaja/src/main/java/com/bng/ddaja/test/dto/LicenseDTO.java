@@ -72,6 +72,12 @@ public class LicenseDTO {
         this.agency = license.getAgency();
     }
 
+    // dtoToLicense 올바른 포현
+    // 권장 : toEntity()
+    // LicenseDTO class가 LicenseDTO를 받아서 License를 return?
+    // LicenseDTO class가 본인 데이터로 License를 return하는게 좋아보임
+    // new LicenseDTO().licenseToDto(license.findById(lid))에서 사용 중인데
+    // 굳이 이렇게 사용하는 의도를 잘 모르겠음
     public License licenseToDto ( LicenseDTO dto ){
 
         return License.builder()
