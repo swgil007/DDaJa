@@ -21,4 +21,8 @@ public class UsersService {
         return usersRepository.findAll().stream().map(v -> new UserDTO(v)).collect(Collectors.toList());
     }
 
+    public UserDTO getUserById(long id) {
+        return new UserDTO(usersRepository.findById(id));
+    }
+
 }

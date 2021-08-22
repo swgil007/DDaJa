@@ -3,7 +3,15 @@ package com.bng.ddaja.users.dto;
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.enums.TokenType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@Getter
+@Setter
 public class UserDTO extends CommonDTO {
     private String userId;
 

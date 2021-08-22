@@ -67,9 +67,7 @@ public class LicensesController {
         , notes = "자격증 ID를 통해 특정 자격증의 정보를 조회한다.")
     @GetMapping("/{id}")
     public ResponseEntity<CommonResource> getLicenses(@PathVariable(name = "id", required = true) long id) {
-        LicenseDTO license = licenseService.getLicenseById(id);
-        CommonResource resource = new CommonResource(license, LicenseHateos.values());
-        return ResponseEntity.ok().body(resource);
+        return ResponseEntity.ok().body(new CommonResource(licenseService.getLicenseById(id), LicenseHateos.values()));
     }
 
     @ApiOperation(

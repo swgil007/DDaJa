@@ -29,9 +29,9 @@ public class CommonResponse {
     public CommonPage page;
     private List<? extends CommonResource> items;
 
-    public CommonResponse (List<? extends CommonResource> items) {
-        this.totalCount = items.size();
-        this.items = items;
+    public CommonResponse(List<? extends CommonDTO> dtoList) {
+        items = dtoList.stream().map(d -> new CommonResource(d)).collect(Collectors.toList());
+        totalCount = dtoList.size();
     }
 
     public CommonResponse(int totalCount, CommonResource item) {
