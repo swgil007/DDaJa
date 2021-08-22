@@ -113,9 +113,8 @@ public class LicensesController {
     }
     
     @GetMapping("type")
-    public ResponseEntity<LicenseType[]> getLicensesType() {
-        //List<CommonResource> resourceList = Arrays.stream(LicenseType.values()).map(e -> new CommonResource(e)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(LicenseType.values());
+    public ResponseEntity<CommonResponse> getLicensesType() {
+        return ResponseEntity.ok().body(new CommonResponse(LicenseType.values()));
     }
 
     @GetMapping("code")
