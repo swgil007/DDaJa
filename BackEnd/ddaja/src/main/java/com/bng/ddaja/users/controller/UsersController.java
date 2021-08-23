@@ -1,7 +1,7 @@
 package com.bng.ddaja.users.controller;
 
-import com.bng.ddaja.common.dto.CommonResource;
-import com.bng.ddaja.common.dto.CommonResponse;
+import com.bng.ddaja.common.domain.dto.CommonResource;
+import com.bng.ddaja.common.domain.dto.CommonResponse;
 import com.bng.ddaja.users.service.UsersService;
 
 import org.springframework.http.ResponseEntity;

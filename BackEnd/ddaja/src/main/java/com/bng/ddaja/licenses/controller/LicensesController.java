@@ -1,21 +1,15 @@
 package com.bng.ddaja.licenses.controller;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.licenses.spec.LicenseSearchOptions;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
-import com.bng.ddaja.common.dto.CommonEnumResource;
-import com.bng.ddaja.common.dto.CommonError;
-import com.bng.ddaja.common.dto.CommonPage;
-import com.bng.ddaja.common.dto.CommonResource;
-import com.bng.ddaja.common.dto.CommonResponse;
+import com.bng.ddaja.common.domain.dto.CommonError;
+import com.bng.ddaja.common.domain.dto.CommonResource;
+import com.bng.ddaja.common.domain.dto.CommonResponse;
 import com.bng.ddaja.common.enums.LicenseCode;
 import com.bng.ddaja.common.enums.LicenseType;
 import com.bng.ddaja.licenses.dto.LicenseDTO;

@@ -1,4 +1,4 @@
-package com.bng.ddaja.common.dto;
+package com.bng.ddaja.common.domain.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;

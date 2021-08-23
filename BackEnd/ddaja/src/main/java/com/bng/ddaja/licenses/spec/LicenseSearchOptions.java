@@ -1,6 +1,6 @@
 package com.bng.ddaja.licenses.spec;
 
-import com.bng.ddaja.common.dto.CommonEnumResource;
+import com.bng.ddaja.common.domain.dto.CommonEnumResource;
 import com.bng.ddaja.common.enums.CommonEnum;
 
 import lombok.Getter;
