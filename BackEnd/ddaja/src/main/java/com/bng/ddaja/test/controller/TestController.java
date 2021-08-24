@@ -10,15 +10,18 @@ import javax.validation.Valid;
 import com.bng.ddaja.common.config.PublicKeyConfig;
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonErrorDetail;
+import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.Link;
+import com.bng.ddaja.common.enums.Roles;
 import com.bng.ddaja.common.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
-import com.bng.ddaja.test.dto.TestParameter; 
+import com.bng.ddaja.test.dto.TestParameter;
+import com.bng.ddaja.tokens.service.TokensService;
 import com.bng.ddaja.test.dto.TestDTO;
 
 import org.springframework.http.HttpStatus;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -44,6 +48,8 @@ public class TestController {
     private UserService userService;
 
     private PublicKeyConfig publicKeyConfig;
+
+    private TokensService tokensService;
     
     @GetMapping("")
     public String test() {
@@ -121,5 +127,15 @@ public class TestController {
     @GetMapping("/publicKey")
     public String testPublicKeyProperty() {
         return publicKeyConfig.getPublicKey();
+    }
+
+    @GetMapping("/jwt")
+    public String testJwtCreate() {
+        return tokensService.createJWT(new CommonJWT(1, "gillog", "gil", Roles.ADMIN));
+    }
+
+    @GetMapping("/jwt/vertify")
+    public boolean testJwtVertify(String jwt) {
+        return tokensService.isValidatedJWT(jwt);
     }
 }
