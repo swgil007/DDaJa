@@ -1,4 +1,4 @@
-package com.bng.ddaja.common.domain.dto;
+package com.bng.ddaja.common.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

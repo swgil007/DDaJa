@@ -1,4 +1,4 @@
-package com.bng.ddaja.common.domain.dto;
+package com.bng.ddaja.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +11,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonErrorDetail {
-    private String field;
-    private String value;
-    private String reason;
+public class Link {
+    private String rel;
+    private String url;
+    private String method;
 }

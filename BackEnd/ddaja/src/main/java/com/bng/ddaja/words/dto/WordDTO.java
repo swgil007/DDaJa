@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bng.ddaja.common.domain.Word;
-import com.bng.ddaja.common.domain.dto.CommonDTO;
+import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
 

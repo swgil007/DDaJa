@@ -7,9 +7,9 @@ import com.bng.ddaja.licenses.spec.LicenseSearchOptions;
 
 import org.springframework.http.ResponseEntity;
 
-import com.bng.ddaja.common.domain.dto.CommonError;
-import com.bng.ddaja.common.domain.dto.CommonResource;
-import com.bng.ddaja.common.domain.dto.CommonResponse;
+import com.bng.ddaja.common.dto.CommonError;
+import com.bng.ddaja.common.dto.CommonResource;
+import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.enums.LicenseCode;
 import com.bng.ddaja.common.enums.LicenseType;
 import com.bng.ddaja.licenses.dto.LicenseDTO;

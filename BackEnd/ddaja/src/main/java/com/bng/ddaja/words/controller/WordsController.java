@@ -3,8 +3,8 @@ package com.bng.ddaja.words.controller;
 import java.util.List;
 
 import com.bng.ddaja.common.domain.Word;
-import com.bng.ddaja.common.domain.dto.CommonResource;
-import com.bng.ddaja.common.domain.dto.CommonResponse;
+import com.bng.ddaja.common.dto.CommonResource;
+import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.temp.license.TempLicensesService;
 import com.bng.ddaja.test.dto.LicenseDTO;

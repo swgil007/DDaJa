@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.bng.ddaja.common.domain.dto.CommonError;
-import com.bng.ddaja.common.domain.dto.CommonErrorDetail;
-import com.bng.ddaja.common.domain.dto.CommonResource;
-import com.bng.ddaja.common.domain.dto.CommonResponse;
-import com.bng.ddaja.common.domain.dto.Link;
+import com.bng.ddaja.common.dto.CommonError;
+import com.bng.ddaja.common.dto.CommonErrorDetail;
+import com.bng.ddaja.common.dto.CommonResource;
+import com.bng.ddaja.common.dto.CommonResponse;
+import com.bng.ddaja.common.dto.Link;
 import com.bng.ddaja.common.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
 import com.bng.ddaja.example.dto.UserDTO;

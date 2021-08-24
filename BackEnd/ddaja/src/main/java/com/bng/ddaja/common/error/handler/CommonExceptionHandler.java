@@ -3,7 +3,7 @@ package com.bng.ddaja.common.error.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bng.ddaja.common.domain.dto.CommonError;
+import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.error.enums.ErrorCode;
 import com.bng.ddaja.common.error.exception.MemberNotFoundException;
 import org.springframework.http.HttpStatus;

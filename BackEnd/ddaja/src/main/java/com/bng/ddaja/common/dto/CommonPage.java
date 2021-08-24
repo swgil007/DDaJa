@@ -1,4 +1,4 @@
-package com.bng.ddaja.common.domain.dto;
+package com.bng.ddaja.common.dto;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

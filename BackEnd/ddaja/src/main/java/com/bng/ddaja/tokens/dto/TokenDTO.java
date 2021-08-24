@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.bng.ddaja.common.domain.Token;
 import com.bng.ddaja.common.domain.Token.TokenBuilder;
-import com.bng.ddaja.common.domain.dto.CommonDTO;
+import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.users.dto.UserDTO;
 
 import lombok.Getter;

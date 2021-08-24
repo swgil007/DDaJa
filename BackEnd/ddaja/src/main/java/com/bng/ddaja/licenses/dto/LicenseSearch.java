@@ -7,7 +7,7 @@ import static com.bng.ddaja.licenses.spec.LicenseSpec.*;
 import static org.springframework.data.jpa.domain.Specification.where;
 
 import com.bng.ddaja.common.domain.License;
-import com.bng.ddaja.common.domain.dto.CommonSearch;
+import com.bng.ddaja.common.dto.CommonSearch;
 import com.bng.ddaja.common.spec.SpecBuilder;
 
 import org.springframework.data.jpa.domain.Specification;

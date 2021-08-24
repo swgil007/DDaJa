@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.domain.License;
-import com.bng.ddaja.common.domain.dto.CommonDTO;
+import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.enums.LicenseCode;
 import com.bng.ddaja.common.enums.LicenseType;
 

@@ -1,7 +1,7 @@
 package com.bng.ddaja.users.dto;
 
 import com.bng.ddaja.common.domain.User;
-import com.bng.ddaja.common.domain.dto.CommonDTO;
+import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.enums.TokenType;
 
 import lombok.Getter;

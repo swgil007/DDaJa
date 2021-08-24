@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.domain.dto.Link;
+import com.bng.ddaja.common.dto.Link;
 import com.bng.ddaja.common.hateos.CommonHateos;
 
 public enum LicenseHateos implements CommonHateos {

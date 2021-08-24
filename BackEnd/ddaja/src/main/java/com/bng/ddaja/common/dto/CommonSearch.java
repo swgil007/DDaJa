@@ -1,4 +1,4 @@
-package com.bng.ddaja.common.domain.dto;
+package com.bng.ddaja.common.dto;
 
 import com.bng.ddaja.common.domain.CommonEntity;
 import com.bng.ddaja.common.spec.CommonSpec;
