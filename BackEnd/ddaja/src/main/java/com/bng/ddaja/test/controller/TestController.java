@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.bng.ddaja.common.config.PublicKeyConfig;
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonErrorDetail;
 import com.bng.ddaja.common.dto.CommonResource;
@@ -41,6 +42,8 @@ import lombok.extern.slf4j.Slf4j;
 public class TestController {
     
     private UserService userService;
+
+    private PublicKeyConfig publicKeyConfig;
     
     @GetMapping("")
     public String test() {
@@ -113,5 +116,10 @@ public class TestController {
     public TestDTO testPost(@RequestBody TestDTO testDTO) {
         log.info("testPOst");
         return testDTO;
+    }
+
+    @GetMapping("/publicKey")
+    public String testPublicKeyProperty() {
+        return publicKeyConfig.getPublicKey();
     }
 }
