@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import io.jsonwebtoken.JwtException;
+
 @RestControllerAdvice
 public class CommonExceptionHandler {
     
@@ -36,5 +38,11 @@ public class CommonExceptionHandler {
         ex.getBindingResult().getAllErrors()
                 .forEach(c -> errors.put(((FieldError) c).getField(), c.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<CommonError> handleJwtException(JwtException e) {
+        CommonError error = new CommonError(ErrorCode.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }

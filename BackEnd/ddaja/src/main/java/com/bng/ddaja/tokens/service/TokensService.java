@@ -52,7 +52,7 @@ public class TokensService {
                 return true;
         } catch(JwtException e) {
             log.error("[TokenService] InValidated JWT", e);
-            return false;
+            throw e;
         }
     }
 }
