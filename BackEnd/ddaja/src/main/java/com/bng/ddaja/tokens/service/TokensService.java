@@ -10,10 +10,12 @@ import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.common.util.DateUtil;
 import com.bng.ddaja.tokens.repository.TokensRepository;
+import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.users.service.UsersService;
 
 import org.springframework.stereotype.Service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -54,5 +56,23 @@ public class TokensService {
             log.error("[TokenService] InValidated JWT", e);
             throw e;
         }
+    }
+
+    public Claims parseJWT(String jwt) {
+        if(!isValidatedJWT(jwt)) return null;
+        return  Jwts.parserBuilder()
+                    .setSigningKey(publicKeyConfig.getSecretKey())
+                    .build()
+                    .parseClaimsJws(jwt)
+                    .getBody();
+    }
+
+    public CommonJWT getCommonJWT(String jwt) {
+        CommonJWT result = new CommonJWT(jwt, parseJWT(jwt));
+        return result;
+    }
+
+    public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) {
+        return null;
     }
 }

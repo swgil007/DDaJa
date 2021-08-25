@@ -138,4 +138,9 @@ public class TestController {
     public boolean testJwtVertify(String jwt) {
         return tokensService.isValidatedJWT(jwt);
     }
+
+    @GetMapping("/jwt/common-jwt")
+    public CommonJWT testCommonJWT(String jwt) {
+        return tokensService.getCommonJWT(jwt);
+    }
 }

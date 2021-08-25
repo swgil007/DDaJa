@@ -8,5 +8,8 @@ public final class Constants {
     public static final String ROLE_ADMIN = "admin";
     public static final String ROLE_USER = "user";
     public static final String ROLE_VISITOR = "visitor";
+    public static final String DATE_ISSUE = "iat";
+    public static final String DATE_EXPIRE = "exp";
+    
     private Constants() {}
 }

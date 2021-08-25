@@ -1,8 +1,11 @@
 package com.bng.ddaja.common.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public final class DateUtil {
+    private static final String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
     private DateUtil() {}
 
     public static Date addSeconds(Date date, int second) {
