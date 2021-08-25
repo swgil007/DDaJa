@@ -131,16 +131,19 @@ public class TestController {
 
     @GetMapping("/jwt")
     public String testJwtCreate() {
-        return tokensService.createJWT(new CommonJWT(1, "gillog", "gil", Roles.ADMIN));
+        // tokensService.createJWT(new CommonJWT(1, "gillog", "gil", Roles.ADMIN));
+        return null;
     }
 
     @GetMapping("/jwt/vertify")
     public boolean testJwtVertify(String jwt) {
-        return tokensService.isValidatedJWT(jwt);
+        // tokensService.isValidatedJWT(jwt);
+        return true;
     }
 
     @GetMapping("/jwt/common-jwt")
     public CommonJWT testCommonJWT(String jwt) {
-        return tokensService.getCommonJWT(jwt);
+        // tokensService.getCommonJWT(jwt);
+        return null;
     }
 }
