@@ -4,13 +4,17 @@ import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.enums.TokenType;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO extends CommonDTO {
     private String userId;
 

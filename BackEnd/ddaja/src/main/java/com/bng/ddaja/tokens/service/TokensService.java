@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 
 import com.bng.ddaja.common.config.PublicKeyConfig;
+import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.common.util.DateUtil;
@@ -31,7 +32,11 @@ public class TokensService {
     private UsersService usersService;
 
     public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) {
-        return null;
+        UserDTO user = usersService.getUserById(userDTO.getId());
+        if(user == null) return new CommonJWT(false);
+        CommonJWT result = new CommonJWT(user);
+        result.setJwt(createJWT(result));
+        return result;
     }
 
     private String createJWT(CommonJWT commonJWT) {

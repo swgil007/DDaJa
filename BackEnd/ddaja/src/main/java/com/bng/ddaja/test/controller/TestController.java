@@ -17,7 +17,7 @@ import com.bng.ddaja.common.dto.Link;
 import com.bng.ddaja.common.enums.Roles;
 import com.bng.ddaja.common.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
-import com.bng.ddaja.example.dto.UserDTO;
+import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.test.dto.TestParameter;
@@ -51,8 +51,6 @@ public class TestController {
 
     private TokensService tokensService;
 
-    private CommonJWT commonJWT;
-    
     @GetMapping("")
     public String test() {
         return "testeeee";
@@ -132,10 +130,8 @@ public class TestController {
     }
 
     @GetMapping("/jwt")
-    public CommonJWT testJwtCreate() {
-        //return new CommonJWT(1, "gillog", "gil", Roles.ADMIN);
-        //return commonJWT.getJWT(1, "gillog", "gil", Roles.ADMIN);
-        return null;
+    public CommonJWT testJwtCreate(UserDTO userDTO) {
+        return tokensService.getCommonJWTByUserDTO(userDTO);
     }
 
     @GetMapping("/jwt/vertify")
