@@ -5,14 +5,19 @@ import java.util.Date;
 import com.bng.ddaja.common.config.PublicKeyConfig;
 import com.bng.ddaja.common.dto.CommonJWT;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
 
+@Component
 @AllArgsConstructor
 public class JWTUtil {
-    private final PublicKeyConfig publicKeyConfig;
+    private PublicKeyConfig publicKeyConfig;
 
     public String createJWT(CommonJWT commonJWT) {
         Date now = new Date();     

@@ -50,6 +50,8 @@ public class TestController {
     private PublicKeyConfig publicKeyConfig;
 
     private TokensService tokensService;
+
+    private CommonJWT commonJWT;
     
     @GetMapping("")
     public String test() {
@@ -130,9 +132,9 @@ public class TestController {
     }
 
     @GetMapping("/jwt")
-    public String testJwtCreate() {
-        // tokensService.createJWT(new CommonJWT(1, "gillog", "gil", Roles.ADMIN));
-        return null;
+    public CommonJWT testJwtCreate() {
+        //return new CommonJWT(1, "gillog", "gil", Roles.ADMIN);
+        return commonJWT.getJWT(1, "gillog", "gil", Roles.ADMIN);
     }
 
     @GetMapping("/jwt/vertify")
