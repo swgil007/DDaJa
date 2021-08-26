@@ -3,6 +3,8 @@ package com.bng.ddaja.common.error.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.security.sasl.AuthenticationException;
+
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.error.enums.ErrorCode;
 import com.bng.ddaja.common.error.exception.MemberNotFoundException;
@@ -43,6 +45,13 @@ public class CommonExceptionHandler {
     @ExceptionHandler(JwtException.class)
     public ResponseEntity<CommonError> handleJwtException(JwtException e) {
         CommonError error = new CommonError(ErrorCode.UNAUTHORIZED);
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<CommonError> handleAuthenticationException(AuthenticationException e) {    
+        CommonError error = new CommonError(ErrorCode.UNAUTHORIZED);
+        error.setMessage("JWT in Authorazation Header is Required");
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }

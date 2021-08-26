@@ -53,7 +53,7 @@ public class TokensService {
                     .compact();
     }
 
-    private boolean isValidatedJWT(String jwt) {
+    public boolean isValidatedJWT(String jwt) {
         if(jwt == null) return false;
         try {
             Jwts.parserBuilder()
