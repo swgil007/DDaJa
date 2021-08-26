@@ -134,7 +134,8 @@ public class TestController {
     @GetMapping("/jwt")
     public CommonJWT testJwtCreate() {
         //return new CommonJWT(1, "gillog", "gil", Roles.ADMIN);
-        return commonJWT.getJWT(1, "gillog", "gil", Roles.ADMIN);
+        //return commonJWT.getJWT(1, "gillog", "gil", Roles.ADMIN);
+        return null;
     }
 
     @GetMapping("/jwt/vertify")

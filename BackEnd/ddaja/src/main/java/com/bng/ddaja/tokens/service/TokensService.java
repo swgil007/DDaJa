@@ -33,4 +33,40 @@ public class TokensService {
     public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) {
         return null;
     }
+
+    private String createJWT(CommonJWT commonJWT) {
+        Date now = new Date();     
+        return Jwts.builder()
+                    .setSubject(commonJWT.getUserName())
+                    .claim(Constants.CLAIMS_ROLE, commonJWT.getRole())
+                    .claim(Constants.CLAIMS_USER_NAME, commonJWT.getUserName())
+                    .claim(Constants.CLAIMS_USER_ID, commonJWT.getUserID())
+                    .claim(Constants.CLAIMS_ID, commonJWT.getId())
+                    .setIssuedAt(now)
+                    .setExpiration(DateUtil.addHours(now, 12))
+                    .signWith(publicKeyConfig.getSecretKey())
+                    .compact();
+    }
+
+    private boolean isValidatedJWT(String jwt) {
+        if(jwt == null) return false;
+        try {
+            Jwts.parserBuilder()
+                .setSigningKey(publicKeyConfig.getSecretKey())
+                .build()
+                .parse(jwt);
+                return true;
+        } catch(JwtException e) {
+            throw e;
+        }
+    }
+
+    private Claims parseJWT(String jwt) {
+        if(!isValidatedJWT(jwt)) return null;
+        return  Jwts.parserBuilder()
+                    .setSigningKey(publicKeyConfig.getSecretKey())
+                    .build()
+                    .parseClaimsJws(jwt)
+                    .getBody();
+    }
 }
