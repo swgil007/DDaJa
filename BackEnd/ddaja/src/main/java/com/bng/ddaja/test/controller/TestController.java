@@ -21,11 +21,14 @@ import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.test.dto.TestParameter;
+import com.bng.ddaja.test.service.TestService;
 import com.bng.ddaja.tokens.service.TokensService;
 import com.bng.ddaja.test.dto.TestDTO;
 
+import org.springframework.core.task.TaskRejectedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +53,8 @@ public class TestController {
     private PublicKeyConfig publicKeyConfig;
 
     private TokensService tokensService;
+
+    private TestService testService;
 
     @GetMapping("")
     public String test() {
@@ -144,5 +149,55 @@ public class TestController {
     public CommonJWT testCommonJWT(String jwt) {
         // tokensService.getCommonJWT(jwt);
         return null;
+    }
+
+    @Async
+    public void asyncMethod(int i) {
+        try {
+            Thread.sleep(500);
+            log.info("[AsyncMethod]"+"-"+i);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void syncMethod(int i) {
+        try {
+            Thread.sleep(500);
+            log.info("[SyncMethod]"+"-"+i);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @GetMapping("async")
+    public String testAsync() {
+        log.info("TEST ASYNC");
+        for(int i=0; i<50; i++) {
+            asyncMethod(i);
+        }
+        return "";
+    }
+
+    @GetMapping("async/outter")
+    public String testAsyncOutter() {
+        log.info("TEST ASYNC");
+        try {
+            for(int i=0; i<50; i++) {
+                testService.asyncMethod(i);
+            }
+        } catch (TaskRejectedException e) {
+            log.error(e.getMessage());
+        }
+        return "";
+    }
+
+    @GetMapping("sync")
+    public String testSync() {
+        log.info("TEST SYNC");
+        for(int i=0; i<50; i++) {
+            syncMethod(i);
+        }
+        return "";
     }
 }
