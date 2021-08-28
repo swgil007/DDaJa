@@ -38,6 +38,11 @@ export const constantRoutes = [
         meta: { title: '따자', noCache: true }
       }
     ]
+  },
+  {
+    path: '/social/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
   }
 ]
 
