@@ -28,6 +28,7 @@ public class CommonResponse {
     private int totalCount;
     public CommonPage page;
     private List<? extends CommonResource> items;
+    private CommonResource item;
 
     public CommonResponse(List<? extends CommonDTO> dtoList) {
         items = dtoList.stream().map(d -> new CommonResource(d)).collect(Collectors.toList());
@@ -36,9 +37,7 @@ public class CommonResponse {
 
     public CommonResponse(int totalCount, CommonResource item) {
         this.totalCount = totalCount;
-        List<CommonResource> resourceList = new LinkedList<>();
-        resourceList.add(item);
-        this.items = resourceList;
+        this.item = item;
     }
 
     public CommonResponse(int totalCount, List<CommonResource> items) {
@@ -55,5 +54,10 @@ public class CommonResponse {
     public CommonResponse(CommonEnum[] searchOptions) {
         items = Arrays.stream(searchOptions).map(e -> e.toCommonEnumResource()).collect(Collectors.toList());
         totalCount = searchOptions.length;
+    }
+
+    public CommonResponse(CommonDTO item) {
+        this.totalCount = 1;
+        this.item = new CommonResource(item);
     }
 }
