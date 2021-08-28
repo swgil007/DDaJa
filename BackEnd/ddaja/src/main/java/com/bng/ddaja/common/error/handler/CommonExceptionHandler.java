@@ -51,7 +51,7 @@ public class CommonExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<CommonError> handleAuthenticationException(AuthenticationException e) {    
         CommonError error = new CommonError(ErrorCode.UNAUTHORIZED);
-        error.setMessage("JWT in Authorazation Header is Required");
+        error.setMessage(e.getMessage());
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }

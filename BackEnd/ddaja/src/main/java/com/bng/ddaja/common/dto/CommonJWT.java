@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonJWT {
+public class CommonJWT extends CommonDTO {
     private String jwt;
     private long id;
     private String userID;

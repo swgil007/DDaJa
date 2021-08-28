@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
+import javax.security.sasl.AuthenticationException;
 
 import com.bng.ddaja.common.config.PublicKeyConfig;
 import com.bng.ddaja.common.domain.User;
@@ -31,9 +32,9 @@ public class TokensService {
     private TokensRepository tokensRepository;
     private UsersService usersService;
 
-    public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) {
+    public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) throws AuthenticationException {
         UserDTO user = usersService.getUserById(userDTO.getId());
-        if(user == null) return new CommonJWT(false);
+        if(user.getId() == 0) throw new AuthenticationException("User Info is Not Matched");
         CommonJWT result = new CommonJWT(user);
         result.setJwt(createJWT(result));
         return result;

@@ -134,10 +134,10 @@ public class TestController {
         return publicKeyConfig.getPublicKey();
     }
 
-    @GetMapping("/jwt")
-    public CommonJWT testJwtCreate(UserDTO userDTO) {
-        return tokensService.getCommonJWTByUserDTO(userDTO);
-    }
+    // @GetMapping("/jwt")
+    // public CommonJWT testJwtCreate(UserDTO userDTO) {
+    //     return tokensService.getCommonJWTByUserDTO(userDTO);
+    // }
 
     @GetMapping("/jwt/vertify")
     public boolean testJwtVertify(String jwt) {

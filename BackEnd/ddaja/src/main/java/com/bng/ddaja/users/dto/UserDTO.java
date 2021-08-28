@@ -29,6 +29,7 @@ public class UserDTO extends CommonDTO {
     private String profileImg;
 
     public UserDTO(User vo) {
+        if(vo == null) return;
         id = vo.getId();
         userId = vo.getUserId();
         nickName = vo.getNickName();
