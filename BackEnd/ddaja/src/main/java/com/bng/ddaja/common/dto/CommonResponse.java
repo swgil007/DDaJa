@@ -28,7 +28,7 @@ public class CommonResponse {
     private int totalCount;
     public CommonPage page;
     private List<? extends CommonResource> items;
-    private CommonResource item;
+    private CommonDTO item;
 
     public CommonResponse(List<? extends CommonDTO> dtoList) {
         items = dtoList.stream().map(d -> new CommonResource(d)).collect(Collectors.toList());
@@ -37,7 +37,9 @@ public class CommonResponse {
 
     public CommonResponse(int totalCount, CommonResource item) {
         this.totalCount = totalCount;
-        this.item = item;
+        List<CommonResource> resourceList = new LinkedList<>();
+        resourceList.add(item);
+        this.items = resourceList;
     }
 
     public CommonResponse(int totalCount, List<CommonResource> items) {
@@ -58,6 +60,6 @@ public class CommonResponse {
 
     public CommonResponse(CommonDTO item) {
         this.totalCount = 1;
-        this.item = new CommonResource(item);
+        this.item = item;
     }
 }
