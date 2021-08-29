@@ -5,7 +5,8 @@
       <div class="title-container">
         <h3 class="title">DDaJa Login</h3>
       </div>
-      <img src="@/images/social/kakao_login.png" @click="kakaoLogin">
+      <img id="kakao-login-btn" src="@/images/social/kakao_login.png" @click="kakaoLogin">
+      <button @click="kakaoLogout">로그아웃</button>
     </el-form>
   </div>
 </template>
@@ -25,14 +26,56 @@ export default {
   , created() {
   },
   methods: {
+    kakaoLogout() {
+
+    alert(Kakao.Auth.getAccessToken())
+
+    Kakao.API.request({
+  url: '/v1/user/unlink',
+  success: function(response) {
+    console.log(response);
+  },
+  fail: function(error) {
+    console.log(error);
+  },
+});
+
+    Kakao.Auth.logout(function() {
+      console.log(Kakao.Auth.getAccessToken());
+    });
+
+    },
     kakaoLogin() {
 
-      const LOGIN_AFTER_URI = "http://localhost:9527/social/login"
+      // const LOGIN_AFTER_URI = "http://localhost:9527/social/login"
 
-      console.log(this.$kakao.isInitialized());
-      this.$kakao.Auth.authorize({
-        redirectUri: LOGIN_AFTER_URI
-      });
+      // console.log(this.$kakao.isInitialized());
+      // this.$kakao.Auth.authorize({
+      //   redirectUri: LOGIN_AFTER_URI
+      // });
+
+  this.$kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      alert(JSON.stringify(authObj))
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function(res) {
+          alert(JSON.stringify(res))
+        },
+        fail: function(error) {
+          alert(
+            'login success, but failed to request user information: ' +
+              JSON.stringify(error)
+          )
+        },
+      })
+    },
+    fail: function(err) {
+      alert('failed to login: ' + JSON.stringify(err))
+    },
+  })
+
     //   const REST_API_KEY_KAKAO = "13378a39977a1f2ea36dd5a2d964e3e6";
     //
     //   const KAKAO_LOGIN_REST_API_URI = "https://kauth.kakao.com/oauth/authorize?response_type=code"
