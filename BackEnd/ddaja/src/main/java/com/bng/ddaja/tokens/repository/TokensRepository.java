@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface TokensRepository extends JpaRepository<Token, Long>, JpaSpecificationExecutor<Token> {
-
+    public Token findByClientID(String clientID);
 }

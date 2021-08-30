@@ -32,8 +32,8 @@ public class Token extends CommonEntity {
     @Column(name="T_ID")
     private long id;
     
-    @Column(name="JWT")
-    private String jwt;
+    @Column(name="ACCESS")
+    private String access;
     
     @Column(name="REFRESH")
     private String refresh;
@@ -43,6 +43,9 @@ public class Token extends CommonEntity {
 
     @Column(name="ISSUANCE")
     private String issuance;
+
+    @Column(name="C_ID")
+    private String clientID;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "U_ID")

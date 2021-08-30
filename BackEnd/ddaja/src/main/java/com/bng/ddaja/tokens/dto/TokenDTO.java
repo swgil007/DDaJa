@@ -16,7 +16,7 @@ import lombok.ToString;
 @Setter
 public class TokenDTO extends CommonDTO {
     
-    private String jwt;
+    private String access;
     
     private String refresh;
 
@@ -24,24 +24,29 @@ public class TokenDTO extends CommonDTO {
 
     private String issuance;
 
+    private String clientID;
+
     private UserDTO user;
 
     public TokenDTO(Token vo) {
+        if(vo == null) return;
         id = vo.getId();
-        jwt = vo.getJwt();
+        access = vo.getAccess();
         refresh = vo.getRefresh();
         expire = vo.getExpire();
         issuance = vo.getIssuance();
+        clientID = vo.getClientID();
         user = vo.getUser() == null ? null : new UserDTO(vo.getUser());
     }
 
     public Token toEntity() {
         TokenBuilder builder = Token.builder()
                     .id(id)
-                    .jwt(jwt)
+                    .access(access)
                     .refresh(refresh)
                     .expire(expire)
-                    .issuance(issuance);
+                    .issuance(issuance)
+                    .clientID(clientID);
         if(user != null) builder.user(user.toEntity());
         return builder.build();
     }

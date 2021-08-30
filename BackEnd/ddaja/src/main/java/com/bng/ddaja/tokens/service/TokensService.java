@@ -11,6 +11,7 @@ import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.common.util.DateUtil;
+import com.bng.ddaja.tokens.dto.TokenDTO;
 import com.bng.ddaja.tokens.repository.TokensRepository;
 import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.users.service.UsersService;
@@ -74,5 +75,9 @@ public class TokensService {
                     .build()
                     .parseClaimsJws(jwt)
                     .getBody();
+    }
+
+    public TokenDTO getTokenByClientID(String clientID) {
+        return new TokenDTO(tokensRepository.findByClientID(clientID));
     }
 }
