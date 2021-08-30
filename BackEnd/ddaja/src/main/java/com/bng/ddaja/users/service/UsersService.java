@@ -19,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class UsersService {
     private UsersRepository usersRepository;
-    private TokensService tokensService;
 
     public List<UserDTO> getUsers() {
         return usersRepository.findAll().stream().map(v -> new UserDTO(v)).collect(Collectors.toList());
