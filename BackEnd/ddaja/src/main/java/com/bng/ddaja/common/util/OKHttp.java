@@ -14,16 +14,14 @@ import okio.Buffer;
 
 @Slf4j
 public final class OKHttp {
-
     private static final String POST = "post";
-    private static final String GET = "get";
     private static final String PUT = "put";
     private static final String PATCH = "patch";
     private static final String DELETE = "delete";
     private static final String OPTIONS = "options";
     private static final OkHttpClient client = new OkHttpClient();
 
-    public Response okHttpRequest(String url, Headers headers, RequestBody requestBody, HttpMethods httpMethod) {
+    public static Response okHttpRequest(String url, Headers headers, RequestBody requestBody, HttpMethods httpMethod) {
         Request request = createRequest(url, headers, requestBody, httpMethod);
         Response response = null;
         StringBuilder logBuilder = new StringBuilder();
@@ -54,7 +52,7 @@ public final class OKHttp {
         return response;
     }
 
-    private Request createRequest(String url, Headers headers, RequestBody requestBody, HttpMethods httpMethod) {
+    private static Request createRequest(String url, Headers headers, RequestBody requestBody, HttpMethods httpMethod) {
         Request.Builder builder = new Request.Builder().url(url);
         if (headers != null) builder.headers(headers);
         if (requestBody == null) {
