@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.bng.ddaja.common.config.PublicKeyConfig;
+import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonErrorDetail;
 import com.bng.ddaja.common.dto.CommonJWT;
@@ -15,7 +16,6 @@ import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.Link;
 import com.bng.ddaja.common.enums.Roles;
-import com.bng.ddaja.common.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
 import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;

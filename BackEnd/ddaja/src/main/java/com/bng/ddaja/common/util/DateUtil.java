@@ -8,6 +8,10 @@ public final class DateUtil {
     private static final String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
     private DateUtil() {}
 
+    public static Date addMilliSecond(Date date, long milliSecond) {
+        if(date == null) return null;
+        return new Date(date.getTime() + milliSecond);
+    }
     public static Date addSeconds(Date date, int second) {
         if(date == null) return null;
         return new Date(date.getTime() + (Long.valueOf(second) * 1000));

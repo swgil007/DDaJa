@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum AuthRequiredURLs {
-    USER("user");
+    NONE("none");
 
     private String name;
 

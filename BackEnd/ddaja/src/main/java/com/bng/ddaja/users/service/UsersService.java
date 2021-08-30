@@ -3,6 +3,7 @@ package com.bng.ddaja.users.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.users.repository.UsersRepository;
 
@@ -25,4 +26,8 @@ public class UsersService {
         return new UserDTO(usersRepository.findById(id));
     }
 
+    public UserDTO createUserBySocialToken(SocialAccessToken socialAccessToken) {
+        
+        return null;
+    }
 }

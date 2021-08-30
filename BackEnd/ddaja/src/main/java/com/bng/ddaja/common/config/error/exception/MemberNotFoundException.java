@@ -1,6 +1,6 @@
-package com.bng.ddaja.common.error.exception;
+package com.bng.ddaja.common.config.error.exception;
 
-import com.bng.ddaja.common.error.enums.ErrorCode;
+import com.bng.ddaja.common.config.error.enums.ErrorCode;
 
 public class MemberNotFoundException extends CommonException {
     

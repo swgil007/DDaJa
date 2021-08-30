@@ -1,13 +1,14 @@
-package com.bng.ddaja.common.error.handler;
+package com.bng.ddaja.common.config.error.handler;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.security.sasl.AuthenticationException;
 
+import com.bng.ddaja.common.config.error.enums.ErrorCode;
+import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.dto.CommonError;
-import com.bng.ddaja.common.error.enums.ErrorCode;
-import com.bng.ddaja.common.error.exception.MemberNotFoundException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

@@ -21,6 +21,8 @@ export default {
   }
   , data() {
     return {
+      socialAccessToken: {}
+      , test: 'a'
     }
   }
   , created() {
@@ -57,24 +59,43 @@ export default {
   this.$kakao.Auth.createLoginButton({
     container: '#kakao-login-btn',
     success: function(authObj) {
-      alert(JSON.stringify(authObj))
-      Kakao.API.request({
-        url: '/v2/user/me',
-        success: function(res) {
-          alert(JSON.stringify(res))
-        },
-        fail: function(error) {
-          alert(
-            'login success, but failed to request user information: ' +
-              JSON.stringify(error)
-          )
-        },
+      console.log(JSON.stringify(authObj))
+      // Kakao.API.request({
+      //   url: '/v2/user/me',
+      //   success: function(res) {
+      //     console.log(JSON.stringify(res))
+      //   },
+      //   fail: function(error) {
+      //     alert(
+      //       'login success, but failed to request user information: ' +
+      //         JSON.stringify(error)
+      //     )
+      //   },
+      // })
+      const socialAccessToken = {
+        accessToken : authObj.access_token
+        , refreshToken : authObj.refresh_token
+        , tokenType : 'KAKAO'
+        , expireTime : authObj.expires_in
+        , refreshExpireTime : authObj.refresh_token_expires_in
+      }
+
+      const userInfoURI = "http://localhost/users/social"
+      axios.post(userInfoURI, socialAccessToken)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
       })
     },
     fail: function(err) {
       alert('failed to login: ' + JSON.stringify(err))
     },
   })
+
+      //console.log("tt")
+      //console.log(this.socialAccessToken)
 
     //   const REST_API_KEY_KAKAO = "13378a39977a1f2ea36dd5a2d964e3e6";
     //

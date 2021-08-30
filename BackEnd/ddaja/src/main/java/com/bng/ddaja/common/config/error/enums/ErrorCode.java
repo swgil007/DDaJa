@@ -1,4 +1,4 @@
-package com.bng.ddaja.common.error.enums;
+package com.bng.ddaja.common.config.error.enums;
 
 import lombok.Getter;
 

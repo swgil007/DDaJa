@@ -27,4 +27,5 @@ public class TokensController {
     public ResponseEntity<CommonResponse> createToken(@RequestBody UserDTO userDTO) throws AuthenticationException {
         return ResponseEntity.ok().body(new CommonResponse(tokensService.getCommonJWTByUserDTO(userDTO)));
     }
+
 }

@@ -3,7 +3,7 @@ package com.bng.ddaja.common.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.error.enums.ErrorCode;
+import com.bng.ddaja.common.config.error.enums.ErrorCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import org.springframework.validation.FieldError;
