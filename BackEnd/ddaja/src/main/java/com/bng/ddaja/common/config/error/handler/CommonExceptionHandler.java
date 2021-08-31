@@ -8,6 +8,7 @@ import javax.security.sasl.AuthenticationException;
 import com.bng.ddaja.common.config.error.enums.ErrorCode;
 import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
+import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialResponseException;
 import com.bng.ddaja.common.dto.CommonError;
 
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,13 @@ public class CommonExceptionHandler {
     @ExceptionHandler(NotAcceptableSocialLoginException.class)
     public ResponseEntity<CommonError> handleNotAcceptableSocialLoginException(NotAcceptableSocialLoginException e) {
         CommonError error = new CommonError(ErrorCode.NOT_ACCEPTABLE_SOCIAL_LOGIN);
+        error.setMessage(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(NotAcceptableSocialResponseException.class)
+    public ResponseEntity<CommonError> handleNotAcceptableSocialResponseException(NotAcceptableSocialResponseException e) {
+        CommonError error = new CommonError(ErrorCode.NOT_ACCEPTABLE_SOCIAL_RESPONSE);
         error.setMessage(e.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
     }
