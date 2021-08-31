@@ -53,7 +53,6 @@ public class UsersController {
 
     @PostMapping("social")
     public ResponseEntity<CommonResponse> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
-        log.info(socialAccessToken.toString());
         return ResponseEntity.ok().body(new CommonResponse(usersService.getUserBySocialToken(socialAccessToken)));
     }
 }

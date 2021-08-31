@@ -47,6 +47,7 @@ public class UsersService {
 
     public UserDTO getUserBySocialToken(SocialAccessToken socialAccessToken) throws IOException, MemberNotFoundException, NotAcceptableSocialLoginException {
         SocialResponse socialResponse;
+        if(socialAccessToken.getTokenType() == null) throw new NotAcceptableSocialLoginException("Social Login Type is Not Included");
         switch(socialAccessToken.getTokenType()) {
             case KAKAO:
                 socialResponse = requestKakaoUserInfo(socialAccessToken);
@@ -55,9 +56,7 @@ public class UsersService {
                 throw new NotAcceptableSocialLoginException();
         }
         Token token = tokensRepository.findByClientID(socialResponse.getId());
-        if(token == null) {
-            throw new MemberNotFoundException();
-        }
+        if(token == null) throw new MemberNotFoundException();
         if(token.getUser() == null ) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
         return new UserDTO(token.getUser());
     }
