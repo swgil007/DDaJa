@@ -32,12 +32,6 @@ public class CommonExceptionHandler {
     //     return new ResponseEntity<>(error, HttpStatus.METHOD_NOT_ALLOWED);
     // }
 
-    @ExceptionHandler(MemberNotFoundException.class)
-    public ResponseEntity<CommonError> handleMemberNotFoundException(MemberNotFoundException e) {
-        CommonError error = new CommonError(ErrorCode.NOT_FOUND_MEMBER);
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex){
         Map<String, String> errors = new HashMap<>();
@@ -66,17 +60,18 @@ public class CommonExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(MemberNotFoundException.class)
+    public ResponseEntity<CommonError> handleMemberNotFoundException(MemberNotFoundException e) {
+        return new ResponseEntity<>(new CommonError(ErrorCode.NOT_FOUND_MEMBER), HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(NotAcceptableSocialLoginException.class)
     public ResponseEntity<CommonError> handleNotAcceptableSocialLoginException(NotAcceptableSocialLoginException e) {
-        CommonError error = new CommonError(ErrorCode.NOT_ACCEPTABLE_SOCIAL_LOGIN);
-        error.setMessage(e.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(new CommonError(ErrorCode.NOT_ACCEPTABLE_SOCIAL_LOGIN), HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(NotAcceptableSocialResponseException.class)
     public ResponseEntity<CommonError> handleNotAcceptableSocialResponseException(NotAcceptableSocialResponseException e) {
-        CommonError error = new CommonError(ErrorCode.NOT_ACCEPTABLE_SOCIAL_RESPONSE);
-        error.setMessage(e.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(new CommonError(ErrorCode.NOT_ACCEPTABLE_SOCIAL_RESPONSE), HttpStatus.NOT_ACCEPTABLE);
     }
 }

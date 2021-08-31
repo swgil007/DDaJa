@@ -9,6 +9,7 @@ import com.bng.ddaja.common.api.social.KaKaoResponse;
 import com.bng.ddaja.common.api.social.SocialResponse;
 import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
+import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialResponseException;
 import com.bng.ddaja.common.domain.Token;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.enums.HttpMethods;
@@ -68,6 +69,10 @@ public class UsersService {
     private SocialResponse requestKakaoUserInfo(SocialAccessToken socialAccessToken) throws IOException {
         String authorizationValue = Constants.BEARER + " " + socialAccessToken.getAccessToken();
         Response response = OKHttp.okHttpRequest("https://kapi.kakao.com/v2/user/me", new Headers.Builder().add(Constants.AUTHORIZATION, authorizationValue).build(), null, HttpMethods.GET);
+        if(!response.isSuccessful()) {
+            log.info("here!!!");
+            throw new NotAcceptableSocialResponseException();
+        }
         SocialResponse result = new Moshi.Builder()
                                             .add(Date.class, new Rfc3339DateJsonAdapter())
                                             .build()

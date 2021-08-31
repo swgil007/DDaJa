@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum TokenType {
     NONE("")
     , KAKAO("카카오")
-    , NAVAER("네이버")
+    , NAVER("네이버")
     , APPLE("애플")
     , GOOGLE("구글");
 
