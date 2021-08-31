@@ -9,7 +9,8 @@ public enum ErrorCode {
     , NOT_FOUND(404, "Not Founded Resource")
     , NOT_ALLOWED_METHOD(405, "Not Allowed Method")
     , NOT_FOUND_MEMBER(404, "Not Founded Memeber")
-    , UNAUTHORIZED(401, "Unauthorized");
+    , UNAUTHORIZED(401, "Unauthorized")
+    , NOT_ACCEPTABLE_SOCIAL_LOGIN(406, "Not Acceptable Social Login Type");
 
     private final int status;
     private final String message;

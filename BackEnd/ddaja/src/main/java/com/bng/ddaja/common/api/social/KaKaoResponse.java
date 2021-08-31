@@ -1,4 +1,4 @@
-package com.bng.ddaja.common.api;
+package com.bng.ddaja.common.api.social;
 
 import java.util.Date;
 
@@ -13,7 +13,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class KaKaoResponse {
-    private long id;
+public class KaKaoResponse extends SocialResponse {
     private Date connected_at;
 }

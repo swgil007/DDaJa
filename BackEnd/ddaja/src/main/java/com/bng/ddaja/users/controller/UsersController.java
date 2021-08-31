@@ -1,18 +1,11 @@
 package com.bng.ddaja.users.controller;
 
 import java.io.IOException;
-import java.util.Date;
-
-import com.bng.ddaja.common.api.KaKaoResponse;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.SocialAccessToken;
-import com.bng.ddaja.common.enums.HttpMethods;
-import com.bng.ddaja.common.util.OKHttp;
 import com.bng.ddaja.users.service.UsersService;
-import com.squareup.moshi.Moshi;
-import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +18,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.Headers;
-import okhttp3.Request;
-import okhttp3.Response;
 
 @Slf4j
 @RequestMapping("users")

@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.api.KaKaoResponse;
+import com.bng.ddaja.common.api.social.KaKaoResponse;
+import com.bng.ddaja.common.api.social.SocialResponse;
 import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.domain.Token;
 import com.bng.ddaja.common.dto.SocialAccessToken;
@@ -44,15 +45,16 @@ public class UsersService {
 
     public UserDTO getUserBySocialToken(SocialAccessToken socialAccessToken) throws IOException, MemberNotFoundException {
         String authorizationValue = Constants.BEARER + " " + socialAccessToken.getAccessToken();
+        
         Response response = OKHttp.okHttpRequest("https://kapi.kakao.com/v2/user/me", new Headers.Builder().add(Constants.AUTHORIZATION, authorizationValue).build(), null, HttpMethods.GET);
-        KaKaoResponse kakaoUserInfoResponse = new Moshi.Builder()
+        SocialResponse socialResponse = new Moshi.Builder()
                                                         .add(Date.class, new Rfc3339DateJsonAdapter())
                                                         .build()
-                                                        .adapter(KaKaoResponse.class)
+                                                        .adapter(SocialResponse.class)
                                                         .fromJson(response.body()
                                                         .source());
         response.body().close();
-        Token token = tokensRepository.findByClientID(Long.toString(kakaoUserInfoResponse.getId()));
+        Token token = tokensRepository.findByClientID(socialResponse.getId());
         if(token == null) {
             throw new MemberNotFoundException();
         } else {
@@ -66,4 +68,8 @@ public class UsersService {
         return null;
     }
 
+    private Response requestKakaoUserInfo(SocialAccessToken socialAccessToken) {
+        String authorizationValue = Constants.BEARER + " " + socialAccessToken.getAccessToken();
+        return OKHttp.okHttpRequest("https://kapi.kakao.com/v2/user/me", new Headers.Builder().add(Constants.AUTHORIZATION, authorizationValue).build(), null, HttpMethods.GET);
+    }
 }
