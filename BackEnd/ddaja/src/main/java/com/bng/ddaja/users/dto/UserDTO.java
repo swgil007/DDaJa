@@ -22,9 +22,7 @@ public class UserDTO extends CommonDTO {
 
     private String eMail;
 
-    private String tokenOAuth;
-
-    private TokenType tokenType;
+    private String jwt;
 
     private String profileImg;
 
@@ -34,8 +32,6 @@ public class UserDTO extends CommonDTO {
         userId = vo.getUserId();
         nickName = vo.getNickName();
         eMail = vo.getEMail() == null ? "" : vo.getEMail();
-        tokenOAuth = vo.getTokenOAuth() == null ? "" : vo.getTokenOAuth();
-        tokenType = vo.getTokenType();
         profileImg = vo.getProfileImg();
     }
 
@@ -45,8 +41,6 @@ public class UserDTO extends CommonDTO {
                     .userId(userId)
                     .nickName(nickName)
                     .eMail(eMail)
-                    .tokenOAuth(tokenOAuth)
-                    .tokenType(tokenType)
                     .profileImg(profileImg)
                     .build();
     }

@@ -43,13 +43,6 @@ public class User extends CommonEntity {
     @Column(name = "EMAIL")
     private String eMail;
 
-    @Column(name = "TOKEN_OAUTH")
-    private String tokenOAuth;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "TOKEN_TYPE")
-    private TokenType tokenType;
-
     @Column(name = "PROFILE_IMG")
     private String profileImg;
 
