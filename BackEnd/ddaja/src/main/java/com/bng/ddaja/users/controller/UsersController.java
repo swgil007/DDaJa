@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import com.bng.ddaja.common.api.KaKaoResponse;
+import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.SocialAccessToken;
@@ -58,27 +59,9 @@ public class UsersController {
     }
 
     @PostMapping("social")
-    public ResponseEntity<CommonResponse> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws IOException {
+    public ResponseEntity<CommonDTO> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws IOException {
         log.info(socialAccessToken.toString());
         
-        // Request request = new Request.Builder()
-        // .addHeader("Authorization", "Bearer " + socialAccessToken.getAccessToken())
-        // .url("https://kapi.kakao.com/v2/user/me")
-        // .get()
-        // .build();
-
-        Response response = OKHttp.okHttpRequest("https://kapi.kakao.com/v2/user/me", new Headers.Builder().add("Authorization", "Bearer "+socialAccessToken.getAccessToken()).build(), null, HttpMethods.GET);
-
-        KaKaoResponse kakaoUserInfoResponse = new Moshi.Builder()
-                                                        .add(Date.class, new Rfc3339DateJsonAdapter())
-                                                        .build()
-                                                        .adapter(KaKaoResponse.class)
-                                                        .fromJson(response.body()
-                                                        .source());
-        response.body().close();
-
-        log.info(kakaoUserInfoResponse.toString());
-
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.ok().body(usersService.getUserBySocialToken(socialAccessToken));
     }
 }

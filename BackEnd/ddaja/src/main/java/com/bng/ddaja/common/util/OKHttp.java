@@ -55,28 +55,24 @@ public final class OKHttp {
     private static Request createRequest(String url, Headers headers, RequestBody requestBody, HttpMethods httpMethod) {
         Request.Builder builder = new Request.Builder().url(url);
         if (headers != null) builder.headers(headers);
-        if (requestBody == null) {
-            log.info("RequestBody is Null");
-        } else {
-            switch (httpMethod.getName()) {
-                case POST :
-                    builder.post(requestBody);
-                    break;
-                case PUT :
-                    builder.put(requestBody);
-                    break;
-                case PATCH :
-                    builder.patch(requestBody);
-                    break;
-                case OPTIONS :
-                    builder.method("OPTIONS", requestBody);
-                    break;
-                case DELETE :
-                    builder.delete(requestBody);
-                    break;
-                default:
-                    break;
-            }
+        switch (httpMethod.getName()) {
+            case POST :
+                builder.post(requestBody);
+                break;
+            case PUT :
+                builder.put(requestBody);
+                break;
+            case PATCH :
+                builder.patch(requestBody);
+                break;
+            case OPTIONS :
+                builder.method("OPTIONS", requestBody);
+                break;
+            case DELETE :
+                builder.delete(requestBody);
+                break;
+            default:
+                break;
         }
         return builder.build();
     }

@@ -9,4 +9,7 @@ public class MemberNotFoundException extends CommonException {
   public MemberNotFoundException() {
 		super(ErrorCode.NOT_FOUND_MEMBER);
 	}
+  public MemberNotFoundException(String message) {
+    super(ErrorCode.NOT_FOUND_MEMBER, message);
+  }
 }
