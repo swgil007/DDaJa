@@ -23,7 +23,8 @@ public class CommonError {
 
     private int code;
     private String message;
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String reason;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CommonErrorDetail> errors;
 

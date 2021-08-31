@@ -13,6 +13,7 @@ import com.bng.ddaja.common.dto.CommonError;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -56,6 +57,13 @@ public class CommonExceptionHandler {
         CommonError error = new CommonError(ErrorCode.UNAUTHORIZED);
         error.setMessage(e.getMessage());
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<CommonError> handlerHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+        CommonError error = new CommonError(ErrorCode.NOT_READABLE_MESSAGE);
+        error.setReason(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotAcceptableSocialLoginException.class)
