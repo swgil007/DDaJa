@@ -26,7 +26,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "TB_TOKEN")
 @Entity
 public class Token extends CommonEntity {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="T_ID")
