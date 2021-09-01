@@ -57,6 +57,7 @@ public class UsersService {
                 throw new NotAcceptableSocialLoginException();
         }
         Token token = tokensRepository.findByClientID(socialResponse.getId());
+        // 204 ? 202 ?
         if(token == null) throw new MemberNotFoundException();
         if(token.getUser() == null ) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
         return new UserDTO(token.getUser());
@@ -70,7 +71,6 @@ public class UsersService {
         String authorizationValue = Constants.BEARER + " " + socialAccessToken.getAccessToken();
         Response response = OKHttp.okHttpRequest("https://kapi.kakao.com/v2/user/me", new Headers.Builder().add(Constants.AUTHORIZATION, authorizationValue).build(), null, HttpMethods.GET);
         if(!response.isSuccessful()) {
-            log.info("here!!!");
             throw new NotAcceptableSocialResponseException();
         }
         SocialResponse result = new Moshi.Builder()
