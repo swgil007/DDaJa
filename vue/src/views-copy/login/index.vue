@@ -80,11 +80,11 @@ import { removeToken } from '@/utils/auth'
 
 export default {
   name: 'Login',
-  components: { 
-    SocialSign
-    , removeToken
-  }
-  , data() {
+  components: {
+    SocialSign,
+    removeToken
+  },
+  data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
@@ -101,22 +101,22 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin'
-        , password: '111111'
-      }
-      , loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }]
-        , password: [{ required: true, trigger: 'blur', validator: validatePassword }]
-      }
-      , passwordType: 'password'
-      , capsTooltip: false
-      , loading: false
-      , showDialog: false
-      , redirect: undefined
-      , otherQuery: {}
+        username: 'admin',
+        password: '111111'
+      },
+      loginRules: {
+        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+      },
+      passwordType: 'password',
+      capsTooltip: false,
+      loading: false,
+      showDialog: false,
+      redirect: undefined,
+      otherQuery: {}
     }
-  }
-  , watch: {
+  },
+  watch: {
     $route: {
       handler: function(route) {
         const query = route.query
@@ -124,30 +124,29 @@ export default {
           this.redirect = query.redirect
           this.otherQuery = this.getOtherQuery(query)
         }
-      }
-      , immediate: true
+      },
+      immediate: true
     }
-  }
-  , created() {
-    
+  },
+  created() {
+
   },
   mounted() {
-
     if (this.loginForm.username === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
-  }
-  , beforeCreate: function () {
+  },
+  beforeCreate: function() {
     this.$store.dispatch('user/logout')
-  }
-  , methods: {
+  },
+  methods: {
     checkCapslock(e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
-    }
-    , showPwd() {
+    },
+    showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
       } else {
@@ -156,20 +155,19 @@ export default {
       this.$nextTick(() => {
         this.$refs.password.focus()
       })
-    }
-    , handleLogin() {
+    },
+    handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.login()
-          
         } else {
           console.log('error submit!!')
           return false
         }
       })
-    }
-    , async login(){
+    },
+    async login() {
       await this.$store.dispatch('user/login', this.loginForm)
         .then(() => {
           this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
@@ -177,9 +175,9 @@ export default {
         })
         .catch(() => {
           this.loading = false
-      })
-    }
-    , getOtherQuery(query) {
+        })
+    },
+    getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
         if (cur !== 'redirect') {
           acc[cur] = query[cur]

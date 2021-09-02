@@ -65,7 +65,7 @@ const exploreRouter = {
           component: () => import('@/views/explore/license-information'),
           name: '자격증 정보',
           meta: { title: '자격증 정보', noCache: true }
-        } 
+        }
       ]
     }
   ]

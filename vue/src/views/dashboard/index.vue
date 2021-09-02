@@ -25,32 +25,31 @@ import { getToken } from '@/utils/auth'
 
 export default {
   components: {
-    mainCategory
-    , successfulStatus
-    , examinationDay
-    , realTimeStatus
-    , notice
-    , getToken
-  }
+    mainCategory,
+    successfulStatus,
+    examinationDay,
+    realTimeStatus,
+    notice,
+    getToken
+  },
 
-  , data () {
+  data() {
     return {
       Logo: mainLogo
     }
-  }
+  },
 
   /** Token 이 없다면 visitor 부여 **/
-  , beforeCreate: function () {
-    var token = getToken();
-  
-    if( token != 'admin-token' &&  token != 'editor-token'  ){
+  beforeCreate: function() {
+    var token = getToken()
 
+    if (token != 'admin-token' && token != 'editor-token') {
       var visitorInfo = {
         username: 'visitor',
         password: '111111'
       }
 
-      this.$store.dispatch('user/login', visitorInfo )
+      this.$store.dispatch('user/login', visitorInfo)
         .then(() => {
           this.$router.push({ path: this.redirect || '/', query: '' })
         })
