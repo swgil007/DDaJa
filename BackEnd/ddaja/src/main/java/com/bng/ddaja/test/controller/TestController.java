@@ -16,7 +16,7 @@ import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.Link;
 import com.bng.ddaja.common.enums.Roles;
-import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
+import com.bng.ddaja.common.hateoas.licenses.LicenseHateoas;
 import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;

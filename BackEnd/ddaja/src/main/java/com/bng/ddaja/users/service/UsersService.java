@@ -11,6 +11,7 @@ import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
 import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialResponseException;
 import com.bng.ddaja.common.domain.Token;
+import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.enums.HttpMethods;
 import com.bng.ddaja.common.enums.TokenType;
@@ -57,14 +58,15 @@ public class UsersService {
                 throw new NotAcceptableSocialLoginException();
         }
         Token token = tokensRepository.findByClientID(socialResponse.getId());
-        // 204 ? 202 ?
-        if(token == null) throw new MemberNotFoundException();
-        if(token.getUser() == null ) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
+        if(token == null) return createUserBySocialResponse(socialResponse);
+        if(token.getUser() == null) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
         return new UserDTO(token.getUser());
     }
 
-    public UserDTO createUserBySocialToken(SocialAccessToken socialAccessToken) {
-        return null;
+    private UserDTO createUserBySocialResponse(SocialResponse socialResponse) {
+        User user = usersRepository.save(User.builder().build());
+        tokensRepository.save(Token.builder().clientID(socialResponse.getId()).user(user).build());
+        return new UserDTO(user);
     }
 
     private SocialResponse requestKakaoUserInfo(SocialAccessToken socialAccessToken) throws IOException {
