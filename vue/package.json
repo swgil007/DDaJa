@@ -21,11 +21,7 @@
     "clipboard": "2.0.4",
     "codemirror": "5.45.0",
     "core-js": "3.6.5",
-<<<<<<< HEAD
-    "cros": "^1.0.1",
-=======
     "cors": "^2.8.5",
->>>>>>> 90ae619bddd29f7d8b2fb6a42630b3dcc412b60d
     "driver.js": "0.9.5",
     "dropzone": "5.5.1",
     "echarts": "4.2.1",
