@@ -17,7 +17,6 @@ public enum LicenseHateoas implements CommonHateoas {
 
     public String method;
     public String url;
-    //private static final List<LicenseHateos> = Arrays.stream(super.values()).collect(Collectors.toList());
     LicenseHateoas(String method, String url) {
         this.method = method;
         this.url = url;

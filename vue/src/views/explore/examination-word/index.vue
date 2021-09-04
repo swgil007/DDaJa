@@ -41,7 +41,11 @@
             <el-button
               size="mini"
               @click="examPopupStatus(scope.$index, scope.row, true)"
+<<<<<<< HEAD
             >암기 하기</el-button>
+=======
+            />
+>>>>>>> 8c648e9c4372be86d077b18e1b33d4ea0edea249
           </template>
         </el-table-column>
       </el-table>
@@ -61,8 +65,12 @@ import { fetchList } from '@/ddaja-api/explore/examination-word/ExaminationWord'
 export default {
   name: '',
   components: {
+<<<<<<< HEAD
     examinationPopup,
     fetchList
+=======
+    examinationPopup
+>>>>>>> 8c648e9c4372be86d077b18e1b33d4ea0edea249
   },
 
   data() {
@@ -91,13 +99,21 @@ export default {
 
   methods: {
     fetchList() {
+<<<<<<< HEAD
       fetchList(this.tableData).then(response => {
+=======
+      fetchList().then(response => {
+>>>>>>> 8c648e9c4372be86d077b18e1b33d4ea0edea249
         this.tableData = response._embedded.words
       })
     },
 
     examPopupStatus(index, row, val) {
+<<<<<<< HEAD
       if (val == true) {
+=======
+      if (val === true) {
+>>>>>>> 8c648e9c4372be86d077b18e1b33d4ea0edea249
         this.examPopupStatusVal = val
       } else {
         this.examPopupStatusVal = val

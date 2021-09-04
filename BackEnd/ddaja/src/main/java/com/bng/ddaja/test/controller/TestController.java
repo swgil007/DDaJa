@@ -18,7 +18,6 @@ import com.bng.ddaja.common.dto.Link;
 import com.bng.ddaja.common.enums.Roles;
 import com.bng.ddaja.common.hateoas.licenses.LicenseHateoas;
 import com.bng.ddaja.users.dto.UserDTO;
-import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.test.dto.TestParameter;
 import com.bng.ddaja.test.service.TestService;
@@ -47,8 +46,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class TestController {
-    
-    private UserService userService;
 
     private PublicKeyConfig publicKeyConfig;
 

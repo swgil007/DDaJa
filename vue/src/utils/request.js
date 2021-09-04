@@ -3,6 +3,7 @@ import { Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
+<<<<<<< HEAD
 const service = axios.create({
 
   baseURL: process.env.NODE_ENV === 'production'
@@ -10,7 +11,18 @@ const service = axios.create({
     : 'http://localhost',
 
   withCredentials: false
+=======
+
+const service = axios.create({
+
+  baseURL:  process.env.NODE_ENV === 'production'
+  ? ''
+  : 'http://localhost'
+
+  , withCredentials: false
+>>>>>>> 8c648e9c4372be86d077b18e1b33d4ea0edea249
 })
+
 
 // request interceptor
 service.interceptors.request.use(
@@ -47,6 +59,7 @@ service.interceptors.response.use(
   async response => {
     const res = response.data
 
+<<<<<<< HEAD
     if (response.data.info) {
       // access 토큰 만료시 작동되도록
       if (response.data.info.http_state === 400) {
@@ -63,11 +76,32 @@ service.interceptors.response.use(
         } else if (errorCd === 105) {
           // 유저 정보 비우기
           await store.dispatch('user/logout')
+=======
+    if(response.data.info) {
+
+      // access 토큰 만료시 작동되도록
+      if(response.data.info.http_state === 400) {
+        const errorCd = response.data.response_data.error_code
+        // BadCredentialsException (JWT토큰 만료시)
+        if(errorCd === 102) {
+          // 유저 정보 비우기
+          await store.dispatch('user/logout') 
+
+          // 라우터 정보 비우기
+          await store.dispatch('permission/resetRoutes') 
+          router.push(`/login`)
+          return
+
+        }else if(errorCd === 105){
+          // 유저 정보 비우기
+          await store.dispatch('user/logout') 
+>>>>>>> 8c648e9c4372be86d077b18e1b33d4ea0edea249
 
           // 라우터 정보 비우기
           await store.dispatch('permission/resetRoutes')
           router.push(`/login`)
           return
+<<<<<<< HEAD
         } else {
           return renewToken(response.config).then(res => {
             return res
@@ -80,6 +114,22 @@ service.interceptors.response.use(
             router.push(`/login`)
             return
           })
+=======
+
+        }else {
+          return renewToken(response.config).then(res=>{
+          return res
+
+        }, error => {
+          // 유저 정보 비우기
+          store.dispatch('user/logout') 
+
+          // 라우터 정보 비우기
+          store.dispatch('permission/resetRoutes') 
+          router.push(`/login`) 
+          return
+        })
+>>>>>>> 8c648e9c4372be86d077b18e1b33d4ea0edea249
         }
       }
     }
@@ -87,9 +137,9 @@ service.interceptors.response.use(
   }
   , error => {
     Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
+      message: error.message
+      , type: 'error'
+      , duration: 5 * 1000
     })
     return Promise.reject(error)
   }
