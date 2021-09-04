@@ -1,11 +1,4 @@
 package com.bng.ddaja.common.hateoas.licenses;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.bng.ddaja.common.dto.Link;
 import com.bng.ddaja.common.hateoas.CommonHateoas;
 
