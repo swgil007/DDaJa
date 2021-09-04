@@ -1,5 +1,8 @@
 package com.bng.ddaja.licenses.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.enums.LicenseCode;
@@ -25,6 +28,7 @@ public class LicenseDTO extends CommonDTO {
     private String agency;
     private LicenseType type;
     private int passScore;
+    private List<SubjectDTO> subjects;
     
     public LicenseDTO(License vo) {
         this.id = vo.getId();
@@ -36,8 +40,9 @@ public class LicenseDTO extends CommonDTO {
         this.passScore = vo.getPassScore();
         super.createdDate = vo.getCreatedDate();
         super.modifiedDate = vo.getModifiedDate();
+        this.subjects = vo.getSubjects() == null ? null : vo.getSubjects().stream().map(v -> new SubjectDTO(v)).collect(Collectors.toList());
     }
-
+    
     public License toEntity() {
         return License.builder()
         .id(this.id)

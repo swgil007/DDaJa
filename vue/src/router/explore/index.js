@@ -13,7 +13,6 @@ const exploreRouter = {
       component: {
         render(c) { return c('router-view') }
       },
-      name: 'explore',
       meta: {
         title: '자격증',
         noCache: true
@@ -66,7 +65,7 @@ const exploreRouter = {
           component: () => import('@/views/explore/license-information'),
           name: '자격증 정보',
           meta: { title: '자격증 정보', noCache: true }
-        } 
+        }
       ]
     }
   ]

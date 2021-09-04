@@ -2,9 +2,12 @@ package com.bng.ddaja.common.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -14,7 +17,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false, of = "id")
 @Table(name = "TB_OPEN_API")
 @NoArgsConstructor
 @Entity
@@ -31,9 +34,31 @@ public class OpenAPI extends CommonEntity {
     @Column(name = "CNT_PASS")
     private long cntPass;
 
-    @Column(name = "R_ID")
-    private long rID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "R_ID")
+    private Round round;
 
-    @Column(name = "L_ID")
-    private long lId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "L_ID")
+    private License license;
+
+    public void setRound(Round round) {
+        if(this.round != null) {
+            this.round.getOpenAPIs().remove(this);
+        }
+        this.round = round;
+        if(!round.getOpenAPIs().contains(this)) {
+            round.setOpenAPI(this);
+        }
+    }
+
+    public void setLicense(License license) {
+        if(this.license != null) {
+            this.license.getOpenAPIs().remove(this);
+        }
+        this.license = license;
+        if(!license.getOpenAPIs().contains(this)) {
+            license.setOpenAPI(this);
+        }
+    }
 }

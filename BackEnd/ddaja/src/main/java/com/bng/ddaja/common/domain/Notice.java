@@ -1,10 +1,13 @@
 package com.bng.ddaja.common.domain;
 
 import javax.persistence.Column;
-import javax.persistence.Entity; 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table; 
 
 import lombok.EqualsAndHashCode;
@@ -14,8 +17,8 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode
-@Table(name = "TB_LOTICE")
+@EqualsAndHashCode(callSuper = false, of = "id")
+@Table(name = "TB_NOTICE")
 @NoArgsConstructor
 @Entity
 public class Notice extends CommonEntity {
@@ -34,6 +37,17 @@ public class Notice extends CommonEntity {
     @Column(name = "IN_USE")
     private String inUse;
 
-    @Column(name = "A_ID")
-    private long aId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "A_ID")
+    private Admin admin;
+
+    public void setAdmin(Admin admin) {
+        if(this.admin != null) {
+            this.admin.getNotices().remove(this);
+        }
+        this.admin = admin;
+        if(!admin.getNotices().contains(this)) {
+            admin.setNotice(this);
+        }
+    }
 }

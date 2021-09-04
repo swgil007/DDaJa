@@ -72,13 +72,12 @@ public class LicenseDTO {
         this.agency = license.getAgency();
     }
 
-    public License licenseToDto ( LicenseDTO dto ){
-
+    public License toEntity (){
         return License.builder()
-                        .id(dto.getId())
-                        .name(dto.name)
-                        .passScore(dto.passScore)
-                        .agency(dto.agency)
+                        .id(id)
+                        .name(name)
+                        .passScore(passScore)
+                        .agency(agency)
                         .build();
     }
 }

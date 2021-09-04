@@ -11,15 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
+@Builder
 @Getter
-@Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false, of = "id")
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,7 +30,7 @@ public class WordQuestion extends CommonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="WQ_ID")
-    private long Id;
+    private long id;
 
     @Column(name = "CONTENT")
     private String content;
@@ -38,13 +38,20 @@ public class WordQuestion extends CommonEntity {
     @Column(name = "ANSWER")
     private String answer;
 
-    @Column(name = "L_ID")
-    private long LId;
-
-    @Column(name = "W_ID")
-    private long WId;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "W_ID", insertable=false, updatable=false )
+    @JoinColumn(name = "W_ID")
     private Word word;
+
+    @Column(name = "L_ID")
+    private long lId;
+
+    public void setWord(Word word) {
+        if(this.word != null) {
+            this.word.getWordQuestions().remove(this);
+        }
+        this.word = word;
+        if(!word.getWordQuestions().contains(this)) {
+            word.setWordQuestion(this);
+        }
+    }
 }

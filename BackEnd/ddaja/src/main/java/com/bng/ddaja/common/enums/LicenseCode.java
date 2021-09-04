@@ -1,6 +1,11 @@
 package com.bng.ddaja.common.enums;
 
-public enum LicenseCode {
+import com.bng.ddaja.common.dto.CommonEnumResource;
+
+import lombok.Getter;
+
+@Getter
+public enum LicenseCode implements CommonEnum {
 
     NONE("")
     , IP_GISA("정보처리 기사")
@@ -15,7 +20,8 @@ public enum LicenseCode {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public CommonEnumResource toCommonEnumResource() {
+        return new CommonEnumResource(name(), name);
     }
 }

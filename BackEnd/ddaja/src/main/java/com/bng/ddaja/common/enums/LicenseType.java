@@ -1,6 +1,11 @@
 package com.bng.ddaja.common.enums;
 
-public enum LicenseType {
+import com.bng.ddaja.common.dto.CommonEnumResource;
+
+import lombok.Getter;
+
+@Getter
+public enum LicenseType implements CommonEnum {
     NONE("")
     , WRITING("필기")
     , PERFORM("실기");
@@ -11,7 +16,8 @@ public enum LicenseType {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public CommonEnumResource toCommonEnumResource() {
+        return new CommonEnumResource(name(), name);
     }
 }

@@ -7,12 +7,12 @@ export default {
     }
   },
   created() {
-    this.fetchData(this.pageNum)
+    this.fetchData('')
   },
   methods: {
-    fetchData(pageNum) {
+    fetchData(query) {
       axios
-        .get('http://localhost/licenses')
+        .get('http://localhost/licenses' + query)
         .then(res => {
           console.log(res.data)
           this.$emit('licenseInfo', res.data)

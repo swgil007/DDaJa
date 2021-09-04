@@ -3,6 +3,8 @@ package com.bng.ddaja.words.controller;
 import java.util.List;
 
 import com.bng.ddaja.common.domain.Word;
+import com.bng.ddaja.common.dto.CommonResource;
+import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.temp.license.TempLicensesService;
 import com.bng.ddaja.test.dto.LicenseDTO;
@@ -20,7 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.stream.Collectors;
+
+@Slf4j
 @AllArgsConstructor
 @RequestMapping
 @RestController
@@ -31,10 +37,10 @@ public class WordsController {
 
     @GetMapping("/words")
     @ResponseBody
-    public ResponseEntity<List<WordDTO>> wordAllList( ){
-
+    public ResponseEntity<CommonResponse> wordAllList( ){
+        List<CommonResource> resourceList = service.findAll().stream().map(dto -> new CommonResource(dto)).collect(Collectors.toList());
         return ResponseEntity.ok() 
-                            .body(service.findAll());
+                            .body( new CommonResponse(resourceList.size(), resourceList) );
     }
 
     @GetMapping("/words/{wid}")
@@ -44,8 +50,9 @@ public class WordsController {
                                                     , @RequestParam( name = "limitNumber", required = false ) int limitNumber 
                                                     , @RequestParam( name = "sortEntity", required = false ) String sortEntity ){
 
-        return ResponseEntity.ok() 
-                            .body(service.findAll());
+        // return ResponseEntity.ok() 
+        //                     .body(service.findAll());
+        return null;
     }
 
     @GetMapping("/words/licenses/{lid}")
@@ -61,7 +68,7 @@ public class WordsController {
                                                 @RequestParam( name = "lid"  , required = false ) long lid ){                                           
 
         Word vo = Word.builder()
-                        .license(new LicenseDTO().licenseToDto(license.findById(lid)))
+                        .license(license.findById(lid).toEntity())
                         .title(title)
                         .build();
 
