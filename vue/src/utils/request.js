@@ -3,14 +3,16 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
+
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-
-  // baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://localhost',
-  withCredentials: false,
-  timeout: 5000 // request timeout
+  baseURL:  process.env.NODE_ENV === 'production'
+  ? ''
+  : 'http://localhost',
+  withCredentials: false, // 2021-06-17 스프링 개발용 수정
+  // timeout: 10000 // request timeout 개발용 잠깐 timeout 없게 허용
 })
+
 
 // request interceptor
 service.interceptors.request.use(
@@ -44,41 +46,56 @@ service.interceptors.response.use(
    * Here is just an example
    * You can also judge the status by HTTP Status Code
    */
-  response => {
+  async response => {
     const res = response.data
 
-    // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
-      Message({
-        message: res.message || 'Error',
-        type: 'error',
-        duration: 5 * 1000
-      })
+    if(response.data.info) {
 
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
+      // access 토큰 만료시 작동되도록
+      if(response.data.info.http_state === 400) {
+        const errorCd = response.data.response_data.error_code
+        // BadCredentialsException (JWT토큰 만료시)
+        if(errorCd === 102) {
+          // 유저 정보 비우기
+          await store.dispatch('user/logout') 
+
+          // 라우터 정보 비우기
+          await store.dispatch('permission/resetRoutes') 
+          router.push(`/login`)
+          return
+
+        }else if(errorCd === 105){
+          // 유저 정보 비우기
+          await store.dispatch('user/logout') 
+
+          // 라우터 정보 비우기
+          await store.dispatch('permission/resetRoutes')
+          router.push(`/login`)
+          return
+
+        }else {
+          return renewToken(response.config).then(res=>{
+          return res
+
+        }, error => {
+          // 유저 정보 비우기
+          store.dispatch('user/logout') 
+
+          // 라우터 정보 비우기
+          store.dispatch('permission/resetRoutes') 
+          router.push(`/login`) 
+          return
         })
+        }
       }
-      return Promise.reject(new Error(res.message || 'Error'))
-    } else {
-      return res
     }
-  },
-  error => {
-    console.log('err' + error) // for debug
+    return res
+  }
+  , error => {
     Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
+      message: error.message
+      , type: 'error'
+      , duration: 5 * 1000
     })
     return Promise.reject(error)
   }

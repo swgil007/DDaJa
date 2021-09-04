@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-logo-div">
-      <img :src="Logo" class="logo" style="">
+      <img :src="Logo" class="logo" style="" @click="test123()">
     </div>
     <mainCategory />
     <successfulStatus />
@@ -22,6 +22,7 @@ import examinationDay from './component/examination-day'
 import realTimeStatus from './component/real-time-status'
 import notice from './component/notice'
 import { getToken } from '@/utils/auth'
+import {test} from '@/api/test'
 
 export default {
   components: {
@@ -53,6 +54,22 @@ export default {
         .then(() => {
           this.$router.push({ path: this.redirect || '/', query: '' })
         })
+    }
+  }
+
+  , methods :{
+    async test123(){
+  try{
+    await test().then( response => {
+        console.log(response)
+      })
+  }
+      catch (error) {
+        console.log('error.response.data.message============ ')
+
+        console.log(error)
+      }
+
     }
   }
 }

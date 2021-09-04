@@ -9,13 +9,13 @@
         style="width: 100%; height: 100%;"
       >
         <el-table-column
-          label="Name"
-          prop="name"
+          label="Title"
+          prop="title"
         />
         <el-table-column
-          label="Date"
+          label="등록일"
           width="400"
-          prop="date"
+          prop="createdDate"
         />
         <el-table-column
           label="단어 수"
@@ -63,8 +63,10 @@ export default {
   components: {
     examinationPopup,
     fetchList
-  },
-  data() {
+  }
+
+
+  , data() {
     return {
       tableData: [
         { date: '2011-05-03', wordNum: '23', answer: '12', name: '데이터 베이스 요약 정리 암기 하기' },
@@ -80,21 +82,28 @@ export default {
       radio1: '1',
       examPopupStatusVal: false
     }
-  },
-  created() {
+  }
+
+
+  , created() {
     this.licenseInfo = this.$session.get('licenseInfo')
     this.subject = this.licenseInfo.subject
-  },
-  methods: {
-    examPopupStatus(index, row, val) {
-      fetchList(this.tableData).them(response => {
-        console.log(response)
-      })
+    this.fetchList()
+  }
 
+
+  , methods: {
+    fetchList (){
+      fetchList(this.tableData).then(response => {
+        this.tableData = response._embedded.words
+      })
+    }
+    
+    , examPopupStatus(index, row, val) {
       if (val == true) {
-        // this.examPopupStatusVal = val;
+        this.examPopupStatusVal = val;
       } else {
-        // this.examPopupStatusVal = val;
+        this.examPopupStatusVal = val;
       }
     }
   }
