@@ -55,7 +55,7 @@ export default {
     requestTypeList() {
       axios.get('http://localhost/licenses/type')
         .then(res => {
-          this.typeOptions = res.data.items
+          this.typeOptions = res.data
         })
         .catch(err => {
           console.log(err)
@@ -64,7 +64,7 @@ export default {
     requestCodeList() {
       axios.get('http://localhost/licenses/code')
         .then(res => {
-          this.codeOptions = res.data.items
+          this.codeOptions = res.data
         })
         .catch(err => {
           console.log(err)

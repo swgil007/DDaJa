@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.domain.User;
-import com.bng.ddaja.common.dto.CommonParameter;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.CommonUserDetails;

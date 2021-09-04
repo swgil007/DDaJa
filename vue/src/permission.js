@@ -14,6 +14,7 @@ router.beforeEach(async(to, from, next) => {
 
   const hasToken = getToken()
 
+  console.log(hasToken)
   if (hasToken) {
     /** ADMIN **/
     if (hasToken === 'admin-token') {
@@ -46,6 +47,9 @@ router.beforeEach(async(to, from, next) => {
   /** 토큰이 없고 다른 페이지로 이동하려는 경우 **/
   } else {
     store.dispatch('user/resetToken')
+
+    console.log(to.path)
+    console.log(whiteList.indexOf(to.path))
 
     if (whiteList.indexOf(to.path) !== -1) {
       next()

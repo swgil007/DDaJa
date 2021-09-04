@@ -68,7 +68,7 @@ public class WordsController {
                                                 @RequestParam( name = "lid"  , required = false ) long lid ){                                           
 
         Word vo = Word.builder()
-                        .license(new LicenseDTO().licenseToDto(license.findById(lid)))
+                        .license(license.findById(lid).toEntity())
                         .title(title)
                         .build();
 
