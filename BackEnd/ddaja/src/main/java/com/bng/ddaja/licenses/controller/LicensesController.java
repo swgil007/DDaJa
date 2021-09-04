@@ -14,7 +14,7 @@ import com.bng.ddaja.common.enums.LicenseCode;
 import com.bng.ddaja.common.enums.LicenseType;
 import com.bng.ddaja.licenses.dto.LicenseDTO;
 import com.bng.ddaja.licenses.dto.LicenseSearch;
-import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
+import com.bng.ddaja.common.hateoas.licenses.LicenseHateoas;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +51,7 @@ public class LicensesController {
         return ResponseEntity.ok().body(
                 new CommonResponse(
                     licenseService.getAllLicenseByLicenseSearch(licenseSearch)
-                    , LicenseHateos.values()
+                    , LicenseHateoas.values()
                 )
             );
     }
@@ -61,7 +61,7 @@ public class LicensesController {
         , notes = "자격증 ID를 통해 특정 자격증의 정보를 조회한다.")
     @GetMapping("/{id}")
     public ResponseEntity<CommonResource> getLicenses(@PathVariable(name = "id", required = true) long id) {
-        return ResponseEntity.ok().body(new CommonResource(licenseService.getLicenseById(id), LicenseHateos.values()));
+        return ResponseEntity.ok().body(new CommonResource(licenseService.getLicenseById(id), LicenseHateoas.values()));
     }
 
     @ApiOperation(
@@ -69,7 +69,7 @@ public class LicensesController {
         , notes = "자격증 ID를 통해 특정 자격증의 정보를 수정한다.")
     @PutMapping("/{id}")
     public ResponseEntity<CommonResource> putLicenses(@PathVariable(name = "id", required = true) long id, @RequestBody LicenseDTO licenseDTO) {
-        return ResponseEntity.ok().body(new CommonResource(licenseService.saveLicense(licenseDTO), LicenseHateos.values()));
+        return ResponseEntity.ok().body(new CommonResource(licenseService.saveLicense(licenseDTO), LicenseHateoas.values()));
     }
 
     @ApiOperation(
