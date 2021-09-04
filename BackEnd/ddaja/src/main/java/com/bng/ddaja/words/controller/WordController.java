@@ -5,10 +5,12 @@ import java.util.List;
 import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
+import com.bng.ddaja.common.hateoas.word.WordHateoas;
 import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.temp.license.TempLicensesService;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.words.dto.WordDTO;
+import com.bng.ddaja.words.dto.WordSearch;
 import com.bng.ddaja.words.service.WordService;
 
 import org.springframework.http.ResponseEntity;
@@ -33,66 +35,23 @@ import java.util.stream.Collectors;
 public class WordController {
 
     private WordService wordService;
-    private TempLicensesService licenseService;
 
     @GetMapping("")
     @ResponseBody
-    public ResponseEntity<CommonResponse> wordList(   ){
-        
-        List<CommonResource> resourceList = wordService.findAll().stream().map(dto -> new CommonResource(dto)).collect(Collectors.toList());
-        return ResponseEntity.ok() 
-                            .body( new CommonResponse(resourceList.size(), resourceList) );
+    public ResponseEntity<CommonResponse> wordList( WordSearch wordSearch ){
+        return ResponseEntity.ok().body(
+            new CommonResponse(
+                wordService.getAllWordByWordSearch(wordSearch)
+                , WordHateoas.values()
+            )
+        );
     }
 
-
-
-
-
-// 자격증 id 
-// 해당 자격증 id 에 word List 를 반환
-
-
-// words ? lid = 1
-// licenses / lid / words
-
-
-
-    @GetMapping("/words/licenses/{lid}")
-    @ResponseBody
-    public ResponseEntity<List<WordDTO>> wordLicenseList ( @PathVariable(name = "lid", required = true) long lid ){
-
-        return ResponseEntity.ok()
-                            .body(wordService.wordLicenseList(lid));
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @PostMapping("/words")
-    public ResponseEntity<String> wordInsert (  @RequestParam( name = "title", required = false ) String title,
+    @PostMapping("")
+    public ResponseEntity<String> createWord (  @RequestParam( name = "title", required = false ) String title,
                                                 @RequestParam( name = "lid"  , required = false ) long lid ){                                           
 
-     //    wordService.wordInsert(new  Word);
+       // wordService.createWord(new  Word);
 
         return ResponseEntity.ok().body("INSERT SECCESS : )");
     }
