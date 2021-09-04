@@ -66,7 +66,7 @@ public class UsersService {
     private UserDTO createUserBySocialResponse(SocialResponse socialResponse) {
         User user = usersRepository.save(User.builder().build());
         tokensRepository.save(Token.builder().clientID(socialResponse.getId()).user(user).build());
-        return new UserDTO(user);
+        return new UserDTO(user, true);
     }
 
     private SocialResponse requestKakaoUserInfo(SocialAccessToken socialAccessToken) throws IOException {

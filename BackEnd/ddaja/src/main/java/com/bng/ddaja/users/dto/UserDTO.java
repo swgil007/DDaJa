@@ -35,6 +35,16 @@ public class UserDTO extends CommonDTO {
         profileImg = vo.getProfileImg();
     }
 
+    public UserDTO(User vo, boolean isCreated) {
+        if(vo == null) return;
+        id = vo.getId();
+        userId = vo.getUserId();
+        nickName = vo.getNickName();
+        eMail = vo.getEMail() == null ? "" : vo.getEMail();
+        profileImg = vo.getProfileImg();
+        super.isCreated = isCreated;
+    }
+
     public User toEntity() {
         return User.builder()
                     .id(id)

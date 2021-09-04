@@ -12,6 +12,7 @@ import com.bng.ddaja.common.hateoas.users.UserHateoas;
 import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.users.service.UsersService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +57,7 @@ public class UsersController {
     @PostMapping("social")
     public ResponseEntity<CommonResource> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
         UserDTO userDTO = usersService.getUserBySocialToken(socialAccessToken);
-        if(userDTO == null) return ResponseEntity.noContent().build();
+        if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
         return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));
     }
 }

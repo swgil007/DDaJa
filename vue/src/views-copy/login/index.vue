@@ -76,13 +76,11 @@
 <script>
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
-import { removeToken } from '@/utils/auth'
 
 export default {
   name: 'Login',
   components: {
-    SocialSign,
-    removeToken
+    SocialSign
   },
   data() {
     const validateUsername = (rule, value, callback) => {
@@ -140,6 +138,16 @@ export default {
   },
   beforeCreate: function() {
     this.$store.dispatch('user/logout')
+
+    var visitorInfo = {
+      username: 'visitor',
+      password: '111111'
+    }
+
+    this.$store.dispatch('user/login', visitorInfo)
+      .then(() => {
+        this.$router.push({ path: this.redirect || '/', query: '' })
+      })
   },
   methods: {
     checkCapslock(e) {
