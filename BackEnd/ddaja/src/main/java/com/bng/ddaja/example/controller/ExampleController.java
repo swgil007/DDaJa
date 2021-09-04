@@ -2,8 +2,8 @@ package com.bng.ddaja.example.controller;
 
 import javax.validation.Valid;
 
+import com.bng.ddaja.common.api.dto.UserDTO;
 import com.bng.ddaja.common.domain.User;
-import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.TestParameter;
 
@@ -51,13 +51,6 @@ public class ExampleController {
     public User getUserByUId(@PathVariable(name = "id") long uId) {
         return userService.findUserInfoByUId(uId);
     }
-
-    // @GetMapping("/users/{uId}")
-    // @ResponseBody
-    // public UserDTO getUser(@PathVariable(name = "uId") long uId) {
-    //     return userService.findUser(uId);
-
-    // }
 
     @ApiOperation(
         value = "자격증 정보 조회"
