@@ -16,8 +16,10 @@ public class LicenseSpec {
 
     public static Specification<License> subjectNameLike(final String subjectName) {
         return new Specification<License>() {
+
             public Predicate toPredicate(Root<License> root, CriteriaQuery<?> query,
             CriteriaBuilder builder) {
+                
                 if (subjectName == null || "".equals(subjectName)) return builder.conjunction();
                 Join<License, Subject> j = root.join("subjects", JoinType.INNER);
                 return builder.like(j.<String>get("name"), new StringBuilder().append("%").append(subjectName).append("%").toString());

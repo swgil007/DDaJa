@@ -12,6 +12,7 @@ import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginExcep
 import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialResponseException;
 import com.bng.ddaja.common.domain.Token;
 import com.bng.ddaja.common.domain.User;
+import com.bng.ddaja.common.dto.CommonUserDetails;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.enums.HttpMethods;
 import com.bng.ddaja.common.enums.TokenType;
@@ -25,6 +26,9 @@ import com.bng.ddaja.users.repository.UsersRepository;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +39,7 @@ import okhttp3.Response;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class UsersService {
+public class UsersService implements UserDetailsService {
     private UsersRepository usersRepository;
     private TokensRepository tokensRepository;
 
@@ -83,5 +87,10 @@ public class UsersService {
                                             .source());
         response.body().close();
         return result;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException { 
+        return new CommonUserDetails();
     }
 }

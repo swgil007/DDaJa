@@ -2,7 +2,6 @@ package com.bng.ddaja.common.dto;
 
 import com.bng.ddaja.common.domain.CommonEntity;
 import com.bng.ddaja.common.spec.CommonSpec;
-import com.bng.ddaja.common.spec.SpecBuilder;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

@@ -21,12 +21,6 @@ import lombok.Setter;
 public class WordDTO extends CommonDTO { 
 
     @ApiModelProperty(
-        name = "l_id"
-        , example = "11"
-    )
-    private long lId;
-
-    @ApiModelProperty(
         name = "title"
         , example = "리눅스 용어 외우기"
     )
