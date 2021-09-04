@@ -5,14 +5,12 @@ import com.bng.ddaja.common.dto.CommonEnumResource;
 import lombok.Getter;
 
 @Getter
-public enum LicenseType implements CommonEnum {
-    NONE("")
-    , WRITING("필기")
-    , PERFORM("실기");
+public enum Roles implements CommonEnum {
+    ADMIN("관리자"), USER("사용자"), VISITOR("방문자");
 
     private String name;
 
-    LicenseType(String name) {
+    Roles(String name) {
         this.name = name;
     }
 
@@ -20,4 +18,5 @@ public enum LicenseType implements CommonEnum {
     public CommonEnumResource toCommonEnumResource() {
         return new CommonEnumResource(name(), name);
     }
+    
 }

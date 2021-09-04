@@ -14,6 +14,21 @@ import App from './App'
 import store from './store'
 import router from './router'
 import VueSession from 'vue-session'
+import axios from 'axios'
+// import cors from 'cors'
+import VueKakaoSdk from 'vue-kakao-sdk'
+
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+// axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'origin, access-control-allow-origin';
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+axios.defaults.timeout = 100000
+axios.defaults.baseURL = '{url}'
+
+Vue.prototype.$http = axios
+
+// Vue.use(cors)
+const apiKey = 'a227a64e7aecffa5d4254e4526d679b1'
+Vue.use(VueKakaoSdk, { apiKey })
 
 import './icons' // icon
 import './permission' // permission control

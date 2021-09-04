@@ -1,19 +1,13 @@
 package com.bng.ddaja.licenses.controller;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.licenses.spec.LicenseSearchOptions;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
-import com.bng.ddaja.common.dto.CommonEnumResource;
 import com.bng.ddaja.common.dto.CommonError;
-import com.bng.ddaja.common.dto.CommonPage;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.enums.LicenseCode;
@@ -67,9 +61,7 @@ public class LicensesController {
         , notes = "자격증 ID를 통해 특정 자격증의 정보를 조회한다.")
     @GetMapping("/{id}")
     public ResponseEntity<CommonResource> getLicenses(@PathVariable(name = "id", required = true) long id) {
-        LicenseDTO license = licenseService.getLicenseById(id);
-        CommonResource resource = new CommonResource(license, LicenseHateos.values());
-        return ResponseEntity.ok().body(resource);
+        return ResponseEntity.ok().body(new CommonResource(licenseService.getLicenseById(id), LicenseHateos.values()));
     }
 
     @ApiOperation(
@@ -113,15 +105,13 @@ public class LicensesController {
     }
     
     @GetMapping("type")
-    public ResponseEntity<LicenseType[]> getLicensesType() {
-        //List<CommonResource> resourceList = Arrays.stream(LicenseType.values()).map(e -> new CommonResource(e)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(LicenseType.values());
+    public ResponseEntity<CommonResponse> getLicensesType() {
+        return ResponseEntity.ok().body(new CommonResponse(LicenseType.values()));
     }
 
     @GetMapping("code")
-    public ResponseEntity<LicenseCode[]> getLicensesCode() {
-        //List<CommonResource> resourceList = Arrays.stream(LicenseCode.values()).map(e -> new CommonResource(e)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(LicenseCode.values()); 
+    public ResponseEntity<CommonResponse> getLicensesCode() {
+        return ResponseEntity.ok().body(new CommonResponse(LicenseCode.values())); 
     }
 
     @GetMapping("subjects")
@@ -137,10 +127,6 @@ public class LicensesController {
     )
     @GetMapping("search")
     public ResponseEntity<CommonResponse> getLicenseSearchOptions() {
-        // List<CommonEnumResource> resourceList = 
-        //         Arrays.stream(LicenseSearchOptions.values())
-        //                 .map(e -> new CommonEnumResource(e.name(), e.getName(), e.getQuery()))
-        //                 .collect(Collectors.toList());
         return ResponseEntity.ok().body(new CommonResponse(LicenseSearchOptions.values()));
     }
 }
