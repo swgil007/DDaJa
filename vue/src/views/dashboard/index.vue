@@ -44,11 +44,7 @@ export default {
   beforeCreate: function() {
     var token = getToken()
 
-<<<<<<< HEAD
-    if (token != 'admin-token' && token != 'editor-token') {
-=======
     if (token !== 'admin-token' && token !== 'editor-token') {
->>>>>>> 8c648e9c4372be86d077b18e1b33d4ea0edea249
       var visitorInfo = {
         username: 'visitor',
         password: '111111'
