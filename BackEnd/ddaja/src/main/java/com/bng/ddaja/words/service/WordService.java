@@ -5,13 +5,10 @@ import java.util.List;
 
 import com.bng.ddaja.common.domain.License;
 import com.bng.ddaja.common.domain.Word;
-import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.temp.license.TempLicensesService;
 import com.bng.ddaja.words.dto.WordDTO;
-import com.bng.ddaja.words.repository.WordsRepository;
+import com.bng.ddaja.words.repository.WordRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +20,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class WordsService {
+public class WordService {
 
-    private WordsRepository repository;
+    private WordRepository repository;
 
     @Autowired
     private TempLicensesService licenses;

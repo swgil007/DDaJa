@@ -7,7 +7,9 @@ import lombok.Getter;
 
 @Getter
 public enum LicenseSearchOptions implements CommonSearchOption {
-    NAME("자격증 이름", "name"), SUBJECTNAME("과목 이름", "subjectName"), INUSE("사용 여부", "inUse");
+    NAME("자격증 이름", "name")
+    , SUBJECTNAME("과목 이름", "subjectName")
+    , INUSE("사용 여부", "inUse");
 
     private String name;
     private String query;
@@ -19,7 +21,7 @@ public enum LicenseSearchOptions implements CommonSearchOption {
 
     @Override
     public CommonEnumResource toCommonEnumResource() {
-        return new CommonEnumResource(this.name(), name, query);
+        return new CommonEnumResource(name(), name, query);
     }
 
 }

@@ -41,7 +41,7 @@
             <el-button
               size="mini"
               @click="examPopupStatus(scope.$index, scope.row, true)"
-            >암기 하기</el-button>
+            ></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -94,7 +94,7 @@ export default {
 
   , methods: {
     fetchList (){
-      fetchList(this.tableData).then(response => {
+      fetchList().then(response => {
         this.tableData = response._embedded.words
       })
     }

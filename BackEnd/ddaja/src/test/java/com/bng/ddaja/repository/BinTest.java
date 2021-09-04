@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bng.ddaja.DdajaApplication;
 import com.bng.ddaja.common.domain.Word;
-import com.bng.ddaja.words.repository.WordsRepository;
+import com.bng.ddaja.words.repository.WordRepository;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BinTest {
     
     @MockBean
-    private WordsRepository wordsRepository; 
+    private WordRepository wordsRepository; 
 
     @Test
     public void wordTest(){

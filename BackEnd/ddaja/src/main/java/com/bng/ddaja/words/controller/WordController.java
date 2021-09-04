@@ -9,7 +9,7 @@ import com.bng.ddaja.licenses.service.LicensesService;
 import com.bng.ddaja.temp.license.TempLicensesService;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.words.dto.WordDTO;
-import com.bng.ddaja.words.service.WordsService;
+import com.bng.ddaja.words.service.WordService;
 
 import org.springframework.http.ResponseEntity;
 
@@ -28,55 +28,71 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @AllArgsConstructor
-@RequestMapping
+@RequestMapping("words")
 @RestController
-public class WordsController {
+public class WordController {
 
-    private WordsService service;
-    private TempLicensesService license;
+    private WordService wordService;
+    private TempLicensesService licenseService;
 
-    @GetMapping("/words")
+    @GetMapping("")
     @ResponseBody
-    public ResponseEntity<CommonResponse> wordAllList( ){
-        List<CommonResource> resourceList = service.findAll().stream().map(dto -> new CommonResource(dto)).collect(Collectors.toList());
+    public ResponseEntity<CommonResponse> wordList(   ){
+        
+        List<CommonResource> resourceList = wordService.findAll().stream().map(dto -> new CommonResource(dto)).collect(Collectors.toList());
         return ResponseEntity.ok() 
                             .body( new CommonResponse(resourceList.size(), resourceList) );
     }
 
-    @GetMapping("/words/{wid}")
-    @ResponseBody
-    public ResponseEntity<List<WordDTO>> wordList( @PathVariable(name = "lid", required = true) long lid
-                                                    , @RequestParam( name = "startNumber", required = false ) int startNumber 
-                                                    , @RequestParam( name = "limitNumber", required = false ) int limitNumber 
-                                                    , @RequestParam( name = "sortEntity", required = false ) String sortEntity ){
 
-        // return ResponseEntity.ok() 
-        //                     .body(service.findAll());
-        return null;
-    }
+
+
+
+// 자격증 id 
+// 해당 자격증 id 에 word List 를 반환
+
+
+// words ? lid = 1
+// licenses / lid / words
+
+
 
     @GetMapping("/words/licenses/{lid}")
     @ResponseBody
     public ResponseEntity<List<WordDTO>> wordLicenseList ( @PathVariable(name = "lid", required = true) long lid ){
 
         return ResponseEntity.ok()
-                            .body(service.wordLicenseList(lid));
+                            .body(wordService.wordLicenseList(lid));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @PostMapping("/words")
     public ResponseEntity<String> wordInsert (  @RequestParam( name = "title", required = false ) String title,
                                                 @RequestParam( name = "lid"  , required = false ) long lid ){                                           
 
-        Word vo = Word.builder()
-                        .license(license.findById(lid).toEntity())
-                        .title(title)
-                        .build();
-
-        System.out.println("------------??" );
-        System.out.println(vo.getLicense().getId());
-        System.out.println("------------??" + vo.getCreatedDate());
-        
-        service.wordInsert(vo);
+     //    wordService.wordInsert(new  Word);
 
         return ResponseEntity.ok().body("INSERT SECCESS : )");
     }

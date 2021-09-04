@@ -50,7 +50,7 @@ export default {
         password: '111111'
       }
 
-      this.$store.dispatch('user/login', visitorInfo)
+      this.$store.dispatch('user/login', Info)
         .then(() => {
           this.$router.push({ path: this.redirect || '/', query: '' })
         })
