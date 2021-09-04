@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.bng.ddaja.common.hateos.CommonHateos;
+import com.bng.ddaja.common.hateoas.CommonHateoas;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -27,7 +27,7 @@ public class CommonResource {
     public CommonResource(CommonDTO item) {
         this.item = item;
     }
-    public CommonResource(CommonDTO item, CommonHateos[] hateos) {
+    public CommonResource(CommonDTO item, CommonHateoas[] hateos) {
         this.item = item;
         this.hateos = Arrays.stream(hateos).map(h -> h.initLink(item.getId())).collect(Collectors.toList());
     }

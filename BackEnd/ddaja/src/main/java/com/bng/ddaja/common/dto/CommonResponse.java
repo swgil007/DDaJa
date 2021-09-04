@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.hateos.CommonHateos;
-import com.bng.ddaja.common.spec.CommonSearchOption;
+import com.bng.ddaja.common.enums.CommonEnum;
+import com.bng.ddaja.common.hateoas.CommonHateoas;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -28,10 +28,11 @@ public class CommonResponse {
     private int totalCount;
     public CommonPage page;
     private List<? extends CommonResource> items;
+    private CommonDTO item;
 
-    public CommonResponse (List<? extends CommonResource> items) {
-        this.totalCount = items.size();
-        this.items = items;
+    public CommonResponse(List<? extends CommonDTO> dtoList) {
+        items = dtoList.stream().map(d -> new CommonResource(d)).collect(Collectors.toList());
+        totalCount = dtoList.size();
     }
 
     public CommonResponse(int totalCount, CommonResource item) {
@@ -46,14 +47,19 @@ public class CommonResponse {
         this.items = items;
     }
 
-    public CommonResponse(Page<? extends CommonDTO> pageDTO, CommonHateos[] hateos) {
+    public CommonResponse(Page<? extends CommonDTO> pageDTO, CommonHateoas[] hateos) {
         items = pageDTO.stream().map(dto -> new CommonResource(dto, hateos)).collect(Collectors.toList());
         totalCount = pageDTO.getSize();
         page = new CommonPage(pageDTO);
     }
 
-    public CommonResponse(CommonSearchOption[] searchOptions) {
+    public CommonResponse(CommonEnum[] searchOptions) {
         items = Arrays.stream(searchOptions).map(e -> e.toCommonEnumResource()).collect(Collectors.toList());
         totalCount = searchOptions.length;
+    }
+
+    public CommonResponse(CommonDTO item) {
+        this.totalCount = 1;
+        this.item = item;
     }
 }

@@ -3,7 +3,7 @@ package com.bng.ddaja.common.enums;
 import lombok.Getter;
 
 @Getter
-public enum AdminRule {
+public enum AdminRole {
 
     NONE("임시 관리자")
     , SUPER("슈퍼 관리자")
@@ -11,7 +11,7 @@ public enum AdminRule {
 
     private String role;
 
-    AdminRule(String role) {
+    AdminRole(String role) {
         this.role = role;
     }
 }

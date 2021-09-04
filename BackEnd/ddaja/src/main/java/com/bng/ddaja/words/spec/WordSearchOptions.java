@@ -1,12 +1,12 @@
 package com.bng.ddaja.words.spec;
 
 import com.bng.ddaja.common.dto.CommonEnumResource;
-import com.bng.ddaja.common.spec.CommonSearchOption;
+import com.bng.ddaja.common.enums.CommonEnum;
 
 import lombok.Getter;
 
 @Getter
-public enum WordSearchOptions implements CommonSearchOption{
+public enum WordSearchOptions implements CommonEnum{
 
     NAME("단어 목록명", "name")
     , LICENSEID("자격증 ID", "licenseID");

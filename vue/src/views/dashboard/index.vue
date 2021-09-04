@@ -22,7 +22,7 @@ import examinationDay from './component/examination-day'
 import realTimeStatus from './component/real-time-status'
 import notice from './component/notice'
 import { getToken } from '@/utils/auth'
-import {test} from '@/api/test'
+import { test } from '@/api/test'
 
 export default {
   components: {
@@ -55,21 +55,19 @@ export default {
           this.$router.push({ path: this.redirect || '/', query: '' })
         })
     }
-  }
+  },
 
-  , methods :{
-    async test123(){
-  try{
-    await test().then( response => {
-        console.log(response)
-      })
-  }
-      catch (error) {
+  methods: {
+    async test123() {
+      try {
+        await test().then(response => {
+          console.log(response)
+        })
+      } catch (error) {
         console.log('error.response.data.message============ ')
 
         console.log(error)
       }
-
     }
   }
 }

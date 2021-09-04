@@ -41,7 +41,7 @@
             <el-button
               size="mini"
               @click="examPopupStatus(scope.$index, scope.row, true)"
-            ></el-button>
+            />
           </template>
         </el-table-column>
       </el-table>
@@ -63,10 +63,9 @@ export default {
   components: {
     examinationPopup,
     fetchList
-  }
+  },
 
-
-  , data() {
+  data() {
     return {
       tableData: [
         { date: '2011-05-03', wordNum: '23', answer: '12', name: '데이터 베이스 요약 정리 암기 하기' },
@@ -82,28 +81,26 @@ export default {
       radio1: '1',
       examPopupStatusVal: false
     }
-  }
+  },
 
-
-  , created() {
+  created() {
     this.licenseInfo = this.$session.get('licenseInfo')
     this.subject = this.licenseInfo.subject
     this.fetchList()
-  }
+  },
 
-
-  , methods: {
-    fetchList (){
+  methods: {
+    fetchList() {
       fetchList().then(response => {
         this.tableData = response._embedded.words
       })
-    }
-    
-    , examPopupStatus(index, row, val) {
+    },
+
+    examPopupStatus(index, row, val) {
       if (val == true) {
-        this.examPopupStatusVal = val;
+        this.examPopupStatusVal = val
       } else {
-        this.examPopupStatusVal = val;
+        this.examPopupStatusVal = val
       }
     }
   }

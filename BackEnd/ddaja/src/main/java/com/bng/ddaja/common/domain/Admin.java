@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.bng.ddaja.common.enums.AdminRule; 
+import com.bng.ddaja.common.enums.AdminRole; 
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -43,7 +43,7 @@ public class Admin extends CommonEntity {
     private String inUse;
 
     @Enumerated(EnumType.STRING)
-    private AdminRule role;
+    private AdminRole role;
 
     @OneToMany(mappedBy = "admin", fetch = FetchType.LAZY)
     private List<Notice> notices;

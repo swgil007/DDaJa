@@ -12,26 +12,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
+@Builder
 @Getter
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false, of = "id")
 @Table(name = "TB_TOKEN")
-@NoArgsConstructor
 @Entity
 public class Token extends CommonEntity {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="T_ID")
     private long id;
     
-    @Column(name="JWT")
-    private String jwt;
+    @Column(name="ACCESS")
+    private String access;
     
     @Column(name="REFRESH")
     private String refresh;
@@ -41,6 +42,9 @@ public class Token extends CommonEntity {
 
     @Column(name="ISSUANCE")
     private String issuance;
+
+    @Column(name="C_ID")
+    private String clientID;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "U_ID")

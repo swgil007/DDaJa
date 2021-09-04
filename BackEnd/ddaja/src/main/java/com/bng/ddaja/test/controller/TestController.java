@@ -7,27 +7,35 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.bng.ddaja.common.config.PublicKeyConfig;
+import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.dto.CommonError;
 import com.bng.ddaja.common.dto.CommonErrorDetail;
+import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.Link;
-import com.bng.ddaja.common.error.exception.MemberNotFoundException;
-import com.bng.ddaja.common.hateos.licenses.LicenseHateos;
-import com.bng.ddaja.example.dto.UserDTO;
+import com.bng.ddaja.common.enums.Roles;
+import com.bng.ddaja.common.hateoas.licenses.LicenseHateoas;
+import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.example.service.UserService;
 import com.bng.ddaja.test.dto.LicenseDTO;
-import com.bng.ddaja.test.dto.TestParameter; 
+import com.bng.ddaja.test.dto.TestParameter;
+import com.bng.ddaja.test.service.TestService;
+import com.bng.ddaja.tokens.service.TokensService;
 import com.bng.ddaja.test.dto.TestDTO;
 
+import org.springframework.core.task.TaskRejectedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -41,7 +49,13 @@ import lombok.extern.slf4j.Slf4j;
 public class TestController {
     
     private UserService userService;
-    
+
+    private PublicKeyConfig publicKeyConfig;
+
+    private TokensService tokensService;
+
+    private TestService testService;
+
     @GetMapping("")
     public String test() {
         return "testeeee";
@@ -113,5 +127,77 @@ public class TestController {
     public TestDTO testPost(@RequestBody TestDTO testDTO) {
         log.info("testPOst");
         return testDTO;
+    }
+
+    @GetMapping("/publicKey")
+    public String testPublicKeyProperty() {
+        return publicKeyConfig.getPublicKey();
+    }
+
+    // @GetMapping("/jwt")
+    // public CommonJWT testJwtCreate(UserDTO userDTO) {
+    //     return tokensService.getCommonJWTByUserDTO(userDTO);
+    // }
+
+    @GetMapping("/jwt/vertify")
+    public boolean testJwtVertify(String jwt) {
+        // tokensService.isValidatedJWT(jwt);
+        return true;
+    }
+
+    @GetMapping("/jwt/common-jwt")
+    public CommonJWT testCommonJWT(String jwt) {
+        // tokensService.getCommonJWT(jwt);
+        return null;
+    }
+
+    @Async
+    public void asyncMethod(int i) {
+        try {
+            Thread.sleep(500);
+            log.info("[AsyncMethod]"+"-"+i);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void syncMethod(int i) {
+        try {
+            Thread.sleep(500);
+            log.info("[SyncMethod]"+"-"+i);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @GetMapping("async")
+    public String testAsync() {
+        log.info("TEST ASYNC");
+        for(int i=0; i<50; i++) {
+            asyncMethod(i);
+        }
+        return "";
+    }
+
+    @GetMapping("async/outter")
+    public String testAsyncOutter() {
+        log.info("TEST ASYNC");
+        try {
+            for(int i=0; i<50; i++) {
+                testService.asyncMethod(i);
+            }
+        } catch (TaskRejectedException e) {
+            log.error(e.getMessage());
+        }
+        return "";
+    }
+
+    @GetMapping("sync")
+    public String testSync() {
+        log.info("TEST SYNC");
+        for(int i=0; i<50; i++) {
+            syncMethod(i);
+        }
+        return "";
     }
 }

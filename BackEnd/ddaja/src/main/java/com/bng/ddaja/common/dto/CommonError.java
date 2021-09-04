@@ -3,7 +3,7 @@ package com.bng.ddaja.common.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.error.enums.ErrorCode;
+import com.bng.ddaja.common.config.error.enums.ErrorCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import org.springframework.validation.FieldError;
@@ -23,7 +23,8 @@ public class CommonError {
 
     private int code;
     private String message;
-
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String reason;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CommonErrorDetail> errors;
 

@@ -4,28 +4,24 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.bng.ddaja.common.enums.TokenType;
-
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Getter
 @Builder
-@ToString
 @EqualsAndHashCode(callSuper = false, of = "id")
 @Table(name = "TB_USER")
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class User extends CommonEntity {
 
@@ -42,13 +38,6 @@ public class User extends CommonEntity {
 
     @Column(name = "EMAIL")
     private String eMail;
-
-    @Column(name = "TOKEN_OAUTH")
-    private String tokenOAuth;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "TOKEN_TYPE")
-    private TokenType tokenType;
 
     @Column(name = "PROFILE_IMG")
     private String profileImg;
@@ -70,12 +59,6 @@ public class User extends CommonEntity {
 
     @OneToMany(mappedBy = "user")
     private List<DebateState> debateStates;
-
-    @Builder
-    public User(long id, String userId) {
-        this.id = id;
-        this.userId = userId;
-    }
 
     public void setUserQuestion(UserQuestion userQuestion) {
         this.userQuestions.add(userQuestion);

@@ -2,9 +2,9 @@ import request from '@/utils/request'
 
 export function fetchList() {
   return request({
-    url      : '/words'
-    , method : 'get'
-    , params : { 
+    url: '/words',
+    method: 'get',
+    params: {
     }
   })
 }

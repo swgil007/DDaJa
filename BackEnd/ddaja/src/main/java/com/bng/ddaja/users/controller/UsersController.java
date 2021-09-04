@@ -1,14 +1,27 @@
 package com.bng.ddaja.users.controller;
 
+import java.io.IOException;
+
+import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
+import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
+import com.bng.ddaja.common.dto.CommonDTO;
+import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
+import com.bng.ddaja.common.dto.SocialAccessToken;
+import com.bng.ddaja.common.hateoas.users.UserHateoas;
+import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.users.service.UsersService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.RequestBody;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +40,24 @@ public class UsersController {
     )
     @GetMapping("")
     public ResponseEntity<CommonResponse> getUsers() {
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.ok().body(new CommonResponse(usersService.getUsers()));
     }
 
+    @ApiOperation(
+        value = "사용자 단일 조회"
+        , notes = "사용자 ID로 해당 사용자를 조회한다."
+        , produces = "application/json"
+        , response = CommonResponse.class
+    )
+    @GetMapping("{id}")
+    public ResponseEntity<CommonResource> getUser(@PathVariable(name = "id", required = true) long id) {
+        return ResponseEntity.ok().body(new CommonResource(usersService.getUserById(id)));
+    }
+
+    @PostMapping("social")
+    public ResponseEntity<CommonResource> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
+        UserDTO userDTO = usersService.getUserBySocialToken(socialAccessToken);
+        if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
+        return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));
+    }
 }
