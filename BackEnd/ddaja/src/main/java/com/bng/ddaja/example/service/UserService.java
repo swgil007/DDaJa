@@ -8,7 +8,6 @@ import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.CommonUserDetails;
-import com.bng.ddaja.common.hateoas.licenses.LicenseHateoas;
 import com.bng.ddaja.example.dto.UserDTO;
 import com.bng.ddaja.example.repository.user.UserRepository;
 
