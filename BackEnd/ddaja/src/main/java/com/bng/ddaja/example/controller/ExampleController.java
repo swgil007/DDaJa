@@ -32,21 +32,6 @@ public class ExampleController {
 
     private UserService userService;
 
-    @ApiOperation(
-        value = "사용자 정보 조회"
-        , notes = "사용자의 ID를 통해 사용자의 정보를 조회한다.")
-    @ApiImplicitParam(
-        name = "id"
-        , value = "사용자 아이디"
-        , required = true
-        , dataType = "string"
-        , paramType = "path"
-        , defaultValue = "None")
-    @GetMapping("/user/{userId}")
-    public UserDTO getUser(@PathVariable(name = "userId") String userId) {
-        return userService.findUserInfoByUserId(userId);
-    }
-
     @GetMapping("/users/{id}")
     public User getUserByUId(@PathVariable(name = "id") long uId) {
         return userService.findUserInfoByUId(uId);
