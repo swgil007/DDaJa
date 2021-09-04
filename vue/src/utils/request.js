@@ -1,16 +1,16 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
 
-// create an axios instance
 const service = axios.create({
+
   baseURL:  process.env.NODE_ENV === 'production'
   ? ''
-  : 'http://localhost',
-  withCredentials: false, // 2021-06-17 스프링 개발용 수정
-  // timeout: 10000 // request timeout 개발용 잠깐 timeout 없게 허용
+  : 'http://localhost'
+
+  , withCredentials: false
 })
 
 
