@@ -10,39 +10,38 @@
       >
         <el-table-column
           label="Title"
-          prop="title"
+          prop="item.title"
         />
+
         <el-table-column
           label="등록일"
           width="400"
-          prop="createdDate"
-        />
+        >
+          <template slot-scope="scope">
+            {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
+          </template>
+
+        </el-table-column>
+
         <el-table-column
           label="단어 수"
           width="100"
-          prop="wordNum"
+          prop="item.wordNum"
         />
         <el-table-column
           label="정답 수"
           width="100"
-          prop="answer"
+          prop="item.answer"
         />
         <el-table-column
           align="right"
         >
-          <template slot="header" slot-scope="{}">
-            <el-input
-              v-model="search"
-              size="mini"
-              placeholder="Type to search"
-            />
-          </template>
           <template slot-scope="scope">
             <el-button
               size="mini"
               @click="examPopupStatus(scope.$index, scope.row, true)"
             >암기 하기</el-button>
-            />
+
           </template>
         </el-table-column>
       </el-table>
@@ -67,32 +66,36 @@ export default {
 
   data() {
     return {
-      tableData: [
-        { date: '2011-05-03', wordNum: '23', answer: '12', name: '데이터 베이스 요약 정리 암기 하기' },
-        { date: '2012-05-03', wordNum: '30', answer: '8', name: 'java 요약 정리 암기 하기' },
-        { date: '2013-05-03', wordNum: '40', answer: '7', name: '운영체제 요약 정리 암기 하기' },
-        { date: '2014-05-03', wordNum: '20', answer: '0', name: '전자계산기 요약 정리 암기 하기' },
-        { date: '2015-05-03', wordNum: '23', answer: '0', name: '알고리즘  요약 정리 암기 하기' },
-        { date: '2016-05-03', wordNum: '36', answer: '0', name: 'OSI 7계층  요약 정리 암기 하기' },
-        { date: '2017-05-03', wordNum: '90', answer: '0', name: 'C 언어 함수  요약 정리 암기 하기' },
-        { date: '2018-05-03', wordNum: '96', answer: '0', name: '리눅스 용어  요약 정리 암기 하기' }
-      ],
+      tableData: [],
       search: '',
       radio1: '1',
-      examPopupStatusVal: false
+      examPopupStatusVal: false,
+
+      totalCount: 0,
+      page: {},
+      param: {
+        licenseID: 0,
+        page: 1,
+        size: 10
+      }
     }
   },
 
   created() {
     this.licenseInfo = this.$session.get('licenseInfo')
     this.subject = this.licenseInfo.subject
+    this.param.licenseID = this.licenseInfo.licenseID
+
     this.fetchList()
   },
 
   methods: {
     fetchList() {
-      fetchList().then(response => {
-        this.tableData = response._embedded.words
+      fetchList(this.param).then(response => {
+        console.log(response)
+        this.tableData = response.items
+        this.totalCount = response.totalCount
+        this.page = response.page
       })
     },
 
@@ -102,6 +105,11 @@ export default {
       } else {
         this.examPopupStatusVal = val
       }
+    },
+
+    createDate(item) {
+      console.log(item)
+      return '2020'
     }
   }
 }

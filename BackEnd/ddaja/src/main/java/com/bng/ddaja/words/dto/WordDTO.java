@@ -38,22 +38,10 @@ public class WordDTO extends CommonDTO {
 
     public WordDTO( Word word ){
 
-        id = word.getId();
-        title =  word.getTitle();
-        license = new LicenseDTO(word.getLicense());
-        // word.getWordQuestions().forEach(x-> {
-        //     this.wordQuestions.add( new WordQuestionDTO(x) );
-        // }); 
-    }
-
-    public WordDTO( Word word , LicenseDTO licenseDTO ) {
-
-        id     = word.getId();
-        title   = word.getTitle();
-        license = licenseDTO;
-        
-        // word.getWordQuestions().forEach(x-> {
-        //     this.wordQuestions.add( new WordQuestionDTO(x) );
-        // }); 
+        id           = word.getId();
+        title        = word.getTitle();
+        createdDate  = word.getCreatedDate();
+        modifiedDate = word.getModifiedDate();
+        license      = new LicenseDTO(word.getLicense());
     }
 }

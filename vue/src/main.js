@@ -16,6 +16,7 @@ import router from './router'
 import VueSession from 'vue-session'
 import axios from 'axios'
 import cors from 'cors'
+import moment from 'vue-moment'
 import VueKakaoSdk from 'vue-kakao-sdk'
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
@@ -27,6 +28,8 @@ axios.defaults.baseURL = '{url}'
 Vue.prototype.$http = axios
 
 Vue.use(cors)
+Vue.use(moment)
+
 const apiKey = 'a227a64e7aecffa5d4254e4526d679b1'
 Vue.use(VueKakaoSdk, { apiKey })
 
