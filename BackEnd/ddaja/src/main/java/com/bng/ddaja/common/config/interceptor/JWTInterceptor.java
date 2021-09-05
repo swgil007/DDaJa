@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bng.ddaja.common.enums.AuthRequiredURLs;
-import com.bng.ddaja.tokens.service.TokensService;
+import com.bng.ddaja.tokens.service.TokenService;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class JWTInterceptor implements HandlerInterceptor {
     
-    private TokensService tokensService;
+    private TokenService tokenService;
 
     @Override
     public  boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception  {
@@ -27,6 +27,6 @@ public class JWTInterceptor implements HandlerInterceptor {
         if(!isAuthRequiredURL) return true;
         String jwt = request.getHeader("Authorization");
         if(jwt == null) throw new AuthenticationException("JWT is Required");
-        return tokensService.isValidatedJWT(jwt);
+        return tokenService.isValidatedJWT(jwt);
     }
 }

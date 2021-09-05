@@ -21,7 +21,7 @@ import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.test.dto.TestParameter;
 import com.bng.ddaja.test.service.TestService;
-import com.bng.ddaja.tokens.service.TokensService;
+import com.bng.ddaja.tokens.service.TokenService;
 import com.bng.ddaja.test.dto.TestDTO;
 
 import org.springframework.core.task.TaskRejectedException;
@@ -49,7 +49,7 @@ public class TestController {
 
     private PublicKeyConfig publicKeyConfig;
 
-    private TokensService tokensService;
+    private TokenService tokensService;
 
     private TestService testService;
 
