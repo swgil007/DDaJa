@@ -10,7 +10,7 @@ import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.hateoas.users.UserHateoas;
 import com.bng.ddaja.users.dto.UserDTO;
-import com.bng.ddaja.users.service.UsersService;
+import com.bng.ddaja.users.service.UserService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("users")
 @AllArgsConstructor
 @RestController
-public class UsersController {
-    private UsersService usersService;
+public class UserController {
+    private UserService usersService;
     
     @ApiOperation(
         value = "사용자 전체 조회"

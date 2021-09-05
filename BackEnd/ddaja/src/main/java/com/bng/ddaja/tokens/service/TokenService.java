@@ -12,9 +12,10 @@ import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.common.util.DateUtil;
 import com.bng.ddaja.tokens.dto.TokenDTO;
-import com.bng.ddaja.tokens.repository.TokensRepository;
+import com.bng.ddaja.tokens.repository.TokenRepository;
 import com.bng.ddaja.users.dto.UserDTO;
-import com.bng.ddaja.users.service.UsersService;
+import com.bng.ddaja.users.repository.UserRepository;
+import com.bng.ddaja.users.service.UserService;
 
 import org.springframework.stereotype.Service;
 
@@ -28,13 +29,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class TokensService {
+public class TokenService {
     private PublicKeyConfig publicKeyConfig;
-    private TokensRepository tokensRepository;
-    private UsersService usersService;
+    private TokenRepository tokenRepository;
+    private UserRepository userRepository;
 
     public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) throws AuthenticationException {
-        UserDTO user = usersService.getUserById(userDTO.getId());
+        UserDTO user = new UserDTO(userRepository.findById(userDTO.getId()));
         if(user.getId() == 0) throw new AuthenticationException("User Info is Not Matched");
         CommonJWT result = new CommonJWT(user);
         result.setJwt(createJWT(result));
@@ -78,6 +79,6 @@ public class TokensService {
     }
 
     public TokenDTO getTokenByClientID(String clientID) {
-        return new TokenDTO(tokensRepository.findByClientID(clientID));
+        return new TokenDTO(tokenRepository.findByClientID(clientID));
     }
 }

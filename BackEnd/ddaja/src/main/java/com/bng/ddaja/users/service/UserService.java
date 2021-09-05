@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.api.social.KaKaoResponse;
 import com.bng.ddaja.common.api.social.SocialResponse;
 import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
@@ -15,12 +14,9 @@ import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonUserDetails;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.enums.HttpMethods;
-import com.bng.ddaja.common.enums.TokenType;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.common.util.OKHttp;
-import com.bng.ddaja.tokens.dto.TokenDTO;
 import com.bng.ddaja.tokens.repository.TokensRepository;
-import com.bng.ddaja.tokens.service.TokensService;
 import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.users.repository.UsersRepository;
 import com.squareup.moshi.Moshi;
@@ -39,7 +35,7 @@ import okhttp3.Response;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class UsersService implements UserDetailsService {
+public class UserService implements UserDetailsService {
     private UsersRepository usersRepository;
     private TokensRepository tokensRepository;
 

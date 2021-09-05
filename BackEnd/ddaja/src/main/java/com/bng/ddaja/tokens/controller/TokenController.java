@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @RequestMapping("tokens")
 @RestController
-public class TokensController {
+public class TokenController {
     private TokensService tokensService;
 
 
