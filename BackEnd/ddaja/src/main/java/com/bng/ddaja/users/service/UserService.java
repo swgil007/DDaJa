@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.security.sasl.AuthenticationException;
+
 import com.bng.ddaja.common.api.social.SocialResponse;
 import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
@@ -16,9 +18,10 @@ import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.enums.HttpMethods;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.common.util.OKHttp;
-import com.bng.ddaja.tokens.repository.TokensRepository;
+import com.bng.ddaja.tokens.repository.TokenRepository;
+import com.bng.ddaja.tokens.service.TokenService;
 import com.bng.ddaja.users.dto.UserDTO;
-import com.bng.ddaja.users.repository.UsersRepository;
+import com.bng.ddaja.users.repository.UserRepository;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 
@@ -36,8 +39,9 @@ import okhttp3.Response;
 @AllArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
-    private UsersRepository usersRepository;
-    private TokensRepository tokensRepository;
+    private UserRepository usersRepository;
+    private TokenRepository tokensRepository;
+    private TokenService tokenService;
 
     public List<UserDTO> getUsers() {
         return usersRepository.findAll().stream().map(v -> new UserDTO(v)).collect(Collectors.toList());
@@ -60,13 +64,17 @@ public class UserService implements UserDetailsService {
         Token token = tokensRepository.findByClientID(socialResponse.getId());
         if(token == null) return createUserBySocialResponse(socialResponse);
         if(token.getUser() == null) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
-        return new UserDTO(token.getUser());
+        UserDTO userDTO = new UserDTO(token.getUser());
+        userDTO.setJwt(tokenService.getCommonJWTByUserDTO(userDTO).getJwt());
+        return userDTO;
     }
 
-    private UserDTO createUserBySocialResponse(SocialResponse socialResponse) {
+    private UserDTO createUserBySocialResponse(SocialResponse socialResponse) throws AuthenticationException {
         User user = usersRepository.save(User.builder().build());
         tokensRepository.save(Token.builder().clientID(socialResponse.getId()).user(user).build());
-        return new UserDTO(user, true);
+        UserDTO userDTO = new UserDTO(user, true);
+        userDTO.setJwt(tokenService.getCommonJWTByUserDTO(userDTO).getJwt());
+        return userDTO;
     }
 
     private SocialResponse requestKakaoUserInfo(SocialAccessToken socialAccessToken) throws IOException {
