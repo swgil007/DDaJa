@@ -11,3 +11,13 @@ export function fetchList(param) {
     }
   })
 }
+
+export function fetchWordQuestion(wordID) {
+  return request({
+    url: '/word-questions',
+    method: 'get',
+    params: {
+      wordID: wordID
+    }
+  })
+}

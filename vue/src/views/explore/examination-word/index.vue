@@ -38,7 +38,7 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="examPopupStatus(scope.$index, scope.row, true)"
+              @click="examPopupStatus(true, scope.row)"
             >암기 하기</el-button>
 
           </template>
@@ -46,6 +46,7 @@
       </el-table>
     </div>
     <examinationPopup
+      :word-i-d="wordID"
       :popup-val="examPopupStatusVal"
       @close:examination="examPopupStatus"
     />
@@ -68,8 +69,8 @@ export default {
       tableData: [],
       search: '',
       radio1: '1',
+      wordID: 1,
       examPopupStatusVal: false,
-
       totalCount: 0,
       page: {},
       param: {
@@ -98,9 +99,10 @@ export default {
       })
     },
 
-    examPopupStatus(index, row, val) {
+    examPopupStatus(val, row) {
       if (val === true) {
         this.examPopupStatusVal = val
+        this.wordID = row.item.id
       } else {
         this.examPopupStatusVal = val
       }
