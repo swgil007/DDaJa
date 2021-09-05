@@ -19,19 +19,11 @@ public class WordService {
 
     private WordRepository wordRepository;
 
-    /** WORD LIST - LICENSES **/
     public Page<WordDTO> getAllWordByWordSearch( WordSearch wordSearch ) {
-        Page<WordDTO> xx = wordRepository.findAll(wordSearch.toSpecification(), wordSearch.toPageable()).map( vo -> new WordDTO(vo));
-        
-
-        System.out.println("BINSOO WORD TEST");
-        xx.get().forEach(x -> System.out.println(x));
-       
-        return xx; 
+        return wordRepository.findAll(wordSearch.toSpecification(), wordSearch.toPageable()).map( vo -> new WordDTO(vo));
     } 
     
 
-    /** WORD INSERT **/
     @Transactional
     public void createWord ( Word vo ){ 
         wordRepository.save(vo);

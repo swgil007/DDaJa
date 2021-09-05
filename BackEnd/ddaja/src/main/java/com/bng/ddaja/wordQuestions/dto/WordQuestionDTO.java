@@ -1,6 +1,7 @@
 package com.bng.ddaja.wordQuestions.dto;
 
 import com.bng.ddaja.common.domain.WordQuestion;
+import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.words.dto.WordDTO;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WordQuestionDTO {
+public class WordQuestionDTO extends CommonDTO{
 
     @ApiModelProperty(
         name = "id"

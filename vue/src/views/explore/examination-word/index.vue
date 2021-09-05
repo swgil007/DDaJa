@@ -30,7 +30,7 @@
         <el-table-column
           label="정답 수"
           width="100"
-          prop="item.answer"
+          prop="item.userWordQuestionAnswerCount"
         />
         <el-table-column
           align="right"
@@ -54,7 +54,7 @@
 
 <script>
 
-import examinationPopup from '@/views/explore/examination-word/component/examinationPopup'
+import examinationPopup from './component/examinationPopup'
 import { fetchList } from '@/ddaja-api/explore/examination-word/ExaminationWord'
 
 export default {

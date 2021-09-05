@@ -28,7 +28,7 @@ public class WordController {
 
     @GetMapping("")
     @ResponseBody
-    public ResponseEntity<CommonResponse> wordList( WordSearch wordSearch ){
+    public ResponseEntity<CommonResponse> getAllWordByWordSearch( WordSearch wordSearch ){
         return ResponseEntity.ok().body(
             new CommonResponse(
                 wordService.getAllWordByWordSearch(wordSearch)
