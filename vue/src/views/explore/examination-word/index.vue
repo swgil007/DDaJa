@@ -20,13 +20,12 @@
           <template slot-scope="scope">
             {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
           </template>
-
         </el-table-column>
 
         <el-table-column
           label="단어 수"
           width="100"
-          prop="item.wordNum"
+          prop="item.wordQuestionsCount"
         />
         <el-table-column
           label="정답 수"

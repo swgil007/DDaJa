@@ -36,12 +36,18 @@ public class WordDTO extends CommonDTO {
     ) 
     private List<WordQuestionDTO> wordQuestions = new ArrayList<WordQuestionDTO>();
 
+    @ApiModelProperty(
+        name = "wordQuestionCount"
+    )
+    private int wordQuestionsCount;
+
     public WordDTO( Word word ){
 
-        id           = word.getId();
-        title        = word.getTitle();
-        createdDate  = word.getCreatedDate();
-        modifiedDate = word.getModifiedDate();
-        license      = new LicenseDTO(word.getLicense());
+        id                 = word.getId();
+        title              = word.getTitle();
+        createdDate        = word.getCreatedDate();
+        modifiedDate       = word.getModifiedDate();
+        wordQuestionsCount = word.getWordQuestions().size();
+        license            = new LicenseDTO(word.getLicense());
     }
 }

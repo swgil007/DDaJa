@@ -22,7 +22,7 @@ public class WordService {
     /** WORD LIST - LICENSES **/
     public Page<WordDTO> getAllWordByWordSearch( WordSearch wordSearch ) {
         Page<WordDTO> xx = wordRepository.findAll(wordSearch.toSpecification(), wordSearch.toPageable()).map( vo -> new WordDTO(vo));
-         
+        
 
         System.out.println("BINSOO WORD TEST");
         xx.get().forEach(x -> System.out.println(x));
