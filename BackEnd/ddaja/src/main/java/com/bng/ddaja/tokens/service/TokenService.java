@@ -38,11 +38,16 @@ public class TokenService {
         UserDTO user = new UserDTO(userRepository.findById(userDTO.getId()));
         if(user.getId() == 0) throw new AuthenticationException("User Info is Not Matched");
         CommonJWT result = new CommonJWT(user);
-        result.setJwt(createJWT(result));
+        result.setJwt(createJWTByCommonJWT(result));
         return result;
     }
 
-    private String createJWT(CommonJWT commonJWT) {
+    public CommonJWT getCommonJWTByJWT(String jwt) {
+        if(jwt == null) return new CommonJWT(false);
+        return new CommonJWT(jwt, parseJWT(jwt));
+    }
+
+    private String createJWTByCommonJWT(CommonJWT commonJWT) {
         Date now = new Date();     
         return Jwts.builder()
                     .setSubject(commonJWT.getUserName())

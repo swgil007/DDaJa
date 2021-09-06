@@ -197,4 +197,10 @@ public class TestController {
         }
         return "";
     }
+
+    @GetMapping("jwt")
+    public CommonJWT testJWT(CommonJWT commonJWT) {
+        log.info(commonJWT.toString());
+        return commonJWT;
+    }
 }
