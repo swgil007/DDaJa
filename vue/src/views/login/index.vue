@@ -33,14 +33,14 @@ export default {
     alert(Kakao.Auth.getAccessToken())
 
     Kakao.API.request({
-  url: '/v1/user/unlink',
-  success: function(response) {
-    console.log(response);
-  },
-  fail: function(error) {
-    console.log(error);
-  },
-});
+      url: '/v1/user/unlink',
+      success: function(response) {
+        console.log(response);
+      },
+      fail: function(error) {
+        console.log(error);
+      },
+    });
 
     Kakao.Auth.logout(function() {
       console.log(Kakao.Auth.getAccessToken());
@@ -84,6 +84,12 @@ export default {
       axios.post(userInfoURI, socialAccessToken)
       .then(res => {
         console.log(res)
+        if(res.status != 200) {
+          alert('로그인에 실패하였습니다 :(')
+          return
+        }
+
+        window.sessionStorage.setItem('jwt', res.data.item.jwt)
       })
       .catch(err => {
         console.log(err)
