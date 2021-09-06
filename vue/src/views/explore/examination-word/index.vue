@@ -1,21 +1,35 @@
 <template>
-  <div class="main-container">
-    <div class="main-title">
-      <font class="font1">단어 암기</font><font font class="font2"> - {{ licenseInfo.licenseName }}</font>
+  <div class = "main-container">
+    <div class = "main-title">
+      <font class = "font1">단어 암기</font><font font class="font2"> - {{ licenseInfo.licenseName }}</font>
     </div>
-    <div class="div1">
+
+
+<div class="div1">
+  <el-input placeholder="Please input"  v-model="input3" class="input1"> 
+    <el-select v-model="select" slot="prepend" placeholder="Select"  class="select1">
+      <el-option label="Restaurant" value="1"></el-option>
+      <el-option label="Order No." value="2"></el-option>
+      <el-option label="Tel" value="3"></el-option>
+    </el-select>
+    <el-button slot="append" icon="el-icon-search" class="btn1"></el-button>
+  </el-input>
+</div>
+
+
+    <div class = "div2">
       <el-table
-        :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-        style="width: 100%; height: 100%;"
+        :data = "tableData"
+        style = "width: 100%; height: 100%;"
       >
         <el-table-column
-          label="Title"
-          prop="item.title"
+          label = "Title"
+          prop  = "item.title"
         />
 
         <el-table-column
-          label="등록일"
-          width="400"
+          label = "등록일"
+          width = "400"
         >
           <template slot-scope="scope">
             {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
@@ -23,32 +37,27 @@
         </el-table-column>
 
         <el-table-column
-          label="단어 수"
-          width="100"
-          prop="item.wordQuestionsCount"
+          label = "단어 수"
+          width = "100"
+          prop  = "item.wordQuestionsCount"
         />
         <el-table-column
-          label="정답 수"
-          width="100"
-          prop="item.userWordQuestionAnswerCount"
-        />
-        <el-table-column
-          align="right"
+          align = "right"
         >
-          <template slot-scope="scope">
+          <template slot-scope = "scope">
             <el-button
-              size="mini"
-              @click="examPopupStatus(true, scope.row)"
+              size   = "mini"
+              @click = "examPopupStatus(true, scope.row)"
             >암기 하기</el-button>
-
           </template>
         </el-table-column>
       </el-table>
     </div>
     <examinationPopup
-      :word-i-d="wordID"
-      :popup-val="examPopupStatusVal"
-      @close:examination="examPopupStatus"
+      :word-i-d           = "wordID"
+      :popup-val          = "examPopupStatusVal"
+      :wordQuestionsCount = "wordQuestionsCount"
+      @close:examination  = "examPopupStatus"
     />
   </div>
 </template>
@@ -59,58 +68,65 @@ import examinationPopup from './component/examinationPopup'
 import { fetchList } from '@/ddaja-api/explore/examination-word/ExaminationWord'
 
 export default {
-  name: '',
-  components: {
-    examinationPopup
-  },
+  name: ''
 
-  data() {
+  , components: {
+    examinationPopup
+  }
+
+
+  , data() {
     return {
-      tableData: [],
-      search: '',
-      radio1: '1',
-      wordID: 1,
-      examPopupStatusVal: false,
-      totalCount: 0,
-      page: {},
-      param: {
-        licenseID: 0,
-        page: 1,
-        size: 10
+      tableData            : []
+      , search             : ''
+      , wordID             : 1
+      , totalCount         : 0
+      , examPopupStatusVal : false
+      , wordQuestionsCount : 1
+      , page: {}
+      , param: {
+        licenseID : 0
+        , page    : 1
+        , size    : 10
       }
     }
-  },
+  }
 
-  created() {
-    this.licenseInfo = this.$session.get('licenseInfo')
-    this.subject = this.licenseInfo.subject
+
+  , created() {
+    this.licenseInfo     = this.$session.get('licenseInfo')
     this.param.licenseID = this.licenseInfo.licenseID
-
+    this.subject         = this.licenseInfo.subject
     this.fetchList()
-  },
+  }
 
-  methods: {
+
+  , methods: {
+
     fetchList() {
       fetchList(this.param).then(response => {
-        console.log(response)
-        this.tableData = response.items
+        this.page       = response.page
+        this.tableData  = response.items
         this.totalCount = response.totalCount
-        this.page = response.page
       })
-    },
+    }
 
-    examPopupStatus(val, row) {
+
+    , examPopupStatus(val, row) {
+
       if (val === true) {
-        this.examPopupStatusVal = val
+        if( row.item.wordQuestionsCount === 0){
+          alert('단어가 없습니다')
+          return
+        }
+
         this.wordID = row.item.id
+        this.examPopupStatusVal = val
+        this.wordQuestionsCount = row.item.wordQuestionsCount
+
       } else {
         this.examPopupStatusVal = val
       }
-    },
-
-    createDate(item) {
-      console.log(item)
-      return '2020'
     }
   }
 }
@@ -145,7 +161,18 @@ export default {
         }
     }
     .div1{
-        width: 90%;
+      width: 90%;
+        margin: 0 5% 0 5%;
+        padding: 2% 0 3% 0;
+        .select1{
+          width: 200px;
+        }
+        .btn1{
+          width: 100px;
+        }
+    }
+    .div2{
+      width: 90%;
         margin: 0 5% 0 5%;
     }
 }

@@ -1,68 +1,53 @@
 <template>
-  <div class="examination-popup">
+  <div class = "examination-popup">
     <el-dialog
-      title=""
-      width="60%"
-      :visible.sync="popupVal"
-      :before-close="handleClose"
+      width = "60%"
+      :visible.sync = "popupVal"
+      :before-close = "handleClose"
     >
       <el-card
-        class="card1"
-        title=""
-        width="60%"
-        :visible.sync="popupVal"
-        :before-close="handleClose"
+        class = "card1"
+        width = "60%"
+        :visible.sync = "popupVal"
+        :before-close = "handleClose"
       >
-        <div slot="header" class="div1">
+        <div slot = "header" class = "div1">
           <el-button
-            v-if="questionIndex != 0"
-            style="float: left; padding: 3px 0"
-            type="text"
-            @click="setWordQuestion(-1)"
-          > ← Ago </el-button>
+            v-if   = "questionIndex != 0"
+            style  = "float: left; padding: 3px 0"
+            type   = "text"
+            @click = "setWordQuestion(-1)"
+          > ← 이전 단어 </el-button>
 
-          <span class="span1"> {{ wordTitle }} </span>
+          <span class = "span1"> {{ wordTitle }} </span>
 
           <el-button
-            v-if="questionListSize != questionIndex"
-            style="float: right; padding: 3px 0"
-            type="text"
-            @click="setWordQuestion(1)"
-          > Next → </el-button>
+            v-if   = "questionListSize != questionIndex"
+            style  = "float: right; padding: 3px 0"
+            type   = "text"
+            @click = "setWordQuestion(1)"
+          > 다음 단어 → </el-button>
         </div>
-        <div class="div2">
-          <span class="span1">
+
+        <div class = "div2">
+          <span class = "span1">
+            <i class = "el-icon-edit"/> {{ questionIndex +1 }} 번 단어 <br><br> 
             {{ question.content }}
           </span>
         </div>
-        <div class="div3">
-          <div class="div3-1">
-            <span>정답</span>
-          </div>
-          <div v-if="testCheck" class="div3-2">
-            <el-input
-              v-model="input"
-              placeholder="Please input"
-              class="input1"
-            />
-          </div>
-          <div v-else class="div3-3">
-            <!-- 정답 -->
-            <span v-if="testAnswerCheck" class="span1">DATA BASE</span>
-            <!-- 오답 -->
-            <span v-else class="span1 span2">DATA BASE</span>
-          </div>
-        </div>
-        <div class="dialog-footer">
-          <div
-            v-if="testCheck"
-            class="btn1"
-          >
+
+        <div class = "div3">
+          <div v-if = "questionResult" class = "div3-2">
             <el-button
-              type="primary"
-              @click="testCheck = false"
-            >확 인
+              type   = "success"
+              @click = "answerCheck"
+              class  = "btn1"
+              plain
+            >정답 확인 하기
             </el-button>
+          </div>
+          <div v-else class = "div3-3">
+            <span class = "span1 span2"> {{question.answer}} </span>
           </div>
         </div>
       </el-card>
@@ -72,98 +57,109 @@
 
 <script>
 
-import community from '@/views/explore/communication'
 import { fetchWordQuestion } from '@/ddaja-api/explore/examination-word/ExaminationWord'
+import community from '@/views/explore/communication'
 
 export default {
-  name: 'ExaminationPopup',
+  name : 'ExaminationPopup'
 
-  components: {
+  , components : {
     community
-  },
+  }
 
-  props: {
-    popupVal: {},
-    wordID: {}
-  },
+  , props : {
+    popupVal : {}
+    , wordID : {}
+    , wordQuestionsCount : {}
+  }
 
-  data() {
+  , data() {
     return {
-      input: '',
-      testCheck: true,
-      testAnswerCheck: false,
-      wordQuestionInfo: {},
-      wordTitle: '',
-      questionList: [],
-      questionListSize: 0,
-      questionIndex: 0,
-      questionSeqList: [],
-      question: {
-        id: 0,
-        lid: 0,
-        answer: '',
-        content: '',
-        createDate: '',
-        modifieDate: ''
-      }
+        amswerVal          : ''
+        , wordTitle        : ''
+        , questionResult   : true
+        , questionList     : []
+        , questionListSize : 0
+        , questionIndex    : 0
+        , question: {
+            id            : 0
+            , lid         : 0
+            , answer      : ''
+            , content     : ''
+            , createDate  : ''
+            , modifieDate : ''
+        }
     }
-  },
+  }
 
-  watch: {
-    popupVal(val) {
-      if (val) {
-        this.fetchWordQuestion()
-      } else {
-        this.wordQuestionInfo = {}
+
+  , watch: {
+      popupVal(val) {
+        if (val) {
+          this.fetchWordQuestion()
+        } 
       }
-    }
-  },
+  }
 
-  methods: {
-    popupClose() {
-      this.question = { id: 0,
-        lid: 0,
-        answer: '',
-        content: '',
-        createDate: '',
-        modifieDate: ''
-      }
-      this.wordTitle = ''
-      this.$emit('close:examination', false)
-    },
 
-    setWordQuestion(index) {
-      var questionIndex = this.questionIndex + index
-      this.questionIndex = questionIndex
-      this.question = this.questionList[questionIndex]
-    },
-
+  , methods: {
+    
     fetchWordQuestion() {
-      fetchWordQuestion(this.wordID).then(response => {
+
+      var param = {
+        wordID : this.wordID
+        , size : this.wordQuestionsCount
+        , page : 0
+      }
+
+      fetchWordQuestion(param).then(response => {
         var questionList = []
 
         response.items.forEach(x => {
           questionList.push(x.item)
         })
 
-        if (questionList.length === 0) {
-          alert('Zero Question')
-          this.popupClose()
-          return
-        }
-
-        this.questionIndex = 0
+        this.questionIndex    = 0
         this.questionListSize = questionList.length - 1
-        this.questionList = questionList
-        this.wordTitle = response.items[0].item.wordDTO.title
+        this.questionList     = questionList
+        this.wordTitle        = response.items[0].item.wordDTO.title
         this.setWordQuestion(0)
       })
-    },
+    }
 
-    handleClose() {
-      this.$confirm('END ?').then(_ => {
-        this.popupClose()
-      }).catch(_ => {})
+
+    , answerCheck(){
+      this.questionResult = false;
+    }
+
+
+    , setWordQuestion(index) {
+      var questionIndex   = this.questionIndex + index
+      this.questionIndex  = questionIndex
+      this.question       = this.questionList[questionIndex]
+      this.amswerVal      = ''
+      this.questionResult = true
+    }
+
+
+    , handleClose() {
+        this.$confirm('END ?').then(_ => {
+            this.popupClose()
+        }).catch(_ => {})
+    }
+
+
+    , popupClose() {
+      this.question = { 
+          id            : 0
+          , lid         : 0
+          , answer      : ''
+          , content     : ''
+          , createDate  : ''
+          , modifieDate : ''
+      }
+      this.wordTitle = ''
+      this.$emit('close:examination', false)
     }
   }
 }
@@ -173,16 +169,6 @@ export default {
 .examination-popup{
     .card1{
         padding-bottom: 20px;
-        .dialog-footer{
-            float: left;
-            width: 100%;
-            div{
-                float: right;
-            }
-            .btn1{
-                padding-left: 2%;
-            }
-        }
     }
     .div1{
         .span1 {
@@ -204,29 +190,36 @@ export default {
         }
     }
     .div3{
-        .div3-1{
-            float: left;
-            width: 100%;
-            span{
-                float: left;
-                padding: 0 0 0 3%;
-                font-size: 18px;
-                text-align: left;
-                font-weight: bold;
-            }
+      .div3-1{
+          padding: 30px 0 0 0;
+          float: left;
+          width: 100%;
+          span{
+              float: left;
+              padding: 0 0 0 3%;
+              font-size: 17px;
+              text-align: left;
+              font-weight: bold;
+          }
         }
         .div3-2{
-            .input1{
-                padding: 2%;
+            .btn1{
+              text-align: left;
+              font-size : 18px;
+              font-weight: bold;
+              padding: 2% 0 2% 3%;
+              margin : 3% 2% 0 2%;
+              width: 94%;
             }
         }
         .div3-3{
             float: left;
             width: 100%;
+            height: 100px;
             .span1, .span2{
                 float: left;
-                padding: 2% 0 2% 3%;
-                font-size: 18px;
+                padding: 3% 0 2% 3%;
+                font-size: 21px;
                 text-align: left;
                 font-weight: bold;
             }
