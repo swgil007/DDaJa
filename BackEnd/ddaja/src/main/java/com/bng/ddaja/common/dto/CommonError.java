@@ -35,13 +35,8 @@ public class CommonError {
     }
     
     public void setErrors(List<FieldError> fieldErrors) {
-        errors = fieldErrors.stream().map(
-            error -> new CommonErrorDetail
-            (
-                error.getCodes()[0]
-                , error.getRejectedValue().toString()
-                , error.getDefaultMessage()
-            )
-        ).collect(Collectors.toList());
+        errors = fieldErrors.stream()
+                            .map(e -> new CommonErrorDetail(e))
+                            .collect(Collectors.toList());
     }
 }

@@ -2,6 +2,7 @@ package com.bng.ddaja.common.config.error.handler;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.security.sasl.AuthenticationException;
 
@@ -24,11 +25,10 @@ import io.jsonwebtoken.JwtException;
 public class CommonExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex){
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors()
-                .forEach(c -> errors.put(((FieldError) c).getField(), c.getDefaultMessage()));
-        return ResponseEntity.badRequest().body(errors);
+    public ResponseEntity<CommonError> handleValidationExceptions(MethodArgumentNotValidException e){
+        CommonError error = new CommonError(ErrorCode.INVALID_PARAMETER);
+        error.setErrors(e.getAllErrors().stream().map(o -> (FieldError)o).collect(Collectors.toList()));
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(JwtException.class)
