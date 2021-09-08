@@ -53,7 +53,7 @@ public class CommonExceptionHandler {
 
     @ExceptionHandler(MemberNotFoundException.class)
     public ResponseEntity<CommonError> handleMemberNotFoundException(MemberNotFoundException e) {
-        return new ResponseEntity<>(new CommonError(ErrorCode.NOT_FOUND_MEMBER), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new CommonError(ErrorCode.NOT_FOUND_MEMBER), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotAcceptableSocialLoginException.class)
