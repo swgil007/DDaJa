@@ -2,6 +2,8 @@ package com.bng.ddaja.users.controller;
 
 import java.io.IOException;
 
+import javax.validation.Valid;
+
 import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
 import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
 import com.bng.ddaja.common.dto.CommonDTO;
@@ -15,8 +17,10 @@ import com.bng.ddaja.users.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @RestController
 public class UserController {
-    private UserService usersService;
+    private UserService userService;
     
     @ApiOperation(
         value = "사용자 전체 조회"
@@ -40,7 +44,7 @@ public class UserController {
     )
     @GetMapping("")
     public ResponseEntity<CommonResponse> getUsers() {
-        return ResponseEntity.ok().body(new CommonResponse(usersService.getUsers()));
+        return ResponseEntity.ok().body(new CommonResponse(userService.getUsers()));
     }
 
     @ApiOperation(
@@ -51,12 +55,19 @@ public class UserController {
     )
     @GetMapping("{id}")
     public ResponseEntity<CommonResource> getUser(@PathVariable(name = "id", required = true) long id) {
-        return ResponseEntity.ok().body(new CommonResource(usersService.getUserById(id)));
+        return ResponseEntity.ok().body(new CommonResource(userService.getUserById(id)));
+    }
+
+    @PatchMapping("{id}")
+    public ResponseEntity<CommonResponse> patchUser(@PathVariable(name = "id") long id, @RequestBody @Valid UserDTO userDTO) {
+        userDTO.setId(id);
+        userService.patchUserByUserDTO(userDTO);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("social")
     public ResponseEntity<CommonResource> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
-        UserDTO userDTO = usersService.getUserBySocialToken(socialAccessToken);
+        UserDTO userDTO = userService.getUserBySocialToken(socialAccessToken);
         if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
         return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));
     }

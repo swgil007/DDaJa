@@ -3,6 +3,7 @@ package com.bng.ddaja.users.service;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.security.sasl.AuthenticationException;
@@ -39,16 +40,16 @@ import okhttp3.Response;
 @AllArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
-    private UserRepository usersRepository;
-    private TokenRepository tokensRepository;
+    private UserRepository userRepository;
+    private TokenRepository tokenRepository;
     private TokenService tokenService;
 
     public List<UserDTO> getUsers() {
-        return usersRepository.findAll().stream().map(v -> new UserDTO(v)).collect(Collectors.toList());
+        return userRepository.findAll().stream().map(v -> new UserDTO(v)).collect(Collectors.toList());
     }
 
     public UserDTO getUserById(long id) {
-        return new UserDTO(usersRepository.findById(id));
+        return new UserDTO(userRepository.findById(id));
     }
 
     public UserDTO getUserBySocialToken(SocialAccessToken socialAccessToken) throws IOException, MemberNotFoundException, NotAcceptableSocialLoginException {
@@ -61,7 +62,7 @@ public class UserService implements UserDetailsService {
             default:
                 throw new NotAcceptableSocialLoginException();
         }
-        Token token = tokensRepository.findByClientID(socialResponse.getId());
+        Token token = tokenRepository.findByClientID(socialResponse.getId());
         if(token == null) return createUserBySocialResponse(socialResponse);
         if(token.getUser() == null) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
         UserDTO userDTO = new UserDTO(token.getUser());
@@ -69,9 +70,15 @@ public class UserService implements UserDetailsService {
         return userDTO;
     }
 
+    public UserDTO patchUserByUserDTO(UserDTO userDTO) {
+        Optional<User> originUser = userRepository.findOptionalUserById(userDTO.getId());
+        if(!originUser.isPresent()) throw new MemberNotFoundException("해당 ID의 사용자가 존재하지 않습니다.");
+        return new UserDTO(userRepository.save(userDTO.toEntity()));
+    }
+
     private UserDTO createUserBySocialResponse(SocialResponse socialResponse) throws AuthenticationException {
-        User user = usersRepository.save(User.builder().build());
-        tokensRepository.save(Token.builder().clientID(socialResponse.getId()).user(user).build());
+        User user = userRepository.save(User.builder().build());
+        tokenRepository.save(Token.builder().clientID(socialResponse.getId()).user(user).build());
         UserDTO userDTO = new UserDTO(user, true);
         userDTO.setJwt(tokenService.getCommonJWTByUserDTO(userDTO).getJwt());
         return userDTO;
