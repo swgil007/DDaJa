@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.config.error.enums.ErrorCode;
+import com.bng.ddaja.common.config.error.exception.CommonException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import org.springframework.validation.FieldError;
@@ -32,6 +33,11 @@ public class CommonError {
         this.code = errorCode.getStatus();
         this.message = errorCode.getMessage();
         errors = null;
+    }
+
+    public CommonError (CommonException e) {
+        this.code = e.getErrorCode().getStatus();
+        this.message =  e.getMessage() == null ? e.getErrorCode().getMessage() : e.getMessage();
     }
     
     public void setErrors(List<FieldError> fieldErrors) {

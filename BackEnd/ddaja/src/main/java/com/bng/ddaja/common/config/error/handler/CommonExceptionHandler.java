@@ -53,16 +53,16 @@ public class CommonExceptionHandler {
 
     @ExceptionHandler(MemberNotFoundException.class)
     public ResponseEntity<CommonError> handleMemberNotFoundException(MemberNotFoundException e) {
-        return new ResponseEntity<>(new CommonError(ErrorCode.NOT_FOUND_MEMBER), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new CommonError(e), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotAcceptableSocialLoginException.class)
     public ResponseEntity<CommonError> handleNotAcceptableSocialLoginException(NotAcceptableSocialLoginException e) {
-        return new ResponseEntity<>(new CommonError(ErrorCode.NOT_ACCEPTABLE_SOCIAL_LOGIN), HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(new CommonError(e), HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(NotAcceptableSocialResponseException.class)
     public ResponseEntity<CommonError> handleNotAcceptableSocialResponseException(NotAcceptableSocialResponseException e) {
-        return new ResponseEntity<>(new CommonError(ErrorCode.NOT_ACCEPTABLE_SOCIAL_RESPONSE), HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(new CommonError(e), HttpStatus.NOT_ACCEPTABLE);
     }
 }
