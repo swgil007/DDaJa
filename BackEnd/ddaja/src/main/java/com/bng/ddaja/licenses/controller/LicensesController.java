@@ -7,7 +7,7 @@ import com.bng.ddaja.licenses.spec.LicenseSearchOptions;
 
 import org.springframework.http.ResponseEntity;
 
-import com.bng.ddaja.common.dto.CommonError;
+import com.bng.ddaja.common.dto.ExceptionResponse;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.enums.LicenseCode;
@@ -94,7 +94,7 @@ public class LicensesController {
         , @ApiResponse(
             code = 409
             , message = "로직 수행 불가 모순 발생"
-            , response = CommonError.class
+            , response = ExceptionResponse.class
             , responseContainer = "List"
         )
     })

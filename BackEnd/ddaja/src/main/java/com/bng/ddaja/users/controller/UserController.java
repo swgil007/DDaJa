@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import javax.validation.Valid;
 
-import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
-import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
+import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
+import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialLoginException;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;

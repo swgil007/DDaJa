@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.bng.ddaja.common.config.PublicKeyConfig;
-import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
-import com.bng.ddaja.common.dto.CommonError;
-import com.bng.ddaja.common.dto.CommonErrorDetail;
+import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
+import com.bng.ddaja.common.dto.ExceptionResponse;
+import com.bng.ddaja.common.dto.ExceptionDetail;
 import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;

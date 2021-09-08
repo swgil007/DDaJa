@@ -13,17 +13,17 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonErrorDetail {
+public class ExceptionDetail {
     private String field;
     private String value;
     private String reason;
 
-    public CommonErrorDetail(String field, String reason) {
+    public ExceptionDetail(String field, String reason) {
         this.field = field;
         this.reason = reason;
     }
 
-    public CommonErrorDetail(FieldError e) {
+    public ExceptionDetail(FieldError e) {
         field = e.getField();
         reason = e.getDefaultMessage();
         if(e.getRejectedValue() != null) value = e.getRejectedValue().toString();

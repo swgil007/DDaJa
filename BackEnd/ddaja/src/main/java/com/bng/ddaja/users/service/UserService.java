@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import javax.security.sasl.AuthenticationException;
 
 import com.bng.ddaja.common.api.social.SocialResponse;
-import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
-import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialLoginException;
-import com.bng.ddaja.common.config.error.exception.NotAcceptableSocialResponseException;
+import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
+import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialLoginException;
+import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialResponseException;
 import com.bng.ddaja.common.domain.Token;
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonUserDetails;

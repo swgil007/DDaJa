@@ -3,8 +3,8 @@ package com.bng.ddaja.common.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bng.ddaja.common.config.error.enums.ErrorCode;
-import com.bng.ddaja.common.config.error.exception.CommonException;
+import com.bng.ddaja.common.config.exception.enums.ExceptionCode;
+import com.bng.ddaja.common.config.exception.exception.CommonException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import org.springframework.validation.FieldError;
@@ -20,29 +20,29 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonError {
+public class ExceptionResponse {
 
     private int code;
     private String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String reason;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<CommonErrorDetail> errors;
+    private List<ExceptionDetail> details;
 
-    public CommonError (ErrorCode errorCode) {
+    public ExceptionResponse (ExceptionCode errorCode) {
         this.code = errorCode.getStatus();
         this.message = errorCode.getMessage();
-        errors = null;
+        details = null;
     }
 
-    public CommonError (CommonException e) {
+    public ExceptionResponse (CommonException e) {
         this.code = e.getErrorCode().getStatus();
         this.message =  e.getMessage() == null ? e.getErrorCode().getMessage() : e.getMessage();
     }
     
-    public void setErrors(List<FieldError> fieldErrors) {
-        errors = fieldErrors.stream()
-                            .map(e -> new CommonErrorDetail(e))
+    public void setDetails(List<FieldError> fieldErrors) {
+        details = fieldErrors.stream()
+                            .map(e -> new ExceptionDetail(e))
                             .collect(Collectors.toList());
     }
 }

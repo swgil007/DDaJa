@@ -1,9 +1,9 @@
-package com.bng.ddaja.common.config.error.enums;
+package com.bng.ddaja.common.config.exception.enums;
 
 import lombok.Getter;
 
 @Getter
-public enum ErrorCode {
+public enum ExceptionCode {
     
     INVALID_PARAMETER(400, "Invalid Request Parameter")
     , NOT_FOUND(404, "Not Founded Resource")
@@ -17,7 +17,7 @@ public enum ErrorCode {
     private final int status;
     private final String message;
 
-    ErrorCode(final int status, final String message) {
+    ExceptionCode(final int status, final String message) {
         this.status = status;
         this.message = message;
     }
