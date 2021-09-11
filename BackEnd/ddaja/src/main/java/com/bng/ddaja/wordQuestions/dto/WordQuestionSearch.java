@@ -4,10 +4,8 @@ import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.common.dto.CommonSearch;
 import com.bng.ddaja.common.spec.SpecBuilder;
 import org.springframework.data.jpa.domain.Specification;
-
 import static com.bng.ddaja.wordQuestions.spec.WordQuestionSpec.*;
 import static org.springframework.data.jpa.domain.Specification.where;
-
 import lombok.Getter;
 import lombok.Setter;
 

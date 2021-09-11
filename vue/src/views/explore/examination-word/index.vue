@@ -1,26 +1,33 @@
 <template>
   <div class = "main-container">
     <div class = "main-title">
-      <font class = "font1">단어 암기</font><font font class="font2"> - {{ licenseInfo.licenseName }}</font>
+      <font class = "font1">단어 암기</font>
+      <font class = "font2"> - {{ licenseInfo.licenseName }}</font>
     </div>
 
-
-<div class="div1">
-  <el-input placeholder="Please input"  v-model="input3" class="input1"> 
-    <el-select v-model="select" slot="prepend" placeholder="Select"  class="select1">
-      <el-option label="Restaurant" value="1"></el-option>
-      <el-option label="Order No." value="2"></el-option>
-      <el-option label="Tel" value="3"></el-option>
-    </el-select>
-    <el-button slot="append" icon="el-icon-search" class="btn1"></el-button>
-  </el-input>
-</div>
-
+    <div class = "div1" style = "padding:0px 0px 75px 50%;">
+      <div style = "float:left; padding:8px 50px 0px 0px">
+        <span style = "font-size:19px; font-weight:bold">TITLE</span>        
+      </div>
+      <div style = "float:left; padding:0px 50px 0px 0px">
+        <el-input
+          style       = "width:500px"
+          v-model     = "param.name"
+          placeholder = "Title 을 입력 하세요."
+          @keyup.enter.native = "clickSearch">
+        </el-input>        
+      </div>
+      <div style = "float:left; padding:0px 0px 0px 0px">
+        <el-button 
+          type   = "primary"
+          @click = "clickSearch">검 색</el-button>
+      </div>
+    </div>
 
     <div class = "div2">
       <el-table
         :data = "tableData"
-        style = "width: 100%; height: 100%;"
+        style = "width:100%; height:100%;"
       >
         <el-table-column
           label = "Title"
@@ -44,7 +51,7 @@
         <el-table-column
           align = "right"
         >
-          <template slot-scope = "scope">
+          <template slot-scope="scope">
             <el-button
               size   = "mini"
               @click = "examPopupStatus(true, scope.row)"
@@ -52,12 +59,25 @@
           </template>
         </el-table-column>
       </el-table>
+
+      <div class="divpage">
+        <pagination 
+          v-show      = "totalCount>0" 
+          :total      = "totalCount" 
+          :page.sync  = "param.page" 
+          :limit.sync = "param.size" 
+          @pagination = "fetchList" />
+      </div>
+      <div>
+        <el-divider></el-divider>
+      </div>
     </div>
+
     <examinationPopup
-      :word-i-d           = "wordID"
-      :popup-val          = "examPopupStatusVal"
-      :wordQuestionsCount = "wordQuestionsCount"
-      @close:examination  = "examPopupStatus"
+      :word-i-d             = "wordID"
+      :popup-val            = "examPopupStatusVal"
+      :word-questions-count = "wordQuestionsCount"
+      @close:examination    = "examPopupStatus"
     />
   </div>
 </template>
@@ -65,6 +85,7 @@
 <script>
 
 import examinationPopup from './component/examinationPopup'
+import Pagination from '@/components/Pagination'
 import { fetchList } from '@/ddaja-api/explore/examination-word/ExaminationWord'
 
 export default {
@@ -72,26 +93,27 @@ export default {
 
   , components: {
     examinationPopup
+    , Pagination
   }
-
 
   , data() {
     return {
-      tableData            : []
-      , search             : ''
-      , wordID             : 1
-      , totalCount         : 0
-      , examPopupStatusVal : false
-      , wordQuestionsCount : 1
+      tableData: []
+      , search: ''
+      , wordID: 1
+      , totalCount: 0
+      , examPopupStatusVal: false
+      , wordQuestionsCount: 1
       , page: {}
+
       , param: {
-        licenseID : 0
-        , page    : 1
-        , size    : 10
+        licenseID: 0
+        , name : ''
+        , page: 1
+        , size: 10
       }
     }
   }
-
 
   , created() {
     this.licenseInfo     = this.$session.get('licenseInfo')
@@ -99,7 +121,6 @@ export default {
     this.subject         = this.licenseInfo.subject
     this.fetchList()
   }
-
 
   , methods: {
 
@@ -111,11 +132,9 @@ export default {
       })
     }
 
-
     , examPopupStatus(val, row) {
-
       if (val === true) {
-        if( row.item.wordQuestionsCount === 0){
+        if (row.item.wordQuestionsCount === 0) {
           alert('단어가 없습니다')
           return
         }
@@ -123,10 +142,15 @@ export default {
         this.wordID = row.item.id
         this.examPopupStatusVal = val
         this.wordQuestionsCount = row.item.wordQuestionsCount
-
       } else {
         this.examPopupStatusVal = val
       }
+    }
+
+    , clickSearch (){
+      this.param.page = 0;
+      this.param.size = 10;
+      this.fetchList()
     }
   }
 }

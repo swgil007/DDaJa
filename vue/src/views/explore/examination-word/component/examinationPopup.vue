@@ -1,53 +1,53 @@
 <template>
-  <div class = "examination-popup">
+  <div class="examination-popup">
     <el-dialog
-      width = "60%"
-      :visible.sync = "popupVal"
-      :before-close = "handleClose"
+      width="60%"
+      :visible.sync="popupVal"
+      :before-close="handleClose"
     >
       <el-card
-        class = "card1"
-        width = "60%"
-        :visible.sync = "popupVal"
-        :before-close = "handleClose"
+        class="card1"
+        width="60%"
+        :visible.sync="popupVal"
+        :before-close="handleClose"
       >
-        <div slot = "header" class = "div1">
+        <div slot="header" class="div1">
           <el-button
-            v-if   = "questionIndex != 0"
-            style  = "float: left; padding: 3px 0"
-            type   = "text"
-            @click = "setWordQuestion(-1)"
+            v-if="questionIndex != 0"
+            style="float: left; padding: 3px 0"
+            type="text"
+            @click="setWordQuestion(-1)"
           > ← 이전 단어 </el-button>
 
-          <span class = "span1"> {{ wordTitle }} </span>
+          <span class="span1"> {{ wordTitle }} </span>
 
           <el-button
-            v-if   = "questionListSize != questionIndex"
-            style  = "float: right; padding: 3px 0"
-            type   = "text"
-            @click = "setWordQuestion(1)"
+            v-if="questionListSize != questionIndex"
+            style="float: right; padding: 3px 0"
+            type="text"
+            @click="setWordQuestion(1)"
           > 다음 단어 → </el-button>
         </div>
 
-        <div class = "div2">
-          <span class = "span1">
-            <i class = "el-icon-edit"/> {{ questionIndex +1 }} 번 단어 <br><br> 
+        <div class="div2">
+          <span class="span1">
+            <i class="el-icon-edit" /> {{ questionIndex +1 }} 번 단어 <br><br>
             {{ question.content }}
           </span>
         </div>
 
-        <div class = "div3">
-          <div v-if = "questionResult" class = "div3-2">
+        <div class="div3">
+          <div v-if="questionResult" class="div3-2">
             <el-button
-              type   = "success"
-              @click = "answerCheck"
-              class  = "btn1"
+              type="success"
+              class="btn1"
               plain
+              @click="answerCheck"
             >정답 확인 하기
             </el-button>
           </div>
-          <div v-else class = "div3-3">
-            <span class = "span1 span2"> {{question.answer}} </span>
+          <div v-else class="div3-3">
+            <span class="span1 span2"> {{ question.answer }} </span>
           </div>
         </div>
       </el-card>
@@ -61,55 +61,52 @@ import { fetchWordQuestion } from '@/ddaja-api/explore/examination-word/Examinat
 import community from '@/views/explore/communication'
 
 export default {
-  name : 'ExaminationPopup'
+  name: 'ExaminationPopup',
 
-  , components : {
+  components: {
     community
-  }
+  },
 
-  , props : {
-    popupVal : {}
-    , wordID : {}
-    , wordQuestionsCount : {}
-  }
+  props: {
+    popupVal: {},
+    wordID: {},
+    wordQuestionsCount: {}
+  },
 
-  , data() {
+  data() {
     return {
-        amswerVal          : ''
-        , wordTitle        : ''
-        , questionResult   : true
-        , questionList     : []
-        , questionListSize : 0
-        , questionIndex    : 0
-        , question: {
-            id            : 0
-            , lid         : 0
-            , answer      : ''
-            , content     : ''
-            , createDate  : ''
-            , modifieDate : ''
-        }
-    }
-  }
-
-
-  , watch: {
-      popupVal(val) {
-        if (val) {
-          this.fetchWordQuestion()
-        } 
+      amswerVal: '',
+      wordTitle: '',
+      questionResult: true,
+      questionList: [],
+      questionListSize: 0,
+      questionIndex: 0,
+      question: {
+        id: 0,
+        lid: 0,
+        answer: '',
+        content: '',
+        createDate: '',
+        modifieDate: ''
       }
-  }
+    }
+  },
 
+  watch: {
+    popupVal(val) {
+      if (val) {
+        this.fetchWordQuestion()
+      }
+    }
+  },
 
-  , methods: {
-    
+  methods: {
+
     fetchWordQuestion() {
-
       var param = {
-        wordID : this.wordID
-        , size : this.wordQuestionsCount
-        , page : 0
+        wordID: this.wordID,
+        size: this.wordQuestionsCount,
+        page: 0
       }
 
       fetchWordQuestion(param).then(response => {
@@ -119,44 +116,40 @@ export default {
           questionList.push(x.item)
         })
 
-        this.questionIndex    = 0
+        this.questionIndex = 0
         this.questionListSize = questionList.length - 1
-        this.questionList     = questionList
-        this.wordTitle        = response.items[0].item.wordDTO.title
+        this.questionList = questionList
+        this.wordTitle = response.items[0].item.wordDTO.title
         this.setWordQuestion(0)
       })
-    }
+    },
 
+    answerCheck() {
+      this.questionResult = false
+    },
 
-    , answerCheck(){
-      this.questionResult = false;
-    }
-
-
-    , setWordQuestion(index) {
-      var questionIndex   = this.questionIndex + index
-      this.questionIndex  = questionIndex
-      this.question       = this.questionList[questionIndex]
-      this.amswerVal      = ''
+    setWordQuestion(index) {
+      var questionIndex = this.questionIndex + index
+      this.questionIndex = questionIndex
+      this.question = this.questionList[questionIndex]
+      this.amswerVal = ''
       this.questionResult = true
-    }
+    },
 
+    handleClose() {
+      this.$confirm('END ?').then(_ => {
+        this.popupClose()
+      }).catch(_ => {})
+    },
 
-    , handleClose() {
-        this.$confirm('END ?').then(_ => {
-            this.popupClose()
-        }).catch(_ => {})
-    }
-
-
-    , popupClose() {
-      this.question = { 
-          id            : 0
-          , lid         : 0
-          , answer      : ''
-          , content     : ''
-          , createDate  : ''
-          , modifieDate : ''
+    popupClose() {
+      this.question = {
+        id: 0,
+        lid: 0,
+        answer: '',
+        content: '',
+        createDate: '',
+        modifieDate: ''
       }
       this.wordTitle = ''
       this.$emit('close:examination', false)

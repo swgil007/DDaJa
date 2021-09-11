@@ -41,11 +41,6 @@ public class WordDTO extends CommonDTO {
     )
     private int wordQuestionsCount;
 
-    @ApiModelProperty(
-        name = "userWordQuestioinAnswerCount"
-    )
-    private int userWordQuestionAnswerCount;
-
     public WordDTO( Word word ){
 
         id                 = word.getId();
@@ -54,8 +49,5 @@ public class WordDTO extends CommonDTO {
         modifiedDate       = word.getModifiedDate();
         wordQuestionsCount = word.getWordQuestions().size();
         license            = new LicenseDTO(word.getLicense());
-
-        /** User API 개발 후 수정 - user 가 해당 단어 목록 정답률 **/
-        userWordQuestionAnswerCount = word.getWordQuestions().size() / 3;
     }
 }
