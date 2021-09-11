@@ -6,9 +6,20 @@ export function fetchList(param) {
     method: 'get',
     params: {
       licenseID: param.licenseID,
-      name : param.name || '',
-      page: param.page,
-      size: param.size
+      name: param.name || '',
+      page: param.page || 0,
+      size: param.size || 0
+    }
+  })
+}
+
+export function fetchListTotalCount(param) {
+  return request({
+    url: '/words/total-count',
+    method: 'get',
+    params: {
+      licenseID: param.licenseID,
+      name: param.name || ''
     }
   })
 }
@@ -19,8 +30,8 @@ export function fetchWordQuestion(param) {
     method: 'get',
     params: {
       wordID: param.wordID,
-      page: param.page,
-      size: param.size
+      page: param.page || 0,
+      size: param.size || 0
     }
   })
 }

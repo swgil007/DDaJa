@@ -1,42 +1,43 @@
 <template>
-  <div class = "main-container">
-    <div class = "main-title">
-      <font class = "font1">단어 암기</font>
-      <font class = "font2"> - {{ licenseInfo.licenseName }}</font>
+  <div class="main-container">
+    <div class="main-title">
+      <font class="font1">단어 암기</font>
+      <font class="font2"> - {{ licenseInfo.licenseName }}</font>
     </div>
 
-    <div class = "div1" style = "padding:0px 0px 75px 50%;">
-      <div style = "float:left; padding:8px 50px 0px 0px">
-        <span style = "font-size:19px; font-weight:bold">TITLE</span>        
+    <div class="div1" style="padding:0px 0px 75px 50%;">
+      <div style="float:left; padding:8px 50px 0px 0px">
+        <span style="font-size:19px; font-weight:bold">TITLE</span>
       </div>
-      <div style = "float:left; padding:0px 50px 0px 0px">
+      <div style="float:left; padding:0px 50px 0px 0px">
         <el-input
-          style       = "width:500px"
-          v-model     = "param.name"
-          placeholder = "Title 을 입력 하세요."
-          @keyup.enter.native = "clickSearch">
-        </el-input>        
+          v-model="param.name"
+          style="width:500px"
+          placeholder="Title 을 입력 하세요."
+          @keyup.enter.native="clickSearch"
+        />
       </div>
-      <div style = "float:left; padding:0px 0px 0px 0px">
-        <el-button 
-          type   = "primary"
-          @click = "clickSearch">검 색</el-button>
+      <div style="float:left; padding:0px 0px 0px 0px">
+        <el-button
+          type="primary"
+          @click="clickSearch"
+        >검 색</el-button>
       </div>
     </div>
 
-    <div class = "div2">
+    <div class="div2">
       <el-table
-        :data = "tableData"
-        style = "width:100%; height:100%;"
+        :data="tableData"
+        style="width:100%; height:100%;"
       >
         <el-table-column
-          label = "Title"
-          prop  = "item.title"
+          label="Title"
+          prop="item.title"
         />
 
         <el-table-column
-          label = "등록일"
-          width = "400"
+          label="등록일"
+          width="400"
         >
           <template slot-scope="scope">
             {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
@@ -44,40 +45,41 @@
         </el-table-column>
 
         <el-table-column
-          label = "단어 수"
-          width = "100"
-          prop  = "item.wordQuestionsCount"
+          label="단어 수"
+          width="100"
+          prop="item.wordQuestionsCount"
         />
         <el-table-column
-          align = "right"
+          align="right"
         >
           <template slot-scope="scope">
             <el-button
-              size   = "mini"
-              @click = "examPopupStatus(true, scope.row)"
+              size="mini"
+              @click="examPopupStatus(true, scope.row)"
             >암기 하기</el-button>
           </template>
         </el-table-column>
       </el-table>
 
       <div class="divpage">
-        <pagination 
-          v-show      = "totalCount>0" 
-          :total      = "totalCount" 
-          :page.sync  = "param.page" 
-          :limit.sync = "param.size" 
-          @pagination = "fetchList" />
+        <pagination
+          v-show="totalCount>0"
+          :total="totalCount"
+          :page.sync="param.page"
+          :limit.sync="param.size"
+          @pagination="fetchList"
+        />
       </div>
       <div>
-        <el-divider></el-divider>
+        <el-divider />
       </div>
     </div>
 
     <examinationPopup
-      :word-i-d             = "wordID"
-      :popup-val            = "examPopupStatusVal"
-      :word-questions-count = "wordQuestionsCount"
-      @close:examination    = "examPopupStatus"
+      :word-i-d="wordID"
+      :popup-val="examPopupStatusVal"
+      :word-questions-count="wordQuestionsCount"
+      @close:examination="examPopupStatus"
     />
   </div>
 </template>
@@ -86,53 +88,56 @@
 
 import examinationPopup from './component/examinationPopup'
 import Pagination from '@/components/Pagination'
-import { fetchList } from '@/ddaja-api/explore/examination-word/ExaminationWord'
+import { fetchList, fetchListTotalCount } from '@/ddaja-api/explore/examination-word/ExaminationWord'
 
 export default {
-  name: ''
+  name: '',
 
-  , components: {
-    examinationPopup
-    , Pagination
-  }
+  components: {
+    examinationPopup,
+    Pagination
+  },
 
-  , data() {
+  data() {
     return {
-      tableData: []
-      , search: ''
-      , wordID: 1
-      , totalCount: 0
-      , examPopupStatusVal: false
-      , wordQuestionsCount: 1
-      , page: {}
+      tableData: [],
+      search: '',
+      wordID: 1,
+      totalCount: 0,
+      examPopupStatusVal: false,
+      wordQuestionsCount: 1,
+      page: {},
 
-      , param: {
-        licenseID: 0
-        , name : ''
-        , page: 1
-        , size: 10
+      param: {
+        licenseID: 0,
+        name: '',
+        page: 1,
+        size: 10
       }
     }
-  }
+  },
 
-  , created() {
-    this.licenseInfo     = this.$session.get('licenseInfo')
+  created() {
+    this.licenseInfo = this.$session.get('licenseInfo')
     this.param.licenseID = this.licenseInfo.licenseID
-    this.subject         = this.licenseInfo.subject
+    this.subject = this.licenseInfo.subject
     this.fetchList()
-  }
+  },
 
-  , methods: {
+  methods: {
 
     fetchList() {
       fetchList(this.param).then(response => {
-        this.page       = response.page
-        this.tableData  = response.items
+        this.tableData = response.items
+        this.page = response.page
+      })
+
+      fetchListTotalCount(this.param).then(response => {
         this.totalCount = response.totalCount
       })
-    }
+    },
 
-    , examPopupStatus(val, row) {
+    examPopupStatus(val, row) {
       if (val === true) {
         if (row.item.wordQuestionsCount === 0) {
           alert('단어가 없습니다')
@@ -145,11 +150,11 @@ export default {
       } else {
         this.examPopupStatusVal = val
       }
-    }
+    },
 
-    , clickSearch (){
-      this.param.page = 0;
-      this.param.size = 10;
+    clickSearch() {
+      this.param.page = 0
+      this.param.size = 10
       this.fetchList()
     }
   }

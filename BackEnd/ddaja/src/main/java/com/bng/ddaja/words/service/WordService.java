@@ -1,5 +1,9 @@
 package com.bng.ddaja.words.service;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.words.dto.WordDTO;
 import com.bng.ddaja.words.dto.WordSearch;
@@ -23,6 +27,10 @@ public class WordService {
         return wordRepository.findAll(wordSearch.toSpecification(), wordSearch.toPageable()).map( vo -> new WordDTO(vo));
     } 
     
+
+    public List<WordDTO> getAllWordByWordSearchTotalCount( WordSearch wordSearch ) {
+        return wordRepository.findAll(wordSearch.toSpecification()).stream().map(vo -> new WordDTO(vo)).collect(Collectors.toList());
+    } 
 
     @Transactional
     public void createWord ( Word vo ){ 

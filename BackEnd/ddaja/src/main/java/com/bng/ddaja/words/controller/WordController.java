@@ -37,6 +37,16 @@ public class WordController {
         );
     }
 
+    @GetMapping("/total-count")
+    @ResponseBody
+    public ResponseEntity<CommonResponse> getAllWordByWordSearchTotalCount( WordSearch wordSearch ){
+        return ResponseEntity.ok().body(
+            new CommonResponse(
+                wordService.getAllWordByWordSearchTotalCount(wordSearch)
+            )
+        );
+    }
+
     @PostMapping("")
     public ResponseEntity<String> createWord (  @RequestParam( name = "title", required = false ) String title,
                                                 @RequestParam( name = "lid"  , required = false ) long lid ){                                           
