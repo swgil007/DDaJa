@@ -57,7 +57,7 @@
 
 <script>
 
-import { fetchWordQuestion } from '@/ddaja-api/explore/examination-word/ExaminationWord'
+import { fetchWordQuestion } from '@/ddaja-api/user/explore/examination-word/ExaminationWord'
 import community from '@/views/explore/communication'
 
 export default {

@@ -88,7 +88,7 @@
 
 import examinationPopup from './component/examinationPopup'
 import Pagination from '@/components/Pagination'
-import { fetchList, fetchListTotalCount } from '@/ddaja-api/explore/examination-word/ExaminationWord'
+import { fetchList, fetchListTotalCount } from '@/ddaja-api/user/explore/examination-word/ExaminationWord'
 
 export default {
   name: '',
