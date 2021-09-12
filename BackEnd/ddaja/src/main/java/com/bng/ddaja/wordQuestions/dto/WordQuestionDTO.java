@@ -3,6 +3,7 @@ package com.bng.ddaja.wordQuestions.dto;
 import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.words.dto.WordDTO;
+import com.bng.ddaja.words.service.WordService;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -46,11 +47,23 @@ public class WordQuestionDTO extends CommonDTO{
     )
     private WordDTO wordDTO;
 
+
     public WordQuestionDTO( WordQuestion wordQuestion ){
         this.id      = wordQuestion.getId();
         this.wordDTO = new WordDTO(wordQuestion.getWord());
         this.lId     = wordQuestion.getLId();
         this.content = wordQuestion.getContent();
         this.answer  = wordQuestion.getAnswer();
+    }
+
+    public WordQuestion toEntity(){
+
+        return WordQuestion.builder()
+        .id(this.id)
+        .content(this.content)
+        .answer(this.answer)
+        .lId(this.lId)
+        // .word()
+        .build();
     }
 }

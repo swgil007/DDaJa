@@ -15,7 +15,6 @@
       </div>
     </el-col>
 
-
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="routerChange('/admin-binsoo/license')">
         <div class="card-panel-icon-wrapper icon-message">
@@ -29,7 +28,6 @@
         </div>
       </div>
     </el-col>
-
 
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="routerChange('/admin-binsoo/notice')">
@@ -45,7 +43,6 @@
       </div>
     </el-col>
 
-
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="routerChange('/admin-binsoo/question')">
         <div class="card-panel-icon-wrapper icon-shopping">
@@ -59,7 +56,6 @@
         </div>
       </div>
     </el-col>
-
 
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="routerChange('/admin-binsoo/word')">
@@ -75,7 +71,6 @@
       </div>
     </el-col>
 
-
   </el-row>
 </template>
 
@@ -85,48 +80,48 @@ import CountTo from 'vue-count-to'
 export default {
   components: {
     CountTo
-  }
+  },
 
-  , mounted () {
-    this.fetchData()
-  }
-
-  , data (){
+  data() {
     return {
-      user : {
-        path : ''
-        , count : 0
-      }
-      , license : {
-        path : ''
-        , count : 0
-      }
-      , notice : {
-        path : ''
-        , count : 0
-      }
-      , question : {
-        path : ''
-        , count : 0
-      }
-      , word : {
-        path : ''
-        , count : 0
+      user: {
+        path: '',
+        count: 0
+      },
+      license: {
+        path: '',
+        count: 0
+      },
+      notice: {
+        path: '',
+        count: 0
+      },
+      question: {
+        path: '',
+        count: 0
+      },
+      word: {
+        path: '',
+        count: 0
       }
     }
-  }
+  },
 
-  , methods: {
+  mounted() {
+    this.fetchData()
+  },
 
-    fetchData(){
-      this.user.count = 234550;
-      this.license.count = 7530;
-      this.notice.count = 2550;
-      this.question.count = 1520;
-      this.word.count = 9640;
-    }
+  methods: {
 
-    , routerChange(path) {
+    fetchData() {
+      this.user.count = 234550
+      this.license.count = 7530
+      this.notice.count = 2550
+      this.question.count = 1520
+      this.word.count = 9640
+    },
+
+    routerChange(path) {
       this.$router.push(path)
       this.$emit('handleSetLineChartData', 'purchases')
     }

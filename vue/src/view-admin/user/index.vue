@@ -1,131 +1,128 @@
 <template>
-<div class="main-container">
+  <div class="main-container">
     <div class="main-title">
-        <font class="font1">User Manager</font>
+      <font class="font1">User Manager</font>
     </div>
 
     <div class="div1" style="padding:0px 0px 75px 45%;">
-        <div style="float:left; padding:1px 20px 0px 0px">
+      <div style="float:left; padding:1px 20px 0px 0px">
 
-            <el-select v-model="searchFiled" placeholder="Select">
-                <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                </el-option>
-            </el-select>    
+        <el-select v-model="searchFiled" placeholder="Select">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
 
-        </div>
-        <div style="float:left; padding:0px 20px 0px 0px">
-            <el-input
-                v-model="param.name"
-                style="width:500px"
-                placeholder="검색 조건을 입력 하세요."
-                @keyup.enter.native="clickSearch"
-            />
-        </div>
-        <div style="float:left; padding:0px 0px 0px 0px">
-            <el-button
-            type="primary"
-            @click="clickSearch"
-            >검 색</el-button>
-        </div>
+      </div>
+      <div style="float:left; padding:0px 20px 0px 0px">
+        <el-input
+          v-model="param.name"
+          style="width:500px"
+          placeholder="검색 조건을 입력 하세요."
+          @keyup.enter.native="clickSearch"
+        />
+      </div>
+      <div style="float:left; padding:0px 0px 0px 0px">
+        <el-button
+          type="primary"
+          @click="clickSearch"
+        >검 색</el-button>
+      </div>
     </div>
 
     <div class="div2">
-            <el-table
-                :data="tableData"
-                style="width:100%; height:100%;"
-            >
-            <el-table-column
-                label="ID"
-                prop="item.userId"
-                width="280"
-            />
-
-            <el-table-column
-                label="Nick Name"
-                prop="item.nickName"
-                width="280"
-            />
-
-
-            <el-table-column
-                label="Email"
-                prop="item.email"
-            />
-
-
-            <el-table-column
-                label="등록일"
-                width="180"
-            >
-            <template slot-scope="scope">
-            {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
-            </template>
-            </el-table-column>
-
-            <el-table-column
-                label="수정일"
-                width="180"
-            >
-            <template slot-scope="scope">
-            {{ $moment(scope.row.item.modifiedDate).format('YYYY-MM-DD') }}
-            </template>
-            </el-table-column>
-
-
-            <el-table-column
-                align="right"
-                width="100"
-            >
-            <template slot-scope="scope">
-            <el-button
-                size="mini"
-                @click="updateDrawerStatus(true, scope.row)"
-            >수정</el-button>
-            </template>
-            </el-table-column>
-
-            <el-table-column
-                align="right"
-                width="100"
-            >
-            <template slot-scope="scope">
-            <el-button
-                size="mini"
-                @click="detailDrawerStatus(true, scope.row)"
-            >상세</el-button>
-            </template>
-            </el-table-column>
-        </el-table>
-
-    <div class="divpage">
-        <pagination
-            v-show="totalCount>0"
-            :total="totalCount"
-            :page.sync="param.page"
-            :limit.sync="param.size"
-            @pagination="fetchList"
+      <el-table
+        :data="tableData"
+        style="width:100%; height:100%;"
+      >
+        <el-table-column
+          label="ID"
+          prop="item.userId"
+          width="280"
         />
-    </div>
-    <div>
+
+        <el-table-column
+          label="Nick Name"
+          prop="item.nickName"
+          width="280"
+        />
+
+        <el-table-column
+          label="Email"
+          prop="item.email"
+        />
+
+        <el-table-column
+          label="등록일"
+          width="180"
+        >
+          <template slot-scope="scope">
+            {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
+          </template>
+        </el-table-column>
+
+        <el-table-column
+          label="수정일"
+          width="180"
+        >
+          <template slot-scope="scope">
+            {{ $moment(scope.row.item.modifiedDate).format('YYYY-MM-DD') }}
+          </template>
+        </el-table-column>
+
+        <el-table-column
+          align="right"
+          width="100"
+        >
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="updateDrawerStatus(true, scope.row)"
+            >수정</el-button>
+          </template>
+        </el-table-column>
+
+        <el-table-column
+          align="right"
+          width="100"
+        >
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="detailDrawerStatus(true, scope.row)"
+            >상세</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <div class="divpage">
+        <pagination
+          v-show="totalCount>0"
+          :total="totalCount"
+          :page.sync="param.page"
+          :limit.sync="param.size"
+          @pagination="fetchList"
+        />
+      </div>
+      <div>
         <el-divider />
-    </div>
+      </div>
     </div>
     <detailDrawer
-    :popup-val="detailDrawerVal"
-    :id="id"
-    @close:detaildrawer="detailDrawerStatus"
+      :id="id"
+      :popup-val="detailDrawerVal"
+      @close:detaildrawer="detailDrawerStatus"
     />
     <updateDrawer
-    :popup-val="updateDrawerVal"
-    :id="id"
-    @close:updatedrawer="updateDrawerStatus"
+      :id="id"
+      :popup-val="updateDrawerVal"
+      @close:updatedrawer="updateDrawerStatus"
     />
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -136,76 +133,74 @@ import detailDrawer from './components/detailDrawer'
 import updateDrawer from './components/updateDrawer'
 
 export default {
-    name: '',
+  name: '',
 
-    components: {
-        Pagination
-        , detailDrawer
-        , updateDrawer
-    },
+  components: {
+    Pagination,
+    detailDrawer,
+    updateDrawer
+  },
 
-    data() {
-        return {
-            options: [{
-                value: 'ID',
-                label: 'ID'
-                }, {
-                value: 'NickName',
-                label: 'NickName'
-                }, {
-                value: 'Email',
-                label: 'Email'
-            }],
-            searchFiled : 'ID'
-            ,
-            tableData: [],
-            search: '',
-            id: 1,
-            totalCount: 0,
-            page: {},
-            param: {
-            licenseID: 0,
-            name: '',
-            page: 1,
-            size: 10
-            }
-            , detailDrawerVal : false
-            , updateDrawerVal : false
-        }
-    },
+  data() {
+    return {
+      options: [{
+        value: 'ID',
+        label: 'ID'
+      }, {
+        value: 'NickName',
+        label: 'NickName'
+      }, {
+        value: 'Email',
+        label: 'Email'
+      }],
+      searchFiled: 'ID',
+      tableData: [],
+      search: '',
+      id: 1,
+      totalCount: 0,
+      page: {},
+      param: {
+        licenseID: 0,
+        name: '',
+        page: 1,
+        size: 10
+      },
+      detailDrawerVal: false,
+      updateDrawerVal: false
+    }
+  },
 
-    created() {
-        this.fetchList()
-    },
+  created() {
+    this.fetchList()
+  },
 
-    methods: {
+  methods: {
 
     fetchList() {
-        userList(this.param).then(response => {
+      userList(this.param).then(response => {
         this.tableData = response.items
         this.page = response.page
-    })
+      })
 
-    userListTotalCount(this.param).then(response => {
+      userListTotalCount(this.param).then(response => {
         this.totalCount = response.totalCount
-    })
+      })
     },
 
-    updateDrawerStatus(val, row) {   
-        this.updateDrawerVal = val
-        this.id = (row == undefined)  ? 0 : row.item.id;
-
+    updateDrawerStatus(val, row) {
+      this.updateDrawerVal = val
+      this.id = (row == undefined) ? 0 : row.item.id
     },
-    detailDrawerStatus(val, row) { 
-        this.detailDrawerVal = val
-        this.id = (row == undefined)  ? 0 : row.item.id;
+    detailDrawerStatus(val, row) {
+      this.detailDrawerVal = val
+      this.id = (row == undefined) ? 0 : row.item.id
     },
     clickSearch() {
-        this.param.page = 0
-        this.param.size = 10
-        this.fetchList()
+      this.param.page = 0
+      this.param.size = 10
+      this.fetchList()
     }
-    }
+  }
 }
 </script>
 

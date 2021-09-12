@@ -1,5 +1,7 @@
 package com.bng.ddaja.wordQuestions.service;
 
+import com.bng.ddaja.common.domain.Word;
+import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionSearch;
 import com.bng.ddaja.wordQuestions.repository.WordQuestionRepository;
@@ -18,5 +20,21 @@ public class WordQuestionService {
 
     public Page<WordQuestionDTO> getAllWordQuestionByWordQuestionSearch( WordQuestionSearch wordQuestionSearch){
         return wordQuestionRepository.findAll(wordQuestionSearch.toSpecification(), wordQuestionSearch.toPageable()).map( vo -> new WordQuestionDTO(vo));
+    }
+
+    public WordQuestionDTO saveWordQuestion( WordQuestionDTO wordQuestionDTO){
+        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity();
+        wordQuestionRepository.save(wordQuestionVO);
+        return new WordQuestionDTO(wordQuestionVO);
+    }
+
+    public WordQuestionDTO updateWordQuestion( WordQuestionDTO wordQuestionDTO, long id){
+        // 진행중
+        return null;
+    }    
+    
+    public WordQuestionDTO deleteWordQuestion( long id){
+        // 진행중
+        return null;
     }
 }

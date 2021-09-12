@@ -25,11 +25,14 @@ public class WordService {
 
     public Page<WordDTO> getAllWordByWordSearch( WordSearch wordSearch ) {
         return wordRepository.findAll(wordSearch.toSpecification(), wordSearch.toPageable()).map( vo -> new WordDTO(vo));
-    } 
-    
+    }
 
     public List<WordDTO> getAllWordByWordSearchTotalCount( WordSearch wordSearch ) {
         return wordRepository.findAll(wordSearch.toSpecification()).stream().map(vo -> new WordDTO(vo)).collect(Collectors.toList());
+    } 
+
+    public Word getWordByWord( long wID ) {
+        return wordRepository.findById(wID);
     } 
 
     @Transactional
