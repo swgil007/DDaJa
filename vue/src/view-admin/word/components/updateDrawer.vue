@@ -8,94 +8,95 @@
       :before-close="handleClose"
     >
       <div class="div1">
-        <span class="span1">Word Questions 수정{{id}}</span>
+        <span class="span1">Word Questions 수정{{ id }}</span>
       </div>
-      <div  style="">
-      <el-table
-        :data="tableData"
-        height="500"
-        style="width: 100%">
-        <el-table-column type="expand">
-        <template slot-scope="props">
-        <p><i class="el-icon-check"></i> createdDate</p>
-        <p>{{ props.row.createdDate }}</p>
-        <br>
-        <p><i class="el-icon-check"></i> modifiedDate</p>
-        <p>{{ props.row.modifiedDate }}</p>
-        <br>
-        <p><i class="el-icon-check"></i> content </p>
-        <p>{{ props.row.content }}</p>
-        </template>
-        </el-table-column>
-        <el-table-column
-        label="id"
-        prop="id"
-        width="100">
-        </el-table-column>
-        <el-table-column
-        label="answer"
-        prop="answer">
-        </el-table-column>
+      <div style="">
+        <el-table
+          :data="tableData"
+          height="500"
+          style="width: 100%"
+        >
+          <el-table-column type="expand">
+            <template slot-scope="props">
+              <p><i class="el-icon-check" /> createdDate</p>
+              <p>{{ props.row.createdDate }}</p>
+              <br>
+              <p><i class="el-icon-check" /> modifiedDate</p>
+              <p>{{ props.row.modifiedDate }}</p>
+              <br>
+              <p><i class="el-icon-check" /> content </p>
+              <p>{{ props.row.content }}</p>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="id"
+            prop="id"
+            width="100"
+          />
+          <el-table-column
+            label="answer"
+            prop="answer"
+          />
 
-        <el-table-column
-        label="수정"
-        prop="id"
-        width="100">
-        <template slot-scope="{row}">
-          <i class="el-icon-delete" @click="updateQuestion( row)"></i>
-        </template>
-        </el-table-column>
+          <el-table-column
+            label="수정"
+            prop="id"
+            width="100"
+          >
+            <template slot-scope="{row}">
+              <i class="el-icon-delete" @click="updateQuestion( row)" />
+            </template>
+          </el-table-column>
 
-        <el-table-column
-        label="삭제"
-        prop="id"
-        width="100">
-        <template slot-scope="{row}">
-          <i class="el-icon-delete" @click="deleteQuestion( row)"></i>
-        </template>
-        </el-table-column>
+          <el-table-column
+            label="삭제"
+            prop="id"
+            width="100"
+          >
+            <template slot-scope="{row}">
+              <i class="el-icon-delete" @click="deleteQuestion( row)" />
+            </template>
+          </el-table-column>
 
-      </el-table>       
+        </el-table>
 
       </div>
 
       <div v-if="status==='insert'" style="padding: 5% 8% 5% 8%">
         <div style="float:left; width:100%">
-          <el-input placeholder="Answer" v-model="question.answer" style="float:left; width:50%"></el-input>
+          <el-input v-model="question.answer" placeholder="Answer" style="float:left; width:50%" />
         </div>
         <div style="float:left;">
           <el-input
+            v-model="question.content"
             type="textarea"
             :rows="4"
             placeholder="Content"
-            v-model="question.content"
-            style="width:1000px; padding:1% 0 0 0">
-          </el-input>
+            style="width:1000px; padding:1% 0 0 0"
+          />
         </div>
         <div style="float:right;">
-          <el-button type="primary" plain @click="save" style="height:100px; margin:10px 0 0 0">등 록</el-button>
+          <el-button type="primary" plain style="height:100px; margin:10px 0 0 0" @click="save">등 록</el-button>
         </div>
       </div>
-
 
       <div v-if="status==='update'" style="padding: 5% 8% 5% 8%">
         <div style="float:left; width:100%">
-          <el-input placeholder="Answer" v-model="question.answer" style="float:left; width:50%"></el-input>
+          <el-input v-model="question.answer" placeholder="Answer" style="float:left; width:50%" />
         </div>
         <div style="float:left;">
           <el-input
+            v-model="question.content"
             type="textarea"
             :rows="4"
             placeholder="Content"
-            v-model="question.content"
-            style="width:1000px; padding:1% 0 0 0">
-          </el-input>
+            style="width:1000px; padding:1% 0 0 0"
+          />
         </div>
         <div style="float:right;">
-          <el-button type="primary" plain @click="updateQuestionSave" style="height:100px; margin:10px 0 0 0">수 정</el-button>
+          <el-button type="primary" plain style="height:100px; margin:10px 0 0 0" @click="updateQuestionSave">수 정</el-button>
         </div>
       </div>
-
 
     </el-drawer>
   </div>
@@ -108,24 +109,24 @@ import { wordQuestionList, wordQuestionUpdate, wordQuestionInsert, wordQuestionD
 export default {
   name: 'Community',
   props: {
-    popupVal: false
-    , id: {}
-    , size: {}
+    popupVal: false,
+    id: {},
+    size: {}
   },
   data() {
     return {
       param: {
-        wordID: 0
-        , page : 0
-        , size : 0
-      }
-      , tableData: []
-      , question : {
-        id : 0
-        , answer : ''
-        , content : ''
-      }
-      , status : 'insert'
+        wordID: 0,
+        page: 0,
+        size: 0
+      },
+      tableData: [],
+      question: {
+        id: 0,
+        answer: '',
+        content: ''
+      },
+      status: 'insert'
     }
   },
   watch: {
@@ -141,52 +142,50 @@ export default {
     async fetchInfo() {
       await wordQuestionList(this.param).then(response => {
         response.items.forEach(x => {
-          this.tableData.push({id : x.item.id, answer : x.item.answer, content : x.item.content, createdDate : x.item.createdDate, modifiedDate : x.item.modifiedDate })
-        });
+          this.tableData.push({ id: x.item.id, answer: x.item.answer, content: x.item.content, createdDate: x.item.createdDate, modifiedDate: x.item.modifiedDate })
+        })
       })
-    }
+    },
 
-    , updateQuestion(row){
+    updateQuestion(row) {
       this.status = 'update'
       this.question.id = row.id
-      this.question.answer  = row.answer 
+      this.question.answer = row.answer
       this.question.content = row.content
-    }
+    },
 
-    , async updateQuestionSave(row){
-
-      if(this.question.id === 0 ){
+    async updateQuestionSave(row) {
+      if (this.question.id === 0) {
         alert('ERROR')
         return
       }
 
-      await wordQuestionUpdate(this.question).then( response => {
+      await wordQuestionUpdate(this.question).then(response => {
         this.$message({
           message: 'Word Question Update Success',
           type: 'success'
-        });
+        })
       })
       this.status = 'insert'
       this.question = {}
-    }
+    },
 
-
-    , async deleteQuestion(row){
+    async deleteQuestion(row) {
       this.question.id = row.id
-      await wordQuestionDelete(this.question).then( response => {
+      await wordQuestionDelete(this.question).then(response => {
         this.$message({
           message: 'Word Question Delete Success',
           type: 'success'
-        });
+        })
       })
-    }
+    },
 
-    , async save() {
-      await wordQuestionInsert(this.question).then( response => {
+    async save() {
+      await wordQuestionInsert(this.question).then(response => {
         this.$message({
           message: 'Word Question Save Success',
           type: 'success'
-        });
+        })
       })
       this.question = {}
     },
@@ -224,7 +223,7 @@ export default {
     }
 .div2{
   width : 100%; margin: 1% 4% 2% 4%;
-  overflow:auto; 
+  overflow:auto;
 .div2-1{
 width : 100%; float :left ; padding: 1% 1% 1% 0%;text-align : right; font-weight:bold;
 .div2-1-1{

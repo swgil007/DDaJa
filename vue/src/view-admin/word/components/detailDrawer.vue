@@ -10,33 +10,34 @@
       <div class="div1">
         <span class="span1">Word Questions 상세</span>
       </div>
-      <div  style="">
-      <el-table
-        :data="tableData"
-        height="730"
-        style="width: 100%">
-        <el-table-column type="expand">
-        <template slot-scope="props">
-        <p><i class="el-icon-check"></i> createdDate</p>
-        <p>{{ props.row.createdDate }}</p>
-        <br>
-        <p><i class="el-icon-check"></i> modifiedDate</p>
-        <p>{{ props.row.modifiedDate }}</p>
-        <br>
-        <p><i class="el-icon-check"></i> content </p>
-        <p>{{ props.row.content }}</p>
-        </template>
-        </el-table-column>
-        <el-table-column
-        label="id"
-        prop="id"
-        width="100">
-        </el-table-column>
-        <el-table-column
-        label="answer"
-        prop="answer">
-        </el-table-column>
-      </el-table>       
+      <div style="">
+        <el-table
+          :data="tableData"
+          height="730"
+          style="width: 100%"
+        >
+          <el-table-column type="expand">
+            <template slot-scope="props">
+              <p><i class="el-icon-check" /> createdDate</p>
+              <p>{{ props.row.createdDate }}</p>
+              <br>
+              <p><i class="el-icon-check" /> modifiedDate</p>
+              <p>{{ props.row.modifiedDate }}</p>
+              <br>
+              <p><i class="el-icon-check" /> content </p>
+              <p>{{ props.row.content }}</p>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="id"
+            prop="id"
+            width="100"
+          />
+          <el-table-column
+            label="answer"
+            prop="answer"
+          />
+        </el-table>
       </div>
     </el-drawer>
   </div>
@@ -49,18 +50,18 @@ import { wordQuestionList } from '@/ddaja-api/admin/word/Word'
 export default {
   name: 'Community',
   props: {
-    popupVal: false
-    , id: {}
-    , size: {}
+    popupVal: false,
+    id: {},
+    size: {}
   },
   data() {
     return {
       param: {
-        wordID: 0
-        , page : 0
-        , size : 0
-      }
-      , tableData: []
+        wordID: 0,
+        page: 0,
+        size: 0
+      },
+      tableData: []
     }
   },
   watch: {
@@ -76,12 +77,12 @@ export default {
     async fetchInfo() {
       await wordQuestionList(this.param).then(response => {
         response.items.forEach(x => {
-          this.tableData.push({id : x.item.id, answer : x.item.answer, content : x.item.content, createdDate : x.item.createdDate, modifiedDate : x.item.modifiedDate })
-        });
+          this.tableData.push({ id: x.item.id, answer: x.item.answer, content: x.item.content, createdDate: x.item.createdDate, modifiedDate: x.item.modifiedDate })
+        })
       })
-    }
+    },
 
-    , popupClose() {
+    popupClose() {
       this.$emit('close:updatedrawer', false)
     },
 
@@ -114,7 +115,7 @@ export default {
     }
 .div2{
   width : 100%; margin: 1% 4% 2% 4%;
-  overflow:auto; 
+  overflow:auto;
 .div2-1{
 width : 100%; float :left ; padding: 1% 1% 1% 0%;text-align : right; font-weight:bold;
 .div2-1-1{

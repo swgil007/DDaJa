@@ -148,26 +148,26 @@ export default {
   name: '',
 
   components: {
-    Pagination
-    , detailDrawer
-    , updateDrawer
+    Pagination,
+    detailDrawer,
+    updateDrawer
   },
 
   data() {
     return {
-      licenseOptions: []
-      , tableData: []
-      , id: 1
-      , totalCount:0
-      , param: {
-        licenseID: undefined
-        , name: ''
-        , page: 1
-        , size: 10
+      licenseOptions: [],
+      tableData: [],
+      id: 1,
+      totalCount: 0,
+      param: {
+        licenseID: undefined,
+        name: '',
+        page: 1,
+        size: 10
       },
       detailDrawerVal: false,
       updateDrawerVal: false,
-      size :0
+      size: 0
     }
   },
 
@@ -178,17 +178,17 @@ export default {
 
   methods: {
 
-    async getLicense (){
-      await licenseList().then( response => {
-        response.items.forEach( x => {
+    async getLicense() {
+      await licenseList().then(response => {
+        response.items.forEach(x => {
           var type = (x.item.type === 'WRITING') ? '필기' : '실기'
           var label = '[' + type + '] ' + x.item.name
-          this.licenseOptions.push({value:x.item.id, label:label})
+          this.licenseOptions.push({ value: x.item.id, label: label })
         })
       })
-    }
+    },
 
-    , async fetchList() {
+    async fetchList() {
       await wordList(this.param).then(response => {
         this.tableData = response.items
         this.page = response.page

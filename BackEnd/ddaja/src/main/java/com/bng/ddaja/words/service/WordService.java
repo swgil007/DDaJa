@@ -31,7 +31,7 @@ public class WordService {
         return wordRepository.findAll(wordSearch.toSpecification()).stream().map(vo -> new WordDTO(vo)).collect(Collectors.toList());
     } 
 
-    public Word getWordByWord( long wID ) {
+    public Word findById( long wID ) {
         return wordRepository.findById(wID);
     } 
 
