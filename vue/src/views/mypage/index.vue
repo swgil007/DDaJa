@@ -3,79 +3,25 @@
     <el-form class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">DDaJa Login</h3>
+        <h3 class="title">DDaJa MyPage</h3>
       </div>
       <img id="kakao-login-btn" src="@/images/social/kakao_login.png" @click="kakaoLogin">
       <button @click="kakaoLogout">로그아웃</button>
     </el-form>
   </div>
 </template>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-import axios from 'axios'
-
 export default {
-  name: 'Login',
+  name: 'Mypage',
   components: {
-    axios
-  }
-  , data() {
+  },
+  data() {
     return {
       socialAccessToken: {}
     }
-  }
-  ,
+  },
   methods: {
-    kakaoLogout() {
-      alert(Kakao.Auth.getAccessToken())
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function(response) {
-          console.log(response);
-        },
-        fail: function(error) {
-          console.log(error);
-        },
-      });
-      Kakao.Auth.logout(function() {
-        console.log(Kakao.Auth.getAccessToken());
-      });
-    },
-    kakaoLogin() {
-      this.$kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function(authObj) {
-          console.log(JSON.stringify(authObj))
-          const socialAccessToken = {
-            accessToken : authObj.access_token
-            , refreshToken : authObj.refresh_token
-            , tokenType : 'KAKAO'
-            , expireTime : authObj.expires_in
-            , refreshExpireTime : authObj.refresh_token_expires_in
-          }
-          const userInfoURI = "http://localhost/users/social"
-          axios.post(userInfoURI, socialAccessToken)
-          .then(res => {
-            console.log(res)
-            if(res.status == 200) {
-              window.sessionStorage.setItem('jwt', res.data.item.jwt)
-              //window.location.href="/"
-              return
-            } else if(res.status == 201) {
-              window.sessionStorage.setItem('jwt', res.data.item.jwt)
-              return
-            }
-            alert("로그인에 실패하였습니다 :(")
-          })
-          .catch(err => {
-            console.log(err)
-          })
-        },
-        fail: function(err) {
-          alert('failed to login: ' + JSON.stringify(err))
-        }
-      })
-    }
+
   }
 }
 </script>
