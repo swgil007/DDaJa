@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
+    <el-form class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
         <h3 class="title">DDaJa Login</h3>
@@ -8,44 +8,45 @@
       <img id="kakao-login-btn" src="@/images/social/kakao_login.png" @click="kakaoLogin">
       <button @click="kakaoLogout">로그아웃</button>
     </el-form>
+    <register-popup
+      :popup-val="popupVal"
+      @close:popup="popupClose"
+    />
   </div>
 </template>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 import axios from 'axios'
+import registerPopup from './components/RegisterPopup.vue'
 
 export default {
   name: 'Login',
   components: {
     axios
+    , registerPopup
   }
   , data() {
     return {
       socialAccessToken: {}
-      , test: 'a'
+      , popupVal: false
     }
   }
-  , created() {
-  },
+  ,
   methods: {
     kakaoLogout() {
-
-    alert(Kakao.Auth.getAccessToken())
-
-    Kakao.API.request({
-      url: '/v1/user/unlink',
-      success: function(response) {
-        console.log(response);
-      },
-      fail: function(error) {
-        console.log(error);
-      },
-    });
-
-    Kakao.Auth.logout(function() {
-      console.log(Kakao.Auth.getAccessToken());
-    });
-
+      alert(Kakao.Auth.getAccessToken())
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function(response) {
+          console.log(response);
+        },
+        fail: function(error) {
+          console.log(error);
+        },
+      });
+      Kakao.Auth.logout(function() {
+        console.log(Kakao.Auth.getAccessToken());
+      });
     },
     kakaoLogin() {
 
@@ -84,12 +85,18 @@ export default {
       axios.post(userInfoURI, socialAccessToken)
       .then(res => {
         console.log(res)
-        if(res.status != 200) {
-          alert('로그인에 실패하였습니다 :(')
+        if(res.status == 200) {
+          window.sessionStorage.setItem('jwt', res.data.item.jwt)
+          //window.location.href="/"
+          this.popupVal = true
+          alert(this.popupVal)
+          return
+        } else if(res.status == 201) {
+          window.sessionStorage.setItem('jwt', res.data.item.jwt)
+          this.popupState(true)
           return
         }
-
-        window.sessionStorage.setItem('jwt', res.data.item.jwt)
+        alert("로그인에 실패하였습니다 :(")
       })
       .catch(err => {
         console.log(err)
@@ -97,9 +104,8 @@ export default {
     },
     fail: function(err) {
       alert('failed to login: ' + JSON.stringify(err))
-    },
+    }
   })
-
       //console.log("tt")
       //console.log(this.socialAccessToken)
 
@@ -116,6 +122,12 @@ export default {
     //       console.log(err)
     //     })
     // }
+    }
+    , popupState(popupVal) {
+      this.popupVal = popupVal
+    }
+    , popupClose(popupVal) {
+      this.popupVal = popupVal
     }
   }
 }
@@ -177,7 +189,7 @@ $light_gray:#eee;
   min-height: 100%;
   width: 100%;
   background-color: $bg;
-  overflow: hidden;
+  overflow: auto;
 
   .login-form {
     position: relative;
