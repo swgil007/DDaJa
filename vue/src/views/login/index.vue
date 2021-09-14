@@ -17,18 +17,15 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 import axios from 'axios'
-import registerPopup from './components/RegisterPopup.vue'
 
 export default {
   name: 'Login',
   components: {
     axios
-    , registerPopup
   }
   , data() {
     return {
       socialAccessToken: {}
-      , popupVal: false
     }
   }
   ,
@@ -49,85 +46,39 @@ export default {
       });
     },
     kakaoLogin() {
-
-      // const LOGIN_AFTER_URI = "http://localhost:9527/social/login"
-
-      // console.log(this.$kakao.isInitialized());
-      // this.$kakao.Auth.authorize({
-      //   redirectUri: LOGIN_AFTER_URI
-      // });
-
-  this.$kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-      console.log(JSON.stringify(authObj))
-      // Kakao.API.request({
-      //   url: '/v2/user/me',
-      //   success: function(res) {
-      //     console.log(JSON.stringify(res))
-      //   },
-      //   fail: function(error) {
-      //     alert(
-      //       'login success, but failed to request user information: ' +
-      //         JSON.stringify(error)
-      //     )
-      //   },
-      // })
-      const socialAccessToken = {
-        accessToken : authObj.access_token
-        , refreshToken : authObj.refresh_token
-        , tokenType : 'KAKAO'
-        , expireTime : authObj.expires_in
-        , refreshExpireTime : authObj.refresh_token_expires_in
-      }
-
-      const userInfoURI = "http://localhost/users/social"
-      axios.post(userInfoURI, socialAccessToken)
-      .then(res => {
-        console.log(res)
-        if(res.status == 200) {
-          window.sessionStorage.setItem('jwt', res.data.item.jwt)
-          //window.location.href="/"
-          this.popupVal = true
-          alert(this.popupVal)
-          return
-        } else if(res.status == 201) {
-          window.sessionStorage.setItem('jwt', res.data.item.jwt)
-          this.popupState(true)
-          return
+      this.$kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+          console.log(JSON.stringify(authObj))
+          const socialAccessToken = {
+            accessToken : authObj.access_token
+            , refreshToken : authObj.refresh_token
+            , tokenType : 'KAKAO'
+            , expireTime : authObj.expires_in
+            , refreshExpireTime : authObj.refresh_token_expires_in
+          }
+          const userInfoURI = "http://localhost/users/social"
+          axios.post(userInfoURI, socialAccessToken)
+          .then(res => {
+            console.log(res)
+            if(res.status == 200) {
+              window.sessionStorage.setItem('jwt', res.data.item.jwt)
+              //window.location.href="/"
+              return
+            } else if(res.status == 201) {
+              window.sessionStorage.setItem('jwt', res.data.item.jwt)
+              return
+            }
+            alert("로그인에 실패하였습니다 :(")
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        },
+        fail: function(err) {
+          alert('failed to login: ' + JSON.stringify(err))
         }
-        alert("로그인에 실패하였습니다 :(")
       })
-      .catch(err => {
-        console.log(err)
-      })
-    },
-    fail: function(err) {
-      alert('failed to login: ' + JSON.stringify(err))
-    }
-  })
-      //console.log("tt")
-      //console.log(this.socialAccessToken)
-
-    //   const REST_API_KEY_KAKAO = "13378a39977a1f2ea36dd5a2d964e3e6";
-    //
-    //   const KAKAO_LOGIN_REST_API_URI = "https://kauth.kakao.com/oauth/authorize?response_type=code"
-    //   this.$http
-    //     .get(KAKAO_LOGIN_REST_API_URI + '&client_id=' + REST_API_KEY_KAKAO + '&&redirect_uri=' + LOGIN_AFTER_URI)
-    //     .then(res => {
-    //       console.log(res.data)
-    //     })
-    //     .catch(err => {
-    //       alert('fail')
-    //       console.log(err)
-    //     })
-    // }
-    }
-    , popupState(popupVal) {
-      this.popupVal = popupVal
-    }
-    , popupClose(popupVal) {
-      this.popupVal = popupVal
     }
   }
 }
