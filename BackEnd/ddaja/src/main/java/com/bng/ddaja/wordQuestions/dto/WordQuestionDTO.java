@@ -1,5 +1,6 @@
 package com.bng.ddaja.wordQuestions.dto;
 
+import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.words.dto.WordDTO;
@@ -56,14 +57,14 @@ public class WordQuestionDTO extends CommonDTO{
         this.answer  = wordQuestion.getAnswer();
     }
 
-    public WordQuestion toEntity(){
+    public WordQuestion toEntity( Word word ){
 
         return WordQuestion.builder()
         .id(this.id)
         .content(this.content)
         .answer(this.answer)
         .lId(this.lId)
-        // .word()
+        .word(word)
         .build();
     }
 }

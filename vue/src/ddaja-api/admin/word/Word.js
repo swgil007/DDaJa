@@ -48,11 +48,12 @@ export function wordQuestionList(param) {
 
 export function wordQuestionUpdate(param) {
   return request({
-    url: '/word-questions',
-    method: 'patch',
+    url: '/word-questions/' + param.id,
+    method: 'post',
     params: {
-      qID: param.id,
-      answer: param.answer || '',
+      wID    : param.wID,
+      lID    : param.lID,
+      answer : param.answer  || '',
       content: param.content || ''
     }
   })

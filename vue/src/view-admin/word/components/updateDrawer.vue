@@ -44,7 +44,7 @@
             width="100"
           >
             <template slot-scope="{row}">
-              <i class="el-icon-delete" @click="updateQuestion( row)" />
+              <i class="el-icon-delete" @click="updateQuestion(row)" />
             </template>
           </el-table-column>
 
@@ -54,7 +54,7 @@
             width="100"
           >
             <template slot-scope="{row}">
-              <i class="el-icon-delete" @click="deleteQuestion( row)" />
+              <i class="el-icon-delete" @click="deleteQuestion(row)" />
             </template>
           </el-table-column>
 
@@ -123,6 +123,8 @@ export default {
       tableData: [],
       question: {
         id: 0,
+        wID: 0,
+        lID: 0,
         answer: '',
         content: ''
       },
@@ -142,19 +144,24 @@ export default {
     async fetchInfo() {
       await wordQuestionList(this.param).then(response => {
         response.items.forEach(x => {
-          this.tableData.push({ id: x.item.id, answer: x.item.answer, content: x.item.content, createdDate: x.item.createdDate, modifiedDate: x.item.modifiedDate })
+          this.tableData.push({ id: x.item.id, answer: x.item.answer, content: x.item.content, createdDate: x.item.createdDate, modifiedDate: x.item.modifiedDate, wID : x.item.wordDTO.id , lID : x.item.lid })
         })
       })
     },
 
     updateQuestion(row) {
+      console.log(row)
       this.status = 'update'
-      this.question.id = row.id
-      this.question.answer = row.answer
+      this.question.id      = row.id
+      this.question.wID     = row.wID
+      this.question.lID     = row.lID
+      this.question.answer  = row.answer
       this.question.content = row.content
-    },
+      
+    }
 
-    async updateQuestionSave(row) {
+    , async updateQuestionSave() {
+
       if (this.question.id === 0) {
         alert('ERROR')
         return
@@ -168,9 +175,9 @@ export default {
       })
       this.status = 'insert'
       this.question = {}
-    },
+    }
 
-    async deleteQuestion(row) {
+    , async deleteQuestion(row) {
       this.question.id = row.id
       await wordQuestionDelete(this.question).then(response => {
         this.$message({

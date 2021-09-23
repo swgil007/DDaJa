@@ -26,21 +26,26 @@ public class WordQuestionService {
     }
 
     public WordQuestionDTO saveWordQuestion( WordQuestionDTO wordQuestionDTO){
-        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity();
+
+        long wID = 9;
+
+        Word word = wordService.findById(wID);
+        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity(word);
+
         wordQuestionRepository.save(wordQuestionVO);
         return new WordQuestionDTO(wordQuestionVO);
     }
 
-    public WordQuestionDTO updateWordQuestion( WordQuestionDTO wordQuestionDTO, long id){
-        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity();
-        wordQuestionVO.setWord(wordService.findById(id));
+    public WordQuestionDTO updateWordQuestion( WordQuestionDTO wordQuestionDTO, long wID){
+
+        Word word = wordService.findById(wID);
+        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity(word);
         wordQuestionRepository.save(wordQuestionVO);
+
         return new WordQuestionDTO(wordQuestionVO);
-    }    
+    }
     
-    /*
-    ** Delete 처리를 했는데 Vo 를 반환하지 않고 상태 코드를 반환해주는건 어떨까 ?
-    */
+
     public WordQuestionDTO deleteWordQuestion( long id ){
         WordQuestion wordQuestionVO = wordQuestionRepository.getOne(id);
         wordQuestionRepository.delete(wordQuestionVO);
