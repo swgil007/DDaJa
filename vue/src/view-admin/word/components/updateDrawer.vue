@@ -8,7 +8,7 @@
       :before-close="handleClose"
     >
       <div class="div1">
-        <span class="span1">Word Questions 수정{{ id }}</span>
+        <span class="span1">Word Questions</span>
       </div>
       <div style="">
         <el-table
@@ -18,13 +18,6 @@
         >
           <el-table-column type="expand">
             <template slot-scope="props">
-              <p><i class="el-icon-check" /> createdDate</p>
-              <p>{{ props.row.createdDate }}</p>
-              <br>
-              <p><i class="el-icon-check" /> modifiedDate</p>
-              <p>{{ props.row.modifiedDate }}</p>
-              <br>
-              <p><i class="el-icon-check" /> content </p>
               <p>{{ props.row.content }}</p>
             </template>
           </el-table-column>
@@ -34,17 +27,26 @@
             width="100"
           />
           <el-table-column
-            label="answer"
+            label="정답"
             prop="answer"
           />
-
+          <el-table-column
+            label="생성일"
+            prop="createdDate"
+            width="100"
+          />
+          <el-table-column
+            label="수정일"
+            prop="modifiedDate"
+            width="100"
+          />
           <el-table-column
             label="수정"
             prop="id"
             width="100"
           >
             <template slot-scope="{row}">
-              <i class="el-icon-delete" @click="updateQuestion(row)" />
+              <i class="el-icon-s-tools" @click="updateQuestion(row)" />
             </template>
           </el-table-column>
 
@@ -64,11 +66,11 @@
 
       <div v-if="status==='insert'" style="padding: 5% 8% 5% 8%">
         <div style="float:left; width:100%">
-          <el-input v-model="question.answer" placeholder="Answer" style="float:left; width:50%" />
+          <el-input v-model="param.answer" placeholder="Answer" style="float:left; width:50%" />
         </div>
         <div style="float:left;">
           <el-input
-            v-model="question.content"
+            v-model="param.content"
             type="textarea"
             :rows="4"
             placeholder="Content"
@@ -82,11 +84,11 @@
 
       <div v-if="status==='update'" style="padding: 5% 8% 5% 8%">
         <div style="float:left; width:100%">
-          <el-input v-model="question.answer" placeholder="Answer" style="float:left; width:50%" />
+          <el-input v-model="param.answer" placeholder="Answer" style="float:left; width:50%" />
         </div>
         <div style="float:left;">
           <el-input
-            v-model="question.content"
+            v-model="param.content"
             type="textarea"
             :rows="4"
             placeholder="Content"
@@ -94,7 +96,7 @@
           />
         </div>
         <div style="float:right;">
-          <el-button type="primary" plain style="height:100px; margin:10px 0 0 0" @click="updateQuestionSave">수 정</el-button>
+          <el-button type="primary" plain style="height:100px; margin:10px 0 0 0" @click="update">수 정</el-button>
         </div>
       </div>
 
@@ -107,36 +109,45 @@
 import { wordQuestionList, wordQuestionUpdate, wordQuestionInsert, wordQuestionDelete } from '@/ddaja-api/admin/word/Word'
 
 export default {
-  name: 'Community',
+  name: 'Admin_Word_Question_Update',
+
   props: {
     popupVal: false,
-    id: {},
-    size: {}
+    wordInfo : {
+      type : Object
+      , defalut : function (){
+        return {
+          wID : 0
+          , lID : 0
+          , wordQuestionsCount : 0        
+        }
+      }
+    }
   },
+
   data() {
     return {
       param: {
-        wordID: 0,
-        page: 0,
-        size: 0
+        wID: 0
+        , lID: 0
+        , answer: ''
+        , content: ''
+        , page: 1
+        , size: 100
       },
       tableData: [],
-      question: {
-        id: 0,
-        wID: 0,
-        lID: 0,
-        answer: '',
-        content: ''
-      },
       status: 'insert'
     }
   },
   watch: {
     popupVal(val) {
       if (val) {
-        this.param.wordID = this.id
-        this.param.size = this.size
-        this.fetchInfo()
+        this.param.wID = this.wordInfo.wID
+        this.param.lID = this.wordInfo.lID
+
+        if(this.wordInfo.wordQuestionsCount > 0){
+          this.fetchInfo()
+        }
       }
     }
   },
@@ -144,42 +155,37 @@ export default {
     async fetchInfo() {
       await wordQuestionList(this.param).then(response => {
         response.items.forEach(x => {
-          this.tableData.push({ id: x.item.id, answer: x.item.answer, content: x.item.content, createdDate: x.item.createdDate, modifiedDate: x.item.modifiedDate, wID : x.item.wordDTO.id , lID : x.item.lid })
+          this.tableData.push({ id: x.item.id, answer: x.item.answer, content: x.item.content, createdDate: x.item.createdDate, modifiedDate: x.item.modifiedDate, wID: x.item.wordDTO.id, lID: x.item.lid })
         })
       })
     },
 
     updateQuestion(row) {
-      console.log(row)
       this.status = 'update'
-      this.question.id      = row.id
-      this.question.wID     = row.wID
-      this.question.lID     = row.lID
-      this.question.answer  = row.answer
-      this.question.content = row.content
-      
-    }
+      this.param.id = row.id
+      this.param.answer = row.answer
+      this.param.content = row.content
+    },
 
-    , async updateQuestionSave() {
-
-      if (this.question.id === 0) {
-        alert('ERROR')
-        return
-      }
-
-      await wordQuestionUpdate(this.question).then(response => {
+    async update() {
+      await wordQuestionUpdate(this.param).then(response => {
         this.$message({
           message: 'Word Question Update Success',
           type: 'success'
         })
       })
+      this.fetchInfo();
       this.status = 'insert'
-      this.question = {}
-    }
+      this.param.answer  = ''
+      this.param.content = ''
+    },
 
-    , async deleteQuestion(row) {
-      this.question.id = row.id
-      await wordQuestionDelete(this.question).then(response => {
+
+    async deleteQuestion(row) {
+
+      this.param.id = row.id
+    
+      await wordQuestionDelete(this.param).then(response => {
         this.$message({
           message: 'Word Question Delete Success',
           type: 'success'
@@ -187,17 +193,20 @@ export default {
       })
     },
 
+
     async save() {
-      await wordQuestionInsert(this.question).then(response => {
+      await wordQuestionInsert(this.param).then(response => {
         this.$message({
           message: 'Word Question Save Success',
           type: 'success'
         })
       })
-      this.question = {}
+      this.param.answer  = ''
+      this.param.content = ''
     },
 
     popupClose() {
+      this.tableData = []
       this.$emit('close:updatedrawer', false)
     },
 

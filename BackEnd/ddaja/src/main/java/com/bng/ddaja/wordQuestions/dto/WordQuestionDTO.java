@@ -57,14 +57,13 @@ public class WordQuestionDTO extends CommonDTO{
         this.answer  = wordQuestion.getAnswer();
     }
 
-    public WordQuestion toEntity( Word word ){
+    public WordQuestion toEntity( ){
 
         return WordQuestion.builder()
         .id(this.id)
         .content(this.content)
         .answer(this.answer)
         .lId(this.lId)
-        .word(word)
         .build();
     }
 }

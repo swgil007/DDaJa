@@ -39,7 +39,7 @@ export function wordQuestionList(param) {
     url: '/word-questions',
     method: 'get',
     params: {
-      wordID: param.wordID,
+      wordID: param.wID,
       page: param.page || 0,
       size: param.size || 0
     }
@@ -51,9 +51,9 @@ export function wordQuestionUpdate(param) {
     url: '/word-questions/' + param.id,
     method: 'post',
     params: {
-      wID    : param.wID,
-      lID    : param.lID,
-      answer : param.answer  || '',
+      wID: param.wID,
+      lID: param.lID,
+      answer: param.answer   || '',
       content: param.content || ''
     }
   })
@@ -64,6 +64,8 @@ export function wordQuestionInsert(param) {
     url: '/word-questions',
     method: 'put',
     params: {
+      wID: param.wID,
+      lID: param.lID,
       answer: param.answer || '',
       content: param.content || ''
     }

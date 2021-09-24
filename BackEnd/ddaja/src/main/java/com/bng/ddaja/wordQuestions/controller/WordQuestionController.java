@@ -39,11 +39,20 @@ public class WordQuestionController {
         );
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CommonResponse> saveWordQuestion(@RequestBody WordQuestionDTO wordQuestionDTO){
+    @PutMapping("")
+    public ResponseEntity<CommonResponse> saveWordQuestion(  @ApiParam(  name = "content", type = "String", required = true) @RequestParam("content") String content 
+                                                            , @ApiParam( name = "answer" , type = "String", required = true) @RequestParam("answer")  String answer 
+                                                            , @ApiParam( name = "lID"    , type = "long"  , required = true) @RequestParam("lID")     long lID 
+                                                            , @ApiParam( name = "wID"    , type = "long"  , required = true) @RequestParam("wID")     long wID){
+
+        WordQuestionDTO wordQuestionDTO = new WordQuestionDTO();
+        wordQuestionDTO.setLId(lID);
+        wordQuestionDTO.setAnswer(answer);
+        wordQuestionDTO.setContent(content);
+
         return ResponseEntity.ok().body(
             new CommonResponse(
-                wordQuestionService.saveWordQuestion(wordQuestionDTO)
+                wordQuestionService.saveWordQuestion(wordQuestionDTO, wID)
             )
         );
     }
@@ -64,7 +73,7 @@ public class WordQuestionController {
 
         return ResponseEntity.ok().body(
                     new CommonResponse(
-                        wordQuestionService.updateWordQuestion(wordQuestionDTO, wID)
+                        wordQuestionService.saveWordQuestion(wordQuestionDTO, wID)
                     )
                 );
     }

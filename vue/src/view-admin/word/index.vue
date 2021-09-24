@@ -94,18 +94,6 @@
             >수정</el-button>
           </template>
         </el-table-column>
-
-        <el-table-column
-          align="right"
-          width="100"
-        >
-          <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="detailDrawerStatus(true, scope.row)"
-            >상세</el-button>
-          </template>
-        </el-table-column>
       </el-table>
 
       <div class="divpage">
@@ -121,16 +109,9 @@
         <el-divider />
       </div>
     </div>
-    <detailDrawer
-      :id="id"
-      :size="size"
-      :popup-val="detailDrawerVal"
-      @close:detaildrawer="detailDrawerStatus"
-    />
     <updateDrawer
-      :id="id"
-      :size="size"
       :popup-val="updateDrawerVal"
+      :word-info="wordInfo"
       @close:updatedrawer="updateDrawerStatus"
     />
 
@@ -141,7 +122,6 @@
 
 import Pagination from '@/components/Pagination'
 import { licenseList, wordList, wordListTotalCount } from '@/ddaja-api/admin/word/Word'
-import detailDrawer from './components/detailDrawer'
 import updateDrawer from './components/updateDrawer'
 
 export default {
@@ -149,25 +129,26 @@ export default {
 
   components: {
     Pagination,
-    detailDrawer,
     updateDrawer
   },
 
   data() {
     return {
-      licenseOptions: [],
-      tableData: [],
-      id: 1,
-      totalCount: 0,
-      param: {
-        licenseID: undefined,
-        name: '',
-        page: 1,
-        size: 10
-      },
-      detailDrawerVal: false,
-      updateDrawerVal: false,
-      size: 0
+      licenseOptions: []
+      , tableData: []
+      , totalCount: 0
+      , param: {
+        licenseID: undefined
+        , name: ''
+        , page: 1
+        , size: 10
+      }
+      , wordInfo : {
+        wID : 0
+        , lID : 0
+        , wordQuestionsCount : 0
+      }
+      , updateDrawerVal: false
     }
   },
 
@@ -201,13 +182,11 @@ export default {
 
     updateDrawerStatus(val, row) {
       this.updateDrawerVal = val
-      this.id = (row == undefined) ? 0 : row.item.id
-      this.size = (row == undefined) ? 0 : row.item.wordQuestionsCount
-    },
-    detailDrawerStatus(val, row) {
-      this.detailDrawerVal = val
-      this.id = (row == undefined) ? 0 : row.item.id
-      this.size = (row == undefined) ? 0 : row.item.wordQuestionsCount
+      if(val){
+        this.wordInfo.wID = row.item.id
+        this.wordInfo.lID = row.item.license.id
+        this.wordInfo.wordQuestionsCount = row.item.wordQuestionsCount
+      }
     },
     clickSearch() {
       this.param.page = 0

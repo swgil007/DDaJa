@@ -51,8 +51,16 @@ export default {
   name: 'Community',
   props: {
     popupVal: false,
-    id: {},
-    size: {}
+    wordInfo : {
+      type : Object
+      , defalut : function (){
+        return {
+          wID : 0
+          , lID : 0
+          , wordQuestionsCount : 0        
+        }
+      }
+    }
   },
   data() {
     return {
@@ -67,9 +75,10 @@ export default {
   watch: {
     popupVal(val) {
       if (val) {
-        this.param.wordID = this.id
-        this.param.size = this.size
-        this.fetchInfo()
+        this.param.wID = this.wordInfo.wID
+        if(this.wordInfo.wordQuestionsCount > 0){
+          this.fetchInfo()
+        }
       }
     }
   },

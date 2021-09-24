@@ -25,23 +25,12 @@ public class WordQuestionService {
         return wordQuestionRepository.findAll(wordQuestionSearch.toSpecification(), wordQuestionSearch.toPageable()).map( vo -> new WordQuestionDTO(vo));
     }
 
-    public WordQuestionDTO saveWordQuestion( WordQuestionDTO wordQuestionDTO){
+    public WordQuestionDTO saveWordQuestion( WordQuestionDTO wordQuestionDTO, long wID){
 
-        long wID = 9;
-
-        Word word = wordService.findById(wID);
-        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity(word);
+        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity();
+        wordQuestionVO.setWord(wordService.findById(wID));
 
         wordQuestionRepository.save(wordQuestionVO);
-        return new WordQuestionDTO(wordQuestionVO);
-    }
-
-    public WordQuestionDTO updateWordQuestion( WordQuestionDTO wordQuestionDTO, long wID){
-
-        Word word = wordService.findById(wID);
-        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity(word);
-        wordQuestionRepository.save(wordQuestionVO);
-
         return new WordQuestionDTO(wordQuestionVO);
     }
     
