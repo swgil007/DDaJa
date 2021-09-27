@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-container style="height: 100%; border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '3']">
+    <el-container>
+      <el-aside>
+        <el-menu :default-openeds="['1']">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-message" />Navigator One</template>
             <el-menu-item-group>
@@ -52,7 +52,7 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px">
+        <el-header>
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px" />
             <el-dropdown-menu slot="dropdown">
@@ -81,10 +81,17 @@
     background-color: #B3C0D1;
     color: #333;
     line-height: 60px;
+    text-align: right;
+    font-size: 12px;
   }
-
   .el-aside {
     color: #333;
+    background-color: rgb(238, 241, 246);
+    width: 100px;
+  }
+  .el-container {
+      height: 100%;
+      border: 1px solid #eee;
   }
 </style>
 
