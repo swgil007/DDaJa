@@ -90,7 +90,7 @@ export default {
       address: 'No. 189, Grove St, Los Angeles'
     }
     return {
-      tableData: Array(20).fill(item)
+      tableData: Array(5).fill(item)
     }
   }
 }
