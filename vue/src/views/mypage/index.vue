@@ -70,11 +70,31 @@
             <el-table-column prop="name" label="Name" width="120" />
             <el-table-column prop="address" label="Address" />
           </el-table>
+          <user-info-form />
         </el-main>
       </el-container>
     </el-container>
   </div>
 </template>
+
+<script>
+import userInfoForm from './components/userInfoForm.vue'
+export default {
+  components: {
+    userInfoForm
+  },
+  data() {
+    const item = {
+      date: '2016-05-02',
+      name: 'Tom',
+      address: 'No. 189, Grove St, Los Angeles'
+    }
+    return {
+      tableData: Array(20).fill(item)
+    }
+  }
+}
+</script>
 
 <style>
   .el-header {
@@ -94,18 +114,3 @@
       border: 1px solid #eee;
   }
 </style>
-
-<script>
-export default {
-  data() {
-    const item = {
-      date: '2016-05-02',
-      name: 'Tom',
-      address: 'No. 189, Grove St, Los Angeles'
-    }
-    return {
-      tableData: Array(20).fill(item)
-    }
-  }
-}
-</script>
