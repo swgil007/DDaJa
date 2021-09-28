@@ -4,19 +4,8 @@
       <el-aside>
         <el-menu :default-openeds="['1']">
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message" />Navigator One</template>
-            <el-menu-item-group>
-              <template slot="title">Group 1</template>
-              <el-menu-item index="1-1">Option 1</el-menu-item>
-              <el-menu-item index="1-2">Option 2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group 2">
-              <el-menu-item index="1-3">Option 3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <template slot="title">Option4</template>
-              <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
-            </el-submenu>
+            <template slot="title"><i class="el-icon-user-solid" />내 정보</template>
+            <el-menu-item index="1-1" @click="setForm('userInfo')">수정하기</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title"><i class="el-icon-menu" />Navigator Two</template>
@@ -63,16 +52,7 @@
           </el-dropdown>
           <span>Tom</span>
         </el-header>
-
         <el-main>
-
-          <el-button type="primary" @click="setForm('userInfo')">on</el-button>
-          <el-button type="primary" @click="setForm('main')">off</el-button>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="Date" width="140" />
-            <el-table-column prop="name" label="Name" width="120" />
-            <el-table-column prop="address" label="Address" />
-          </el-table>
           <user-info-form
             :is-user-info-form="isUserInfoForm"
           />
