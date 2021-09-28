@@ -65,12 +65,17 @@
         </el-header>
 
         <el-main>
+
+          <el-button type="primary" @click="setForm('userInfo')">on</el-button>
+          <el-button type="primary" @click="setForm('main')">off</el-button>
           <el-table :data="tableData">
             <el-table-column prop="date" label="Date" width="140" />
             <el-table-column prop="name" label="Name" width="120" />
             <el-table-column prop="address" label="Address" />
           </el-table>
-          <user-info-form />
+          <user-info-form
+            :is-user-info-form="isUserInfoForm"
+          />
         </el-main>
       </el-container>
     </el-container>
@@ -90,7 +95,20 @@ export default {
       address: 'No. 189, Grove St, Los Angeles'
     }
     return {
-      tableData: Array(5).fill(item)
+      tableData: Array(5).fill(item),
+      isUserInfoForm: false
+    }
+  },
+  methods: {
+    setForm(formName) {
+      switch (formName) {
+        case 'userInfo' :
+          this.isUserInfoForm = true
+          break
+        default :
+          this.isUserInfoForm = false
+          break
+      }
     }
   }
 }

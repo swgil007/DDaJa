@@ -9,7 +9,6 @@ import Layout from '@/layout'
 /* Router Modules */
 import exploreRouter from './explore'
 import adminRouter from './admin'
-import mypageRouter from './mypage'
 
 export const constantRoutes = [
   {
@@ -55,7 +54,6 @@ export const constantRoutes = [
 export const asyncRoutes = [
   exploreRouter,
   adminRouter,
-  mypageRouter,
   {
     path: '/error',
     component: Layout,
