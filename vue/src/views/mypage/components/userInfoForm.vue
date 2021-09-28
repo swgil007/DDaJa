@@ -37,6 +37,9 @@ export default {
   },
   data() {
     return {
+      userInfo: {
+
+      },
       form: {
         name: '',
         date1: '2021-09-27',
@@ -50,7 +53,24 @@ export default {
       }
     }
   },
+  created() {
+    this.getUserInfo()
+  },
   methods: {
+    getUserInfo() {
+      this.$http
+        .get('http://localhost/users/token', {
+          headers: {
+            Authorazation: window.sessionStorage.getItem('jwt')
+          }
+        })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     onSubmit() {
       console.log('submit!')
     },
