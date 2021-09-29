@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
 import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialLoginException;
 import com.bng.ddaja.common.dto.CommonDTO;
+import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.SocialAccessToken;
@@ -70,5 +71,11 @@ public class UserController {
         UserDTO userDTO = userService.getUserBySocialToken(socialAccessToken);
         if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
         return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));
+    }
+
+    @GetMapping("token")
+    public ResponseEntity<CommonResource> getUserInfoByToken(CommonJWT commonJWT) {
+        log.info(commonJWT.toString());
+        return null;
     }
 }
