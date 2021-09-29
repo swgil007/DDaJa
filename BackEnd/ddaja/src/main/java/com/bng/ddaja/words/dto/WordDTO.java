@@ -47,7 +47,15 @@ public class WordDTO extends CommonDTO {
         title              = word.getTitle();
         createdDate        = word.getCreatedDate();
         modifiedDate       = word.getModifiedDate();
-        wordQuestionsCount = word.getWordQuestions().size();
         license            = new LicenseDTO(word.getLicense());
+        // wordQuestionsCount = word.getWordQuestions().size();
+        
+    }
+
+    public Word toEntity( ){
+
+        return Word.builder()
+            .title(this.title)
+            .build();
     }
 }

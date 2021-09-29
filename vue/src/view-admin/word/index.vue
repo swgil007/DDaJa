@@ -2,9 +2,13 @@
   <div class="main-container">
     <div class="main-title">
       <font class="font1">Word Manager</font>
+          <el-button
+          @click="insertDrawerStatus(true)"
+          style="float:right; margin: 0 58px 0 0; width:78px; height :50px"
+        >추 가</el-button>
     </div>
 
-    <div class="div1" style="padding:0px 0px 75px 29%;">
+    <div class="div1" style="padding:0px 0px 70px 29%;">
       <div style="float:left; padding:1px 20px 0px 0px">
 
         <el-select v-model="param.licenseID" placeholder="Select" style="width:500px">
@@ -32,7 +36,6 @@
         >검 색</el-button>
       </div>
     </div>
-
     <div class="div2">
       <el-table
         :data="tableData"
@@ -114,7 +117,10 @@
       :word-info="wordInfo"
       @close:updatedrawer="updateDrawerStatus"
     />
-
+    <insertDrawer
+      :popup-val="insertDrawerVal"
+      @close:insertdrawer="insertDrawerStatus"
+    />
   </div>
 </template>
 
@@ -122,14 +128,17 @@
 
 import Pagination from '@/components/Pagination'
 import { licenseList, wordList, wordListTotalCount } from '@/ddaja-api/admin/word/Word'
+
 import updateDrawer from './components/updateDrawer'
+import insertDrawer from './components/insertDrawer'
 
 export default {
-  name: '',
+  name: 'Admin_Word',
 
   components: {
-    Pagination,
-    updateDrawer
+    Pagination
+    , updateDrawer
+    , insertDrawer
   },
 
   data() {
@@ -149,6 +158,7 @@ export default {
         , wordQuestionsCount : 0
       }
       , updateDrawerVal: false
+      , insertDrawerVal: false
     }
   },
 
@@ -178,17 +188,22 @@ export default {
       await wordListTotalCount(this.param).then(response => {
         this.totalCount = response.totalCount
       })
-    },
+    }
 
-    updateDrawerStatus(val, row) {
+    , updateDrawerStatus(val, row) {
       this.updateDrawerVal = val
       if(val){
         this.wordInfo.wID = row.item.id
         this.wordInfo.lID = row.item.license.id
         this.wordInfo.wordQuestionsCount = row.item.wordQuestionsCount
       }
-    },
-    clickSearch() {
+    }
+
+    , insertDrawerStatus(val) {
+      this.insertDrawerVal = val
+    }
+    
+    , clickSearch() {
       this.param.page = 0
       this.param.size = 10
       this.fetchList()

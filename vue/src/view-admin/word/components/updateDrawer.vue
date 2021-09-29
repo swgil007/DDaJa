@@ -170,8 +170,8 @@ export default {
     async update() {
       await wordQuestionUpdate(this.param).then(response => {
         this.$message({
-          message: 'Word Question Update Success',
-          type: 'success'
+          message: 'Word Question Update Success'
+          , type: 'success'
         })
       })
       this.fetchInfo();
@@ -219,53 +219,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 @import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
-
-.main-container{
-    width: 100%;
-    .div1{
-        text-align: left;
-        margin-top: 5px;
-        margin-bottom: 30px;
-        color: rgb(0, 0, 0);
-        margin-left: 1%;
-        margin-right: 1%;
-        padding: 4% 2% 2% 4%;
-        .span1{
-            font-size: 50px;
-            font-family: 'Do Hyeon', sans-serif;
-        }
-    }
-.div2{
-  width : 100%; margin: 1% 4% 2% 4%;
-  overflow:auto;
-.div2-1{
-width : 100%; float :left ; padding: 1% 1% 1% 0%;text-align : right; font-weight:bold;
-.div2-1-1{
-  width : 5%;
-  padding: 1% 3% 1% 6%;
-  float :left ;
-}
-.div2-1-2{
-  width : 82%;
-  padding: 1% 1% 1% 1%;
-  float :left ;
-  text-align: left;
-}
-}
-.div2-2{
-width : 100%; text-align : left;float :left ; padding: 1% 10% 1% 10%;
-}
-}
-    .pointer{
-        cursor:pointer;
-    }
-}
-
-::v-deep .el-drawer{
-width: 70% !important;
-}
-
-// rtl
+.main-container{ width: 100%; .div1{ text-align: left; margin-top: 5px; margin-bottom: 30px; color: rgb(0, 0, 0); margin-left: 1%; margin-right: 1%; padding: 4% 2% 2% 4%;
+.span1{ font-size: 50px; font-family: 'Do Hyeon', sans-serif; }} .div2{ width : 100%; margin: 1% 4% 2% 4%; overflow:auto; .div2-1{ width : 100%; float :left ; padding: 1% 1% 1% 0%;text-align : right; font-weight:bold; .div2-1-1{ width : 5%; padding: 1% 3% 1% 6%; float :left ; } .div2-1-2{ width : 82%; padding: 1% 1% 1% 1%; float :left ; text-align: left;}} .div2-2{ width : 100%; text-align : left;float :left ; padding: 1% 10% 1% 10%;}} .pointer{ cursor:pointer;}} ::v-deep .el-drawer{ width: 70% !important; }
 </style>

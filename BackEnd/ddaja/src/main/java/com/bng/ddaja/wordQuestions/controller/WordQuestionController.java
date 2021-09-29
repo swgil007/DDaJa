@@ -9,18 +9,15 @@ import com.bng.ddaja.wordQuestions.service.WordQuestionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 
 @AllArgsConstructor
 @RequestMapping("/word-questions")
@@ -39,8 +36,8 @@ public class WordQuestionController {
         );
     }
 
-    @PutMapping("")
-    public ResponseEntity<CommonResponse> saveWordQuestion(  @ApiParam(  name = "content", type = "String", required = true) @RequestParam("content") String content 
+    @PostMapping("")
+    public ResponseEntity<CommonResponse> saveWordQuestion( @ApiParam(   name = "content", type = "String", required = true) @RequestParam("content") String content 
                                                             , @ApiParam( name = "answer" , type = "String", required = true) @RequestParam("answer")  String answer 
                                                             , @ApiParam( name = "lID"    , type = "long"  , required = true) @RequestParam("lID")     long lID 
                                                             , @ApiParam( name = "wID"    , type = "long"  , required = true) @RequestParam("wID")     long wID){
@@ -58,7 +55,7 @@ public class WordQuestionController {
     }
 
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CommonResponse> updateWordQuestion( @PathVariable(name="id", required = true) long id
                                     , @ApiParam( name = "content", type = "String", required = true) @RequestParam("content") String content 
                                     , @ApiParam( name = "answer" , type = "String", required = true) @RequestParam("answer")  String answer 
@@ -72,11 +69,12 @@ public class WordQuestionController {
         wordQuestionDTO.setContent(content);
 
         return ResponseEntity.ok().body(
-                    new CommonResponse(
-                        wordQuestionService.saveWordQuestion(wordQuestionDTO, wID)
-                    )
-                );
+            new CommonResponse(
+                wordQuestionService.saveWordQuestion(wordQuestionDTO, wID)
+            )
+        );
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<CommonResponse> deleteWordQuestion(@PathVariable(name="id", required = true) long id){

@@ -5,6 +5,7 @@ import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionSearch;
 import com.bng.ddaja.wordQuestions.repository.WordQuestionRepository;
+import com.bng.ddaja.words.repository.WordRepository;
 import com.bng.ddaja.words.service.WordService;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WordQuestionService {
 
     private WordQuestionRepository wordQuestionRepository;
-    private WordService wordService;
+    private WordRepository wordRepository;
 
     public Page<WordQuestionDTO> getAllWordQuestionByWordQuestionSearch( WordQuestionSearch wordQuestionSearch){
         return wordQuestionRepository.findAll(wordQuestionSearch.toSpecification(), wordQuestionSearch.toPageable()).map( vo -> new WordQuestionDTO(vo));
@@ -27,17 +28,19 @@ public class WordQuestionService {
 
     public WordQuestionDTO saveWordQuestion( WordQuestionDTO wordQuestionDTO, long wID){
 
-        WordQuestion wordQuestionVO = wordQuestionDTO.toEntity();
-        wordQuestionVO.setWord(wordService.findById(wID));
-
-        wordQuestionRepository.save(wordQuestionVO);
-        return new WordQuestionDTO(wordQuestionVO);
+        WordQuestion wordQuestion = wordQuestionDTO.toEntity();
+        wordQuestion.setWord(wordRepository.findById(wID));
+        wordQuestionRepository.save(wordQuestion);
+        
+        return new WordQuestionDTO(wordQuestion);
     }
     
 
     public WordQuestionDTO deleteWordQuestion( long id ){
-        WordQuestion wordQuestionVO = wordQuestionRepository.getOne(id);
-        wordQuestionRepository.delete(wordQuestionVO);
-        return new WordQuestionDTO(wordQuestionVO);
+
+        WordQuestion wordQuestion = wordQuestionRepository.getOne(id);
+        wordQuestionRepository.delete(wordQuestion);
+        
+        return new WordQuestionDTO(wordQuestion);
     }
 }

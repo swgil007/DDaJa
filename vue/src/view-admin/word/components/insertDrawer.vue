@@ -1,0 +1,157 @@
+<template>
+    <div class="main-container">
+    <el-drawer
+        :visible.sync = "popupVal"
+        :with-header  = "false"
+        :before-close = "popupClose"
+        style         = "width:100%"
+    >
+        <div class="div1">
+            <span class="span1">Word ADD</span>
+        </div>
+
+        <div style="padding:30px 30px  30px  30px">
+            <el-form 
+                :model = "param" 
+                ref    = "param" 
+                label-width = "200px">
+                <el-form-item label="License">
+                    <el-select 
+                        v-model     = "param.lID" 
+                        placeholder = "Select"
+                        style       = "width:750px"
+                        filterable>
+                    <el-option
+                        v-for  = "item in licenseOptions"
+                        :key   = "item.value"
+                        :label = "item.label"
+                        :value = "item.value">
+                    </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label = "Word name">
+                    <el-input 
+                        v-model = "param.title" 
+                        style   = "width:750px"></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+        <div style="float:right; padding: 0 200px 0  0">
+            <el-button 
+                type   = "primary" 
+                @click = "onSubmit">Create</el-button>
+        </div>
+    </el-drawer>
+    </div>
+</template>
+
+<script>
+
+import { licenseList, wordInsert } from '@/ddaja-api/admin/word/Word'
+
+export default {
+    name: 'Admin_Word_Insert'
+
+    , created (){
+        this.getLicense();
+    }
+
+    , props: {
+        popupVal : {
+            type : Boolean
+            , defalut : false
+        }
+    }
+
+    , data() {
+        return {
+            param: {
+                lID: 0
+                , title: ''
+            }
+            , licenseOptions: []
+        }
+    }
+
+    , methods: {
+
+        onSubmit() {
+            console.log(this.param);
+
+            wordInsert(this.param).then( response => {
+                this.$message({
+                    message: 'Word Insert Success'
+                    , type: 'success'
+                })
+            })
+        }
+
+
+        , async getLicense() {
+            await licenseList().then(response => {
+                response.items.forEach(x => {
+                    var type = (x.item.type === 'WRITING') ? '필기' : '실기'
+                    var label = '[' + type + '] ' + x.item.name
+                    this.licenseOptions.push({ value: x.item.id, label: label })
+                })
+            })
+        }
+
+        , popupClose() {
+            this.$emit('close:insertdrawer', false)
+        }
+    }
+}
+
+</script>
+
+<style lang="scss" scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
+
+.main-container{
+    width: 100%;
+    .div1{
+        text-align: left;
+        margin-top: 5px;
+        margin-bottom: 30px;
+        color: rgb(0, 0, 0);
+        margin-left: 1%;
+        margin-right: 1%;
+        padding: 4% 2% 2% 4%;
+        .span1{
+            font-size: 50px;
+            font-family: 'Do Hyeon', sans-serif;
+        }
+    }
+.div2{
+  width : 100%; margin: 1% 4% 2% 4%;
+  overflow:auto;
+.div2-1{
+width : 100%; float :left ; padding: 1% 1% 1% 0%;text-align : right; font-weight:bold;
+.div2-1-1{
+  width : 5%;
+  padding: 1% 3% 1% 6%;
+  float :left ;
+}
+.div2-1-2{
+  width : 82%;
+  padding: 1% 1% 1% 1%;
+  float :left ;
+  text-align: left;
+}
+}
+.div2-2{
+width : 100%; text-align : left;float :left ; padding: 1% 10% 1% 10%;
+}
+}
+    .pointer{
+        cursor:pointer;
+    }
+}
+
+::v-deep .el-drawer{
+width: 70% !important;
+}
+
+</style>
