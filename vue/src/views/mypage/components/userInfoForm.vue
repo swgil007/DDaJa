@@ -53,29 +53,7 @@ export default {
       }
     }
   },
-  created() {
-    this.getUserInfo()
-  },
   methods: {
-    getUserInfo() {
-      const jwt = window.localStorage.getItem('jwt')
-      if (!jwt) {
-        alert('잘못된 접근입니다.')
-        // window.history.go(-1)
-      }
-      this.$http
-        .get('http://localhost/users/' + window.localStorage.getItem('userID'), {
-          headers: {
-            Authorization: jwt
-          }
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
     onSubmit() {
       console.log('submit!')
     },

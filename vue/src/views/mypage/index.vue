@@ -50,7 +50,7 @@
               <el-dropdown-item>Delete</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>Tom</span>
+          <span>{{ userInfo }}</span>
         </el-header>
         <el-main>
           <user-info-form
@@ -75,11 +75,35 @@ export default {
       address: 'No. 189, Grove St, Los Angeles'
     }
     return {
+      userInfo: {},
       tableData: Array(5).fill(item),
       isUserInfoForm: false
     }
   },
+  created() {
+    this.getUserInfo()
+  },
   methods: {
+    getUserInfo() {
+      const jwt = window.localStorage.getItem('jwt')
+      if (!jwt) {
+        alert('잘못된 접근입니다.')
+        // window.history.go(-1)
+      }
+      this.$http
+        .get('http://localhost/users/' + window.localStorage.getItem('userID'), {
+          headers: {
+            Authorization: jwt
+          }
+        })
+        .then(res => {
+          console.log(res)
+          this.userInfo = res.data.item
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     setForm(formName) {
       switch (formName) {
         case 'userInfo' :
