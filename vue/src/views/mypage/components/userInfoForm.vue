@@ -58,11 +58,15 @@ export default {
   },
   methods: {
     getUserInfo() {
-      console.log(window.localStorage.getItem('jwt'))
+      const jwt = window.localStorage.getItem('jwt')
+      if (!jwt) {
+        alert('잘못된 접근입니다.')
+        // window.history.go(-1)
+      }
       this.$http
-        .get('http://localhost/users/token', {
+        .get('http://localhost/users/' + window.localStorage.getItem('userID'), {
           headers: {
-            Authorization: window.localStorage.getItem('jwt')
+            Authorization: jwt
           }
         })
         .then(res => {
