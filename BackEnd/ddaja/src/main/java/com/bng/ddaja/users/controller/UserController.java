@@ -55,7 +55,7 @@ public class UserController {
         , response = CommonResponse.class
     )
     @GetMapping("{id}")
-    public ResponseEntity<CommonResource> getUser(@PathVariable(name = "id", required = true) long id) {
+    public ResponseEntity<CommonResource> getUser(@PathVariable(name = "id", required = true) long id, CommonJWT commonJWT) {
         return ResponseEntity.ok().body(new CommonResource(userService.getUserById(id)));
     }
 
@@ -75,7 +75,7 @@ public class UserController {
 
     @GetMapping("token")
     public ResponseEntity<CommonResource> getUserInfoByToken(CommonJWT commonJWT) {
-        log.info(commonJWT.toString());
+        if(!commonJWT.isValidated()) return ResponseEntity.noContent().build();
         return null;
     }
 }
