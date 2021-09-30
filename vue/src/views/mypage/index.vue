@@ -50,11 +50,12 @@
               <el-dropdown-item>Delete</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>{{ userInfo }}</span>
+          <span>{{ userInfo.nickName == '' ? '익명의 사용자' : userInfo.nickName }} 님</span>
         </el-header>
         <el-main>
           <user-info-form
             :is-user-info-form="isUserInfoForm"
+            :user-info="userInfo"
           />
         </el-main>
       </el-container>
@@ -75,7 +76,14 @@ export default {
       address: 'No. 189, Grove St, Los Angeles'
     }
     return {
-      userInfo: {},
+      userInfo: {
+        id: '',
+        email: '',
+        userId: '',
+        nickName: '',
+        createdDate: '',
+        modifiedDate: ''
+      },
       tableData: Array(5).fill(item),
       isUserInfoForm: false
     }
@@ -98,7 +106,12 @@ export default {
         })
         .then(res => {
           console.log(res)
-          this.userInfo = res.data.item
+          this.userInfo.id = res.data.item.id
+          this.userInfo.email = res.data.item.email
+          this.userInfo.userId = res.data.item.userId
+          this.userInfo.nickName = res.data.item.nickName
+          this.userInfo.createdDate = res.data.item.createdDate
+          this.userInfo.modifiedDate = res.data.item.modifiedDate
         })
         .catch(err => {
           console.log(err)

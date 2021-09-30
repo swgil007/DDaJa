@@ -2,7 +2,7 @@
   <el-form v-show="isUserInfoForm" ref="form" :model="form" label-width="120px">
     <el-form-item label="닉네임">
       <el-col :span="11">
-        <el-input v-model="form.name" />
+        <el-input v-model="userInfo.nickName" />
       </el-col>
     </el-form-item>
     <el-form-item label="프로필">
@@ -13,14 +13,14 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
         >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <img v-if="userInfo.profileImage" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
       </el-col>
     </el-form-item>
     <el-form-item label="가입일">
       <el-col :span="11">
-        <el-date-picker v-model="form.date1" type="date" placeholder="Pick a date" style="width: 100%;" :disabled="true" />
+        <el-date-picker v-model="userInfo.createdDate" type="date" placeholder="Pick a date" style="width: 100%;" :disabled="true" />
       </el-col>
     </el-form-item>
     <el-form-item>
@@ -33,13 +33,11 @@
 <script>
 export default {
   props: {
-    isUserInfoForm: {}
+    isUserInfoForm: {},
+    userInfo: {}
   },
   data() {
     return {
-      userInfo: {
-
-      },
       form: {
         name: '',
         date1: '2021-09-27',
