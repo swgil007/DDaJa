@@ -37,6 +37,8 @@ public class UserDTO extends CommonDTO {
         nickName = vo.getNickName();
         eMail = vo.getEMail() == null ? "" : vo.getEMail();
         profileImg = vo.getProfileImg();
+        createdDate = vo.getCreatedDate();
+        modifiedDate = vo.getModifiedDate();
     }
 
     public UserDTO(User vo, boolean isCreated) {
