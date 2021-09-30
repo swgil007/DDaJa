@@ -1,8 +1,10 @@
 <template>
   <el-form v-show="isUserInfoForm" ref="form" :model="form" label-width="120px">
+    {{ userInfo }}
+    {{ originUserInfo }}
     <el-form-item label="닉네임">
       <el-col :span="11">
-        <el-input v-model="userInfo.nickName" />
+        <el-input v-model="originUserInfo.nickName" />
       </el-col>
     </el-form-item>
     <el-form-item label="프로필">
@@ -24,8 +26,7 @@
       </el-col>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">Create</el-button>
-      <el-button>Cancel{{ isUserInfoForm }}</el-button>
+      <el-button type="primary" @click="modifyUserInfo()">수정</el-button>
     </el-form-item>
   </el-form>
 
@@ -34,10 +35,18 @@
 export default {
   props: {
     isUserInfoForm: {},
-    userInfo: {}
+    originUserInfo: {}
   },
   data() {
     return {
+      userInfo: {
+        id: this.originUserInfo.id,
+        email: this.originUserInfo.email,
+        userId: this.originUserInfo.userId,
+        nickName: this.originUserInfo.nickName,
+        createdDate: this.originUserInfo.createdDate,
+        modifiedDate: this.originUserInfo.modifiedDate
+      },
       form: {
         name: '',
         date1: '2021-09-27',
@@ -52,8 +61,11 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
-      console.log('submit!')
+    modifyUserInfo() {
+      const userInfos = {
+        nickName: this.originUserInfo.nickName
+      }
+      console.log(userInfos.nickName)
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)

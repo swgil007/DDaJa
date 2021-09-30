@@ -55,7 +55,7 @@
         <el-main>
           <user-info-form
             :is-user-info-form="isUserInfoForm"
-            :user-info="userInfo"
+            :origin-user-info="userInfo"
           />
         </el-main>
       </el-container>
