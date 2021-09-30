@@ -58,10 +58,11 @@ export default {
   },
   methods: {
     getUserInfo() {
+      console.log(window.localStorage.getItem('jwt'))
       this.$http
         .get('http://localhost/users/token', {
           headers: {
-            Authorazation: window.sessionStorage.getItem('jwt')
+            Authorazation: window.localStorage.getItem('jwt')
           }
         })
         .then(res => {

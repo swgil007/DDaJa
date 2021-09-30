@@ -58,11 +58,12 @@ export default {
           .then(res => {
             console.log(res)
             if(res.status == 200) {
-              window.sessionStorage.setItem('jwt', res.data.item.jwt)
+              console.log("hreer!")
+              window.localStorage.setItem('jwt', res.data.item.jwt)
               //window.location.href="/"
               return
             } else if(res.status == 201) {
-              window.sessionStorage.setItem('jwt', res.data.item.jwt)
+              window.localStorage.setItem('jwt', res.data.item.jwt)
               return
             }
             alert("로그인에 실패하였습니다 :(")
