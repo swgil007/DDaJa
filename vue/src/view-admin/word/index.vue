@@ -48,7 +48,12 @@
           width="100"
           align="center"
         />
-
+        <el-table-column
+          label="Type"
+          width="100"
+          align="center"
+          prop="item.license.type"
+        />
         <el-table-column
           label="License"
           prop="item.license.name"
@@ -181,7 +186,13 @@ export default {
 
     async fetchList() {
       await wordList(this.param).then(response => {
-        this.tableData = response.items
+        var tableData = [];
+
+        response.items.forEach( x => {
+          x.item.license.type = (x.item.license.type === 'WRITING') ? '필기' : '실기'
+          tableData.push(x)
+        })
+        this.tableData = tableData
         this.page = response.page
       })
 

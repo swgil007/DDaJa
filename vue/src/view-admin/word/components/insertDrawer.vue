@@ -8,9 +8,14 @@
     >
         <div class="div1">
             <span class="span1">Word ADD</span>
+            <div style="float:right; padding: 0 150px 0  0">
+                <el-button 
+                type   = "primary" 
+                @click = "onSubmit">Create</el-button>
+            </div>
         </div>
 
-        <div style="padding:30px 30px  30px  30px">
+        <div style="padding:0 30px 10px  30px">
             <el-form 
                 :model = "param" 
                 ref    = "param" 
@@ -20,6 +25,7 @@
                         v-model     = "param.lID" 
                         placeholder = "Select"
                         style       = "width:750px"
+                        ref         = "license"
                         filterable>
                     <el-option
                         v-for  = "item in licenseOptions"
@@ -32,30 +38,47 @@
                 <el-form-item label = "Word name">
                     <el-input 
                         v-model = "param.title" 
-                        style   = "width:750px"></el-input>
+                        style   = "width:750px"
+                        ref     = "title"></el-input>
                 </el-form-item>
             </el-form>
         </div>
-        <div style="float:right; padding: 0 200px 0  0">
-            <el-button 
-                type   = "primary" 
-                @click = "onSubmit">Create</el-button>
+        <div>
+            <ExcelUpload
+                :on-success="handleSuccess" 
+                :before-upload="beforeUpload" />
+            <el-scrollbar
+                ref="scrollbar"
+                style="height: calc(100vh - 45px)"
+            >
+                <el-table 
+                    :data="tableData" 
+                    border 
+                    highlight-current-row 
+                    style="width: 100%;margin-top:20px; height: 500px; overflow:scroll">
+                    <el-table-column v-for="item of tableHeader" 
+                        :key="item" 
+                        :prop="item" 
+                        :label="item" />
+                </el-table>
+            </el-scrollbar>
         </div>
     </el-drawer>
     </div>
 </template>
 
 <script>
-
-import { licenseList, wordInsert } from '@/ddaja-api/admin/word/Word'
+import ExcelUpload from '../components/excelUpload'
+import { licenseList, wordInsert, wordQuestionInsert } from '@/ddaja-api/admin/word/Word'
 
 export default {
     name: 'Admin_Word_Insert'
-
+    , components : {
+        ExcelUpload
+    }
     , created (){
         this.getLicense();
     }
-
     , props: {
         popupVal : {
             type : Boolean
@@ -67,34 +90,87 @@ export default {
         return {
             param: {
                 lID: 0
+                , wID: 0
                 , title: ''
             }
             , licenseOptions: []
+            , tableData: []
+            , tableHeader: []
         }
     }
 
     , methods: {
 
-        onSubmit() {
-            console.log(this.param);
+        async onSubmit() {
 
-            wordInsert(this.param).then( response => {
-                this.$message({
-                    message: 'Word Insert Success'
-                    , type: 'success'
-                })
+            if( !this.verification() ){return}
+
+            await this.wordInsert().then();
+
+            var tableData = this.tableData
+
+            for( var index in tableData ){
+                var data = tableData[index]
+                this.param.answer  = data.answer
+                this.param.content = data.content
+
+                await this.wordQuestionInsert().then()
+            }
+
+            this.popupClose();
+            this.$alert('SAVE SUCESS')
+        }
+        
+        , async wordInsert(){
+            await wordInsert(this.param).then( response => {
+                this.param.wID = response.item.id
             })
         }
 
+        , async wordQuestionInsert(){
+            await wordQuestionInsert(this.param).then()
+        }
 
         , async getLicense() {
             await licenseList().then(response => {
                 response.items.forEach(x => {
                     var type = (x.item.type === 'WRITING') ? '필기' : '실기'
-                    var label = '[' + type + '] ' + x.item.name
+                    var label = type + ' - ' + x.item.name
                     this.licenseOptions.push({ value: x.item.id, label: label })
                 })
+                this.param.lID = this.licenseOptions[0].value;
             })
+        }
+
+        , verification (){
+            if( this.param.lID === 0 ){
+                this.$alert('LICENSE NULL ERROR')
+                this.$refs.license.focus();
+                return false
+            }
+            if( this.param.title === '' ){
+                this.$alert('TITLE NULL ERROR')
+                this.$refs.title.focus();
+                return false
+            }
+            return true
+        }
+
+        , beforeUpload(file) {
+            const isLt1M = file.size / 1024 / 1024 < 1
+
+            if (isLt1M) { return true}
+
+            this.$message({
+                message: 'Please do not upload files larger than 1m in size.',
+                type: 'warning'
+            })
+            return false
+        }
+
+        , handleSuccess({ results, header }) {
+            this.tableData = results
+            this.tableHeader = header
         }
 
         , popupClose() {

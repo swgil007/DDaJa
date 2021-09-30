@@ -2,8 +2,10 @@ package com.bng.ddaja.words.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.bng.ddaja.common.domain.Word;
+import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
@@ -48,8 +50,13 @@ public class WordDTO extends CommonDTO {
         createdDate        = word.getCreatedDate();
         modifiedDate       = word.getModifiedDate();
         license            = new LicenseDTO(word.getLicense());
-        // wordQuestionsCount = word.getWordQuestions().size();
-        
+
+        Optional<List<WordQuestion>> op = Optional.ofNullable(word.getWordQuestions());
+        if(op.isPresent()){
+            wordQuestionsCount = op.get().size();
+        }else{
+            wordQuestionsCount = 0;
+        }
     }
 
     public Word toEntity( ){
