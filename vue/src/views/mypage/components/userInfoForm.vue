@@ -62,7 +62,7 @@ export default {
       this.$http
         .get('http://localhost/users/token', {
           headers: {
-            Authorazation: window.localStorage.getItem('jwt')
+            Authorization: window.localStorage.getItem('jwt')
           }
         })
         .then(res => {
