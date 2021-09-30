@@ -56,6 +56,7 @@ public class UserController {
     )
     @GetMapping("{id}")
     public ResponseEntity<CommonResource> getUser(@PathVariable(name = "id", required = true) long id, CommonJWT commonJWT) {
+        if(!commonJWT.isValidated()) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new CommonResource("Not Authorized Request"));
         return ResponseEntity.ok().body(new CommonResource(userService.getUserById(id)));
     }
 
@@ -71,11 +72,5 @@ public class UserController {
         UserDTO userDTO = userService.getUserBySocialToken(socialAccessToken);
         if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
         return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));
-    }
-
-    @GetMapping("token")
-    public ResponseEntity<CommonResource> getUserInfoByToken(CommonJWT commonJWT) {
-        if(!commonJWT.isValidated()) return ResponseEntity.noContent().build();
-        return null;
     }
 }
