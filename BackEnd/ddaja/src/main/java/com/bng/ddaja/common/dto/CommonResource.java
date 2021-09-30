@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class CommonResource {
     private CommonDTO item;
     private List<Link> hateos;
+    private String message;
 
     public CommonResource(CommonDTO item) {
         this.item = item;
@@ -30,5 +31,9 @@ public class CommonResource {
     public CommonResource(CommonDTO item, CommonHateoas[] hateos) {
         this.item = item;
         this.hateos = Arrays.stream(hateos).map(h -> h.initLink(item.getId())).collect(Collectors.toList());
+    }
+
+    public CommonResource(String message) {
+        this.message = message;
     }
 }
