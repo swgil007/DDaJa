@@ -1,10 +1,10 @@
 <template>
   <el-form v-show="isUserInfoForm" ref="form" :model="form" label-width="120px">
+    {{ user }}
     {{ userInfo }}
-    {{ originUserInfo }}
     <el-form-item label="닉네임">
       <el-col :span="11">
-        <el-input v-model="originUserInfo.nickName" />
+        <el-input v-model="userInfo.nickName" />
       </el-col>
     </el-form-item>
     <el-form-item label="프로필">
@@ -35,17 +35,17 @@
 export default {
   props: {
     isUserInfoForm: {},
-    originUserInfo: {}
+    userInfo: {}
   },
   data() {
     return {
-      userInfo: {
-        id: this.originUserInfo.id,
-        email: this.originUserInfo.email,
-        userId: this.originUserInfo.userId,
-        nickName: this.originUserInfo.nickName,
-        createdDate: this.originUserInfo.createdDate,
-        modifiedDate: this.originUserInfo.modifiedDate
+      user: {
+        id: this.userInfo.id,
+        email: this.userInfo.email,
+        userId: this.userInfo.userId,
+        nickName: this.userInfo.nickName,
+        createdDate: this.userInfo.createdDate,
+        modifiedDate: this.userInfo.modifiedDate
       },
       form: {
         name: '',
@@ -63,7 +63,7 @@ export default {
   methods: {
     modifyUserInfo() {
       const userInfos = {
-        nickName: this.originUserInfo.nickName
+        nickName: this.userInfo.nickName
       }
       console.log(userInfos.nickName)
     },
