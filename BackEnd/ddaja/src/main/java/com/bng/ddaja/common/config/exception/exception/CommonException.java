@@ -1,6 +1,6 @@
-package com.bng.ddaja.common.config.error.exception;
+package com.bng.ddaja.common.config.exception.exception;
 
-import com.bng.ddaja.common.config.error.enums.ErrorCode;
+import com.bng.ddaja.common.config.exception.enums.ExceptionCode;
 
 import lombok.Getter;
 
@@ -8,15 +8,15 @@ import lombok.Getter;
 public class CommonException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    private ErrorCode errorCode;
+    private ExceptionCode errorCode;
     private String message;
 
-    public CommonException(ErrorCode errorCode) {
+    public CommonException(ExceptionCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
     
-    public CommonException(ErrorCode errorCode, String message) {
+    public CommonException(ExceptionCode errorCode, String message) {
         super(message);
         this.errorCode = errorCode;
         this.message = message;

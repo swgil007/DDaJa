@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+@JsonInclude(Include.NON_NULL)
 @Getter
 @Setter
 @ToString
@@ -16,6 +17,5 @@ public class CommonDTO {
     public long id;
     public Date createdDate;
     public Date modifiedDate;
-    @JsonInclude(Include.NON_NULL)
-    public Boolean isCreated = null;
+    public boolean isCreated;
 }

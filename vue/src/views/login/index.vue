@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
+    <el-form class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
         <h3 class="title">DDaJa Login</h3>
@@ -22,94 +22,62 @@ export default {
   , data() {
     return {
       socialAccessToken: {}
-      , test: 'a'
     }
   }
-  , created() {
-  },
+  ,
   methods: {
     kakaoLogout() {
-
-    alert(Kakao.Auth.getAccessToken())
-
-    Kakao.API.request({
-  url: '/v1/user/unlink',
-  success: function(response) {
-    console.log(response);
-  },
-  fail: function(error) {
-    console.log(error);
-  },
-});
-
-    Kakao.Auth.logout(function() {
-      console.log(Kakao.Auth.getAccessToken());
-    });
-
+      alert(Kakao.Auth.getAccessToken())
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function(response) {
+          console.log(response);
+        },
+        fail: function(error) {
+          console.log(error);
+        },
+      });
+      Kakao.Auth.logout(function() {
+        console.log(Kakao.Auth.getAccessToken());
+      });
     },
     kakaoLogin() {
-
-      // const LOGIN_AFTER_URI = "http://localhost:9527/social/login"
-
-      // console.log(this.$kakao.isInitialized());
-      // this.$kakao.Auth.authorize({
-      //   redirectUri: LOGIN_AFTER_URI
-      // });
-
-  this.$kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-      console.log(JSON.stringify(authObj))
-      // Kakao.API.request({
-      //   url: '/v2/user/me',
-      //   success: function(res) {
-      //     console.log(JSON.stringify(res))
-      //   },
-      //   fail: function(error) {
-      //     alert(
-      //       'login success, but failed to request user information: ' +
-      //         JSON.stringify(error)
-      //     )
-      //   },
-      // })
-      const socialAccessToken = {
-        accessToken : authObj.access_token
-        , refreshToken : authObj.refresh_token
-        , tokenType : 'KAKAO'
-        , expireTime : authObj.expires_in
-        , refreshExpireTime : authObj.refresh_token_expires_in
-      }
-
-      const userInfoURI = "http://localhost/users/social"
-      axios.post(userInfoURI, socialAccessToken)
-      .then(res => {
-        console.log(res)
+      this.$kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+          console.log(JSON.stringify(authObj))
+          const socialAccessToken = {
+            accessToken : authObj.access_token
+            , refreshToken : authObj.refresh_token
+            , tokenType : 'KAKAO'
+            , expireTime : authObj.expires_in
+            , refreshExpireTime : authObj.refresh_token_expires_in
+          }
+          const userInfoURI = "http://localhost/users/social"
+          axios.post(userInfoURI, socialAccessToken)
+          .then(res => {
+            console.log(res)
+            if(res.status == 200) {
+              console.log("hreer!")
+              window.localStorage.setItem('jwt', res.data.item.jwt)
+              window.localStorage.setItem('userID', res.data.item.id)
+              //window.location.href="/"
+              return
+            } else if(res.status == 201) {
+              window.localStorage.setItem('jwt', res.data.item.jwt)
+              window.localStorage.setItem('userID', res.data.item.id)
+              return
+            }
+            alert("로그인에 실패하였습니다 :(")
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        },
+        fail: function(err) {
+          alert('failed to login: ' + JSON.stringify(err))
+        }
       })
-      .catch(err => {
-        console.log(err)
-      })
-    },
-    fail: function(err) {
-      alert('failed to login: ' + JSON.stringify(err))
-    },
-  })
-
-      //console.log("tt")
-      //console.log(this.socialAccessToken)
-
-    //   const REST_API_KEY_KAKAO = "13378a39977a1f2ea36dd5a2d964e3e6";
-    //
-    //   const KAKAO_LOGIN_REST_API_URI = "https://kauth.kakao.com/oauth/authorize?response_type=code"
-    //   this.$http
-    //     .get(KAKAO_LOGIN_REST_API_URI + '&client_id=' + REST_API_KEY_KAKAO + '&&redirect_uri=' + LOGIN_AFTER_URI)
-    //     .then(res => {
-    //       console.log(res.data)
-    //     })
-    //     .catch(err => {
-    //       alert('fail')
-    //       console.log(err)
-    //     })
-    // }
     }
   }
 }
@@ -171,7 +139,7 @@ $light_gray:#eee;
   min-height: 100%;
   width: 100%;
   background-color: $bg;
-  overflow: hidden;
+  overflow: auto;
 
   .login-form {
     position: relative;

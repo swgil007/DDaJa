@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.bng.ddaja.common.config.PublicKeyConfig;
-import com.bng.ddaja.common.config.error.exception.MemberNotFoundException;
-import com.bng.ddaja.common.dto.CommonError;
-import com.bng.ddaja.common.dto.CommonErrorDetail;
+import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
+import com.bng.ddaja.common.dto.ExceptionResponse;
+import com.bng.ddaja.common.dto.ExceptionDetail;
 import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
@@ -21,7 +21,7 @@ import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.test.dto.TestParameter;
 import com.bng.ddaja.test.service.TestService;
-import com.bng.ddaja.tokens.service.TokensService;
+import com.bng.ddaja.tokens.service.TokenService;
 import com.bng.ddaja.test.dto.TestDTO;
 
 import org.springframework.core.task.TaskRejectedException;
@@ -49,7 +49,7 @@ public class TestController {
 
     private PublicKeyConfig publicKeyConfig;
 
-    private TokensService tokensService;
+    private TokenService tokensService;
 
     private TestService testService;
 
@@ -196,5 +196,11 @@ public class TestController {
             syncMethod(i);
         }
         return "";
+    }
+
+    @GetMapping("jwt")
+    public CommonJWT testJWT(CommonJWT commonJWT) {
+        log.info(commonJWT.toString());
+        return commonJWT;
     }
 }

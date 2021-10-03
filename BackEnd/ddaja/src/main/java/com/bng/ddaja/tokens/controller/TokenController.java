@@ -3,7 +3,7 @@ package com.bng.ddaja.tokens.controller;
 import javax.security.sasl.AuthenticationException;
 
 import com.bng.ddaja.common.dto.CommonResponse;
-import com.bng.ddaja.tokens.service.TokensService;
+import com.bng.ddaja.tokens.service.TokenService;
 import com.bng.ddaja.users.dto.UserDTO;
 
 import org.springframework.http.ResponseEntity;
@@ -19,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @RequestMapping("tokens")
 @RestController
-public class TokensController {
-    private TokensService tokensService;
+public class TokenController {
+    private TokenService tokensService;
 
 
     @PostMapping("")

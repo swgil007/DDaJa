@@ -53,6 +53,7 @@ public class CommonJWT extends CommonDTO {
 
     public CommonJWT(String jwt, Claims claims) {
         this.jwt = jwt;
+        if(claims == null) return;
         this.claims = claims;
         id = Integer.toUnsignedLong((int) claims.get(Constants.CLAIMS_ID));
         userID = (String) claims.get(Constants.CLAIMS_USER_ID);

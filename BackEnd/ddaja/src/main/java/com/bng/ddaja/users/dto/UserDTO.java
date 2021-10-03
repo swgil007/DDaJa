@@ -1,8 +1,12 @@
 package com.bng.ddaja.users.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.bng.ddaja.common.domain.User;
+import com.bng.ddaja.common.domain.User.UserBuilder;
 import com.bng.ddaja.common.dto.CommonDTO;
-import com.bng.ddaja.common.enums.TokenType;
+import com.bng.ddaja.common.util.CommonUtil;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +37,8 @@ public class UserDTO extends CommonDTO {
         nickName = vo.getNickName();
         eMail = vo.getEMail() == null ? "" : vo.getEMail();
         profileImg = vo.getProfileImg();
+        createdDate = vo.getCreatedDate();
+        modifiedDate = vo.getModifiedDate();
     }
 
     public UserDTO(User vo, boolean isCreated) {
@@ -46,12 +52,12 @@ public class UserDTO extends CommonDTO {
     }
 
     public User toEntity() {
-        return User.builder()
-                    .id(id)
-                    .userId(userId)
-                    .nickName(nickName)
-                    .eMail(eMail)
-                    .profileImg(profileImg)
-                    .build();
+        UserBuilder userBuilder = User.builder();
+        userBuilder.id(id);
+        if(CommonUtil.isNotEmptyString(userId)) userBuilder.userId(userId);
+        if(CommonUtil.isNotEmptyString(nickName)) userBuilder.nickName(nickName);
+        if(CommonUtil.isNotEmptyString(eMail)) userBuilder.eMail(eMail);
+        if(CommonUtil.isNotEmptyString(profileImg)) userBuilder.profileImg(profileImg);
+        return userBuilder.build();
     }
 }
