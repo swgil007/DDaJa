@@ -1,7 +1,5 @@
 package com.bng.ddaja.common.domain;
 
-public package com.bng.ddaja.common.domain;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
