@@ -6,7 +6,6 @@ import { getToken } from '@/utils/auth'
 import 'nprogress/nprogress.css'
 
 NProgress.configure({ showSpinner: false })
-const whiteList = ['/login', '/', '/auth-redirect', '/social/login', '/mypage']
 
 router.beforeEach(async(to, from, next) => {
   NProgress.start()
@@ -14,48 +13,22 @@ router.beforeEach(async(to, from, next) => {
 
   const hasToken = getToken()
 
-  console.log(hasToken)
-  if (hasToken) {
-    /** ADMIN **/
-    if (hasToken === 'admin-token') {
-      if (to.path === '/login') {
-        next({ path: '/' })
-        NProgress.done()
-      } else {
-        routerNext('admin', to, next)
-      }
-
-    /** EDITOR **/
-    } else if (hasToken === 'editor-token') {
-      if (to.path === '/login') {
-        next({ path: '/' })
-        NProgress.done()
-      } else {
-        routerNext('editor', to, next)
-      }
-
-    /** VISITOR **/
+  /** ADMIN **/
+  if (hasToken === 'admin-token') {
+    if (to.path === '/login') {
+      next({ path: '/' })
+      NProgress.done()
     } else {
-      if (to.path === '/login') {
-        store.dispatch('user/resetToken')
-        next()
-      } else {
-        routerNext('visitor', to, next)
-      }
+      routerNext('admin', to, next)
     }
 
-  /** 토큰이 없고 다른 페이지로 이동하려는 경우 **/
+  /** VISTOR **/
   } else {
-    store.dispatch('user/resetToken')
-
-    console.log(to.path)
-    console.log(whiteList.indexOf(to.path))
-
-    if (whiteList.indexOf(to.path) !== -1) {
+    if (to.path === '/login') {
+      store.dispatch('user/resetToken')
       next()
     } else {
-      next(`/login?redirect=${to.path}`)
-      NProgress.done()
+      routerNext('visitor', to, next)
     }
   }
 })

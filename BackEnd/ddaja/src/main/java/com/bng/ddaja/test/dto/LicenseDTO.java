@@ -70,6 +70,7 @@ public class LicenseDTO {
         this.name = license.getName();
         this.passScore = license.getPassScore();
         this.agency = license.getAgency();
+        this.type = license.getType();
     }
 
     public License toEntity (){

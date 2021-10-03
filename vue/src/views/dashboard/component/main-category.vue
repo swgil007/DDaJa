@@ -78,6 +78,7 @@ export default {
       jeongboCheoliGisa: {
         licenseName: '정보처리 기사',
         licenseSeq: '1',
+        licenseID: '1',
         subject: [
           { 'subjectid': 1,
             'subjectName': '소프트웨어 설계'
@@ -98,7 +99,8 @@ export default {
       },
       jeongboCheoliSanupGisa: {
         licenseName: '정보처리 산업기사',
-        licenseSeq: '2',
+        licenseSeq: '3',
+        licenseID: '3',
         subject: [
           { 'subjectid': 1,
             'subjectName': '데이터베이스'
@@ -119,7 +121,8 @@ export default {
       },
       computerUtilizeOne: {
         licenseName: '컴퓨터 활용 1급',
-        licenseSeq: '3',
+        licenseSeq: '5',
+        licenseID: '5',
         subject: [
           { 'subjectid': 1,
             'subjectName': '컴퓨터 일반'
@@ -134,7 +137,8 @@ export default {
       },
       computerUtilizeTwo: {
         licenseName: '컴퓨터 활용 2급',
-        licenseSeq: '4',
+        licenseSeq: '7',
+        licenseID: '7',
         subject: [
           { 'subjectid': 1,
             'subjectName': '컴퓨터 일반'

@@ -9,6 +9,7 @@ import Layout from '@/layout'
 /* Router Modules */
 import exploreRouter from './explore'
 import adminRouter from './admin'
+import adminBinsooRouter from './admin-binsoo'
 
 export const constantRoutes = [
   {
@@ -54,6 +55,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
   exploreRouter,
   adminRouter,
+  adminBinsooRouter,
   {
     path: '/error',
     component: Layout,
