@@ -1,10 +1,8 @@
 package com.bng.ddaja.wordQuestions.dto;
 
-import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.words.dto.WordDTO;
-import com.bng.ddaja.words.service.WordService;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

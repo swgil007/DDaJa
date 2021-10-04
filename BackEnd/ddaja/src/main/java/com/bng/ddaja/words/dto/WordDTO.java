@@ -44,7 +44,6 @@ public class WordDTO extends CommonDTO {
     private int wordQuestionsCount;
 
     public WordDTO( Word word ){
-
         id                 = word.getId();
         title              = word.getTitle();
         createdDate        = word.getCreatedDate();
@@ -60,9 +59,10 @@ public class WordDTO extends CommonDTO {
     }
 
     public Word toEntity( ){
-
         return Word.builder()
-            .title(this.title)
+            .id(id)
+            .title(title)
+            .license(license.toEntity())
             .build();
     }
 }

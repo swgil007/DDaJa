@@ -1,7 +1,6 @@
 package com.bng.ddaja.words.service;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.bng.ddaja.common.domain.Word;
@@ -16,15 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 @AllArgsConstructor
 public class WordService {
 
     private WordRepository wordRepository;
-    private LicensesRepository licensesRepository;
+    private LicensesService LicensesService;
 
     public Page<WordDTO> getAllWordByWordSearch( WordSearch wordSearch ) {
         return wordRepository.findAll(wordSearch.toSpecification(), wordSearch.toPageable()).map( vo -> new WordDTO(vo));
@@ -34,15 +31,14 @@ public class WordService {
         return wordRepository.findAll(wordSearch.toSpecification()).stream().map(vo -> new WordDTO(vo)).collect(Collectors.toList());
     } 
 
-    public Word findById( long wID ) {
-        return wordRepository.findById(wID);
+    public WordDTO findById( long wID ) {
+        return new WordDTO(wordRepository.findById(wID));
     } 
 
     public WordDTO saveWord ( WordDTO wordDTO, long lID ){
         Word word = wordDTO.toEntity();
-        word.setLicense(licensesRepository.findById(lID));
+        word.setLicense(LicensesService.getLicenseById(lID).toEntity());
         wordRepository.save(word);
-
         return new WordDTO(word);
     }
 

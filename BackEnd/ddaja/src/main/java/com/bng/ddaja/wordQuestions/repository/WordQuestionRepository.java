@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface WordQuestionRepository extends JpaRepository< WordQuestion, Long >, JpaSpecificationExecutor< WordQuestion >{
 
-    public List<WordQuestion> findAll(); 
     public WordQuestion findById( long id ); 
     public List<WordQuestion> findByWord( Word word );
 

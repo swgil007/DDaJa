@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
@@ -54,9 +53,19 @@ public class WordQuestionController {
             )
         );
     }
+    
+    // @PostMapping("")
+    // public ResponseEntity<CommonResponse> saveWordQuestion( @RequestBody WordQuestionDTO wordQuestionDTO 
+    //                                                         ,  @ApiParam( name = "wID"    , type = "long"  , required = true) @RequestParam("wID") long wID){
 
+    //     return ResponseEntity.ok().body(
+    //         new CommonResponse(
+    //             wordQuestionService.saveWordQuestion(wordQuestionDTO, wID)
+    //         )
+    //     );
+    // }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<CommonResponse> updateWordQuestion( @PathVariable(name="id", required = true) long id
                                     , @ApiParam( name = "content", type = "String", required = true) @RequestParam("content") String content 
                                     , @ApiParam( name = "answer" , type = "String", required = true) @RequestParam("answer")  String answer 
@@ -77,7 +86,7 @@ public class WordQuestionController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<CommonResponse> deleteWordQuestion(@PathVariable(name="id", required = true) long id){
         return ResponseEntity.ok().body(
             new CommonResponse(

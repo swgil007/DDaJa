@@ -72,9 +72,6 @@ public class License extends CommonEntity {
     private List<Subject> subjects;
 
     @OneToMany(mappedBy = "license")
-    private List<OpenAPI> openAPIs;
-
-    @OneToMany(mappedBy = "license")
     private List<LicenseInfo> licenseInfos;
 
     @OneToMany(mappedBy = "license")
@@ -112,13 +109,6 @@ public class License extends CommonEntity {
         this.questions.add(question);
         if(question.getLicense() != this) {
             question.setLicense(this);
-        }
-    }
-
-    public void setOpenAPI(OpenAPI openAPI) {
-        this.openAPIs.add(openAPI);
-        if(openAPI.getLicense() != this) {
-            openAPI.setLicense(this);
         }
     }
 

@@ -109,17 +109,17 @@
 import { wordQuestionList, wordQuestionUpdate, wordQuestionInsert, wordQuestionDelete } from '@/ddaja-api/admin/word/Word'
 
 export default {
-  name: 'Admin_Word_Question_Update',
+  name: 'AdminWordQuestionUpdate',
 
   props: {
     popupVal: false,
-    wordInfo : {
-      type : Object
-      , defalut : function (){
+    wordInfo: {
+      type: Object,
+      defalut: function() {
         return {
-          wID : 0
-          , lID : 0
-          , wordQuestionsCount : 0        
+          wID: 0,
+          lID: 0,
+          wordQuestionsCount: 0
         }
       }
     }
@@ -128,12 +128,12 @@ export default {
   data() {
     return {
       param: {
-        wID: 0
-        , lID: 0
-        , answer: ''
-        , content: ''
-        , page: 1
-        , size: 100
+        wID: 0,
+        lID: 0,
+        answer: '',
+        content: '',
+        page: 1,
+        size: 100
       },
       tableData: [],
       status: 'insert'
@@ -145,7 +145,7 @@ export default {
         this.param.wID = this.wordInfo.wID
         this.param.lID = this.wordInfo.lID
 
-        if(this.wordInfo.wordQuestionsCount > 0){
+        if (this.wordInfo.wordQuestionsCount > 0) {
           this.fetchInfo()
         }
       }
@@ -170,21 +170,19 @@ export default {
     async update() {
       await wordQuestionUpdate(this.param).then(response => {
         this.$message({
-          message: 'Word Question Update Success'
-          , type: 'success'
+          message: 'Word Question Update Success',
+          type: 'success'
         })
       })
-      this.fetchInfo();
+      this.fetchInfo()
       this.status = 'insert'
-      this.param.answer  = ''
+      this.param.answer = ''
       this.param.content = ''
     },
 
-
     async deleteQuestion(row) {
-
       this.param.id = row.id
-    
+
       await wordQuestionDelete(this.param).then(response => {
         this.$message({
           message: 'Word Question Delete Success',
@@ -193,7 +191,6 @@ export default {
       })
     },
 
-
     async save() {
       await wordQuestionInsert(this.param).then(response => {
         this.$message({
@@ -201,7 +198,7 @@ export default {
           type: 'success'
         })
       })
-      this.param.answer  = ''
+      this.param.answer = ''
       this.param.content = ''
     },
 
