@@ -1,6 +1,5 @@
 package com.bng.ddaja.wordQuestions.service;
 
-import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionSearch;
@@ -23,21 +22,13 @@ public class WordQuestionService {
         return wordQuestionRepository.findAll(wordQuestionSearch.toSpecification(), wordQuestionSearch.toPageable()).map( vo -> new WordQuestionDTO(vo));
     }
 
-    public WordQuestionDTO saveWordQuestion( WordQuestionDTO wordQuestionDTO, long wID){
-        System.out.println("binsoo ======= >  1");
+    public WordQuestionDTO saveWordQuestion( WordQuestionDTO wordQuestionDTO){
         WordQuestion wordQuestion = wordQuestionDTO.toEntity();
-        System.out.println("binsoo ======= >  2 " + wID );
-
-        Word WORD = wordService.findById(wID).toEntity();
-        System.out.println("binsoo ======= >  2 - ,,, " + WORD.getId() ); 
-        System.out.println("binsoo ======= >  2 - ,,, " + WORD.getTitle() ); 
-        wordQuestion.setWord(WORD);
-        System.out.println("binsoo ======= >  3");
+        wordQuestion.setWord(wordService.findById(wordQuestionDTO.getWID()).toEntity());
         wordQuestionRepository.save(wordQuestion);
-        System.out.println("binsoo ======= >  4");
         return new WordQuestionDTO(wordQuestion);
     }
-    
+
 
     public WordQuestionDTO deleteWordQuestion( long id ){
         WordQuestion wordQuestion = wordQuestionRepository.getOne(id);

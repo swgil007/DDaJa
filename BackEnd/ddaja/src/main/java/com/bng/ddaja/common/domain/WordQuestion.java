@@ -43,7 +43,7 @@ public class WordQuestion extends CommonEntity {
     private Word word;
 
     @Column(name = "L_ID")
-    private long lId;
+    private long lID;
 
     public void setWord(Word word) {
         if(this.word != null) {

@@ -1,6 +1,8 @@
 package com.bng.ddaja.words.controller;
 
 
+import javax.validation.Valid;
+
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.hateoas.word.WordHateoas;
 import com.bng.ddaja.words.dto.WordDTO;
@@ -52,31 +54,22 @@ public class WordController {
     }
 
     @PostMapping("")
-    public ResponseEntity<CommonResponse> saveWord (@ApiParam(   name = "lID"   , type = "long"   , required = true) @RequestParam("lID")   long lID 
-                                                    , @ApiParam( name = "title" , type = "String" , required = true) @RequestParam("title") String title ){                                           
-
-        WordDTO wordDTO = new WordDTO();
-        wordDTO.setTitle(title);
-        
+    public @ResponseBody ResponseEntity<CommonResponse> saveWord ( @Valid WordDTO WordDTO ){                                           
         return ResponseEntity.ok().body(
             new CommonResponse(
-                wordService.saveWord(wordDTO, lID)
+                wordService.saveWord(WordDTO)
             )
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CommonResponse> updateWord ( @PathVariable(name="id", required = true) long id
-                                    , @ApiParam( name = "lID"   , type = "long"   , required = true) @RequestParam("lID")   long lID 
-                                    , @ApiParam( name = "title" , type = "String" , required = true) @RequestParam("title") String title  ){                                           
-
-        WordDTO wordDTO = new WordDTO();
-        wordDTO.setId(id);
-        wordDTO.setTitle(title);
+    public ResponseEntity<CommonResponse> updateWord ( @PathVariable(name="id", required = true) long id, @Valid WordDTO wordDTO  ){                                           
         
+        wordDTO.setId(id);
+
         return ResponseEntity.ok().body(
             new CommonResponse(
-                wordService.saveWord(wordDTO, lID)
+                wordService.saveWord(wordDTO)
             )
         );
     }

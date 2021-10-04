@@ -50,8 +50,11 @@ public class Word extends CommonEntity {
             this.license.getWords().remove(this);
         }
         this.license = license;
-        if(!license.getWords().contains(this)) {
-            license.setWord(this);
+        
+        if(license.getWords() != null) {
+            if(!license.getWords().contains(this)) {
+                license.setWord(this);
+            }
         }
     }
 

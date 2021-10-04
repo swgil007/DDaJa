@@ -12,11 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class LicenseDTO extends CommonDTO {
@@ -53,5 +51,17 @@ public class LicenseDTO extends CommonDTO {
         .type(this.type)
         .passScore(this.passScore)
         .build();
+    }
+
+    public void valueCheck() {
+        System.out.println("====== LicenseDTO ToString ====== ");
+        System.out.println("ID         : " + this.id);
+        System.out.println("CODE       : " + this.code);
+        System.out.println("NAME       : " + this.name);
+        System.out.println("IN USE     : " + this.inUse);
+        System.out.println("AGENCY     : " + this.agency);
+        System.out.println("TYPE       : " + this.type);
+        System.out.println("PASS SCORE : " + this.passScore);
+        System.out.println("====================================");
     }
 }

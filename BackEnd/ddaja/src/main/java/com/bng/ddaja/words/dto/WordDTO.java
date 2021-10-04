@@ -23,6 +23,18 @@ import lombok.Setter;
 public class WordDTO extends CommonDTO { 
 
     @ApiModelProperty(
+        name = "id"
+        , example = "11"
+    )
+    private long id;
+
+    @ApiModelProperty(
+    name = "lID"
+    , example = "11"
+    )
+    private long lID;
+
+    @ApiModelProperty(
         name = "title"
         , example = "리눅스 용어 외우기"
     )
@@ -48,7 +60,10 @@ public class WordDTO extends CommonDTO {
         title              = word.getTitle();
         createdDate        = word.getCreatedDate();
         modifiedDate       = word.getModifiedDate();
-        license            = new LicenseDTO(word.getLicense());
+
+        if(Optional.ofNullable(word.getLicense()).isPresent()){
+            license = new LicenseDTO(word.getLicense());
+        }
 
         Optional<List<WordQuestion>> op = Optional.ofNullable(word.getWordQuestions());
         if(op.isPresent()){
@@ -62,7 +77,6 @@ public class WordDTO extends CommonDTO {
         return Word.builder()
             .id(id)
             .title(title)
-            .license(license.toEntity())
             .build();
     }
 }

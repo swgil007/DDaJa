@@ -92,6 +92,8 @@ export default {
                 lID: 0
                 , wID: 0
                 , title: ''
+                , answer : ''
+                , content : ''
             }
             , licenseOptions: []
             , tableData: []
@@ -103,18 +105,16 @@ export default {
 
         async onSubmit() {
 
-            if( !this.verification() ){return}
+            if( !this.verification() ){ return }
 
             await this.wordInsert().then();
+            if(this.tableData.length === 0){ return }
 
-            var tableData = this.tableData
-
-            for( var index in tableData ){
-                var data = tableData[index]
-                this.param.answer  = data.answer
-                this.param.content = data.content
-
-                await this.wordQuestionInsert().then()
+            for( var i in this.tableData){
+                var x = this.tableData[i];
+                this.param.answer = x.answer
+                this.param.content = x.content
+                await this.wordQuestionInsert().then();
             }
 
             this.popupClose();
