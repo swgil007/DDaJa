@@ -53,10 +53,23 @@ export default {
   },
   methods: {
     modifyUserInfo() {
-      const userInfos = {
-        nickName: this.userInfo.nickName
+      console.log("modifyUserInfo")
+      console.log(this.userInfo)
+      const headers = {
+        'Authorazation' : window.localStorage.getItem('jwt')
       }
-      console.log(userInfos.nickName)
+      // axios.put('http://localhost/users/' + this.license.id, this.userInfo, headers)
+      //   .then(res => {
+      //     console.log(res.data)
+      //     const h = this.$createElement
+      //     this.$notify({
+      //       title: '완료',
+      //       message: h('i', { style: 'color: teal' }, '수정이 완료되었습니다.')
+      //     })
+      //   })
+      //   .catch(error => {
+      //     console.log(error)
+      //   })
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
