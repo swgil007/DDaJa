@@ -1,6 +1,5 @@
 <template>
   <el-form v-show="isUserInfoForm" ref="form" :model="form" label-width="120px">
-    {{ user }}
     {{ userInfo }}
     <el-form-item label="닉네임">
       <el-col :span="11">
@@ -39,14 +38,6 @@ export default {
   },
   data() {
     return {
-      user: {
-        id: this.userInfo.id,
-        email: this.userInfo.email,
-        userId: this.userInfo.userId,
-        nickName: this.userInfo.nickName,
-        createdDate: this.userInfo.createdDate,
-        modifiedDate: this.userInfo.modifiedDate
-      },
       form: {
         name: '',
         date1: '2021-09-27',
