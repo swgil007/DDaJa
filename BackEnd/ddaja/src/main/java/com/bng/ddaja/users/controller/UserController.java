@@ -61,9 +61,11 @@ public class UserController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<CommonResponse> patchUser(@PathVariable(name = "id") long id, @RequestBody @Valid UserDTO userDTO) {
-        userDTO.setId(id);
-        userService.patchUserByUserDTO(userDTO);
+    public ResponseEntity<CommonResponse> patchUser(@PathVariable(name = "id") long id, @RequestBody @Valid UserDTO userDTO, CommonJWT commonJWT) {
+        log.info(commonJWT.toString());
+        log.info(userDTO.toString());
+        //userDTO.setId(id);
+        //userService.patchUserByUserDTO(userDTO);
         return ResponseEntity.noContent().build();
     }
 
