@@ -56,8 +56,9 @@ export default {
       console.log('modifyUserInfo')
       console.log(this.userInfo)
       const headers = {
-        'Authorazation': window.localStorage.getItem('jwt')
+        Authorization: window.localStorage.getItem('jwt')
       }
+      console.log(headers)
       this.$http.patch('http://localhost/users/' + this.userInfo.id, this.userInfo, headers)
         .then(res => {
           console.log(res.data)
