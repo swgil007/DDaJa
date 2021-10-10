@@ -46,6 +46,7 @@ public class WordQuestionController {
         );
     }
 
+
     @PutMapping("{id}")
     public ResponseEntity<CommonResponse> updateWordQuestion( @PathVariable(name="id", required = true) long id, @Valid WordQuestionDTO wordQuestionDTO){
         return ResponseEntity.ok().body(
@@ -56,6 +57,9 @@ public class WordQuestionController {
     }
 
 
+    /*
+    ** Access-Control-Allow-Origin: '*' CROS ERROR 발생. 해결 예정.
+    */
     @DeleteMapping("{id}")
     public ResponseEntity<CommonResponse> deleteWordQuestion(@PathVariable(name="id", required = true) long id){
         return ResponseEntity.ok().body(

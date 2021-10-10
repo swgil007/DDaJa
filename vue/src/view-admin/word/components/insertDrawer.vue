@@ -162,8 +162,8 @@ export default {
             if (isLt1M) { return true}
 
             this.$message({
-                message: 'Please do not upload files larger than 1m in size.',
-                type: 'warning'
+                message: 'Please do not upload files larger than 1m in size.'
+                , type: 'warning'
             })
             return false
         }

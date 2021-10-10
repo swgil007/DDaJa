@@ -4,8 +4,15 @@
       <font class="font1">Word Manager</font>
           <el-button
           @click="insertDrawerStatus(true)"
-          style="float:right; margin: 0 58px 0 0; width:78px; height :50px"
-        >추 가</el-button>
+          icon="el-icon-circle-plus-outline"
+          style="float:right; margin: 0 58px 0 0; width:100px; height :50px"
+        > 추가 </el-button>
+        <el-button
+        type="danger"
+          @click="deleteWord()"
+          icon="el-icon-delete"
+          style="float:right; margin: 0 30px 0 0; width:100px; height :50px"
+        > 삭제 </el-button>
     </div>
 
     <div class="div1" style="padding:0px 0px 70px 29%;">
@@ -39,19 +46,25 @@
     <div class="div2">
       <el-table
         :data="tableData"
-        :header-cell-style="{textAlign:'center'}"
+        :header-cell-style="{textAlign:'left'}"
+        @selection-change="handleSelectionChange"
         style="width:100%; height:100%;"
       >
+        <el-table-column
+          type="selection"
+          width="55"
+          align="left">
+        </el-table-column>
         <el-table-column
           label="ID"
           prop="item.id"
           width="100"
-          align="center"
+          align="left"
         />
         <el-table-column
           label="Type"
           width="100"
-          align="center"
+          align="left"
           prop="item.license.type"
         />
         <el-table-column
@@ -68,13 +81,13 @@
           label="Questions Count"
           prop="item.wordQuestionsCount"
           width="200"
-          align="center"
+          align="left"
         />
 
         <el-table-column
           label="등록일"
           width="180"
-          align="center"
+          align="left"
         >
           <template slot-scope="scope">
             {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
@@ -84,7 +97,7 @@
         <el-table-column
           label="수정일"
           width="180"
-          align="center"
+          align="left"
         >
           <template slot-scope="scope">
             {{ $moment(scope.row.item.modifiedDate).format('YYYY-MM-DD') }}
@@ -132,10 +145,11 @@
 <script>
 
 import Pagination from '@/components/Pagination'
-import { licenseList, wordList, wordListTotalCount } from '@/ddaja-api/admin/word/Word'
+import { licenseList, wordList, wordListTotalCount, wordDelete } from '@/ddaja-api/admin/word/Word'
 
 import updateDrawer from './components/updateDrawer'
 import insertDrawer from './components/insertDrawer'
+import _ from 'lodash'
 
 export default {
   name: 'Admin_Word',
@@ -160,8 +174,10 @@ export default {
       , wordInfo : {
         wID : 0
         , lID : 0
+        , title : ''
         , wordQuestionsCount : 0
       }
+      , selectList : []
       , updateDrawerVal: false
       , insertDrawerVal: false
     }
@@ -201,11 +217,32 @@ export default {
       })
     }
 
+    , deleteWord(){
+      var wordIdList = _.map(this.selectList, 'id')
+
+      wordIdList.forEach( x => {
+        this.wordDelete(x)
+      })
+    }
+
+    , wordDelete(wID){
+      var param = {
+        id : wID
+      }
+      wordDelete(param).then( response => {
+        this.$message({
+          message: 'Word Delete Success'
+          , type: 'success'
+        })
+      })
+    }
+
     , updateDrawerStatus(val, row) {
       this.updateDrawerVal = val
       if(val){
-        this.wordInfo.wID = row.item.id
-        this.wordInfo.lID = row.item.license.id
+        this.wordInfo.wID   = row.item.id
+        this.wordInfo.lID   = row.item.license.id
+        this.wordInfo.title = row.item.title
         this.wordInfo.wordQuestionsCount = row.item.wordQuestionsCount
       }
     }
@@ -218,6 +255,13 @@ export default {
       this.param.page = 0
       this.param.size = 10
       this.fetchList()
+    }
+
+    , handleSelectionChange(val){
+      this.selectList = []
+      val.forEach( x => {
+        this.selectList.push(x.item)
+      })
     }
   }
 }

@@ -43,6 +43,14 @@ export function wordUpdate(param) {
   })
 }
 
+export function wordDelete(param) {
+  return request({
+    url : '/words/' + param.id
+    , method : 'delete'
+    , params : {}
+  })
+}
+
 export function wordListTotalCount(param) {
   return request({
     url : '/words/total-count'
@@ -110,10 +118,9 @@ export function wordQuestionUpdate(param) {
 
 export function wordQuestionDelete(param) {
   return request({
-    url : '/word-questions'
+    url : '/word-questions/' + param.id
     , method : 'delete'
-    , params : {
-      qID : param.id
-    }
+    , params : {}
+    , dataType : 'json'
   })
 }

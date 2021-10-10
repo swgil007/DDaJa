@@ -15,25 +15,28 @@ import XLSX from 'xlsx'
 
 export default {
   props: {
-    beforeUpload: Function, // eslint-disable-line
-    onSuccess: Function// eslint-disable-line
-  },
-  data() {
+    beforeUpload: Function 
+    , onSuccess: Function
+  }
+
+  , data() {
     return {
-      loading: false,
-      excelData: {
-        header: null,
-        results: null
+      loading: false
+      , excelData: {
+        header: null
+        , results: null
       }
     }
-  },
-  methods: {
+  }
+
+  , methods: {
     generateData({ header, results }) {
       this.excelData.header = header
       this.excelData.results = results
       this.onSuccess && this.onSuccess(this.excelData)
-    },
-    handleDrop(e) {
+    }
+
+    , handleDrop(e) {
       e.stopPropagation()
       e.preventDefault()
       if (this.loading) return
@@ -51,22 +54,26 @@ export default {
       this.upload(rawFile)
       e.stopPropagation()
       e.preventDefault()
-    },
-    handleDragover(e) {
+    }
+
+    , handleDragover(e) {
       e.stopPropagation()
       e.preventDefault()
       e.dataTransfer.dropEffect = 'copy'
-    },
-    handleUpload() {
+    }
+
+    , handleUpload() {
       this.$refs['excel-upload-input'].click()
-    },
-    handleClick(e) {
+    }
+
+    , handleClick(e) {
       const files = e.target.files
       const rawFile = files[0] // only use files[0]
       if (!rawFile) return
       this.upload(rawFile)
-    },
-    upload(rawFile) {
+    }
+
+    , upload(rawFile) {
       this.$refs['excel-upload-input'].value = null // fix can't select the same excel
 
       if (!this.beforeUpload) {
@@ -77,8 +84,9 @@ export default {
       if (before) {
         this.readerData(rawFile)
       }
-    },
-    readerData(rawFile) {
+    }
+
+    , readerData(rawFile) {
       this.loading = true
       return new Promise((resolve, reject) => {
         const reader = new FileReader()
@@ -95,8 +103,9 @@ export default {
         }
         reader.readAsArrayBuffer(rawFile)
       })
-    },
-    getHeaderRow(sheet) {
+    }
+
+    , getHeaderRow(sheet) {
       const headers = []
       const range = XLSX.utils.decode_range(sheet['!ref'])
       let C
@@ -110,8 +119,9 @@ export default {
         headers.push(hdr)
       }
       return headers
-    },
-    isExcel(file) {
+    }
+
+    , isExcel(file) {
       return /\.(xlsx|xls|csv)$/.test(file.name)
     }
   }

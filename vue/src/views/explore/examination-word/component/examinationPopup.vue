@@ -1,5 +1,10 @@
 <template>
-  <div class="examination-popup">
+  <div 
+    class="examination-popup" 
+    v-on:keyup.enter.exact = "answerCheck()" 
+    v-on:keydown.32.exact  = "answerCheck()" 
+    v-on:keydown.37.exact  = "setWordQuestion(-1)"  
+    v-on:keydown.39.exact  = "setWordQuestion(1)">
     <el-dialog
       width="60%"
       :visible.sync="popupVal"
@@ -18,9 +23,9 @@
             type="text"
             @click="setWordQuestion(-1)"
           > ← 이전 단어 </el-button>
-
-          <span class="span1"> {{ wordTitle }} </span>
-
+          <span class="span1"> 
+            {{ wordTitle }} 
+          </span>
           <el-button
             v-if="questionListSize != questionIndex"
             style="float: right; padding: 3px 0"
@@ -31,7 +36,7 @@
 
         <div class="div2">
           <span class="span1">
-            <i class="el-icon-edit" /> {{ questionIndex +1 }} 번 단어 <br><br>
+            <i class="el-icon-caret-right" /> {{ questionIndex +1 }} 번 단어 <br><br>
             {{ question.content }}
           </span>
         </div>
@@ -42,7 +47,7 @@
               type="success"
               class="btn1"
               plain
-              @click="answerCheck"
+              @click="answerCheck()"
             >정답 확인 하기
             </el-button>
           </div>
@@ -127,8 +132,8 @@ export default {
     answerCheck() {
       this.questionResult = false
     },
-
     setWordQuestion(index) {
+      console.log('setWordQuestion ' + index)
       var questionIndex = this.questionIndex + index
       this.questionIndex = questionIndex
       this.question = this.questionList[questionIndex]
@@ -153,6 +158,10 @@ export default {
       }
       this.wordTitle = ''
       this.$emit('close:examination', false)
+    }
+
+    , search(){
+      alert('??')
     }
   }
 }

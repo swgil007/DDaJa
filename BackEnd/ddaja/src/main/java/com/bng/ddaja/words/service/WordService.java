@@ -1,5 +1,6 @@
 package com.bng.ddaja.words.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,28 +40,25 @@ public class WordService {
 
     public WordDTO saveWord ( WordDTO wordDTO ){
         Word word = wordDTO.toEntity();
+
         LicensesService.getLicenseById(wordDTO.getLID()).valueCheck();
-
-        System.out.println(" ==> 1");
-        LicenseDTO O = LicensesService.getLicenseById(wordDTO.getLID());
-        System.out.println(" ==> 2");
-
-        License X = O.toEntity();
-        System.out.println(" ==> 3");
-        
-        word.setLicense(X);
-        System.out.println(" ==> 4");
-        System.out.println(word.getLicense().getId());
-        System.out.println(word.getTitle());
-        System.out.println("-----");
-        
+        word.setLicense(LicensesService.getLicenseById(wordDTO.getLID()).toEntity());
         wordRepository.save(word);
-        System.out.println(" ==> 5");
+        
         return new WordDTO(word);
     }
 
+    public WordDTO deleteWord(long wID) {
+
+        Word word = wordRepository.findById(wID);
+        WordDTO wordDTO = new WordDTO(word);
+        wordRepository.delete(word);
+
+        return wordDTO;
+    }
+
     @Transactional
-    public void createWord ( Word word ){ 
+    public void createWord (Word word){ 
         wordRepository.save(word);
     }
 }
