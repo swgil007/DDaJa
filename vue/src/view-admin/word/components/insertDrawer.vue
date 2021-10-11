@@ -2,6 +2,7 @@
     <div class="main-container">
     <el-drawer
         :visible.sync = "popupVal"
+        v-loading     = "loading"
         :with-header  = "false"
         :before-close = "popupClose"
         style         = "width:100%"
@@ -16,7 +17,7 @@
         </div>
 
         <div style="padding:0 30px 10px  30px">
-            <el-form 
+            <el-form
                 :model = "param" 
                 ref    = "param" 
                 label-width = "200px">
@@ -98,6 +99,7 @@ export default {
             , licenseOptions: []
             , tableData: []
             , tableHeader: []
+            , loading : false
         }
     }
 
@@ -110,6 +112,8 @@ export default {
             await this.wordInsert().then();
             if(this.tableData.length === 0){ return }
 
+            this.loading = true
+
             for( var i in this.tableData){
                 var x = this.tableData[i];
                 this.param.answer = x.answer
@@ -117,11 +121,13 @@ export default {
                 await this.wordQuestionInsert().then();
             }
 
+            this.loading = false
             this.popupClose();
             this.$alert('SAVE SUCESS')
         }
         
         , async wordInsert(){
+
             await wordInsert(this.param).then( response => {
                 this.param.wID = response.item.id
             })
@@ -148,7 +154,7 @@ export default {
                 this.$refs.license.focus();
                 return false
             }
-            if( this.param.title === '' ){
+            if( this.param.titleS === '' ){
                 this.$alert('TITLE NULL ERROR')
                 this.$refs.title.focus();
                 return false
@@ -174,6 +180,11 @@ export default {
         }
 
         , popupClose() {
+            if(this.loading){
+                this.$alert('Ddaja is putting in the data.')
+                return
+            }
+            this.$emit('refresh')
             this.$emit('close:insertdrawer', false)
         }
     }

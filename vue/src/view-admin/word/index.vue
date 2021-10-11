@@ -61,17 +61,17 @@
           width="100"
           align="left"
         />
+
+        <el-table-column
+          label="License"
+          prop="item.license.name"
+        />
         <el-table-column
           label="Type"
           width="100"
           align="left"
           prop="item.license.type"
         />
-        <el-table-column
-          label="License"
-          prop="item.license.name"
-        />
-
         <el-table-column
           label="Title"
           prop="item.title"
@@ -137,6 +137,7 @@
     />
     <insertDrawer
       :popup-val="insertDrawerVal"
+      @refresh="fetchList()"
       @close:insertdrawer="insertDrawerStatus"
     />
   </div>
