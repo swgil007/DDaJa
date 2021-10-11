@@ -116,7 +116,7 @@ export function wordQuestionUpdate(param) {
   })
 }
 
-export function wordQuestionDelete(param) {
+export function wordQuestionDelete(param) { 
   return request({
     url : '/word-questions/' + param.id
     , method : 'delete'
