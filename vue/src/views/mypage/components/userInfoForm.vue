@@ -31,6 +31,7 @@
 
 </template>
 <script>
+import axios from 'axios'
 export default {
   props: {
     isUserInfoForm: {},
@@ -53,13 +54,14 @@ export default {
   },
   methods: {
     modifyUserInfo() {
+      const instance = axios.create({
+        headers: {
+          Authorization: window.localStorage.getItem('jwt')
+        }
+      })
       console.log('modifyUserInfo')
       console.log(this.userInfo)
-      const headers = {
-        Authorization: window.localStorage.getItem('jwt')
-      }
-      console.log(headers)
-      this.$http.patch('http://localhost/users/' + this.userInfo.id, this.userInfo, headers)
+      instance.patch('http://localhost/users/' + this.userInfo.id, this.userInfo)
         .then(res => {
           console.log(res.data)
           const h = this.$createElement
