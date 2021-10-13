@@ -97,7 +97,7 @@ export default {
       console.log(jwt)
       if (!jwt) {
         alert('잘못된 접근입니다.')
-        window.history.go(-1)
+        this.$router.push('/')
       }
       this.$http
         .get('http://localhost/users/' + window.localStorage.getItem('userID'), {
@@ -117,7 +117,7 @@ export default {
         .catch(err => {
           alert('잘못된 접근입니다.')
           console.log(err)
-          window.history.go(-1)
+          this.$router.push('/')
         })
     },
     setForm(formName) {
