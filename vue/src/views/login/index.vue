@@ -6,6 +6,7 @@
         <h3 class="title">DDaJa Login</h3>
       </div>
       <img id="kakao-login-btn" src="@/images/social/kakao_login.png" @click="kakaoLogin">
+      <google-login />
       <button @click="kakaoLogout">로그아웃</button>
     </el-form>
   </div>
@@ -13,11 +14,13 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 import axios from 'axios'
+import googleLogin from './components/GoogleLogin.vue'
 
 export default {
   name: 'Login',
   components: {
     axios
+    , googleLogin
   }
   , data() {
     return {
@@ -26,7 +29,22 @@ export default {
   }
   ,
   methods: {
-    kakaoLogout() {
+    googleLogin() {
+      const AUTHORIZE_URI = "https://accounts.google.com/o/oauth2/v2/auth";
+      const REDIRECT_URI = "localhost:9527/social/login"
+      const RESPONSE_TYPE = "token"
+      const SCOPE = "https://www.googleapis.com/auth/contacts.readonly"
+
+      const REQUEST_URI = AUTHORIZE_URI + "?" + "client_id=" + this.$googleClientID
+      // const queryStr = qs.stringify({
+      //   client_id: CLIENT_ID,
+      //   redirect_uri: window.location.href,
+      //   response_type: "token",
+      //   scope: "https://www.googleapis.com/auth/contacts.readonly",
+      // });
+      console.log("a")
+    }
+    , kakaoLogout() {
       alert(Kakao.Auth.getAccessToken())
       Kakao.API.request({
         url: '/v1/user/unlink',
