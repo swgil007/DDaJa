@@ -1,6 +1,7 @@
 <template>
   <div class="main-container">
     <el-drawer
+      v-loading="loading"
       :visible.sync="popupVal"
       :with-header="false"
       :before-close="popupClose"
@@ -78,7 +79,6 @@
 <script>
 import ExcelUpload from '../components/excelUpload'
 import { licenseList, wordInsert, wordQuestionInsert } from '@/ddaja-api/admin/word/Word'
-
 export default {
   name: 'AdminWordInsert',
   components: {
@@ -89,40 +89,37 @@ export default {
       defalut: false
     }
   },
-
   data() {
     return {
       param: {
         lID: 0,
         wID: 0,
-        title: ''
+        title: '',
+        answer: '',
+        content: ''
       },
       licenseOptions: [],
       tableData: [],
-      tableHeader: []
+      tableHeader: [],
+      loading: false
     }
   },
   created() {
     this.getLicense()
   },
-
   methods: {
-
     async onSubmit() {
       if (!this.verification()) { return }
-
       await this.wordInsert().then()
-
-      var tableData = this.tableData
-
-      for (var index in tableData) {
-        var data = tableData[index]
-        this.param.answer = data.answer
-        this.param.content = data.content
-
+      if (this.tableData.length === 0) { return }
+      this.loading = true
+      for (var i in this.tableData) {
+        var x = this.tableData[i]
+        this.param.answer = x.answer
+        this.param.content = x.content
         await this.wordQuestionInsert().then()
       }
-
+      this.loading = false
       this.popupClose()
       this.$alert('SAVE SUCESS')
     },
@@ -132,11 +129,9 @@ export default {
         this.param.wID = response.item.id
       })
     },
-
     async wordQuestionInsert() {
       await wordQuestionInsert(this.param).then()
     },
-
     async getLicense() {
       await licenseList().then(response => {
         response.items.forEach(x => {
@@ -147,50 +142,46 @@ export default {
         this.param.lID = this.licenseOptions[0].value
       })
     },
-
     verification() {
       if (this.param.lID === 0) {
         this.$alert('LICENSE NULL ERROR')
         this.$refs.license.focus()
         return false
       }
-      if (this.param.title === '') {
+      if (this.param.titleS === '') {
         this.$alert('TITLE NULL ERROR')
         this.$refs.title.focus()
         return false
       }
       return true
     },
-
     beforeUpload(file) {
       const isLt1M = file.size / 1024 / 1024 < 1
-
       if (isLt1M) { return true }
-
       this.$message({
         message: 'Please do not upload files larger than 1m in size.',
         type: 'warning'
       })
       return false
     },
-
     handleSuccess({ results, header }) {
       this.tableData = results
       this.tableHeader = header
     },
-
     popupClose() {
+      if (this.loading) {
+        this.$alert('Ddaja is putting in the data.')
+        return
+      }
+      this.$emit('refresh')
       this.$emit('close:insertdrawer', false)
     }
   }
 }
-
 </script>
 
 <style lang="scss" scoped>
-
 @import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
-
 .main-container{
     width: 100%;
     .div1{
@@ -231,9 +222,7 @@ width : 100%; text-align : left;float :left ; padding: 1% 10% 1% 10%;
         cursor:pointer;
     }
 }
-
 ::v-deep .el-drawer{
 width: 70% !important;
 }
-
 </style>

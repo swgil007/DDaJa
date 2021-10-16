@@ -23,6 +23,18 @@ import lombok.Setter;
 public class WordDTO extends CommonDTO { 
 
     @ApiModelProperty(
+        name = "id"
+        , example = "11"
+    )
+    private long id;
+
+    @ApiModelProperty(
+    name = "lID"
+    , example = "11"
+    )
+    private long lID;
+
+    @ApiModelProperty(
         name = "title"
         , example = "리눅스 용어 외우기"
     )
@@ -44,7 +56,6 @@ public class WordDTO extends CommonDTO {
     private int wordQuestionsCount;
 
     public WordDTO( Word word ){
-
         id                 = word.getId();
         title              = word.getTitle();
         createdDate        = word.getCreatedDate();
@@ -61,6 +72,7 @@ public class WordDTO extends CommonDTO {
 
     public Word toEntity( ){
         return Word.builder()
+            .id(id)
             .title(this.title)
             .build();
     }

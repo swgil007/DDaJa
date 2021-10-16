@@ -43,15 +43,17 @@ public class WordQuestion extends CommonEntity {
     private Word word;
 
     @Column(name = "L_ID")
-    private long lId;
+    private long lID;
 
     public void setWord(Word word) {
         if(this.word != null) {
-            this.word.getWordQuestions().remove(this);
+        this.word.getWordQuestions().remove(this);
         }
         this.word = word;
-        if(!word.getWordQuestions().contains(this)) {
-            word.setWordQuestion(this);
+        if(word.getWordQuestions() != null){
+            if(!word.getWordQuestions().contains(this)) {
+                word.setWordQuestion(this);
+            }
         }
     }
 }

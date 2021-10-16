@@ -11,10 +11,8 @@
 
 <script>
 import XLSX from 'xlsx'
-
 export default {
   name: 'ExcelUpload',
-
   props: {
         beforeUpload: Function, // eslint-disable-line
         onSuccess: Function// eslint-disable-line
@@ -44,7 +42,6 @@ export default {
         return
       }
       const rawFile = files[0] // only use files[0]
-
       if (!this.isExcel(rawFile)) {
         this.$message.error('Only supports upload .xlsx, .xls, .csv suffix files')
         return false
@@ -69,7 +66,6 @@ export default {
     },
     upload(rawFile) {
       this.$refs['excel-upload-input'].value = null // fix can't select the same excel
-
       if (!this.beforeUpload) {
         this.readerData(rawFile)
         return
@@ -121,18 +117,18 @@ export default {
 
 <style scoped>
 .excel-upload-input{
-    display: none;
-    z-index: -9999;
+display: none;
+z-index: -9999;
 }
 .drop{
-    width: 750px;
-    height: 40px;
-    line-height: 35px;
-    margin: 0 0 0 395px;
-    font-size: 20px;
-    border-radius: 5px;
-    text-align: center;
-    color: #bbb;
-    position: relative;
+width: 750px;
+height: 40px;
+line-height: 35px;
+margin: 0 0 0 395px;
+font-size: 20px;
+border-radius: 5px;
+text-align: center;
+color: #bbb;
+position: relative;
 }
 </style>

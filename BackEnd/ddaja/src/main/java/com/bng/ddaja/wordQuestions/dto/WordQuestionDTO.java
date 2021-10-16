@@ -1,10 +1,8 @@
 package com.bng.ddaja.wordQuestions.dto;
 
-import com.bng.ddaja.common.domain.Word;
 import com.bng.ddaja.common.domain.WordQuestion;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.words.dto.WordDTO;
-import com.bng.ddaja.words.service.WordService;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -37,10 +35,16 @@ public class WordQuestionDTO extends CommonDTO{
     private String answer;
 
     @ApiModelProperty(
-        name = "lId"
+        name = "lID"
         , example = "11"
     )
-    private long lId;
+    private long lID;
+
+    @ApiModelProperty(
+        name = "wID"
+        , example = "11"
+    )
+    private long wID;
 
     @ApiModelProperty(
         name = "WordDTO"
@@ -48,10 +52,11 @@ public class WordQuestionDTO extends CommonDTO{
     )
     private WordDTO wordDTO;
 
+
     public WordQuestionDTO( WordQuestion wordQuestion ){
         this.id      = wordQuestion.getId();
         this.wordDTO = new WordDTO(wordQuestion.getWord());
-        this.lId     = wordQuestion.getLId();
+        this.lID     = wordQuestion.getLID();
         this.content = wordQuestion.getContent();
         this.answer  = wordQuestion.getAnswer();
     }
@@ -61,7 +66,7 @@ public class WordQuestionDTO extends CommonDTO{
         .id(this.id)
         .content(this.content)
         .answer(this.answer)
-        .lId(this.lId)
+        .lID(this.lID)
         .build();
     }
 }

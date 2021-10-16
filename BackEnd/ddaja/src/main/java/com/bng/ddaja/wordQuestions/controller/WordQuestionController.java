@@ -1,5 +1,7 @@
 package com.bng.ddaja.wordQuestions.controller;
 
+import javax.validation.Valid;
+
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.hateoas.wordQuestion.WordQuestionHateoas;
 import com.bng.ddaja.wordQuestions.dto.WordQuestionDTO;
@@ -13,15 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @RequestMapping("/word-questions")
+@AllArgsConstructor
 @RestController
 public class WordQuestionController {
     
@@ -37,46 +36,31 @@ public class WordQuestionController {
         );
     }
 
+
     @PostMapping("")
-    public ResponseEntity<CommonResponse> saveWordQuestion( @ApiParam(   name = "content", type = "String", required = true) @RequestParam("content") String content 
-                                                            , @ApiParam( name = "answer" , type = "String", required = true) @RequestParam("answer")  String answer 
-                                                            , @ApiParam( name = "lID"    , type = "long"  , required = true) @RequestParam("lID")     long lID 
-                                                            , @ApiParam( name = "wID"    , type = "long"  , required = true) @RequestParam("wID")     long wID){
-
-        WordQuestionDTO wordQuestionDTO = new WordQuestionDTO();
-        wordQuestionDTO.setLId(lID);
-        wordQuestionDTO.setAnswer(answer);
-        wordQuestionDTO.setContent(content);
-
+    public @ResponseBody ResponseEntity<CommonResponse> saveWordQuestion( @Valid WordQuestionDTO wordQuestionDTO ){
         return ResponseEntity.ok().body(
             new CommonResponse(
-                wordQuestionService.saveWordQuestion(wordQuestionDTO, wID)
+                wordQuestionService.saveWordQuestion(wordQuestionDTO)
             )
         );
     }
+
 
     @PutMapping("{id}")
-    public ResponseEntity<CommonResponse> updateWordQuestion( @PathVariable(name="id", required = true) long id
-                                    , @ApiParam( name = "content", type = "String", required = true) @RequestParam("content") String content 
-                                    , @ApiParam( name = "answer" , type = "String", required = true) @RequestParam("answer")  String answer 
-                                    , @ApiParam( name = "lID"    , type = "long"  , required = true) @RequestParam("lID")     long lID 
-                                    , @ApiParam( name = "wID"    , type = "long"  , required = true) @RequestParam("wID")     long wID ){
-
-        WordQuestionDTO wordQuestionDTO = new WordQuestionDTO();
-        wordQuestionDTO.setAnswer(answer);
-        wordQuestionDTO.setLId(lID);
-        wordQuestionDTO.setId(id);
-        wordQuestionDTO.setContent(content);
-
+    public ResponseEntity<CommonResponse> updateWordQuestion( @PathVariable(name="id", required = true) long id, @Valid WordQuestionDTO wordQuestionDTO){
         return ResponseEntity.ok().body(
             new CommonResponse(
-                wordQuestionService.saveWordQuestion(wordQuestionDTO, wID)
+                wordQuestionService.saveWordQuestion(wordQuestionDTO)
             )
         );
     }
 
 
-    @DeleteMapping("/{id}")
+    /*
+    ** Access-Control-Allow-Origin: '*' CROS ERROR 발생. 해결 예정.
+    */
+    @DeleteMapping("{id}")
     public ResponseEntity<CommonResponse> deleteWordQuestion(@PathVariable(name="id", required = true) long id){
         return ResponseEntity.ok().body(
             new CommonResponse(

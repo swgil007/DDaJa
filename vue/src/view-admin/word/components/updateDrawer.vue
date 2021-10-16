@@ -8,8 +8,20 @@
       :before-close="handleClose"
     >
       <div class="div1">
-        <span class="span1">Word Questions</span>
+        <span class="span1">Word Questions </span>
+        <span class="span2" style="cursor: pointer" @click="isTitle = true">{{ param.title }}</span>
       </div>
+
+      <div v-if="isTitle" style="padding : 0 20px 60px 20px">
+        <el-input v-model="param.title" placeholder="Please input">
+          <template slot="append">
+            <div style="cursor: pointer" @click="titleUpdate()">
+              <i class="el-icon-setting" />
+            </div>
+          </template>
+        </el-input>
+      </div>
+
       <div style="">
         <el-table
           :data="tableData"
@@ -78,7 +90,12 @@
           />
         </div>
         <div style="float:right;">
-          <el-button type="primary" plain style="height:100px; margin:10px 0 0 0" @click="save">등 록</el-button>
+          <el-button
+            type="primary"
+            plain
+            style="height:100px; margin:10px 0 0 0"
+            @click="save"
+          >등 록</el-button>
         </div>
       </div>
 
@@ -96,7 +113,12 @@
           />
         </div>
         <div style="float:right;">
-          <el-button type="primary" plain style="height:100px; margin:10px 0 0 0" @click="update">수 정</el-button>
+          <el-button
+            type="primary"
+            plain
+            style="height:100px; margin:10px 0 0 0"
+            @click="update"
+          >수 정</el-button>
         </div>
       </div>
 
@@ -106,19 +128,23 @@
 
 <script>
 
-import { wordQuestionList, wordQuestionUpdate, wordQuestionInsert, wordQuestionDelete } from '@/ddaja-api/admin/word/Word'
+import { wordQuestionList, wordQuestionUpdate, wordQuestionInsert, wordQuestionDelete, wordUpdate } from '@/ddaja-api/admin/word/Word'
 
 export default {
   name: 'AdminWordQuestionUpdate',
 
   props: {
-    popupVal: false,
+    popupVal: {
+      type: Boolean,
+      default: false
+    },
     wordInfo: {
       type: Object,
-      defalut: function() {
+      default: function() {
         return {
           wID: 0,
           lID: 0,
+          title: '',
           wordQuestionsCount: 0
         }
       }
@@ -131,12 +157,14 @@ export default {
         wID: 0,
         lID: 0,
         answer: '',
+        title: '',
         content: '',
         page: 1,
         size: 100
       },
       tableData: [],
-      status: 'insert'
+      status: 'insert',
+      isTitle: false
     }
   },
   watch: {
@@ -144,6 +172,7 @@ export default {
       if (val) {
         this.param.wID = this.wordInfo.wID
         this.param.lID = this.wordInfo.lID
+        this.param.title = this.wordInfo.title
 
         if (this.wordInfo.wordQuestionsCount > 0) {
           this.fetchInfo()
@@ -154,6 +183,7 @@ export default {
   methods: {
     async fetchInfo() {
       await wordQuestionList(this.param).then(response => {
+        this.tableData = []
         response.items.forEach(x => {
           this.tableData.push({ id: x.item.id, answer: x.item.answer, content: x.item.content, createdDate: x.item.createdDate, modifiedDate: x.item.modifiedDate, wID: x.item.wordDTO.id, lID: x.item.lid })
         })
@@ -173,16 +203,29 @@ export default {
           message: 'Word Question Update Success',
           type: 'success'
         })
+        this.fetchInfo()
+        this.status = 'insert'
+        this.param.answer = ''
+        this.param.content = ''
       })
-      this.fetchInfo()
-      this.status = 'insert'
-      this.param.answer = ''
-      this.param.content = ''
+    },
+
+    async titleUpdate() {
+      var param = {
+        id: this.param.wID,
+        title: this.param.title,
+        lID: this.param.lID
+      }
+      await wordUpdate(param).then(response => {
+        this.$message({
+          message: 'Word Title Update Success',
+          type: 'success'
+        })
+      })
     },
 
     async deleteQuestion(row) {
       this.param.id = row.id
-
       await wordQuestionDelete(this.param).then(response => {
         this.$message({
           message: 'Word Question Delete Success',
@@ -197,9 +240,10 @@ export default {
           message: 'Word Question Save Success',
           type: 'success'
         })
+        this.fetchInfo()
+        this.param.answer = ''
+        this.param.content = ''
       })
-      this.param.answer = ''
-      this.param.content = ''
     },
 
     popupClose() {
@@ -218,5 +262,5 @@ export default {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
 .main-container{ width: 100%; .div1{ text-align: left; margin-top: 5px; margin-bottom: 30px; color: rgb(0, 0, 0); margin-left: 1%; margin-right: 1%; padding: 4% 2% 2% 4%;
-.span1{ font-size: 50px; font-family: 'Do Hyeon', sans-serif; }} .div2{ width : 100%; margin: 1% 4% 2% 4%; overflow:auto; .div2-1{ width : 100%; float :left ; padding: 1% 1% 1% 0%;text-align : right; font-weight:bold; .div2-1-1{ width : 5%; padding: 1% 3% 1% 6%; float :left ; } .div2-1-2{ width : 82%; padding: 1% 1% 1% 1%; float :left ; text-align: left;}} .div2-2{ width : 100%; text-align : left;float :left ; padding: 1% 10% 1% 10%;}} .pointer{ cursor:pointer;}} ::v-deep .el-drawer{ width: 70% !important; }
+.span1{ font-size: 50px; font-family: 'Do Hyeon', sans-serif; } .span2{ font-size: 30px; font-family: 'Do Hyeon', sans-serif; }} .div2{ width : 100%; margin: 1% 4% 2% 4%; overflow:auto; .div2-1{ width : 100%; float :left ; padding: 1% 1% 1% 0%;text-align : right; font-weight:bold; .div2-1-1{ width : 5%; padding: 1% 3% 1% 6%; float :left ; } .div2-1-2{ width : 82%; padding: 1% 1% 1% 1%; float :left ; text-align: left;}} .div2-2{ width : 100%; text-align : left;float :left ; padding: 1% 10% 1% 10%;}} .pointer{ cursor:pointer;}} ::v-deep .el-drawer{ width: 70% !important; }
 </style>

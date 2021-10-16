@@ -68,7 +68,6 @@ public class LicenseDTO {
         this.lCode = license.getLCode();
         this.passScore = license.getPassScore();
         this.name = license.getName();
-        this.passScore = license.getPassScore();
         this.agency = license.getAgency();
         this.type = license.getType();
     }
@@ -76,9 +75,11 @@ public class LicenseDTO {
     public License toEntity (){
         return License.builder()
                         .id(id)
+                        .lCode(lCode)
                         .name(name)
                         .passScore(passScore)
                         .agency(agency)
+                        .type(type)
                         .build();
     }
 }

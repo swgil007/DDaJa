@@ -16,7 +16,7 @@ public class WordQuestionSpec {
 
     public static Specification<WordQuestion> equalWordID(final long wordID){
         return new Specification<WordQuestion>(){
-            public Predicate toPredicate(Root<WordQuestion> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+            public Predicate toPredicate(Root<WordQuestion> root, CriteriaQuery<?> query, CriteriaBuilder builder){
                 if(wordID == 0) return builder.conjunction();
                 Join<WordQuestion, Word> j = root.join("word", JoinType.INNER);
                 return builder.equal(j.get("id"), wordID);

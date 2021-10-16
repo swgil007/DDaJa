@@ -3,9 +3,16 @@
     <div class="main-title">
       <font class="font1">Word Manager</font>
       <el-button
-        style="float:right; margin: 0 58px 0 0; width:78px; height :50px"
+        icon="el-icon-circle-plus-outline"
+        style="float:right; margin: 0 58px 0 0; width:100px; height :50px"
         @click="insertDrawerStatus(true)"
-      >추 가</el-button>
+      > 추가 </el-button>
+      <el-button
+        type="danger"
+        icon="el-icon-delete"
+        style="float:right; margin: 0 30px 0 0; width:100px; height :50px"
+        @click="deleteWord()"
+      > 삭제 </el-button>
     </div>
 
     <div class="div1" style="padding:0px 0px 70px 29%;">
@@ -39,26 +46,32 @@
     <div class="div2">
       <el-table
         :data="tableData"
-        :header-cell-style="{textAlign:'center'}"
+        :header-cell-style="{textAlign:'left'}"
         style="width:100%; height:100%;"
+        @selection-change="handleSelectionChange"
       >
+        <el-table-column
+          type="selection"
+          width="55"
+          align="left"
+        />
         <el-table-column
           label="ID"
           prop="item.id"
           width="100"
-          align="center"
+          align="left"
         />
-        <el-table-column
-          label="Type"
-          width="100"
-          align="center"
-          prop="item.license.type"
-        />
+
         <el-table-column
           label="License"
           prop="item.license.name"
         />
-
+        <el-table-column
+          label="Type"
+          width="100"
+          align="left"
+          prop="item.license.type"
+        />
         <el-table-column
           label="Title"
           prop="item.title"
@@ -68,13 +81,13 @@
           label="Questions Count"
           prop="item.wordQuestionsCount"
           width="200"
-          align="center"
+          align="left"
         />
 
         <el-table-column
           label="등록일"
           width="180"
-          align="center"
+          align="left"
         >
           <template slot-scope="scope">
             {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
@@ -84,7 +97,7 @@
         <el-table-column
           label="수정일"
           width="180"
-          align="center"
+          align="left"
         >
           <template slot-scope="scope">
             {{ $moment(scope.row.item.modifiedDate).format('YYYY-MM-DD') }}
@@ -124,28 +137,25 @@
     />
     <insertDrawer
       :popup-val="insertDrawerVal"
+      @refresh="fetchList()"
       @close:insertdrawer="insertDrawerStatus"
     />
   </div>
 </template>
 
 <script>
-
 import Pagination from '@/components/Pagination'
-import { licenseList, wordList, wordListTotalCount } from '@/ddaja-api/admin/word/Word'
-
+import { licenseList, wordList, wordListTotalCount, wordDelete } from '@/ddaja-api/admin/word/Word'
 import updateDrawer from './components/updateDrawer'
 import insertDrawer from './components/insertDrawer'
-
+import _ from 'lodash'
 export default {
   name: 'AdminWord',
-
   components: {
     Pagination,
     updateDrawer,
     insertDrawer
   },
-
   data() {
     return {
       licenseOptions: [],
@@ -160,20 +170,19 @@ export default {
       wordInfo: {
         wID: 0,
         lID: 0,
+        title: '',
         wordQuestionsCount: 0
       },
+      selectList: [],
       updateDrawerVal: false,
       insertDrawerVal: false
     }
   },
-
   created() {
     this.getLicense()
     this.fetchList()
   },
-
   methods: {
-
     async getLicense() {
       await licenseList().then(response => {
         response.items.forEach(x => {
@@ -183,11 +192,9 @@ export default {
         })
       })
     },
-
     async fetchList() {
       await wordList(this.param).then(response => {
         var tableData = []
-
         response.items.forEach(x => {
           x.item.license.type = (x.item.license.type === 'WRITING') ? '필기' : '실기'
           tableData.push(x)
@@ -195,21 +202,36 @@ export default {
         this.tableData = tableData
         this.page = response.page
       })
-
       await wordListTotalCount(this.param).then(response => {
         this.totalCount = response.totalCount
       })
     },
-
+    deleteWord() {
+      var wordIdList = _.map(this.selectList, 'id')
+      wordIdList.forEach(x => {
+        this.wordDelete(x)
+      })
+    },
+    wordDelete(wID) {
+      var param = {
+        id: wID
+      }
+      wordDelete(param).then(response => {
+        this.$message({
+          message: 'Word Delete Success',
+          type: 'success'
+        })
+      })
+    },
     updateDrawerStatus(val, row) {
       this.updateDrawerVal = val
       if (val) {
         this.wordInfo.wID = row.item.id
         this.wordInfo.lID = row.item.license.id
+        this.wordInfo.title = row.item.title
         this.wordInfo.wordQuestionsCount = row.item.wordQuestionsCount
       }
     },
-
     insertDrawerStatus(val) {
       this.insertDrawerVal = val
     },
@@ -218,15 +240,19 @@ export default {
       this.param.page = 0
       this.param.size = 10
       this.fetchList()
+    },
+    handleSelectionChange(val) {
+      this.selectList = []
+      val.forEach(x => {
+        this.selectList.push(x.item)
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap');
-
 .main-container{
 width: 100%;
 text-align: center;

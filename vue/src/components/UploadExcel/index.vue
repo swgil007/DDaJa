@@ -15,9 +15,18 @@ import XLSX from 'xlsx'
 
 export default {
   props: {
-    beforeUpload: Function, // eslint-disable-line
-    onSuccess: Function// eslint-disable-line
+    beforeUpload: {
+      type: Function,
+      default: function() {
+      }
+    },
+    onSuccess: {
+      type: Function,
+      default: function() {
+      }
+    }
   },
+
   data() {
     return {
       loading: false,
@@ -27,12 +36,14 @@ export default {
       }
     }
   },
+
   methods: {
     generateData({ header, results }) {
       this.excelData.header = header
       this.excelData.results = results
       this.onSuccess && this.onSuccess(this.excelData)
     },
+
     handleDrop(e) {
       e.stopPropagation()
       e.preventDefault()
@@ -52,20 +63,24 @@ export default {
       e.stopPropagation()
       e.preventDefault()
     },
+
     handleDragover(e) {
       e.stopPropagation()
       e.preventDefault()
       e.dataTransfer.dropEffect = 'copy'
     },
+
     handleUpload() {
       this.$refs['excel-upload-input'].click()
     },
+
     handleClick(e) {
       const files = e.target.files
       const rawFile = files[0] // only use files[0]
       if (!rawFile) return
       this.upload(rawFile)
     },
+
     upload(rawFile) {
       this.$refs['excel-upload-input'].value = null // fix can't select the same excel
 
@@ -78,6 +93,7 @@ export default {
         this.readerData(rawFile)
       }
     },
+
     readerData(rawFile) {
       this.loading = true
       return new Promise((resolve, reject) => {
@@ -96,6 +112,7 @@ export default {
         reader.readAsArrayBuffer(rawFile)
       })
     },
+
     getHeaderRow(sheet) {
       const headers = []
       const range = XLSX.utils.decode_range(sheet['!ref'])
@@ -111,6 +128,7 @@ export default {
       }
       return headers
     },
+
     isExcel(file) {
       return /\.(xlsx|xls|csv)$/.test(file.name)
     }

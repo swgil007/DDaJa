@@ -1,6 +1,8 @@
 package com.bng.ddaja.words.controller;
 
 
+import javax.validation.Valid;
+
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.hateoas.word.WordHateoas;
 import com.bng.ddaja.words.dto.WordDTO;
@@ -8,17 +10,14 @@ import com.bng.ddaja.words.dto.WordSearch;
 import com.bng.ddaja.words.service.WordService;
 
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,31 +51,31 @@ public class WordController {
     }
 
     @PostMapping("")
-    public ResponseEntity<CommonResponse> saveWord (@ApiParam(   name = "lID"   , type = "long"   , required = true) @RequestParam("lID")   long lID 
-                                                    , @ApiParam( name = "title" , type = "String" , required = true) @RequestParam("title") String title ){                                           
-
-        WordDTO wordDTO = new WordDTO();
-        wordDTO.setTitle(title);
-        
+    public @ResponseBody ResponseEntity<CommonResponse> saveWord ( @Valid WordDTO WordDTO ){                                           
         return ResponseEntity.ok().body(
             new CommonResponse(
-                wordService.saveWord(wordDTO, lID)
+                wordService.saveWord(WordDTO)
             )
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CommonResponse> updateWord ( @PathVariable(name="id", required = true) long id
-                                    , @ApiParam( name = "lID"   , type = "long"   , required = true) @RequestParam("lID")   long lID 
-                                    , @ApiParam( name = "title" , type = "String" , required = true) @RequestParam("title") String title  ){                                           
-
-        WordDTO wordDTO = new WordDTO();
-        wordDTO.setId(id);
-        wordDTO.setTitle(title);
+    public ResponseEntity<CommonResponse> updateWord ( @PathVariable(name="id", required = true) long id, @Valid WordDTO wordDTO  ){                                           
         
+        wordDTO.setId(id);
+
         return ResponseEntity.ok().body(
             new CommonResponse(
-                wordService.saveWord(wordDTO, lID)
+                wordService.saveWord(wordDTO)
+            )
+        );
+    }
+
+    @DeleteMapping("")
+    public @ResponseBody ResponseEntity<CommonResponse> deleteWord ( @PathVariable(name="id", required = true) long wID ){                                           
+        return ResponseEntity.ok().body(
+            new CommonResponse(
+                wordService.deleteWord(wID)
             )
         );
     }

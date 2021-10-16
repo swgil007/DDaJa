@@ -121,7 +121,7 @@ public class License extends CommonEntity {
             openAPI.setLicense(this);
         }
     }
-
+    
     public void setLicenseInfo(LicenseInfo licenseInfo) {
         this.licenseInfos.add(licenseInfo);
         if(licenseInfo.getLicense() != this) {
@@ -131,7 +131,7 @@ public class License extends CommonEntity {
 
     public void setStateQuestion(StateQuestion stateQuestion) {
         this.stateQuestions.add(stateQuestion);
-        if(stateQuestion.getLicense() != null){
+        if(stateQuestion.getLicense() != this){
             stateQuestion.setLicense(this);
         }
     }
