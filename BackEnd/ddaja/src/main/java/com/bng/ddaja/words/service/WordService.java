@@ -41,7 +41,7 @@ public class WordService {
     public WordDTO saveWord ( WordDTO wordDTO ){
         Word word = wordDTO.toEntity();
 
-        LicensesService.getLicenseById(wordDTO.getLID()).valueCheck();
+        LicensesService.getLicenseById(wordDTO.getLID()).checkValue();
         word.setLicense(LicensesService.getLicenseById(wordDTO.getLID()).toEntity());
         wordRepository.save(word);
         
