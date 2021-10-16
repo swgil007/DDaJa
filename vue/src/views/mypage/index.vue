@@ -94,9 +94,10 @@ export default {
   methods: {
     getUserInfo() {
       const jwt = window.localStorage.getItem('jwt')
+      console.log(jwt)
       if (!jwt) {
         alert('잘못된 접근입니다.')
-        // window.history.go(-1)
+        // this.$router.push('/')
       }
       this.$http
         .get('http://localhost/users/' + window.localStorage.getItem('userID'), {
@@ -114,7 +115,9 @@ export default {
           this.userInfo.modifiedDate = res.data.item.modifiedDate
         })
         .catch(err => {
+          alert('잘못된 접근입니다.')
           console.log(err)
+          // this.$router.push('/')
         })
     },
     setForm(formName) {

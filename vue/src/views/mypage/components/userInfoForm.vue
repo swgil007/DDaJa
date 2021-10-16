@@ -1,6 +1,5 @@
 <template>
   <el-form v-show="isUserInfoForm" ref="form" :model="form" label-width="120px">
-    {{ user }}
     {{ userInfo }}
     <el-form-item label="닉네임">
       <el-col :span="11">
@@ -32,6 +31,7 @@
 
 </template>
 <script>
+import axios from 'axios'
 export default {
   props: {
     isUserInfoForm: {},
@@ -39,14 +39,6 @@ export default {
   },
   data() {
     return {
-      user: {
-        id: this.userInfo.id,
-        email: this.userInfo.email,
-        userId: this.userInfo.userId,
-        nickName: this.userInfo.nickName,
-        createdDate: this.userInfo.createdDate,
-        modifiedDate: this.userInfo.modifiedDate
-      },
       form: {
         name: '',
         date1: '2021-09-27',
@@ -62,10 +54,25 @@ export default {
   },
   methods: {
     modifyUserInfo() {
-      const userInfos = {
-        nickName: this.userInfo.nickName
-      }
-      console.log(userInfos.nickName)
+      const instance = axios.create({
+        headers: {
+          Authorization: window.localStorage.getItem('jwt')
+        }
+      })
+      console.log('modifyUserInfo')
+      console.log(this.userInfo)
+      instance.patch('http://localhost/users/' + this.userInfo.id, this.userInfo)
+        .then(res => {
+          console.log(res.data)
+          const h = this.$createElement
+          this.$notify({
+            title: '완료',
+            message: h('i', { style: 'color: teal' }, '수정이 완료되었습니다.')
+          })
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)

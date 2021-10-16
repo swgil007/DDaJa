@@ -32,6 +32,8 @@ Vue.use(cors)
 Vue.use(moment)
 Vue.use(map)
 
+Vue.prototype.$googleClientID = '71530109499-g2q6soik7tnfhh27lkqt8jr4pgmbo3ca.apps.googleusercontent.com'
+
 const apiKey = 'a227a64e7aecffa5d4254e4526d679b1'
 Vue.use(VueKakaoSdk, { apiKey })
 

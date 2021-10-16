@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequestMapping("users")
 @AllArgsConstructor
 @RestController
@@ -57,7 +59,9 @@ public class UserController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<CommonResponse> patchUser(@PathVariable(name = "id") long id, @RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<CommonResponse> patchUser(@PathVariable(name = "id") long id, @RequestBody @Valid UserDTO userDTO, CommonJWT commonJWT) {
+        log.info(commonJWT.toString());
+        log.info(userDTO.toString());
         userDTO.setId(id);
         userService.patchUserByUserDTO(userDTO);
         return ResponseEntity.noContent().build();
