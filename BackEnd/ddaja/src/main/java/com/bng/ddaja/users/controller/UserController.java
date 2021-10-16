@@ -10,7 +10,7 @@ import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.hateoas.users.UserHateoas;
 import com.bng.ddaja.users.dto.UserDTO;
-import com.bng.ddaja.users.service.UsersService;
+import com.bng.ddaja.users.service.UserService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("users")
 @AllArgsConstructor
 @RestController
-public class UsersController {
-    private UsersService usersService;
+public class UserController {
+    private UserService userService;
     
     @ApiOperation(
         value = "사용자 전체 조회"
@@ -40,7 +40,7 @@ public class UsersController {
     )
     @GetMapping("")
     public ResponseEntity<CommonResponse> getUsers() {
-        return ResponseEntity.ok().body(new CommonResponse(usersService.getUsers()));
+        return ResponseEntity.ok().body(new CommonResponse(userService.getUsers()));
     }
 
     @ApiOperation(
@@ -51,12 +51,12 @@ public class UsersController {
     )
     @GetMapping("{id}")
     public ResponseEntity<CommonResource> getUser(@PathVariable(name = "id", required = true) long id) {
-        return ResponseEntity.ok().body(new CommonResource(usersService.getUserById(id)));
+        return ResponseEntity.ok().body(new CommonResource(userService.getUserById(id)));
     }
 
     @PostMapping("social")
     public ResponseEntity<CommonResource> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
-        UserDTO userDTO = usersService.getUserBySocialToken(socialAccessToken);
+        UserDTO userDTO = userService.getUserBySocialToken(socialAccessToken);
         if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
         return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));
     }

@@ -7,7 +7,6 @@ import com.bng.ddaja.common.dto.CommonResource;
 import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.hateoas.word.WordHateoas;
 import com.bng.ddaja.licenses.service.LicensesService;
-import com.bng.ddaja.temp.license.TempLicensesService;
 import com.bng.ddaja.test.dto.LicenseDTO;
 import com.bng.ddaja.words.dto.WordDTO;
 import com.bng.ddaja.words.dto.WordSearch;

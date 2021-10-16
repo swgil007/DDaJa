@@ -22,7 +22,7 @@ import com.bng.ddaja.tokens.dto.TokenDTO;
 import com.bng.ddaja.tokens.repository.TokensRepository;
 import com.bng.ddaja.tokens.service.TokensService;
 import com.bng.ddaja.users.dto.UserDTO;
-import com.bng.ddaja.users.repository.UsersRepository;
+import com.bng.ddaja.users.repository.UserRepository;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 
@@ -39,8 +39,8 @@ import okhttp3.Response;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class UsersService implements UserDetailsService {
-    private UsersRepository usersRepository;
+public class UserService implements UserDetailsService {
+    private UserRepository usersRepository;
     private TokensRepository tokensRepository;
 
     public List<UserDTO> getUsers() {

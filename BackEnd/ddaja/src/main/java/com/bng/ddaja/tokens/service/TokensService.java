@@ -14,7 +14,7 @@ import com.bng.ddaja.common.util.DateUtil;
 import com.bng.ddaja.tokens.dto.TokenDTO;
 import com.bng.ddaja.tokens.repository.TokensRepository;
 import com.bng.ddaja.users.dto.UserDTO;
-import com.bng.ddaja.users.service.UsersService;
+import com.bng.ddaja.users.service.UserService;
 
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TokensService {
     private PublicKeyConfig publicKeyConfig;
     private TokensRepository tokensRepository;
-    private UsersService usersService;
+    private UserService usersService;
 
     public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) throws AuthenticationException {
         UserDTO user = usersService.getUserById(userDTO.getId());

@@ -1,5 +1,5 @@
 package com.bng.ddaja.common.config;
-import com.bng.ddaja.users.service.UsersService;
+import com.bng.ddaja.users.service.UserService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
-    private UsersService userService;
+    private UserService userService;
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
