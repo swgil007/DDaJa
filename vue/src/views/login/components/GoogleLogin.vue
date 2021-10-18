@@ -4,6 +4,7 @@
     <googleLogin
       :params="params"
       :on-success="onSuccess"
+      :render-params="renderParams"
     >
       Login
     </googleLogin>
@@ -23,6 +24,11 @@ export default {
       SCOPE: 'https://www.googleapis.com/auth/contacts.readonly',
       params: {
         client_id: this.$googleClientID
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true
       }
     }
   },
