@@ -1,8 +1,24 @@
 <template>
   <div>
     <div @click="googleLogin">구글 로그인</div>
+    <div
+      id="g_id_onload"
+      data-client_id="71530109499-6re6j434sr87q4t8u1s1ou4n8blv6t1q.apps.googleusercontent.com"
+      data-login_uri="http://localhost:9527/social/login"
+      data-auto_prompt="false"
+    />
+    <div
+      class="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-shape="rectangular"
+      data-logo_alignment="left"
+    />
   </div>
 </template>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 export default {
   data() {
