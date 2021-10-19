@@ -12,6 +12,7 @@
 </template>
 <script>
 import googleLogin from 'vue-google-login'
+import { socialLogin } from '@/api/social/user'
 export default {
   components: {
     googleLogin
@@ -39,6 +40,9 @@ export default {
       console.log(googleUser.ya)
       // This only gets the user information: id, name, imageUrl and email
       console.log(googleUser.getBasicProfile())
+      socialLogin(googleUser.ya).then(res => {
+        console.log(res)
+      })
     },
     googleLogin() {
       // const queryStr = qs.stringify({

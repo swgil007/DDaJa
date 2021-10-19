@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { socialLogin } from '@/api/social/user'
 export default {
   methods: {
     kakaoLogin() {
@@ -20,26 +20,29 @@ export default {
             expireTime: authObj.expires_in,
             refreshExpireTime: authObj.refresh_token_expires_in
           }
-          const userInfoURI = 'http://localhost/users/social'
-          axios.post(userInfoURI, socialAccessToken)
-            .then(res => {
-              console.log(res)
-              if (res.status === 200) {
-                console.log('hreer!')
-                window.localStorage.setItem('jwt', res.data.item.jwt)
-                window.localStorage.setItem('userID', res.data.item.id)
-                // window.location.href="/"
-                return
-              } else if (res.status === 201) {
-                window.localStorage.setItem('jwt', res.data.item.jwt)
-                window.localStorage.setItem('userID', res.data.item.id)
-                return
-              }
-              alert('로그인에 실패하였습니다 :(')
-            })
-            .catch(err => {
-              console.log(err)
-            })
+          socialLogin(socialAccessToken).then(res => {
+            console.log('kakao login request!')
+            console.log(res)
+          })
+        //   axios.post(userInfoURI, socialAccessToken)
+        //     .then(res => {
+        //       console.log(res)
+        //       if (res.status === 200) {
+        //         console.log('hreer!')
+        //         window.localStorage.setItem('jwt', res.data.item.jwt)
+        //         window.localStorage.setItem('userID', res.data.item.id)
+        //         // window.location.href="/"
+        //         return
+        //       } else if (res.status === 201) {
+        //         window.localStorage.setItem('jwt', res.data.item.jwt)
+        //         window.localStorage.setItem('userID', res.data.item.id)
+        //         return
+        //       }
+        //       alert('로그인에 실패하였습니다 :(')
+        //     })
+        //     .catch(err => {
+        //       console.log(err)
+        //     })
         },
         fail: function(err) {
           alert('failed to login: ' + JSON.stringify(err))
