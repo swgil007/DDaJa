@@ -36,6 +36,7 @@ export default {
     onSuccess(googleUser) {
       console.log(googleUser)
 
+      console.log(googleUser.ya)
       // This only gets the user information: id, name, imageUrl and email
       console.log(googleUser.getBasicProfile())
     },

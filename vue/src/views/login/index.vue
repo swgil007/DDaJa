@@ -28,21 +28,7 @@ export default {
   }
   ,
   methods: {
-    googleLogin() {
-      const AUTHORIZE_URI = "https://accounts.google.com/o/oauth2/v2/auth";
-      const REDIRECT_URI = "localhost:9527/social/login"
-      const RESPONSE_TYPE = "token"
-      const SCOPE = "https://www.googleapis.com/auth/contacts.readonly"
-      const REQUEST_URI = AUTHORIZE_URI + "?" + "client_id=" + this.$googleClientID
-      // const queryStr = qs.stringify({
-      //   client_id: CLIENT_ID,
-      //   redirect_uri: window.location.href,
-      //   response_type: "token",
-      //   scope: "https://www.googleapis.com/auth/contacts.readonly",
-      // });
-      console.log("a")
-    }
-    , kakaoLogout() {
+    kakaoLogout() {
       alert(Kakao.Auth.getAccessToken())
       Kakao.API.request({
         url: '/v1/user/unlink',
