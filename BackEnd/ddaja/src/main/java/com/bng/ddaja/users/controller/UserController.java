@@ -12,6 +12,7 @@ import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.hateoas.users.UserHateoas;
 import com.bng.ddaja.users.dto.UserDTO;
+import com.bng.ddaja.users.dto.UserSearch;
 import com.bng.ddaja.users.service.UserService;
 
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,13 @@ public class UserController {
         , response = CommonResponse.class
     )
     @GetMapping("")
-    public ResponseEntity<CommonResponse> getUsers() {
-        return ResponseEntity.ok().body(new CommonResponse(userService.getUsers()));
+    public ResponseEntity<CommonResponse> getUsers(UserSearch userSearch) {
+        return ResponseEntity.ok().body(
+            new CommonResponse(
+                userService.getUsersByUserSearch(userSearch)
+                , UserHateoas.values()
+            )
+        );
     }
 
     @ApiOperation(
