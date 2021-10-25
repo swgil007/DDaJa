@@ -176,14 +176,13 @@ export default {
         }
       })
     },
-    async login() {
+    login() {
       console.log('login method called')
-      await adminLogin(this.loginForm)
-        .then(res => {
-          console.log(res)
-          this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-          this.loading = false
-        })
+      adminLogin(this.loginForm).then(res => {
+        console.log(res)
+        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+        this.loading = false
+      })
         .catch(() => {
           this.loading = false
         })
