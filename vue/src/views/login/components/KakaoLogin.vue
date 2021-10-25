@@ -24,6 +24,7 @@ export default {
             console.log(res)
             window.localStorage.setItem('jwt', res.item.jwt)
             window.localStorage.setItem('userID', res.item.id)
+            window.location.href = '/'
           })
         },
         fail: function(err) {
