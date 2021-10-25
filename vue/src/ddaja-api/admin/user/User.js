@@ -4,7 +4,7 @@ export function userList(param) {
   return request({
     url: '/users',
     method: 'get',
-    params: {}
+    params: param
   })
 }
 
