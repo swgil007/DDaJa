@@ -128,7 +128,7 @@
 <script>
 
 import Pagination from '@/components/Pagination'
-import { userList } from '@/ddaja-api/admin/user/User'
+import { userList, userSearch } from '@/ddaja-api/admin/user/User'
 import detailDrawer from './components/detailDrawer'
 import updateDrawer from './components/updateDrawer'
 
@@ -143,17 +143,8 @@ export default {
 
   data() {
     return {
-      options: [{
-        value: 'ID',
-        label: 'ID'
-      }, {
-        value: 'NickName',
-        label: 'NickName'
-      }, {
-        value: 'Email',
-        label: 'Email'
-      }],
-      searchFiled: 'ID',
+      options: [],
+      searchFiled: '',
       tableData: [],
       search: '',
       id: 1,
@@ -169,13 +160,22 @@ export default {
       updateDrawerVal: false
     }
   },
-
   created() {
     this.fetchList()
+    this.fetchSearchOption()
   },
-
   methods: {
-
+    async fetchSearchOption() {
+      await userSearch().then(res => {
+        console.log(res)
+        res.items.forEach(i => {
+          this.options.push({
+            value: i.query,
+            label: i.name
+          })
+        })
+      })
+    },
     fetchList() {
       userList(this.param).then(response => {
         this.tableData = response.items
