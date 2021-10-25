@@ -49,7 +49,7 @@ public class CommonResponse {
 
     public CommonResponse(Page<? extends CommonDTO> pageDTO, CommonHateoas[] hateos) {
         items = pageDTO.stream().map(dto -> new CommonResource(dto, hateos)).collect(Collectors.toList());
-        totalCount = pageDTO.getSize();
+        totalCount = pageDTO.getNumberOfElements();
         page = new CommonPage(pageDTO);
     }
 
