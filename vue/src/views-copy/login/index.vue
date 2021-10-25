@@ -76,6 +76,7 @@
 <script>
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
+import adminLogin from '@/api/admin/admin'
 
 export default {
   name: 'Login',
@@ -176,8 +177,10 @@ export default {
       })
     },
     async login() {
-      await this.$store.dispatch('user/login', this.loginForm)
-        .then(() => {
+      console.log('login method called')
+      await adminLogin(this.loginForm)
+        .then(res => {
+          console.log(res)
           this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
           this.loading = false
         })
