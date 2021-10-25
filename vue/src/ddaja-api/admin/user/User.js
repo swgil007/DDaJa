@@ -15,3 +15,10 @@ export function userDetail(param) {
     params: {}
   })
 }
+
+export function userSearch() {
+  return request({
+    url: '/users/search',
+    method: 'get'
+  })
+}
