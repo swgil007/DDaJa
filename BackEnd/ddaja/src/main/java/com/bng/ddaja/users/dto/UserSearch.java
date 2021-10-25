@@ -5,9 +5,15 @@ import com.bng.ddaja.common.dto.CommonSearch;
 import com.bng.ddaja.common.spec.SpecBuilder;
 
 import org.springframework.data.jpa.domain.Specification;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import static com.bng.ddaja.users.spec.UserSpec.*;
 import static org.springframework.data.jpa.domain.Specification.where;
 
+@Getter
+@Setter
 public class UserSearch extends CommonSearch {
     
     private String nickName;
