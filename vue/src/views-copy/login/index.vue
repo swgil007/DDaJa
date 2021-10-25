@@ -167,14 +167,13 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.login()
-        } else {
+        if (!valid) {
           console.log('error submit!!')
           return false
         }
       })
+      this.loading = true
+      this.login()
     },
     login() {
       console.log('login method called')
@@ -183,9 +182,6 @@ export default {
         this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
         this.loading = false
       })
-        .catch(() => {
-          this.loading = false
-        })
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
