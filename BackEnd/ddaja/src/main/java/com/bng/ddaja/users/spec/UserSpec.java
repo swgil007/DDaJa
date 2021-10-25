@@ -28,4 +28,13 @@ public class UserSpec {
             }
         };
     }
+
+    public static Specification<User> eMailLike(final String eMail) {
+        return new Specification<User>() {
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+                if(eMail == null || "".equals(eMail)) return builder.conjunction();
+                return builder.like(root.get("eMail"), new StringBuilder().append("%").append(eMail).append("%").toString());
+            }
+        };
+    }
 }
