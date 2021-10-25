@@ -1,6 +1,5 @@
 <template>
   <el-form v-show="isUserInfoForm" ref="form" :model="form" label-width="120px">
-    {{ userInfo }}
     <el-form-item label="닉네임">
       <el-col :span="11">
         <el-input v-model="userInfo.nickName" />
@@ -10,7 +9,7 @@
       <el-col :span="11">
         <el-upload
           class="avatar-uploader"
-          action="http://localhost/user/"
+          action="http://localhost/user/profile"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
         >
