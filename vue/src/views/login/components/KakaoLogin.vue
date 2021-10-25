@@ -21,28 +21,10 @@ export default {
             refreshExpireTime: authObj.refresh_token_expires_in
           }
           socialLogin(socialAccessToken).then(res => {
-            console.log('kakao login request!')
             console.log(res)
+            window.localStorage.setItem('jwt', res.item.jwt)
+            window.localStorage.setItem('userID', res.item.id)
           })
-        //   axios.post(userInfoURI, socialAccessToken)
-        //     .then(res => {
-        //       console.log(res)
-        //       if (res.status === 200) {
-        //         console.log('hreer!')
-        //         window.localStorage.setItem('jwt', res.data.item.jwt)
-        //         window.localStorage.setItem('userID', res.data.item.id)
-        //         // window.location.href="/"
-        //         return
-        //       } else if (res.status === 201) {
-        //         window.localStorage.setItem('jwt', res.data.item.jwt)
-        //         window.localStorage.setItem('userID', res.data.item.id)
-        //         return
-        //       }
-        //       alert('로그인에 실패하였습니다 :(')
-        //     })
-        //     .catch(err => {
-        //       console.log(err)
-        //     })
         },
         fail: function(err) {
           alert('failed to login: ' + JSON.stringify(err))

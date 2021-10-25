@@ -42,6 +42,8 @@ export default {
       }
       socialLogin(socialAccessToken).then(res => {
         console.log(res)
+        window.localStorage.setItem('jwt', res.item.jwt)
+        window.localStorage.setItem('userID', res.item.id)
       })
     }
   }
