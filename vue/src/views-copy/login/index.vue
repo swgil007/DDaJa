@@ -138,17 +138,17 @@ export default {
     }
   },
   beforeCreate: function() {
-    this.$store.dispatch('user/logout')
+    // this.$store.dispatch('user/logout')
 
-    var visitorInfo = {
-      username: 'visitor',
-      password: '111111'
-    }
+    // var visitorInfo = {
+    //   username: 'visitor',
+    //   password: '111111'
+    // }
 
-    this.$store.dispatch('user/login', visitorInfo)
-      .then(() => {
-        this.$router.push({ path: this.redirect || '/', query: '' })
-      })
+    // this.$store.dispatch('user/login', visitorInfo)
+    //   .then(() => {
+    //     this.$router.push({ path: this.redirect || '/', query: '' })
+    //   })
   },
   methods: {
     checkCapslock(e) {
