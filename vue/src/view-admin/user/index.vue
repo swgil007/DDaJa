@@ -60,7 +60,7 @@
           width="180"
         >
           <template slot-scope="scope">
-            {{ $moment(scope.row.item.createDate).format('YYYY-MM-DD') }}
+            {{ $moment(scope.row.item.createdDate).format('YYYY-MM-DD') }}
           </template>
         </el-table-column>
 
