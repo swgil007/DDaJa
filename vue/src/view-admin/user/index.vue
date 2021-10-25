@@ -128,7 +128,7 @@
 <script>
 
 import Pagination from '@/components/Pagination'
-import { userList, userListTotalCount } from '@/ddaja-api/admin/user/User'
+import { userList } from '@/ddaja-api/admin/user/User'
 import detailDrawer from './components/detailDrawer'
 import updateDrawer from './components/updateDrawer'
 
@@ -180,20 +180,17 @@ export default {
       userList(this.param).then(response => {
         this.tableData = response.items
         this.page = response.page
-      })
-
-      userListTotalCount(this.param).then(response => {
         this.totalCount = response.totalCount
       })
     },
 
     updateDrawerStatus(val, row) {
       this.updateDrawerVal = val
-      this.id = (row == undefined) ? 0 : row.item.id
+      this.id = (row === undefined) ? 0 : row.item.id
     },
     detailDrawerStatus(val, row) {
       this.detailDrawerVal = val
-      this.id = (row == undefined) ? 0 : row.item.id
+      this.id = (row === undefined) ? 0 : row.item.id
     },
     clickSearch() {
       this.param.page = 0
