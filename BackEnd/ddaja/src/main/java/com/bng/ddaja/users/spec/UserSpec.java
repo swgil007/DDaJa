@@ -20,7 +20,7 @@ public class UserSpec {
         };
     }
 
-    public static Specification<User> idEqual (final long id) {
+    public static Specification<User> idEqual(final long id) {
         return new Specification<User>() {
             public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
                 if (id == 0) return builder.conjunction();
