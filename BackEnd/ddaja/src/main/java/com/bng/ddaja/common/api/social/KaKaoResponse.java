@@ -10,7 +10,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class KaKaoResponse extends SocialResponse {
