@@ -14,6 +14,7 @@ import com.bng.ddaja.common.hateoas.users.UserHateoas;
 import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.users.dto.UserSearch;
 import com.bng.ddaja.users.service.UserService;
+import com.bng.ddaja.users.spec.UserSearchOptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,11 @@ public class UserController {
                 , UserHateoas.values()
             )
         );
+    }
+
+    @GetMapping("search")
+    public ResponseEntity<CommonResponse> getUserSearchOptions() {
+        return ResponseEntity.ok().body(new CommonResponse(UserSearchOptions.values()));
     }
 
     @ApiOperation(
