@@ -76,7 +76,7 @@
 <script>
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
-import adminLogin from '@/api/admin/admin'
+import { adminLogin } from '@/api/admin/admin'
 
 export default {
   name: 'Login',
@@ -177,6 +177,7 @@ export default {
     },
     login() {
       console.log('login method called')
+      console.log(this.loginForm)
       adminLogin(this.loginForm).then(res => {
         console.log(res)
         this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
