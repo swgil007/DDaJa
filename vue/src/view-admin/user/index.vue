@@ -6,8 +6,8 @@
 
     <div class="div1" style="padding:0px 0px 75px 45%;">
       <div style="float:left; padding:1px 20px 0px 0px">
-
-        <el-select v-model="searchFiled" placeholder="Select">
+        {{ search }}
+        <el-select v-model="search.key" placeholder="Select">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -19,7 +19,7 @@
       </div>
       <div style="float:left; padding:0px 20px 0px 0px">
         <el-input
-          v-model="param.name"
+          v-model="search.value"
           style="width:500px"
           placeholder="검색 조건을 입력 하세요."
           @keyup.enter.native="clickSearch"
@@ -144,15 +144,15 @@ export default {
   data() {
     return {
       options: [],
-      searchFiled: '',
+      search: {
+        key: '',
+        value: ''
+      },
       tableData: [],
-      search: '',
       id: 1,
       totalCount: 0,
       page: {},
       param: {
-        licenseID: 0,
-        name: '',
         page: 1,
         size: 10
       },
@@ -193,8 +193,13 @@ export default {
       this.id = (row === undefined) ? 0 : row.item.id
     },
     clickSearch() {
-      this.param.page = 0
-      this.param.size = 10
+      this.param = {
+        page: 0,
+        size: 10
+      }
+      if (this.search.key !== '') {
+        this.param[this.search.key] = this.search.value
+      }
       this.fetchList()
     }
   }
