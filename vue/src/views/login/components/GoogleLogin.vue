@@ -35,6 +35,7 @@ export default {
   },
   methods: {
     onSuccess(googleUser) {
+      console.log(googleUser)
       const socialAccessToken = {
         accessToken: googleUser.Zb.access_token,
         tokenType: 'GOOGLE'
