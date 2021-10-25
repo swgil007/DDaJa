@@ -23,10 +23,12 @@ import com.bng.ddaja.common.util.OKHttp;
 import com.bng.ddaja.tokens.repository.TokenRepository;
 import com.bng.ddaja.tokens.service.TokenService;
 import com.bng.ddaja.users.dto.UserDTO;
+import com.bng.ddaja.users.dto.UserSearch;
 import com.bng.ddaja.users.repository.UserRepository;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -47,6 +49,10 @@ public class UserService implements UserDetailsService {
 
     public List<UserDTO> getUsers() {
         return userRepository.findAll().stream().map(v -> new UserDTO(v)).collect(Collectors.toList());
+    }
+
+    public Page<UserDTO> getUsersByUserSearch(UserSearch userSearch) {
+        return userRepository.findAll(userSearch.toSpecification(), userSearch.toPageable()).map(vo -> new UserDTO(vo));
     }
 
     public UserDTO getUserById(long id) {
