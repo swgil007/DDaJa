@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.security.sasl.AuthenticationException;
 
+import com.bng.ddaja.common.api.social.GoogleResponse;
 import com.bng.ddaja.common.api.social.SocialResponse;
 import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
 import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialLoginException;
@@ -59,6 +60,9 @@ public class UserService implements UserDetailsService {
             case KAKAO:
                 socialResponse = requestKakaoUserInfo(socialAccessToken);
                 break;
+            case GOOGLE:
+                socialResponse = requestGoogleUserInfo(socialAccessToken);
+                break;
             default:
                 throw new NotAcceptableSocialLoginException();
         }
@@ -97,6 +101,30 @@ public class UserService implements UserDetailsService {
                                             .fromJson(response.body()
                                             .source());
         response.body().close();
+        return result;
+    }
+
+    private SocialResponse requestGoogleUserInfo(SocialAccessToken socialAccessToken) throws IOException {
+        final String GOOGLE_USERINFO_URI = "https://www.googleapis.com/oauth2/v3/userinfo";
+        final String GOOGLE_USERINFO_QUERY = "?access_token=";
+        String requestURI = new StringBuilder()
+                                                .append(GOOGLE_USERINFO_URI)
+                                                .append(GOOGLE_USERINFO_QUERY)
+                                                .append(socialAccessToken.getAccessToken())
+                                                .toString();
+        Response response = OKHttp.okHttpRequest(requestURI, null, null, HttpMethods.GET);
+        if(!response.isSuccessful()) {
+            throw new NotAcceptableSocialResponseException();
+        }
+        GoogleResponse result = new Moshi.Builder()
+                                            .add(Date.class, new Rfc3339DateJsonAdapter())
+                                            .build()
+                                            .adapter(GoogleResponse.class)
+                                            .fromJson(response.body()
+                                            .source());
+        response.body().close();
+        log.info(result.toString());
+        result.setId(result.getSub());
         return result;
     }
 
