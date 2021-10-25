@@ -10,7 +10,7 @@
     </googleLogin>
     <a
       href="https://accounts.google.com/o/oauth2/v2/auth?&response_type=token&login_hint
-=AJDLj6JUa8yxXrhHdWRHIV0S13cAv4jm67m2ihty1sMzCLHV_mQrufkn5QDktg8ymG6a0cZzSfbxm02cAf2XY9lSHhOMkt7STw&client_id=71530109499-6re6j434sr87q4t8u1s1ou4n8blv6t1q.apps.googleusercontent.com&origin=http://localhost:9527&scope=openid profile email&ss_domain=http://localhost:9527&include_granted_scopes=true&redirect_uri=http://localhost/users/social"
+=AJDLj6JUa8yxXrhHdWRHIV0S13cAv4jm67m2ihty1sMzCLHV_mQrufkn5QDktg8ymG6a0cZzSfbxm02cAf2XY9lSHhOMkt7STw&client_id=71530109499-6re6j434sr87q4t8u1s1ou4n8blv6t1q.apps.googleusercontent.com&origin=http://localhost:9527&scope=openid profile email&ss_domain=http://localhost:9527&include_granted_scopes=true&redirect_uri=http://localhost:9527/social/login"
     >로그인</a>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default {
   methods: {
     onSuccess(googleUser) {
       console.log(googleUser)
+      console.log(googleUser.Zb.access_token)
 
       // This only gets the user information: id, name, imageUrl and email
       console.log(googleUser.getBasicProfile())
