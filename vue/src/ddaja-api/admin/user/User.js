@@ -8,14 +8,6 @@ export function userList(param) {
   })
 }
 
-export function userListTotalCount(param) {
-  return request({
-    url: '/users',
-    method: 'get',
-    params: {}
-  })
-}
-
 export function userDetail(param) {
   return request({
     url: '/users/' + param.id,
