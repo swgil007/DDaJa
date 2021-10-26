@@ -25,6 +25,7 @@ public class AdminDTO extends CommonDTO {
     private String passWord;
     private AdminRole role;
     private boolean inUse;
+    private String jwt;
 
     public AdminDTO(Admin vo) {
         id = vo.getId();
