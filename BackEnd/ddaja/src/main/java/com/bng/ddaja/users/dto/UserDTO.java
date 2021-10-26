@@ -1,8 +1,5 @@
 package com.bng.ddaja.users.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.domain.User.UserBuilder;
 import com.bng.ddaja.common.dto.CommonDTO;
