@@ -14,7 +14,7 @@ public class AdminSpec {
     public static Specification<Admin> passWordEqual(final String passWord) {
         return new Specification<Admin>() {
             public Predicate toPredicate(Root<Admin> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-                if (passWord == null || "".equals(passWord)) return builder.conjunction();
+                if (passWord == null || "".equals(passWord)) return builder.disjunction();
                 return builder.equal(root.get("passWord"), passWord);
             }
         };
