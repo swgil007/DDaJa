@@ -40,7 +40,7 @@ public class Admin extends CommonEntity {
     private String passWord;
 
     @Column(name="IN_USE")
-    private String inUse;
+    private boolean inUse;
 
     @Enumerated(EnumType.STRING)
     private AdminRole role;
