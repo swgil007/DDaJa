@@ -2,6 +2,7 @@ package com.bng.ddaja.admin.dto;
 
 import javax.validation.constraints.NotBlank;
 
+import com.bng.ddaja.common.domain.Admin;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.enums.AdminRole;
 
@@ -24,4 +25,11 @@ public class AdminDTO extends CommonDTO {
     private String passWord;
     private AdminRole role;
     private boolean inUse;
+
+    public AdminDTO(Admin vo) {
+        id = vo.getId();
+        loginID = vo.getLoginID();
+        role = vo.getRole();
+        inUse = vo.isInUse();
+    }
 }
