@@ -34,10 +34,10 @@ public class Admin extends CommonEntity {
     private long id;
     
     @Column(name="ID")
-    private String adminId;
+    private String loginID;
 
     @Column(name="PASSWORD")
-    private String password;
+    private String passWord;
 
     @Column(name="IN_USE")
     private String inUse;
