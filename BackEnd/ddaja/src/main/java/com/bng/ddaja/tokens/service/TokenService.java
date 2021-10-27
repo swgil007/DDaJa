@@ -2,11 +2,16 @@ package com.bng.ddaja.tokens.service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.crypto.SecretKey;
 import javax.security.sasl.AuthenticationException;
 
+import com.bng.ddaja.admin.dto.AdminDTO;
+import com.bng.ddaja.admin.repository.AdminRepository;
 import com.bng.ddaja.common.config.PublicKeyConfig;
+import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
+import com.bng.ddaja.common.domain.Admin;
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.util.Constants;
@@ -33,6 +38,7 @@ public class TokenService {
     private PublicKeyConfig publicKeyConfig;
     private TokenRepository tokenRepository;
     private UserRepository userRepository;
+    private AdminRepository adminRepository;
 
     public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) throws AuthenticationException {
         UserDTO user = new UserDTO(userRepository.findById(userDTO.getId()));
@@ -40,6 +46,14 @@ public class TokenService {
         CommonJWT result = new CommonJWT(user);
         result.setJwt(createJWTByCommonJWT(result));
         return result;
+    }
+
+    public CommonJWT getCommonJWTByAdminDTO(AdminDTO adminDTO) {
+        Optional<Admin> adminVO = adminRepository.findById(adminDTO.getId());
+        if(!adminVO.isPresent()) throw new MemberNotFoundException("해당 관리자 계정이 확인되지 않습니다.");
+        AdminDTO admin = new AdminDTO(adminVO.get());
+        // working
+        return null;
     }
 
     public CommonJWT getCommonJWTByJWT(String jwt) {
