@@ -32,6 +32,8 @@ public class AdminService {
                                                     .toSpecification();
         Optional<Admin> admin = adminRepository.findOne(adminSpec);
         if(!admin.isPresent()) throw new MemberNotFoundException("해당되는 관리자 계정이 없습니다.");
-        return new AdminDTO(admin.get());
+        AdminDTO result = new AdminDTO(admin.get());
+        result.setJwt(tokenService.getCommonJWTByAdminDTO(result).getJwt());
+        return result;
     }
 }

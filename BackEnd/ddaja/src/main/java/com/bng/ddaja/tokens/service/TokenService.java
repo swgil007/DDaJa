@@ -53,7 +53,7 @@ public class TokenService {
         if(!adminVO.isPresent()) throw new MemberNotFoundException("해당 관리자 계정이 확인되지 않습니다.");
         CommonJWT result = new CommonJWT(new AdminDTO(adminVO.get()));
         result.setJwt(createJWTByCommonJWT(result));
-        return null;
+        return result;
     }
 
     public CommonJWT getCommonJWTByJWT(String jwt) {
