@@ -20,11 +20,12 @@ import moment from 'vue-moment'
 import map from 'lodash'
 import VueKakaoSdk from 'vue-kakao-sdk'
 
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost'
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'origin, access-control-allow-origin'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.timeout = 100000
 axios.defaults.baseURL = '{url}'
+axios.defaults.withCredentials = true
 
 Vue.prototype.$http = axios
 

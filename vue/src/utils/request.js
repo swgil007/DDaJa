@@ -9,7 +9,7 @@ const service = axios.create({
     ? ''
     : 'http://localhost',
 
-  withCredentials: false
+  withCredentials: true
 })
 
 // request interceptor
