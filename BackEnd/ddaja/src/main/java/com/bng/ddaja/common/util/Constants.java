@@ -14,6 +14,7 @@ public final class Constants {
     public static final String DATE_EXPIRE = "exp";
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer";
+    public static final String TOKEN = "token";
     
     private Constants() {}
 }
