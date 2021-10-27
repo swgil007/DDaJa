@@ -80,7 +80,7 @@ public class UserController {
     }
 
     @PostMapping("social")
-    public ResponseEntity<CommonResource> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
+    public ResponseEntity<CommonResource> loginUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
         UserDTO userDTO = userService.getUserBySocialToken(socialAccessToken);
         if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
         return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));
