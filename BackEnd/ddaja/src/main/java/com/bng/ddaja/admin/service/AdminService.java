@@ -10,6 +10,7 @@ import java.util.Optional;
 import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
 import com.bng.ddaja.common.domain.Admin;
 import com.bng.ddaja.common.spec.SpecBuilder;
+import com.bng.ddaja.tokens.service.TokenService;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class AdminService {
     private AdminRepository adminRepository;
+    private TokenService tokenService;
 
     public AdminDTO loginAdminByAdminDTO(AdminDTO adminDTO) {
         Specification<Admin> adminSpec = SpecBuilder.builder(Admin.class)
