@@ -1,98 +1,43 @@
 <template>
   <div class="login-container">
     <el-form class="login-form" autocomplete="on" label-position="left">
-
       <div class="title-container">
         <h3 class="title">DDaJa Login</h3>
       </div>
-      <img id="kakao-login-btn" src="@/images/social/kakao_login.png" @click="kakaoLogin">
+      <kakao-login />
       <google-login />
       <button @click="kakaoLogout">로그아웃</button>
     </el-form>
   </div>
 </template>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-import axios from 'axios'
 import googleLogin from './components/GoogleLogin.vue'
+import kakaoLogin from './components/KakaoLogin.vue'
 export default {
   name: 'Login',
   components: {
-    axios
-    , googleLogin
-  }
-  , data() {
+    googleLogin,
+    kakaoLogin
+  },
+  data() {
     return {
       socialAccessToken: {}
     }
-  }
-  ,
+  },
   methods: {
-    googleLogin() {
-      const AUTHORIZE_URI = "https://accounts.google.com/o/oauth2/v2/auth";
-      const REDIRECT_URI = "localhost:9527/social/login"
-      const RESPONSE_TYPE = "token"
-      const SCOPE = "https://www.googleapis.com/auth/contacts.readonly"
-      const REQUEST_URI = AUTHORIZE_URI + "?" + "client_id=" + this.$googleClientID
-      // const queryStr = qs.stringify({
-      //   client_id: CLIENT_ID,
-      //   redirect_uri: window.location.href,
-      //   response_type: "token",
-      //   scope: "https://www.googleapis.com/auth/contacts.readonly",
-      // });
-      console.log("a")
-    }
-    , kakaoLogout() {
-      alert(Kakao.Auth.getAccessToken())
-      Kakao.API.request({
+    kakaoLogout() {
+      alert(this.$kakao.Auth.getAccessToken())
+      this.$kakao.API.request({
         url: '/v1/user/unlink',
         success: function(response) {
-          console.log(response);
+          console.log(response)
         },
         fail: function(error) {
-          console.log(error);
-        },
-      });
-      Kakao.Auth.logout(function() {
-        console.log(Kakao.Auth.getAccessToken());
-      });
-    },
-    kakaoLogin() {
-      this.$kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function(authObj) {
-          console.log(JSON.stringify(authObj))
-          const socialAccessToken = {
-            accessToken : authObj.access_token
-            , refreshToken : authObj.refresh_token
-            , tokenType : 'KAKAO'
-            , expireTime : authObj.expires_in
-            , refreshExpireTime : authObj.refresh_token_expires_in
-          }
-          const userInfoURI = "http://localhost/users/social"
-          axios.post(userInfoURI, socialAccessToken)
-          .then(res => {
-            console.log(res)
-            if(res.status == 200) {
-              console.log("hreer!")
-              window.localStorage.setItem('jwt', res.data.item.jwt)
-              window.localStorage.setItem('userID', res.data.item.id)
-              //window.location.href="/"
-              return
-            } else if(res.status == 201) {
-              window.localStorage.setItem('jwt', res.data.item.jwt)
-              window.localStorage.setItem('userID', res.data.item.id)
-              return
-            }
-            alert("로그인에 실패하였습니다 :(")
-          })
-          .catch(err => {
-            console.log(err)
-          })
-        },
-        fail: function(err) {
-          alert('failed to login: ' + JSON.stringify(err))
+          console.log(error)
         }
+      })
+      this.$kakao.Auth.logout(function() {
+        console.log(this.$kakao.Auth.getAccessToken())
       })
     }
   }

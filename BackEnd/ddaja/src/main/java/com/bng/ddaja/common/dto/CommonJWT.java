@@ -1,5 +1,7 @@
 package com.bng.ddaja.common.dto;
 
+import com.bng.ddaja.admin.dto.AdminDTO;
+import com.bng.ddaja.common.enums.AdminRole;
 import com.bng.ddaja.common.enums.Roles;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.users.dto.UserDTO;
@@ -7,13 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +33,7 @@ public class CommonJWT extends CommonDTO {
     private Roles role;
     private Claims claims;
     private boolean isValidated;
+    private boolean isSuper;
 
     public CommonJWT(UserDTO userDTO) {
         id = userDTO.getId();
@@ -44,6 +42,15 @@ public class CommonJWT extends CommonDTO {
         role = Roles.USER;
         isValidated = true;
     }
+
+    public CommonJWT(AdminDTO adminDTO) {
+        id = adminDTO.getId();
+        userID = adminDTO.getLoginID();
+        role = Roles.ADMIN;
+        isValidated = true;
+        isSuper = AdminRole.SUPER.equals(adminDTO.getRole());
+    }
+    
     public CommonJWT(long id,  String userID, String userName, Roles role) {
         this.id = id;
         this.userID = userID;

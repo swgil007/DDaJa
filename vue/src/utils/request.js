@@ -9,13 +9,16 @@ const service = axios.create({
     ? ''
     : 'http://localhost',
 
-  withCredentials: false
+  withCredentials: true
 })
 
 // request interceptor
 service.interceptors.request.use(
   config => {
     // do something before request is sent
+    if (window.localStorage.getItem('jwt')) {
+      config.headers['Authorization'] = window.localStorage.getItem('jwt')
+    }
 
     if (store.getters.token) {
       // let each request carry token
@@ -58,7 +61,7 @@ service.interceptors.response.use(
 
           // 라우터 정보 비우기
           await store.dispatch('permission/resetRoutes')
-          router.push(`/login`)
+          this.$router.push(`/login`)
           return
         } else if (errorCd === 105) {
           // 유저 정보 비우기
@@ -66,20 +69,20 @@ service.interceptors.response.use(
 
           // 라우터 정보 비우기
           await store.dispatch('permission/resetRoutes')
-          router.push(`/login`)
+          this.$router.push(`/login`)
           return
         } else {
-          return renewToken(response.config).then(res => {
-            return res
-          }, error => {
-          // 유저 정보 비우기
-            store.dispatch('user/logout')
+          // return renewToken(response.config).then(res => {
+          //   return res
+          // }, error => {
+          // // 유저 정보 비우기
+          //   store.dispatch('user/logout')
 
-            // 라우터 정보 비우기
-            store.dispatch('permission/resetRoutes')
-            router.push(`/login`)
-            return
-          })
+          //   // 라우터 정보 비우기
+          //   store.dispatch('permission/resetRoutes')
+          //   this.$router.push(`/login`)
+          //   return
+          // })
         }
       }
     }

@@ -2,11 +2,16 @@ package com.bng.ddaja.tokens.service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.crypto.SecretKey;
 import javax.security.sasl.AuthenticationException;
 
+import com.bng.ddaja.admin.dto.AdminDTO;
+import com.bng.ddaja.admin.repository.AdminRepository;
 import com.bng.ddaja.common.config.PublicKeyConfig;
+import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
+import com.bng.ddaja.common.domain.Admin;
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.util.Constants;
@@ -33,11 +38,20 @@ public class TokenService {
     private PublicKeyConfig publicKeyConfig;
     private TokenRepository tokenRepository;
     private UserRepository userRepository;
+    private AdminRepository adminRepository;
 
     public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) throws AuthenticationException {
         UserDTO user = new UserDTO(userRepository.findById(userDTO.getId()));
         if(user.getId() == 0) throw new AuthenticationException("User Info is Not Matched");
         CommonJWT result = new CommonJWT(user);
+        result.setJwt(createJWTByCommonJWT(result));
+        return result;
+    }
+
+    public CommonJWT getCommonJWTByAdminDTO(AdminDTO adminDTO) {
+        Optional<Admin> adminVO = adminRepository.findById(adminDTO.getId());
+        if(!adminVO.isPresent()) throw new MemberNotFoundException("해당 관리자 계정이 확인되지 않습니다.");
+        CommonJWT result = new CommonJWT(new AdminDTO(adminVO.get()));
         result.setJwt(createJWTByCommonJWT(result));
         return result;
     }
@@ -55,6 +69,7 @@ public class TokenService {
                     .claim(Constants.CLAIMS_USER_NAME, commonJWT.getUserName())
                     .claim(Constants.CLAIMS_USER_ID, commonJWT.getUserID())
                     .claim(Constants.CLAIMS_ID, commonJWT.getId())
+                    .claim(Constants.CLAIMS_IS_SUPER, commonJWT.isSuper())
                     .setIssuedAt(now)
                     .setExpiration(DateUtil.addHours(now, 12))
                     .signWith(publicKeyConfig.getSecretKey())

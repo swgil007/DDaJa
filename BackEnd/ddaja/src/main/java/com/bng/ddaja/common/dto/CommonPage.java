@@ -23,7 +23,7 @@ public class CommonPage {
     private boolean isFirst;
     private boolean isEmpty;
     private int totalPage;
-    private int totalItems;
+    private int itemCount;
 
     CommonPage(int page, int size) {
         this.page = page;
@@ -37,6 +37,6 @@ public class CommonPage {
         isFirst = pageEntity.isFirst();
         isEmpty = pageEntity.isEmpty();
         totalPage = pageEntity.getTotalPages();
-        totalItems = Long.valueOf(pageEntity.getTotalElements()).intValue();
+        itemCount = pageEntity.getNumberOfElements();
     }
 }

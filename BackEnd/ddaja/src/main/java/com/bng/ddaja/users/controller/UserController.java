@@ -12,7 +12,9 @@ import com.bng.ddaja.common.dto.CommonResponse;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.hateoas.users.UserHateoas;
 import com.bng.ddaja.users.dto.UserDTO;
+import com.bng.ddaja.users.dto.UserSearch;
 import com.bng.ddaja.users.service.UserService;
+import com.bng.ddaja.users.spec.UserSearchOptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +44,18 @@ public class UserController {
         , response = CommonResponse.class
     )
     @GetMapping("")
-    public ResponseEntity<CommonResponse> getUsers() {
-        return ResponseEntity.ok().body(new CommonResponse(userService.getUsers()));
+    public ResponseEntity<CommonResponse> getUsers(UserSearch userSearch) {
+        return ResponseEntity.ok().body(
+            new CommonResponse(
+                userService.getUsersByUserSearch(userSearch)
+                , UserHateoas.values()
+            )
+        );
+    }
+
+    @GetMapping("search")
+    public ResponseEntity<CommonResponse> getUserSearchOptions() {
+        return ResponseEntity.ok().body(new CommonResponse(UserSearchOptions.values()));
     }
 
     @ApiOperation(
@@ -68,7 +80,7 @@ public class UserController {
     }
 
     @PostMapping("social")
-    public ResponseEntity<CommonResource> createUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
+    public ResponseEntity<CommonResource> loginUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
         UserDTO userDTO = userService.getUserBySocialToken(socialAccessToken);
         if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
         return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));

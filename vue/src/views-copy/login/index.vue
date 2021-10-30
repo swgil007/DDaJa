@@ -6,15 +6,15 @@
         <h3 class="title">Login Form</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="loginID">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
+          ref="loginID"
+          v-model="loginForm.loginID"
+          placeholder="로그인 ID"
+          name="loginID"
           type="text"
           tabindex="1"
           autocomplete="on"
@@ -22,17 +22,17 @@
       </el-form-item>
 
       <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
-        <el-form-item prop="password">
+        <el-form-item prop="passWord">
           <span class="svg-container">
-            <svg-icon icon-class="password" />
+            <svg-icon icon-class="passWord" />
           </span>
           <el-input
             :key="passwordType"
-            ref="password"
-            v-model="loginForm.password"
+            ref="passWord"
+            v-model="loginForm.passWord"
             :type="passwordType"
             placeholder="Password"
-            name="password"
+            name="passWord"
             tabindex="2"
             autocomplete="on"
             @keyup.native="checkCapslock"
@@ -49,11 +49,11 @@
 
       <div style="position:relative">
         <div class="tips">
-          <span>Username : admin</span>
+          <span>LoginID : admin</span>
           <span>Password : any</span>
         </div>
         <div class="tips">
-          <span style="margin-right:18px;">Username : editor</span>
+          <span style="margin-right:18px;">LoginID : editor</span>
           <span>Password : any</span>
         </div>
 
@@ -76,6 +76,7 @@
 <script>
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
+import { adminLogin } from '@/api/admin/admin'
 
 export default {
   name: 'Login',
@@ -99,8 +100,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        loginID: 'admin',
+        passWord: '111111'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -130,24 +131,24 @@ export default {
 
   },
   mounted() {
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus()
-    } else if (this.loginForm.password === '') {
-      this.$refs.password.focus()
+    if (this.loginForm.loginID === '') {
+      this.$refs.loginID.focus()
+    } else if (this.loginForm.passWord === '') {
+      this.$refs.passWord.focus()
     }
   },
   beforeCreate: function() {
-    this.$store.dispatch('user/logout')
+    // this.$store.dispatch('user/logout')
 
-    var visitorInfo = {
-      username: 'visitor',
-      password: '111111'
-    }
+    // var visitorInfo = {
+    //   username: 'visitor',
+    //   password: '111111'
+    // }
 
-    this.$store.dispatch('user/login', visitorInfo)
-      .then(() => {
-        this.$router.push({ path: this.redirect || '/', query: '' })
-      })
+    // this.$store.dispatch('user/login', visitorInfo)
+    //   .then(() => {
+    //     this.$router.push({ path: this.redirect || '/', query: '' })
+    //   })
   },
   methods: {
     checkCapslock(e) {
@@ -161,29 +162,27 @@ export default {
         this.passwordType = 'password'
       }
       this.$nextTick(() => {
-        this.$refs.password.focus()
+        this.$refs.passWord.focus()
       })
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.login()
-        } else {
+        if (!valid) {
           console.log('error submit!!')
           return false
         }
       })
+      this.loading = true
+      this.login()
     },
-    async login() {
-      await this.$store.dispatch('user/login', this.loginForm)
-        .then(() => {
-          this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-          this.loading = false
-        })
-        .catch(() => {
-          this.loading = false
-        })
+    login() {
+      console.log('login method called')
+      console.log(this.loginForm)
+      adminLogin(this.loginForm).then(res => {
+        console.log(res)
+        this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+        this.loading = false
+      })
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {

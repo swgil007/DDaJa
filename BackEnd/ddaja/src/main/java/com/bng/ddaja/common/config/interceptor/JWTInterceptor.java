@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bng.ddaja.common.enums.AuthRequiredURLs;
+import com.bng.ddaja.common.enums.SetCookieURLs;
 import com.bng.ddaja.tokens.service.TokenService;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
 
@@ -21,12 +23,19 @@ public class JWTInterceptor implements HandlerInterceptor {
     private TokenService tokenService;
 
     @Override
-    public  boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception  {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception  {
         if(request.getMethod().equals("OPTIONS")) return true;
         boolean isAuthRequiredURL = Arrays.stream(AuthRequiredURLs.values()).anyMatch(e-> request.getRequestURI().contains(e.getName()));
         if(!isAuthRequiredURL) return true;
         String jwt = request.getHeader("Authorization");
         if(jwt == null) throw new AuthenticationException("JWT is Required");
         return tokenService.isValidatedJWT(jwt);
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        boolean isSetCookieURL = Arrays.stream(SetCookieURLs.values()).anyMatch(e-> request.getRequestURI().contains(e.getName()));
+        if(!isSetCookieURL) return;
+        // logic
     }
 }

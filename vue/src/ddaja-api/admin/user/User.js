@@ -4,15 +4,7 @@ export function userList(param) {
   return request({
     url: '/users',
     method: 'get',
-    params: {}
-  })
-}
-
-export function userListTotalCount(param) {
-  return request({
-    url: '/users',
-    method: 'get',
-    params: {}
+    params: param
   })
 }
 
@@ -21,5 +13,12 @@ export function userDetail(param) {
     url: '/users/' + param.id,
     method: 'get',
     params: {}
+  })
+}
+
+export function userSearch() {
+  return request({
+    url: '/users/search',
+    method: 'get'
   })
 }

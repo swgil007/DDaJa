@@ -20,11 +20,12 @@ import moment from 'vue-moment'
 import map from 'lodash'
 import VueKakaoSdk from 'vue-kakao-sdk'
 
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost'
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'origin, access-control-allow-origin'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.timeout = 100000
 axios.defaults.baseURL = '{url}'
+axios.defaults.withCredentials = true
 
 Vue.prototype.$http = axios
 
@@ -32,7 +33,7 @@ Vue.use(cors)
 Vue.use(moment)
 Vue.use(map)
 
-Vue.prototype.$googleClientID = '71530109499-g2q6soik7tnfhh27lkqt8jr4pgmbo3ca.apps.googleusercontent.com'
+Vue.prototype.$googleClientID = '71530109499-6re6j434sr87q4t8u1s1ou4n8blv6t1q.apps.googleusercontent.com'
 
 const apiKey = 'a227a64e7aecffa5d4254e4526d679b1'
 Vue.use(VueKakaoSdk, { apiKey })
