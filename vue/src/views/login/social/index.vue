@@ -2,7 +2,7 @@
   <div class="login-container">
     <el-form class="login-form" autocomplete="on" label-position="left">
       <div class="title-container">
-        <h3 class="title">DDaJa Login</h3>
+        <h3 class="title">Social Login</h3>
       </div>
       <kakao-login />
       <google-login />

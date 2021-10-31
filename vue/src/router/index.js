@@ -42,7 +42,7 @@ export const constantRoutes = [
   },
   {
     path: '/social/login',
-    component: () => import('@/views/login/index'),
+    component: () => import('@/views/login/social/index'),
     hidden: true
   },
   {
