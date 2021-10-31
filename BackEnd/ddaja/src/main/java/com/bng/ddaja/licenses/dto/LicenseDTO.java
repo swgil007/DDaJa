@@ -56,16 +56,4 @@ public class LicenseDTO extends CommonDTO {
         .passScore(this.passScore)
         .build();
     }
-
-    public void checkValue() {
-        log.info("====== LicenseDTO ToString ====== ");
-        log.info("ID         : " + this.id);
-        log.info("CODE       : " + this.code);
-        log.info("NAME       : " + this.name);
-        log.info("IN USE     : " + this.inUse);
-        log.info("AGENCY     : " + this.agency);
-        log.info("TYPE       : " + this.type);
-        log.info("PASS SCORE : " + this.passScore);
-        log.info("====================================");
-    }
 }
