@@ -1,6 +1,7 @@
 package com.bng.ddaja.common.config.interceptor;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 @AllArgsConstructor
 public class JWTInterceptor implements HandlerInterceptor {
@@ -33,9 +36,17 @@ public class JWTInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         boolean isSetCookieURL = Arrays.stream(SetCookieURLs.values()).anyMatch(e-> request.getRequestURI().contains(e.getName()));
         if(!isSetCookieURL) return;
-        // logic
+        log.info("afterCompletion arrived");
+        log.info("request == {}", request);
+        log.info("response.getCharacterEncoding() == {}", response.getCharacterEncoding());
+        log.info("response.getContentType() == {}", response.getContentType());
+        log.info("response.getOutputStream() == {}", response.getOutputStream());
+        log.info("handler == {}", handler);
+        log.info("exception == {}", ex);
+        String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        log.info("test ==={}", test);
     }
 }
