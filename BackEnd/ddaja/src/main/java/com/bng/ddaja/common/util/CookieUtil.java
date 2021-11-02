@@ -18,13 +18,13 @@ public class CookieUtil {
     private static final int ONE_DAY = 24 * 60 * 60;
     
     public static String getTokenInCookie(HttpServletRequest request) throws AuthenticationException {
-        Cookie tokenCookie = getCookie(request, Constants.TOKEN);
+        Cookie tokenCookie = getCookie(request, Constants.ACCESS_TOKEN);
         if(tokenCookie == null) throw new AuthenticationException("Token 정보가 없습니다.");
         return tokenCookie.getValue();
     }
     
     public static void setJwtCookieInResponse(HttpServletResponse response, String jwt) {
-        Cookie cookie = new Cookie(Constants.TOKEN, jwt);
+        Cookie cookie = new Cookie(Constants.ACCESS_TOKEN, jwt);
         cookie.setMaxAge(MAX_AGE_TOKEN * ONE_DAY);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
