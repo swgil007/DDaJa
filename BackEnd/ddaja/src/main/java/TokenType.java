@@ -39,7 +39,19 @@ public enum TokenType {
                         .compact();
         }
     }
-    , REFRESH("refresh_token", 24 * 14) {};
+    , REFRESH("refresh_token", 24 * 14) {
+        @Override
+        public String createToken(CommonJWT commonJWT, String secretKey) {
+            Date now = new Date();
+            SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+            return Jwts.builder()
+                        .setSubject(commonJWT.getJwt())
+                        .setIssuedAt(now)
+                        .setExpiration(DateUtil.addHours(now, getMaxHour()))
+                        .signWith(key)
+                        .compact();
+        }
+    };
 
     private String name;
     private int maxHour;
