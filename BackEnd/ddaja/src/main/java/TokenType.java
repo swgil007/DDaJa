@@ -63,4 +63,12 @@ public enum TokenType {
         if(!cookie.isPresent()) return null;
         return cookie.get().getValue();
     }
+
+    public Cookie getCookie(CommonJWT commonJWT, String secretKey) {
+        Cookie cookie = new Cookie(getName(), createToken(commonJWT, secretKey));
+        cookie.setMaxAge(getMaxHour() * 60 * 60);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        return cookie;
+    }
 }
