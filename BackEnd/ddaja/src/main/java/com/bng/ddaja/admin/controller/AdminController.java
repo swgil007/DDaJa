@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import com.bng.ddaja.admin.dto.AdminDTO;
 import com.bng.ddaja.admin.service.AdminService;
-import com.bng.ddaja.common.util.CookieUtil;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +31,6 @@ public class AdminController {
     @PostMapping("login")
     public ResponseEntity<AdminDTO> loginAdmin(@RequestBody @Valid AdminDTO adminDTO, HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         AdminDTO result = adminService.loginAdminByAdminDTO(adminDTO);
-        CookieUtil.setJwtCookieInResponse(response, result.getJwt());
         return ResponseEntity.ok().body(result);
     }
 }
