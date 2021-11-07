@@ -2,7 +2,7 @@ package com.bng.ddaja.common.dto;
 
 import java.util.Date;
 
-import com.bng.ddaja.common.enums.TokenType;
+import com.bng.ddaja.common.enums.SocialTokenType;
 import com.bng.ddaja.common.util.DateUtil;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import lombok.ToString;
 public class SocialAccessToken {
     private String accessToken;
     private String refreshToken;
-    private TokenType tokenType;
+    private SocialTokenType tokenType;
     private int expireTime;
     private int refreshExpireTime;
     private Date expire;
