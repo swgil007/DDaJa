@@ -14,6 +14,7 @@ import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
 import com.bng.ddaja.common.domain.Admin;
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonJWT;
+import com.bng.ddaja.common.dto.TokenPair;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.common.util.DateUtil;
 import com.bng.ddaja.tokens.dto.TokenDTO;
@@ -45,7 +46,6 @@ public class TokenService {
         if (!optionalUser.isPresent())
             throw new AuthenticationException("해당 사용자 계정이 확인되지 않습니다.");
         CommonJWT result = new CommonJWT(new UserDTO(optionalUser.get()));
-        result.setJwt(createJWTByCommonJWT(result));
         return result;
     }
 
@@ -54,7 +54,6 @@ public class TokenService {
         if (!optionalAdmin.isPresent())
             throw new MemberNotFoundException("해당 관리자 계정이 확인되지 않습니다.");
         CommonJWT result = new CommonJWT(new AdminDTO(optionalAdmin.get()));
-        result.setJwt(createJWTByCommonJWT(result));
         return result;
     }
 
