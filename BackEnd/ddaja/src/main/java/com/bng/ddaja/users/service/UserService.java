@@ -79,7 +79,7 @@ public class UserService implements UserDetailsService {
         if(token == null) return createUserBySocialResponse(socialResponse);
         if(token.getUser() == null) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
         UserDTO userDTO = new UserDTO(token.getUser());
-        userDTO.setJwt(tokenService.getCommonJWTByUserDTO(userDTO).getJwt());
+        userDTO.setCommonJWT(tokenService.getCommonJWTByUserDTO(userDTO));
         return userDTO;
     }
 
