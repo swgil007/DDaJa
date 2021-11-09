@@ -41,17 +41,19 @@ public class TokenService {
     private AdminRepository adminRepository;
 
     public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) throws AuthenticationException {
-        UserDTO user = new UserDTO(userRepository.findById(userDTO.getId()));
-        if(user.getId() == 0) throw new AuthenticationException("User Info is Not Matched");
-        CommonJWT result = new CommonJWT(user);
+        Optional<User> optionalUser = userRepository.findById(userDTO.getId());
+        if (!optionalUser.isPresent())
+            throw new AuthenticationException("해당 사용자 계정이 확인되지 않습니다.");
+        CommonJWT result = new CommonJWT(new UserDTO(optionalUser.get()));
         result.setJwt(createJWTByCommonJWT(result));
         return result;
     }
 
     public CommonJWT getCommonJWTByAdminDTO(AdminDTO adminDTO) {
-        Optional<Admin> adminVO = adminRepository.findById(adminDTO.getId());
-        if(!adminVO.isPresent()) throw new MemberNotFoundException("해당 관리자 계정이 확인되지 않습니다.");
-        CommonJWT result = new CommonJWT(new AdminDTO(adminVO.get()));
+        Optional<Admin> optionalAdmin = adminRepository.findById(adminDTO.getId());
+        if (!optionalAdmin.isPresent())
+            throw new MemberNotFoundException("해당 관리자 계정이 확인되지 않습니다.");
+        CommonJWT result = new CommonJWT(new AdminDTO(optionalAdmin.get()));
         result.setJwt(createJWTByCommonJWT(result));
         return result;
     }
