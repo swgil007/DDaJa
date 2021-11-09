@@ -3,6 +3,7 @@ package com.bng.ddaja.common.config.resolver;
 import javax.servlet.http.HttpServletRequest;
 
 import com.bng.ddaja.common.dto.CommonJWT;
+import com.bng.ddaja.common.enums.TokenType;
 import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.common.util.CookieUtil;
 import com.bng.ddaja.tokens.service.TokenService;
@@ -31,6 +32,6 @@ public class JWTArgumentResolver implements HandlerMethodArgumentResolver {
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
                 HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-        return tokenService.getCommonJWTByJWT(CookieUtil.getTokenInCookie(request));
+                return tokenService.getCommonJWTByJWT(TokenType.ACCESS.getTokenInCookie(request));
     }
 }
