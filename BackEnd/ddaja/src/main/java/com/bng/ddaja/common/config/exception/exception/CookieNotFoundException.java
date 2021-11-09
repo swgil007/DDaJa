@@ -9,4 +9,8 @@ public class CookieNotFoundException extends CommonException {
     public CookieNotFoundException() {
         super(ExceptionCode.NOT_FOUND);
     }
+
+    public CookieNotFoundException(String message) {
+        super(ExceptionCode.NOT_FOUND, message);
+    }
 }
