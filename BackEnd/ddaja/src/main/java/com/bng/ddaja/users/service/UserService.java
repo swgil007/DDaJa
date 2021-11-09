@@ -56,7 +56,10 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDTO getUserById(long id) {
-        return new UserDTO(userRepository.findById(id));
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (!optionalUser.isPresent())
+            throw new MemberNotFoundException("해당 사용자가 존재하지 않습니다.");
+        return new UserDTO(optionalUser.get());
     }
 
     public UserDTO getUserBySocialToken(SocialAccessToken socialAccessToken) throws IOException, MemberNotFoundException, NotAcceptableSocialLoginException {
@@ -81,7 +84,7 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDTO patchUserByUserDTO(UserDTO userDTO) {
-        Optional<User> originUser = userRepository.findOptionalUserById(userDTO.getId());
+        Optional<User> originUser = userRepository.findById(userDTO.getId());
         if(!originUser.isPresent()) throw new MemberNotFoundException("해당 ID의 사용자가 존재하지 않습니다.");
         return new UserDTO(userRepository.save(userDTO.toEntity()));
     }
