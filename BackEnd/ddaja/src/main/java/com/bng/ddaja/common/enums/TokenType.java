@@ -29,7 +29,8 @@ public enum TokenType {
             return Jwts.builder().setSubject(commonJWT.getUserName()).claim(Constants.CLAIMS_ROLE, commonJWT.getRole())
                     .claim(Constants.CLAIMS_USER_NAME, commonJWT.getUserName())
                     .claim(Constants.CLAIMS_USER_ID, commonJWT.getUserID())
-                    .claim(Constants.CLAIMS_ID, commonJWT.getId()).claim(Constants.CLAIMS_IS_SUPER, commonJWT.isSuper())
+                    .claim(Constants.CLAIMS_ROLE, commonJWT.getRole()).claim(Constants.CLAIMS_ID, commonJWT.getId())
+                    .claim(Constants.CLAIMS_IS_SUPER, commonJWT.isSuper())
                     .setIssuedAt(now).setExpiration(DateUtil.addHours(now, getMaxHour())).signWith(key).compact();
         }
     },
