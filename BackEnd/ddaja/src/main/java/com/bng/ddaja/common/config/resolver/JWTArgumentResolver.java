@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.enums.TokenType;
-import com.bng.ddaja.common.util.Constants;
 import com.bng.ddaja.tokens.service.TokenService;
 
 import org.springframework.core.MethodParameter;
