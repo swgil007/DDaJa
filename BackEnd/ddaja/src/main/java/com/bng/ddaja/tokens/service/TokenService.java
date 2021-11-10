@@ -35,20 +35,23 @@ public class TokenService {
     private UserRepository userRepository;
     private AdminRepository adminRepository;
 
-    public <U extends CommonToken> CommonJWT getCommonJWTByUserDTO(U u) throws AuthenticationException {
-        Optional<User> optionalUser = userRepository.findById(u.getId());
-        if (!optionalUser.isPresent())
-            throw new AuthenticationException("해당 사용자 계정이 확인되지 않습니다.");
-        CommonJWT result = new CommonJWT(new UserDTO(optionalUser.get()));
-        return result;
-    }
-
-    public <A extends CommonToken> CommonJWT getCommonJWTByAdminDTO(A a) {
-        Optional<Admin> optionalAdmin = adminRepository.findById(a.getId());
+    private <U extends CommonToken> CommonJWT getCommonJWT(U u) {
+        if (u.getClass().isAssignableFrom(UserDTO.class)) {
+            Optional<User> optionalUser = userRepository.findById(u.getId());
+            if (!optionalUser.isPresent())
+                throw new MemberNotFoundException("해당 사용자 계정이 확인되지 않습니다.");
+            CommonJWT result = new CommonJWT(new UserDTO(optionalUser.get()));
+            return result;
+        }
+        Optional<Admin> optionalAdmin = adminRepository.findById(u.getId());
         if (!optionalAdmin.isPresent())
             throw new MemberNotFoundException("해당 관리자 계정이 확인되지 않습니다.");
         CommonJWT result = new CommonJWT(new AdminDTO(optionalAdmin.get()));
         return result;
+    }
+
+    public TokenPair getTokenPair(CommonToken commonToken) {
+        return new TokenPair(getCommonJWT(commonToken), publicKeyConfig.getPublicKey());
     }
 
     public CommonJWT getCommonJWTByJWT(String jwt) {
@@ -80,12 +83,5 @@ public class TokenService {
 
     public TokenDTO getTokenByClientID(String clientID) {
         return new TokenDTO(tokenRepository.findByClientID(clientID));
-    }
-
-    public TokenPair getTokenPair(CommonToken commonToken) {
-        if (UserDTO.class.isAssignableFrom(commonToken.getClass())) {
-            CommonJWT commonJWT = getCommonJWTByUserDTO(commonToken);
-        }
-        return null;
     }
 }
