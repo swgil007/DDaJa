@@ -62,21 +62,6 @@ public class TokenService {
         return new CommonJWT(jwt, parseJWT(jwt));
     }
 
-    private String createJWTByCommonJWT(CommonJWT commonJWT) {
-        Date now = new Date();     
-        return Jwts.builder()
-                    .setSubject(commonJWT.getUserName())
-                    .claim(Constants.CLAIMS_ROLE, commonJWT.getRole())
-                    .claim(Constants.CLAIMS_USER_NAME, commonJWT.getUserName())
-                    .claim(Constants.CLAIMS_USER_ID, commonJWT.getUserID())
-                    .claim(Constants.CLAIMS_ID, commonJWT.getId())
-                    .claim(Constants.CLAIMS_IS_SUPER, commonJWT.isSuper())
-                    .setIssuedAt(now)
-                    .setExpiration(DateUtil.addHours(now, 12))
-                    .signWith(publicKeyConfig.getSecretKey())
-                    .compact();
-    }
-
     public boolean isValidatedJWT(String jwt) {
         if(jwt == null) return false;
         try {
