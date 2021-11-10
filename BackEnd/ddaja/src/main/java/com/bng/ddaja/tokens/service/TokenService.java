@@ -1,5 +1,7 @@
 package com.bng.ddaja.tokens.service;
 
+import java.util.Optional;
+
 import javax.security.sasl.AuthenticationException;
 
 import com.bng.ddaja.admin.dto.AdminDTO;
@@ -9,6 +11,7 @@ import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
 import com.bng.ddaja.common.domain.Admin;
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonJWT;
+import com.bng.ddaja.common.dto.CommonToken;
 import com.bng.ddaja.common.dto.TokenPair;
 import com.bng.ddaja.tokens.dto.TokenDTO;
 import com.bng.ddaja.tokens.repository.TokenRepository;
@@ -32,16 +35,16 @@ public class TokenService {
     private UserRepository userRepository;
     private AdminRepository adminRepository;
 
-    public CommonJWT getCommonJWTByUserDTO(UserDTO userDTO) throws AuthenticationException {
-        Optional<User> optionalUser = userRepository.findById(userDTO.getId());
+    public <U extends CommonToken> CommonJWT getCommonJWTByUserDTO(U u) throws AuthenticationException {
+        Optional<User> optionalUser = userRepository.findById(u.getId());
         if (!optionalUser.isPresent())
             throw new AuthenticationException("해당 사용자 계정이 확인되지 않습니다.");
         CommonJWT result = new CommonJWT(new UserDTO(optionalUser.get()));
         return result;
     }
 
-    public CommonJWT getCommonJWTByAdminDTO(AdminDTO adminDTO) {
-        Optional<Admin> optionalAdmin = adminRepository.findById(adminDTO.getId());
+    public <A extends CommonToken> CommonJWT getCommonJWTByAdminDTO(A a) {
+        Optional<Admin> optionalAdmin = adminRepository.findById(a.getId());
         if (!optionalAdmin.isPresent())
             throw new MemberNotFoundException("해당 관리자 계정이 확인되지 않습니다.");
         CommonJWT result = new CommonJWT(new AdminDTO(optionalAdmin.get()));
@@ -79,7 +82,10 @@ public class TokenService {
         return new TokenDTO(tokenRepository.findByClientID(clientID));
     }
 
-    public TokenPair getTokenPair() {
-
+    public TokenPair getTokenPair(CommonToken commonToken) {
+        if (UserDTO.class.isAssignableFrom(commonToken.getClass())) {
+            CommonJWT commonJWT = getCommonJWTByUserDTO(commonToken);
+        }
+        return null;
     }
 }
