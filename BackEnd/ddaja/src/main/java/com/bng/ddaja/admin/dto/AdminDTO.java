@@ -4,6 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.bng.ddaja.common.domain.Admin;
 import com.bng.ddaja.common.dto.CommonToken;
+import com.bng.ddaja.common.dto.TokenPair;
 import com.bng.ddaja.common.enums.AdminRole;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class AdminDTO extends CommonToken {
     private String passWord;
     private AdminRole adminRole;
     private boolean inUse;
-    private String jwt;
+    private TokenPair tokenPair;
 
     public AdminDTO(Admin vo) {
         id = vo.getId();
