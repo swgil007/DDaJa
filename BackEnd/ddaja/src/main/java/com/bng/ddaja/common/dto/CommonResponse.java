@@ -62,4 +62,9 @@ public class CommonResponse {
         this.totalCount = 1;
         this.item = item;
     }
+
+    public CommonResponse(TokenPair tokenPair) {
+        this.totalCount = 1;
+        this.item = tokenPair;
+    }
 }
