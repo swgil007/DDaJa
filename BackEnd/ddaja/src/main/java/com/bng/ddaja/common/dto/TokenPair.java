@@ -9,7 +9,7 @@ import com.bng.ddaja.common.enums.TokenType;
 import lombok.Getter;
 
 @Getter
-public class TokenPair {
+public class TokenPair extends CommonDTO {
     private String accessToken;
     private Cookie accessCookie;
     private String refreshToken;
