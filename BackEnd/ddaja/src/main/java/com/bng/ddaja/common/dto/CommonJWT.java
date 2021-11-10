@@ -44,7 +44,7 @@ public class CommonJWT extends CommonToken {
         setUserID(adminDTO.getLoginID());
         setRole(Roles.ADMIN);
         isValidated = true;
-        setSuper(AdminRole.SUPER.equals(adminDTO.getRole()));
+        setSuper(AdminRole.SUPER.equals(adminDTO.getAdminRole()));
     }
     
     public CommonJWT(long id,  String userID, String userName, Roles role) {

@@ -4,6 +4,7 @@ import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.domain.User.UserBuilder;
 import com.bng.ddaja.common.dto.CommonDTO;
 import com.bng.ddaja.common.dto.CommonJWT;
+import com.bng.ddaja.common.dto.CommonToken;
 import com.bng.ddaja.common.util.CommonUtil;
 
 import lombok.AllArgsConstructor;
@@ -17,13 +18,12 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO extends CommonDTO {
+public class UserDTO extends CommonToken {
     private String userId;
     private String nickName;
     private String eMail;
     private String profileImg;
     private String jwt;
-    private CommonJWT commonJWT;
 
     public UserDTO(User vo) {
         if(vo == null) return;
