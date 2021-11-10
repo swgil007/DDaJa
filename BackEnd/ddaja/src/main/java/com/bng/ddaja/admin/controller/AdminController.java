@@ -31,6 +31,7 @@ public class AdminController {
     @PostMapping("login")
     public ResponseEntity<AdminDTO> loginAdmin(@RequestBody @Valid AdminDTO adminDTO, HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         AdminDTO result = adminService.loginAdminByAdminDTO(adminDTO);
+        result.getTokenPair().setCookie(response);
         return ResponseEntity.ok().body(result);
     }
 }

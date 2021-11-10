@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
 import com.bng.ddaja.common.domain.Admin;
+import com.bng.ddaja.common.dto.TokenPair;
 import com.bng.ddaja.common.spec.SpecBuilder;
 import com.bng.ddaja.tokens.service.TokenService;
 
@@ -33,7 +34,7 @@ public class AdminService {
         Optional<Admin> admin = adminRepository.findOne(adminSpec);
         if(!admin.isPresent()) throw new MemberNotFoundException("해당되는 관리자 계정이 없습니다.");
         AdminDTO result = new AdminDTO(admin.get());
-        result.setCommonJWT(tokenService.getCommonJWTByAdminDTO(result));
+        result.setTokenPair(tokenService.getTokenPair(result));
         return result;
     }
 }
