@@ -22,4 +22,4 @@ selenium-debug.log
 package-lock.json
 yarn.lock
 
-!/createError.js
+!node_modules/axios/lib/core/createError.js
