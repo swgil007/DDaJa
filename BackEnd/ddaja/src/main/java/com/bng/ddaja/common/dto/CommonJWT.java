@@ -25,37 +25,33 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonJWT extends CommonDTO {
+public class CommonJWT extends CommonToken {
     private String jwt;
     private long id;
-    private String userID;
-    private String userName;
-    private Roles role;
     private Claims claims;
     private boolean isValidated;
-    private boolean isSuper;
 
     public CommonJWT(UserDTO userDTO) {
         id = userDTO.getId();
-        userID = userDTO.getUserId();
-        userName = userDTO.getNickName();
-        role = Roles.USER;
+        setUserID(userDTO.getUserId());
+        setUserName(userDTO.getNickName());
+        setRole(Roles.USER);
         isValidated = true;
     }
 
     public CommonJWT(AdminDTO adminDTO) {
         id = adminDTO.getId();
-        userID = adminDTO.getLoginID();
-        role = Roles.ADMIN;
+        setUserID(adminDTO.getLoginID());
+        setRole(Roles.ADMIN);
         isValidated = true;
-        isSuper = AdminRole.SUPER.equals(adminDTO.getRole());
+        setSuper(AdminRole.SUPER.equals(adminDTO.getRole()));
     }
     
     public CommonJWT(long id,  String userID, String userName, Roles role) {
         this.id = id;
-        this.userID = userID;
-        this.userName = userName;
-        this.role = role;
+        setUserID(userID);
+        setUserName(userName);
+        setRole(role);
     }
 
     public CommonJWT(String jwt, Claims claims) {
@@ -63,9 +59,9 @@ public class CommonJWT extends CommonDTO {
         if(claims == null) return;
         this.claims = claims;
         id = Integer.toUnsignedLong((int) claims.get(Constants.CLAIMS_ID));
-        userID = (String) claims.get(Constants.CLAIMS_USER_ID);
-        userName = (String) claims.get(Constants.CLAIMS_USER_NAME);
-        role = Roles.valueOf((String) claims.get(Constants.CLAIMS_ROLE));
+        setUserID((String) claims.get(Constants.CLAIMS_USER_ID));
+        setUserName((String) claims.get(Constants.CLAIMS_USER_NAME));
+        setRole(Roles.valueOf((String) claims.get(Constants.CLAIMS_ROLE)));
         this.isValidated = true;
     }
 
