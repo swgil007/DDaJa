@@ -2,6 +2,7 @@ package com.bng.ddaja.users.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.bng.ddaja.common.config.exception.exception.MemberNotFoundException;
@@ -80,8 +81,11 @@ public class UserController {
     }
 
     @PostMapping("social")
-    public ResponseEntity<CommonResource> loginUserBySocial(@RequestBody SocialAccessToken socialAccessToken) throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
+    public ResponseEntity<CommonResource> loginUserBySocial(@RequestBody SocialAccessToken socialAccessToken,
+            HttpServletResponse response)
+            throws MemberNotFoundException, NotAcceptableSocialLoginException, IOException {
         UserDTO userDTO = userService.getUserBySocialToken(socialAccessToken);
+        userDTO.getTokenPair().setCookie(response);
         if(userDTO.isCreated) return new ResponseEntity<>(new CommonResource(userDTO, UserHateoas.values()), HttpStatus.CREATED);
         return ResponseEntity.ok().body(new CommonResource(userDTO, UserHateoas.values()));
     }
