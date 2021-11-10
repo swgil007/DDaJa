@@ -15,7 +15,6 @@ import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialLoginE
 import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialResponseException;
 import com.bng.ddaja.common.domain.Token;
 import com.bng.ddaja.common.domain.User;
-import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.dto.CommonUserDetails;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.enums.HttpMethods;
