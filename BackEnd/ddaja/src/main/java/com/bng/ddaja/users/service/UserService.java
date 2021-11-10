@@ -15,6 +15,7 @@ import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialLoginE
 import com.bng.ddaja.common.config.exception.exception.NotAcceptableSocialResponseException;
 import com.bng.ddaja.common.domain.Token;
 import com.bng.ddaja.common.domain.User;
+import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.dto.CommonUserDetails;
 import com.bng.ddaja.common.dto.SocialAccessToken;
 import com.bng.ddaja.common.enums.HttpMethods;
@@ -79,7 +80,7 @@ public class UserService implements UserDetailsService {
         if(token == null) return createUserBySocialResponse(socialResponse);
         if(token.getUser() == null) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
         UserDTO userDTO = new UserDTO(token.getUser());
-        userDTO.setCommonJWT(tokenService.getCommonJWTByUserDTO(userDTO));
+        userDTO.setTokenPair(tokenService.getTokenPair(userDTO));
         return userDTO;
     }
 
@@ -93,7 +94,7 @@ public class UserService implements UserDetailsService {
         User user = userRepository.save(User.builder().build());
         tokenRepository.save(Token.builder().clientID(socialResponse.getId()).user(user).build());
         UserDTO userDTO = new UserDTO(user, true);
-        userDTO.setJwt(tokenService.getCommonJWTByUserDTO(userDTO).getJwt());
+        userDTO.setTokenPair(tokenService.getTokenPair(userDTO));
         return userDTO;
     }
 
