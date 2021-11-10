@@ -1,10 +1,5 @@
 package com.bng.ddaja.tokens.service;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.Optional;
-
-import javax.crypto.SecretKey;
 import javax.security.sasl.AuthenticationException;
 
 import com.bng.ddaja.admin.dto.AdminDTO;
@@ -15,20 +10,16 @@ import com.bng.ddaja.common.domain.Admin;
 import com.bng.ddaja.common.domain.User;
 import com.bng.ddaja.common.dto.CommonJWT;
 import com.bng.ddaja.common.dto.TokenPair;
-import com.bng.ddaja.common.util.Constants;
-import com.bng.ddaja.common.util.DateUtil;
 import com.bng.ddaja.tokens.dto.TokenDTO;
 import com.bng.ddaja.tokens.repository.TokenRepository;
 import com.bng.ddaja.users.dto.UserDTO;
 import com.bng.ddaja.users.repository.UserRepository;
-import com.bng.ddaja.users.service.UserService;
 
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -86,5 +77,9 @@ public class TokenService {
 
     public TokenDTO getTokenByClientID(String clientID) {
         return new TokenDTO(tokenRepository.findByClientID(clientID));
+    }
+
+    public TokenPair getTokenPair() {
+
     }
 }
