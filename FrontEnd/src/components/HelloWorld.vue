@@ -97,8 +97,8 @@ export default {
   },
   methods: {
     testAxios: function () {
-      const baseURI = 'https://jsonplaceholder.typicode.com';
-      this.$http.get(`${baseURI}/posts`)
+      const baseURI = 'http://localhost/users';
+      this.$http.get(baseURI)
       .then((result) => {
         console.log(result)
       })
