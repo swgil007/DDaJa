@@ -79,6 +79,9 @@
           awesome-vue
         </a>
       </li>
+      <li>
+        <button v-on:click="testAxios">Axios Test</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -88,7 +91,17 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Hello New World!'
+      msg: 'Hello New World!', 
+      posts: []
+    }
+  },
+  methods: {
+    testAxios: function () {
+      const baseURI = 'https://jsonplaceholder.typicode.com';
+      this.$http.get(`${baseURI}/posts`)
+      .then((result) => {
+        console.log(result)
+      })
     }
   }
 }
