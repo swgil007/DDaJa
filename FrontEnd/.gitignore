@@ -1,10 +1,15 @@
 .DS_Store
-node_modules/
 /dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /test/unit/coverage/
+
+node_modules/**/**
+!node_modules/axios*
+!node_modules/axios/lib*
+!node_modules/axios/lib/core*
+!node_modules/axios/lib/core/createError.js
 
 # Editor directories and files
 .idea
@@ -12,3 +17,5 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+package.json
+package-lock.json
