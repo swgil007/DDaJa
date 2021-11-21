@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     testAxios: function () {
-      const baseURI = 'http://localhost/users';
+      const baseURI = 'http://localhost/users/3';
       this.$http.get(baseURI)
       .then((result) => {
         console.log(result)
