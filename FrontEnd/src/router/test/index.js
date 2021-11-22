@@ -1,6 +1,5 @@
 const router = {
   path: '/test',
-  component: () => import('@/views/test/Test'),
   name: 'test',
   meta: {
     title: '관리자'
