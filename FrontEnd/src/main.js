@@ -4,6 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost'
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'origin, access-control-allow-origin'

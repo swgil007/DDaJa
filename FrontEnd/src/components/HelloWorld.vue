@@ -5,6 +5,7 @@
     <ul>
       <li>
         <button v-on:click="testAxios">Axios Test</button>
+         <b-button variant="primary">Button</b-button>
       </li>
     </ul>
   </div>
