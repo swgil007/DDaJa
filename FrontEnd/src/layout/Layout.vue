@@ -1,9 +1,9 @@
 <template>
     <div>
         <h1> layout </h1>
-        <header />
+        <Header />
         <slot />
-        <footer />
+        <Footer />
         <h1> layout Foot </h1>
     </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     name: 'Layout',
     components: {
         Header,
-        Footer,
+        Footer
     }
 }
 </script>
