@@ -1,10 +1,8 @@
 <template>
     <div>
-        <h1> layout </h1>
         <Header />
-        <slot />
+      <router-view/>
         <Footer />
-        <h1> layout Foot </h1>
     </div>
 </template>
 

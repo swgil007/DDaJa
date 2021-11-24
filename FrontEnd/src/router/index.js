@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Layout from '@/layout/Layout'
 import TestRouter from './test'
 import HelloWorld from '@/components/HelloWorld'
 
@@ -14,10 +15,6 @@ export const constantRoutes = [
       title : 'DDaJa'
     }
   },
-  TestRouter
-]
-
-export const asyncRoutes = [
   TestRouter
 ]
 
