@@ -1,4 +1,4 @@
-export const constantRoutes = {
+const constantRoutes = {
     path: '/test',
     name: 'Test',
     component: () => import('@/views/test/Test'),
@@ -16,3 +16,5 @@ export const constantRoutes = {
         }
     ]
 }
+
+export default constantRoutes

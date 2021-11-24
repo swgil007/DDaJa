@@ -13,7 +13,8 @@ export const constantRoutes = [
     meta: {
       title : 'DDaJa'
     }
-  }
+  },
+  TestRouter
 ]
 
 export const asyncRoutes = [
