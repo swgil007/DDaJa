@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>test</h1>
     <img src="./assets/logo.png">
     <layout>
       <router-view/>
@@ -8,7 +9,7 @@
 </template>
 
 <script>
-import Layout from '@/layout/Layout'
+import Layout from './layout/Layout.vue'
 export default {
   name: 'App',
   components: {
