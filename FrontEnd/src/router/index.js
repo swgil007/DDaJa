@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import TestRouter from './test'
 import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
@@ -13,6 +14,10 @@ export const constantRoutes = [
       title : 'DDaJa'
     }
   }
+]
+
+export const asyncRoutes = [
+  TestRouter
 ]
 
 const createRouter = () => new Router({
