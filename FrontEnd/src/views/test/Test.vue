@@ -7,6 +7,9 @@
         <button v-on:click="testAxios">Axios Test</button>
          <b-button variant="primary">Button</b-button>
       </li>
+      <li>
+        <router-view />
+      </li>
     </ul>
   </div>
 </template>
