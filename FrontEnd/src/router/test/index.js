@@ -1,17 +1,17 @@
-import Layout from '@/layout/Layout'
-import TestTWo from '@/views/test/TestTwo'
+import Index from '@/views/test'
+import TestTwo from '@/views/test/components/TestTwo'
 
 const constantRoutes = {
     path: '/test',
     name: 'Test',
-    component: () => import('@/views/test/Test'),
+    component: Index,
     meta: {
         title : 'Test'
     },
     children: [
         {
           path: 'two',
-          component: () => import('@/views/test/TestTwo'),
+          component: TestTwo,
           name: 'Test Two',
           meta: {
             title: 'Test Two'
