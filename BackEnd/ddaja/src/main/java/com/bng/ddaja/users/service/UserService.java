@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
     public UserDTO getUserById(long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (!optionalUser.isPresent())
-            throw new MemberNotFoundException("해당 사용자가 존재하지 않습니다.");
+            throw new MemberNotFoundException("사용자가 존재하지 않습니다.");
         return new UserDTO(optionalUser.get());
     }
 
@@ -85,7 +85,7 @@ public class UserService implements UserDetailsService {
 
     public UserDTO patchUserByUserDTO(UserDTO userDTO) {
         Optional<User> originUser = userRepository.findById(userDTO.getId());
-        if(!originUser.isPresent()) throw new MemberNotFoundException("해당 ID의 사용자가 존재하지 않습니다.");
+        if(!originUser.isPresent()) throw new MemberNotFoundException("사용자가 존재하지 않습니다.");
         return new UserDTO(userRepository.save(userDTO.toEntity()));
     }
 
@@ -141,4 +141,5 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String nickName) throws UsernameNotFoundException { 
         return new CommonUserDetails();
     }
+    
 }
