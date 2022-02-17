@@ -34,4 +34,5 @@ public class AdminController {
         result.getTokenPair().setCookie(response);
         return ResponseEntity.ok().body(result);
     }
+    
 }
