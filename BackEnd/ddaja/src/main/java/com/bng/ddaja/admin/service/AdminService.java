@@ -32,9 +32,10 @@ public class AdminService {
                                                     .addSpec(where(passWordEqual(adminDTO.getPassWord())))
                                                     .toSpecification();
         Optional<Admin> admin = adminRepository.findOne(adminSpec);
-        if(!admin.isPresent()) throw new MemberNotFoundException("해당되는 관리자 계정이 없습니다.");
+        if(!admin.isPresent()) throw new MemberNotFoundException("관리자 계정이 없습니다.");
         AdminDTO result = new AdminDTO(admin.get());
         result.setTokenPair(tokenService.getTokenPair(result));
         return result;
     }
+    
 }
