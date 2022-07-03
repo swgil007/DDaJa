@@ -46,6 +46,8 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     private TokenRepository tokenRepository;
     private TokenService tokenService;
+    private final String MESSAGE_MEMBER_NOT_FOUND = "Token Info Valid But Member Not Founded";
+    private final String MESSAGE_MEMBER_NOT_FOUND_KR = "사용자가 존재하지 않습니다.";
 
     public List<UserDTO> getUsers() {
         return userRepository.findAll().stream().map(v -> new UserDTO(v)).collect(Collectors.toList());
@@ -58,7 +60,7 @@ public class UserService implements UserDetailsService {
     public UserDTO getUserById(long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (!optionalUser.isPresent())
-            throw new MemberNotFoundException("사용자가 존재하지 않습니다.");
+            throw new MemberNotFoundException(MESSAGE_MEMBER_NOT_FOUND_KR);
         return new UserDTO(optionalUser.get());
     }
 
@@ -77,7 +79,7 @@ public class UserService implements UserDetailsService {
         }
         Token token = tokenRepository.findByClientID(socialResponse.getId());
         if(token == null) return createUserBySocialResponse(socialResponse);
-        if(token.getUser() == null) throw new MemberNotFoundException("Token Info Valid But Member Not Founded");
+        if(token.getUser() == null) throw new MemberNotFoundException(MESSAGE_MEMBER_NOT_FOUND);
         UserDTO userDTO = new UserDTO(token.getUser());
         userDTO.setTokenPair(tokenService.getTokenPair(userDTO));
         return userDTO;
@@ -85,7 +87,7 @@ public class UserService implements UserDetailsService {
 
     public UserDTO patchUserByUserDTO(UserDTO userDTO) {
         Optional<User> originUser = userRepository.findById(userDTO.getId());
-        if(!originUser.isPresent()) throw new MemberNotFoundException("사용자가 존재하지 않습니다.");
+        if(!originUser.isPresent()) throw new MemberNotFoundException(MESSAGE_MEMBER_NOT_FOUND_KR);
         return new UserDTO(userRepository.save(userDTO.toEntity()));
     }
 
